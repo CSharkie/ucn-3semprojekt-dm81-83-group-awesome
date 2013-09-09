@@ -8,7 +8,7 @@ namespace groupAwesome.Models
 {
     class Movie
     {
-        private int _id;
+        private static int _id;
         private String _title;
         private DateTime _dateAndTime;
         private int _roomId;
@@ -20,34 +20,48 @@ namespace groupAwesome.Models
         /// <param name="roomId">The room id where the movie will be rolled</param>
         public Movie(String title, DateTime dateAndTime, int roomId)
         {
-            //this._id = MovieCollection.getNextId()
+            _id = MovieCollection.getNextId();
             this._title = title;
             this._dateAndTime = dateAndTime;
-            this._roomId = roomId;
-
+            this._roomId = roomId;            
         }
+        public Movie()
+        {
+            _id = MovieCollection.getNextId();
+            this._title = "";
+            this._dateAndTime = new DateTime(0);
+            this._roomId = -1;
+        }
+        /// <summary>
+        /// Represents the unique ID assigned to the room that the movie plays in
+        /// </summary>
         public int RoomID
         {
             get { return _roomId; }
             set { _roomId = value; }
         }
-        
+        /// <summary>
+        /// The date and time when the movie rolls
+        /// </summary>
         public DateTime DateAndTime
         {
             get { return _dateAndTime; }
             set { _dateAndTime = value; }
         }
-        
+        /// <summary>
+        /// The title of the movie
+        /// </summary>
         public String Title
         {
             get { return _title; }
             set { _title = value; }
         }
-
+        /// <summary>
+        /// The unique ID assigned to the movie
+        /// </summary>
         public int ID
         {
             get { return _id; }
-            set { _id = value; }
         }
     }
 }
