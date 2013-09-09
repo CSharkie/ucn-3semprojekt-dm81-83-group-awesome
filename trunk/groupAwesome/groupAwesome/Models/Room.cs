@@ -19,7 +19,7 @@ namespace groupAwesome.Models
         /// <param name="rows">Represents the number of rows in the Rooms matrix </param>
         /// <param name="cols">Represents the number of colums in the Rooms matrix (+2 if the stairs are outside the chairs)</param>
         /// <param name="stairCol">Represents the column number where the stairs are positioned (The stair will be positioned on 2 columns, stairCol will be the one on the left)</param>
-        public Room(int rows, int cols, int stairCol)
+        public Room(int rows = 0, int cols = 0, int stairCol = 0)
         {
             //this._id = RoomCollection.getNextId();
             resetRoomStructure(rows, cols, stairCol);

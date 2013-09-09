@@ -23,7 +23,7 @@ namespace groupAwesome.Models
             _id = MovieCollection.getNextId();
             this._title = title;
             this._dateAndTime = dateAndTime;
-            this._roomId = roomId;            
+            this._roomId = roomId;
         }
         public Movie()
         {
