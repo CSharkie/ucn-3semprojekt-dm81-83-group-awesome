@@ -51,7 +51,11 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MovieCollection.cs" />
+    <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\ReservationCollection.cs" />
     <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\RoomCollection.cs" />
     <Compile Include="Models\Seat.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
