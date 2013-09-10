@@ -1,0 +1,5 @@
+E:\3rd sem project\GroupAwesome\GroupAwesome\obj\Debug\GroupAwesome.csprojResolveAssemblyReference.cache
+E:\3rd sem project\GroupAwesome\GroupAwesome\bin\GroupAwesome.dll
+E:\3rd sem project\GroupAwesome\GroupAwesome\bin\GroupAwesome.pdb
+E:\3rd sem project\GroupAwesome\GroupAwesome\obj\Debug\GroupAwesome.dll
+E:\3rd sem project\GroupAwesome\GroupAwesome\obj\Debug\GroupAwesome.pdb
