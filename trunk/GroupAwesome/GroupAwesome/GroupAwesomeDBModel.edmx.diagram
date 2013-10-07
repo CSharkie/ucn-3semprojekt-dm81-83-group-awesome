@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="275ec66f5a114b33bb9cd21ac4a75187" Name="Diagram1">
+        <EntityTypeShape EntityType="CinemaBookingGrpAwesomeModel.Discount" Width="1.5" PointX="7.625" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingGrpAwesomeModel.Movie" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingGrpAwesomeModel.Reservation" Width="1.5" PointX="5.375" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingGrpAwesomeModel.RoomMovie" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingGrpAwesomeModel.Room" Width="1.5" PointX="0.625" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingGrpAwesomeModel.RoomSeat" Width="1.5" PointX="9.875" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingGrpAwesomeModel.Seat" Width="1.5" PointX="7.625" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingGrpAwesomeModel.Ticket" Width="1.5" PointX="5.375" PointY="0.625" IsExpanded="true" />
+        <AssociationConnector Association="CinemaBookingGrpAwesomeModel.FK__RoomSeats__Movie__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingGrpAwesomeModel.FK__Reservatio__RMId__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingGrpAwesomeModel.FK__RoomSeats__RoomI__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingGrpAwesomeModel.FK__RoomSeats__RoomI__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingGrpAwesomeModel.FK__RoomSeats__SeatI__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingGrpAwesomeModel.ReservationSeats" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingGrpAwesomeModel.FK__Tickets__Discoun__398D8EEE" />
+        <AssociationConnector Association="CinemaBookingGrpAwesomeModel.FK__Tickets__Reserva__38996AB5" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
