@@ -5,3 +5,6 @@ C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\
 C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeClient\obj\Debug\GroupAwesomeClient.csproj.GenerateResource.Cache
 C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeClient\obj\Debug\GroupAwesomeClient.exe
 C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeClient\obj\Debug\GroupAwesomeClient.pdb
+C:\Users\Gabriel\Desktop\Proiect sem 3\GroupAwesome\GroupAwesomeClient\bin\Debug\GroupAwesomeClient.exe.config
+C:\Users\Gabriel\Desktop\Proiect sem 3\GroupAwesome\GroupAwesomeClient\obj\Debug\GroupAwesomeClient.exe
+C:\Users\Gabriel\Desktop\Proiect sem 3\GroupAwesome\GroupAwesomeClient\obj\Debug\GroupAwesomeClient.pdb

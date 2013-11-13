@@ -41,7 +41,7 @@ namespace GroupAwesomeService
         string update(Ticket ticket, Ticket newTicket);
 
         [OperationContract]
-        string update(Seat seat);
+        string update(Seat seat, Seat newSeat);
         #endregion
 
         #region read
