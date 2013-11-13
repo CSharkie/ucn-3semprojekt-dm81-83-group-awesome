@@ -1,0 +1,7 @@
+C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeClient\bin\Debug\GroupAwesomeClient.exe.config
+C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeClient\bin\Debug\GroupAwesomeClient.exe
+C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeClient\bin\Debug\GroupAwesomeClient.pdb
+C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeClient\obj\Debug\GroupAwesomeClient.Properties.Resources.resources
+C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeClient\obj\Debug\GroupAwesomeClient.csproj.GenerateResource.Cache
+C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeClient\obj\Debug\GroupAwesomeClient.exe
+C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeClient\obj\Debug\GroupAwesomeClient.pdb
