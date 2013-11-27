@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using AwesomeServer;
 
 namespace AwesomeService
 {
@@ -12,34 +13,44 @@ namespace AwesomeService
     public interface IService
     {
         [OperationContract]
-        string GetData(int value);
-
+        string createReservation(Reservation reservation);
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
-
-        // TODO: Add your service operations here
-    }
-
-    // Use a data contract as illustrated in the sample below to add composite types to service operations.
-    // You can add XSD files into the project. After building the project, you can directly use the data types defined there, with the namespace "AwesomeService.ContractType".
-    [DataContract]
-    public class CompositeType
-    {
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
+        string createMovie(Movie movie);
+        [OperationContract]
+        string createRoom(Room room);
+        [OperationContract]
+        string createTicket(Ticket ticket);
+        [OperationContract]
+        string updateReservation(Reservation reservation, Reservation newReservation);
+        [OperationContract]
+        string updateMovie(Movie movie, Movie newMovie);
+        [OperationContract]
+        string updateRoom(Room room, Room newRoom);
+        [OperationContract]
+        string updateTicket(Ticket ticket, Ticket newTicket);
+        [OperationContract]
+        string updateSeat(Seat seat, Seat newSeat);
+        [OperationContract]
+        Reservation getReservation(Reservation reservation);
+        [OperationContract]
+        Movie getMovie(Movie movie);
+        [OperationContract]
+        Room getRoom(Room room);
+        [OperationContract]
+        Ticket getTicket(Ticket ticket);
+        [OperationContract]
+        Seat getSeat(Seat seat);
+        [OperationContract]
+        string removeReservation(Reservation reservation);
+        [OperationContract]
+        string removeMovie(Movie movie);
+        [OperationContract]
+        string removeRoom(Room room);
+        [OperationContract]
+        string removeTicket(Ticket ticket);
+        [OperationContract]
+        IList<Seat> getAdjSeat(int noOfSeats);
+        [OperationContract]
+        string addMovieToRoom(int noOfSeats);
     }
 }

@@ -1,0 +1,11 @@
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\obj\Debug\AwesomeClient.csprojResolveAssemblyReference.cache
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\obj\Debug\AwesomeClient.Form1.resources
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\obj\Debug\AwesomeClient.Properties.Resources.resources
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\obj\Debug\AwesomeClient.csproj.GenerateResource.Cache
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\bin\Debug\AwesomeClient.exe.config
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\bin\Debug\AwesomeClient.exe
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\bin\Debug\AwesomeClient.pdb
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\bin\Debug\AwesomeServer.dll
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\bin\Debug\AwesomeServer.pdb
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\obj\Debug\AwesomeClient.exe
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\obj\Debug\AwesomeClient.pdb
