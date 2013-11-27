@@ -1,0 +1,5 @@
+C:\Users\Gabriel\Desktop\Proiect sem 3\Awesome\AwesomeServer\bin\Debug\AwesomeServer.dll.config
+C:\Users\Gabriel\Desktop\Proiect sem 3\Awesome\AwesomeServer\bin\Debug\AwesomeServer.dll
+C:\Users\Gabriel\Desktop\Proiect sem 3\Awesome\AwesomeServer\bin\Debug\AwesomeServer.pdb
+C:\Users\Gabriel\Desktop\Proiect sem 3\Awesome\AwesomeServer\obj\Debug\AwesomeServer.dll
+C:\Users\Gabriel\Desktop\Proiect sem 3\Awesome\AwesomeServer\obj\Debug\AwesomeServer.pdb

@@ -9,6 +9,7 @@ namespace AwesomeServer
     public class Server : IServer
     {
         #region create
+        DatabaseModelDataContext db = new DatabaseModelDataContext();
         public string create(Reservation reservation)
         {
             string message = "The reservation was added succesfully!";
