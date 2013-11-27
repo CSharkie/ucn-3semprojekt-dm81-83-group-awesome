@@ -1,5 +1,0 @@
-C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeService\bin\GroupAwesomeService.dll
-C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeService\bin\GroupAwesomeService.pdb
-C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeService\obj\Debug\GroupAwesomeService.csprojResolveAssemblyReference.cache
-C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeService\obj\Debug\GroupAwesomeService.dll
-C:\Users\CristianDan\Desktop\ucn-3semprojekt-dm81-83-group-awesome\GroupAwesome\GroupAwesomeService\obj\Debug\GroupAwesomeService.pdb
