@@ -75,42 +75,42 @@ namespace AwesomeService
 
         public Ticket getTicket(Ticket ticket)
         {
-            throw new NotImplementedException();
+            return server.get(ticket);
         }
 
         public Seat getSeat(Seat seat)
         {
-            throw new NotImplementedException();
+            return server.get(seat);
         }
 
         public string removeReservation(Reservation reservation)
         {
-            throw new NotImplementedException();
+            return server.remove(reservation);
         }
 
         public string removeMovie(Movie movie)
         {
-            throw new NotImplementedException();
+            return server.remove(movie);
         }
 
         public string removeRoom(Room room)
         {
-            throw new NotImplementedException();
+            return server.remove(room);
         }
 
         public string removeTicket(Ticket ticket)
         {
-            throw new NotImplementedException();
+            return server.remove(ticket);
         }
 
         public IList<Seat> getAdjSeat(int noOfSeats)
         {
-            throw new NotImplementedException();
+            return server.getAdjSeat(noOfSeats);
         }
 
         public string addMovieToRoom(int noOfSeats)
         {
-            throw new NotImplementedException();
+            return server.addMovieToRoom(noOfSeats);
         }
     }
 }
