@@ -1,0 +1,2 @@
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\obj\Debug\AwesomeClient.Properties.Resources.resources
+C:\Users\1337\Desktop\ucn-3semprojekt-dm81-83-group-awesome\Awesome\AwesomeClient\obj\Debug\AwesomeClient.csproj.GenerateResource.Cache

@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Models" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DatabaseEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Discounts" EntityType="Models.Discount" />
+    <EntitySet Name="Movies" EntityType="Models.Movie" />
+    <EntitySet Name="Reservations" EntityType="Models.Reservation" />
+    <EntitySet Name="RoomMovies" EntityType="Models.RoomMovie" />
+    <EntitySet Name="Rooms" EntityType="Models.Room" />
+    <EntitySet Name="RoomSeats" EntityType="Models.RoomSeat" />
+    <EntitySet Name="Seats" EntityType="Models.Seat" />
+    <EntitySet Name="Tickets" EntityType="Models.Ticket" />
+    <AssociationSet Name="FK__Tickets__Discoun__286302EC" Association="Models.FK__Tickets__Discoun__286302EC">
+      <End Role="Discounts" EntitySet="Discounts" />
+      <End Role="Tickets" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RoomMovie__Movie__24927208" Association="Models.FK__RoomMovie__Movie__24927208">
+      <End Role="Movies" EntitySet="Movies" />
+      <End Role="RoomMovies" EntitySet="RoomMovies" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservatio__RMId__21B6055D" Association="Models.FK__Reservatio__RMId__21B6055D">
+      <End Role="RoomMovies" EntitySet="RoomMovies" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tickets__Reserva__29572725" Association="Models.FK__Tickets__Reserva__29572725">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="Tickets" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RoomMovie__RoomI__25869641" Association="Models.FK__RoomMovie__RoomI__25869641">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="RoomMovies" EntitySet="RoomMovies" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RoomSeats__RoomI__267ABA7A" Association="Models.FK__RoomSeats__RoomI__267ABA7A">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="RoomSeats" EntitySet="RoomSeats" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RoomSeats__SeatI__276EDEB3" Association="Models.FK__RoomSeats__SeatI__276EDEB3">
+      <End Role="Seats" EntitySet="Seats" />
+      <End Role="RoomSeats" EntitySet="RoomSeats" />
+    </AssociationSet>
+    <AssociationSet Name="ReservationSeats" Association="Models.ReservationSeats">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="Seats" EntitySet="Seats" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DPercent" Type="Int32" />
+    <NavigationProperty Name="Tickets" Relationship="Models.FK__Tickets__Discoun__286302EC" FromRole="Discounts" ToRole="Tickets" />
+  </EntityType>
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="RoomMovies" Relationship="Models.FK__RoomMovie__Movie__24927208" FromRole="Movies" ToRole="RoomMovies" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RMId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Taken" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="RoomMovies" Relationship="Models.FK__Reservatio__RMId__21B6055D" FromRole="Reservations" ToRole="RoomMovies" />
+    <NavigationProperty Name="Tickets" Relationship="Models.FK__Tickets__Reserva__29572725" FromRole="Reservations" ToRole="Tickets" />
+    <NavigationProperty Name="Seats" Relationship="Models.ReservationSeats" FromRole="Reservations" ToRole="Seats" />
+  </EntityType>
+  <EntityType Name="RoomMovie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RoomId" Type="Int32" Nullable="false" />
+    <Property Name="MovieId" Type="Int32" Nullable="false" />
+    <Property Name="DateAndTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Movies" Relationship="Models.FK__RoomMovie__Movie__24927208" FromRole="RoomMovies" ToRole="Movies" />
+    <NavigationProperty Name="Reservations" Relationship="Models.FK__Reservatio__RMId__21B6055D" FromRole="RoomMovies" ToRole="Reservations" />
+    <NavigationProperty Name="Rooms" Relationship="Models.FK__RoomMovie__RoomI__25869641" FromRole="RoomMovies" ToRole="Rooms" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Cols" Type="Int32" Nullable="false" />
+    <Property Name="Rows" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RoomMovies" Relationship="Models.FK__RoomMovie__RoomI__25869641" FromRole="Rooms" ToRole="RoomMovies" />
+    <NavigationProperty Name="RoomSeats" Relationship="Models.FK__RoomSeats__RoomI__267ABA7A" FromRole="Rooms" ToRole="RoomSeats" />
+  </EntityType>
+  <EntityType Name="RoomSeat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="RoomId" Type="Int32" Nullable="false" />
+    <Property Name="SeatId" Type="Int32" Nullable="false" />
+    <Property Name="ColNo" Type="Int32" Nullable="false" />
+    <Property Name="RowNo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Rooms" Relationship="Models.FK__RoomSeats__RoomI__267ABA7A" FromRole="RoomSeats" ToRole="Rooms" />
+    <NavigationProperty Name="Seats" Relationship="Models.FK__RoomSeats__SeatI__276EDEB3" FromRole="RoomSeats" ToRole="Seats" />
+  </EntityType>
+  <EntityType Name="Seat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="No" Type="Int32" Nullable="false" />
+    <Property Name="Usable" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="RoomSeats" Relationship="Models.FK__RoomSeats__SeatI__276EDEB3" FromRole="Seats" ToRole="RoomSeats" />
+    <NavigationProperty Name="Reservations" Relationship="Models.ReservationSeats" FromRole="Seats" ToRole="Reservations" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="ReservationId" Type="Int32" Nullable="false" />
+    <Property Name="DiscountId" Type="Int32" Nullable="false" />
+    <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Discounts" Relationship="Models.FK__Tickets__Discoun__286302EC" FromRole="Tickets" ToRole="Discounts" />
+    <NavigationProperty Name="Reservations" Relationship="Models.FK__Tickets__Reserva__29572725" FromRole="Tickets" ToRole="Reservations" />
+  </EntityType>
+  <Association Name="FK__Tickets__Discoun__286302EC">
+    <End Role="Discounts" Type="Models.Discount" Multiplicity="1" />
+    <End Role="Tickets" Type="Models.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discounts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tickets">
+        <PropertyRef Name="DiscountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RoomMovie__Movie__24927208">
+    <End Role="Movies" Type="Models.Movie" Multiplicity="1" />
+    <End Role="RoomMovies" Type="Models.RoomMovie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoomMovies">
+        <PropertyRef Name="MovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservatio__RMId__21B6055D">
+    <End Role="RoomMovies" Type="Models.RoomMovie" Multiplicity="1" />
+    <End Role="Reservations" Type="Models.Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoomMovies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="RMId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tickets__Reserva__29572725">
+    <End Role="Reservations" Type="Models.Reservation" Multiplicity="1" />
+    <End Role="Tickets" Type="Models.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tickets">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RoomMovie__RoomI__25869641">
+    <End Role="Rooms" Type="Models.Room" Multiplicity="1" />
+    <End Role="RoomMovies" Type="Models.RoomMovie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoomMovies">
+        <PropertyRef Name="RoomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RoomSeats__RoomI__267ABA7A">
+    <End Role="Rooms" Type="Models.Room" Multiplicity="1" />
+    <End Role="RoomSeats" Type="Models.RoomSeat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoomSeats">
+        <PropertyRef Name="RoomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RoomSeats__SeatI__276EDEB3">
+    <End Role="Seats" Type="Models.Seat" Multiplicity="1" />
+    <End Role="RoomSeats" Type="Models.RoomSeat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seats">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoomSeats">
+        <PropertyRef Name="SeatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ReservationSeats">
+    <End Role="Reservations" Type="Models.Reservation" Multiplicity="*" />
+    <End Role="Seats" Type="Models.Seat" Multiplicity="*" />
+  </Association>
+</Schema>
