@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeClient", "AwesomeClient\AwesomeClient.csproj", "{D4C8BA87-4957-4B34-80B5-EAE1E415AFA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeServer", "AwesomeServer\AwesomeServer.csproj", "{222AA7F8-70C5-4836-99C9-8393B0FE81F0}"
