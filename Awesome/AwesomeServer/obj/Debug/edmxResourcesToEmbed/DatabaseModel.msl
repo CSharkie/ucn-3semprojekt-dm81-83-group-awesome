@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="DatabaseEntities">
+    <EntitySetMapping Name="Discounts">
+      <EntityTypeMapping TypeName="Models.Discount">
+        <MappingFragment StoreEntitySet="Discounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DPercent" ColumnName="DPercent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movies">
+      <EntityTypeMapping TypeName="Models.Movie">
+        <MappingFragment StoreEntitySet="Movies">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservations">
+      <EntityTypeMapping TypeName="Models.Reservation">
+        <MappingFragment StoreEntitySet="Reservations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RMId" ColumnName="RMId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Taken" ColumnName="Taken" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoomMovies">
+      <EntityTypeMapping TypeName="Models.RoomMovie">
+        <MappingFragment StoreEntitySet="RoomMovies">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+          <ScalarProperty Name="DateAndTime" ColumnName="DateAndTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rooms">
+      <EntityTypeMapping TypeName="Models.Room">
+        <MappingFragment StoreEntitySet="Rooms">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cols" ColumnName="Cols" />
+          <ScalarProperty Name="Rows" ColumnName="Rows" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoomSeats">
+      <EntityTypeMapping TypeName="Models.RoomSeat">
+        <MappingFragment StoreEntitySet="RoomSeats">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+          <ScalarProperty Name="ColNo" ColumnName="ColNo" />
+          <ScalarProperty Name="RowNo" ColumnName="RowNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seats">
+      <EntityTypeMapping TypeName="Models.Seat">
+        <MappingFragment StoreEntitySet="Seats">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="Usable" ColumnName="Usable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tickets">
+      <EntityTypeMapping TypeName="Models.Ticket">
+        <MappingFragment StoreEntitySet="Tickets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+          <ScalarProperty Name="DiscountId" ColumnName="DiscountId" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ReservationSeats" TypeName="Models.ReservationSeats" StoreEntitySet="ReservationSeats">
+      <EndProperty Name="Reservations">
+        <ScalarProperty Name="Id" ColumnName="ReservationId" />
+      </EndProperty>
+      <EndProperty Name="Seats">
+        <ScalarProperty Name="Id" ColumnName="SeatId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
