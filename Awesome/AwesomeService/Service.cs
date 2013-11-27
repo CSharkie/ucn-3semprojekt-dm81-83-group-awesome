@@ -40,37 +40,37 @@ namespace AwesomeService
 
         public string updateMovie(Movie movie, Movie newMovie)
         {
-            throw new NotImplementedException();
+            return server.update(movie, newMovie);
         }
 
         public string updateRoom(Room room, Room newRoom)
         {
-            throw new NotImplementedException();
+            return server.update(room, newRoom);
         }
 
         public string updateTicket(Ticket ticket, Ticket newTicket)
         {
-            throw new NotImplementedException();
+            return server.update(ticket, newTicket);
         }
 
         public string updateSeat(Seat seat, Seat newSeat)
         {
-            throw new NotImplementedException();
+            return server.update(seat, newSeat);
         }
 
         public Reservation getReservation(Reservation reservation)
         {
-            throw new NotImplementedException();
+            return server.get(reservation);
         }
 
         public Movie getMovie(Movie movie)
         {
-            throw new NotImplementedException();
+            return server.get(movie);
         }
 
         public Room getRoom(Room room)
         {
-            throw new NotImplementedException();
+            return server.get(room);
         }
 
         public Ticket getTicket(Ticket ticket)
