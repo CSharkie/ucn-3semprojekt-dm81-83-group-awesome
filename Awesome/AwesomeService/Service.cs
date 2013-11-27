@@ -110,7 +110,7 @@ namespace AwesomeService
 
         public string addMovieToRoom(int noOfSeats)
         {
-            return server.addMovieToRoom(noOfSeats); // gabi comment
+            return server.addMovieToRoom(noOfSeats);
         }
     }
 }
