@@ -22,37 +22,19 @@
     <Type Name="Movie">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Title" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Movy_RoomMovy" Member="RoomMovies" ThisKey="Id" OtherKey="MovieId" Type="RoomMovie" />
+      <Column Name="RoomId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateAndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Room_Movy" Member="Room" ThisKey="RoomId" OtherKey="Id" Type="Room" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Reservations" Member="Reservations">
     <Type Name="Reservation">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="RMId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MovieId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Taken" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Association Name="Reservation_Ticket" Member="Tickets" ThisKey="Id" OtherKey="ReservationId" Type="Ticket" />
-      <Association Name="Reservation_ReservationSeat" Member="ReservationSeats" ThisKey="Id" OtherKey="ReservationId" Type="ReservationSeat" />
-      <Association Name="RoomMovy_Reservation" Member="RoomMovie" ThisKey="RMId" OtherKey="Id" Type="RoomMovie" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.ReservationSeats" Member="ReservationSeats">
-    <Type Name="ReservationSeat">
-      <Column Name="ReservationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="SeatId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Reservation_ReservationSeat" Member="Reservation" ThisKey="ReservationId" OtherKey="Id" Type="Reservation" IsForeignKey="true" />
-      <Association Name="Seat_ReservationSeat" Member="Seat" ThisKey="SeatId" OtherKey="Id" Type="Seat" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.RoomMovies" Member="RoomMovies">
-    <Type Name="RoomMovie">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="RoomId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="MovieId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="DateAndTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="RoomMovy_Reservation" Member="Reservations" ThisKey="Id" OtherKey="RMId" Type="Reservation" />
-      <Association Name="Movy_RoomMovy" Member="Movie" ThisKey="MovieId" OtherKey="Id" Type="Movie" IsForeignKey="true" />
-      <Association Name="Room_RoomMovy" Member="Room" ThisKey="RoomId" OtherKey="Id" Type="Room" IsForeignKey="true" />
+      <Association Name="Reservation_Seat" Member="Seats" ThisKey="Id" OtherKey="ReservationId" Type="Seat" />
     </Type>
   </Table>
   <Table Name="dbo.Rooms" Member="Rooms">
@@ -60,7 +42,7 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Cols" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Rows" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Room_RoomMovy" Member="RoomMovies" ThisKey="Id" OtherKey="RoomId" Type="RoomMovie" />
+      <Association Name="Room_Movy" Member="Movies" ThisKey="Id" OtherKey="RoomId" Type="Movie" />
       <Association Name="Room_RoomSeat" Member="RoomSeats" ThisKey="Id" OtherKey="RoomId" Type="RoomSeat" />
     </Type>
   </Table>
@@ -80,8 +62,9 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="No" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Usable" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Association Name="Seat_ReservationSeat" Member="ReservationSeats" ThisKey="Id" OtherKey="SeatId" Type="ReservationSeat" />
+      <Column Name="ReservationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Seat_RoomSeat" Member="RoomSeats" ThisKey="Id" OtherKey="SeatId" Type="RoomSeat" />
+      <Association Name="Reservation_Seat" Member="Reservation" ThisKey="ReservationId" OtherKey="Id" Type="Reservation" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

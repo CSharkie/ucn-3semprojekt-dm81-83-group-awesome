@@ -57,4 +57,233 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="updateReservation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="reservation" nillable="true" type="q5:Reservation" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="newReservation" nillable="true" type="q6:Reservation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updateReservationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="updateReservationResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updateMovie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="movie" nillable="true" type="q7:Movie" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="newMovie" nillable="true" type="q8:Movie" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updateMovieResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="updateMovieResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updateRoom">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="room" nillable="true" type="q9:Room" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="newRoom" nillable="true" type="q10:Room" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updateRoomResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="updateRoomResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updateTicket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="ticket" nillable="true" type="q11:Ticket" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="newTicket" nillable="true" type="q12:Ticket" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updateTicketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="updateTicketResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updateSeat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="seat" nillable="true" type="q13:Seat" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="newSeat" nillable="true" type="q14:Seat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="updateSeatResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="updateSeatResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getReservation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="reservation" nillable="true" type="q15:Reservation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getReservationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getReservationResult" nillable="true" type="q16:Reservation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getMovie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="movie" nillable="true" type="q17:Movie" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getMovieResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getMovieResult" nillable="true" type="q18:Movie" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getRoom">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="room" nillable="true" type="q19:Room" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getRoomResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getRoomResult" nillable="true" type="q20:Room" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getTicket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="ticket" nillable="true" type="q21:Ticket" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getTicketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getTicketResult" nillable="true" type="q22:Ticket" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getSeat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="seat" nillable="true" type="q23:Seat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getSeatResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getSeatResult" nillable="true" type="q24:Seat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="removeReservation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="reservation" nillable="true" type="q25:Reservation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="removeReservationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="removeReservationResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="removeMovie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="movie" nillable="true" type="q26:Movie" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="removeMovieResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="removeMovieResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="removeRoom">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="room" nillable="true" type="q27:Room" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="removeRoomResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="removeRoomResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="removeTicket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="ticket" nillable="true" type="q28:Ticket" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="removeTicketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="removeTicketResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAdjSeat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAdjSeatResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getAdjSeatResult" nillable="true" type="q29:ArrayOfSeat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addMovieToRoom">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addMovieToRoomResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="addMovieToRoomResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

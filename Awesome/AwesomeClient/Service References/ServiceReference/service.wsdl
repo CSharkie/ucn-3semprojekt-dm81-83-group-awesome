@@ -31,6 +31,102 @@
   <wsdl:message name="IService_createTicket_OutputMessage">
     <wsdl:part name="parameters" element="tns:createTicketResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_updateReservation_InputMessage">
+    <wsdl:part name="parameters" element="tns:updateReservation" />
+  </wsdl:message>
+  <wsdl:message name="IService_updateReservation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updateReservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_updateMovie_InputMessage">
+    <wsdl:part name="parameters" element="tns:updateMovie" />
+  </wsdl:message>
+  <wsdl:message name="IService_updateMovie_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updateMovieResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_updateRoom_InputMessage">
+    <wsdl:part name="parameters" element="tns:updateRoom" />
+  </wsdl:message>
+  <wsdl:message name="IService_updateRoom_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updateRoomResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_updateTicket_InputMessage">
+    <wsdl:part name="parameters" element="tns:updateTicket" />
+  </wsdl:message>
+  <wsdl:message name="IService_updateTicket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updateTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_updateSeat_InputMessage">
+    <wsdl:part name="parameters" element="tns:updateSeat" />
+  </wsdl:message>
+  <wsdl:message name="IService_updateSeat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updateSeatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_getReservation_InputMessage">
+    <wsdl:part name="parameters" element="tns:getReservation" />
+  </wsdl:message>
+  <wsdl:message name="IService_getReservation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getReservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_getMovie_InputMessage">
+    <wsdl:part name="parameters" element="tns:getMovie" />
+  </wsdl:message>
+  <wsdl:message name="IService_getMovie_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getMovieResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_getRoom_InputMessage">
+    <wsdl:part name="parameters" element="tns:getRoom" />
+  </wsdl:message>
+  <wsdl:message name="IService_getRoom_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getRoomResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_getTicket_InputMessage">
+    <wsdl:part name="parameters" element="tns:getTicket" />
+  </wsdl:message>
+  <wsdl:message name="IService_getTicket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_getSeat_InputMessage">
+    <wsdl:part name="parameters" element="tns:getSeat" />
+  </wsdl:message>
+  <wsdl:message name="IService_getSeat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getSeatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_removeReservation_InputMessage">
+    <wsdl:part name="parameters" element="tns:removeReservation" />
+  </wsdl:message>
+  <wsdl:message name="IService_removeReservation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:removeReservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_removeMovie_InputMessage">
+    <wsdl:part name="parameters" element="tns:removeMovie" />
+  </wsdl:message>
+  <wsdl:message name="IService_removeMovie_OutputMessage">
+    <wsdl:part name="parameters" element="tns:removeMovieResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_removeRoom_InputMessage">
+    <wsdl:part name="parameters" element="tns:removeRoom" />
+  </wsdl:message>
+  <wsdl:message name="IService_removeRoom_OutputMessage">
+    <wsdl:part name="parameters" element="tns:removeRoomResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_removeTicket_InputMessage">
+    <wsdl:part name="parameters" element="tns:removeTicket" />
+  </wsdl:message>
+  <wsdl:message name="IService_removeTicket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:removeTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_getAdjSeat_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAdjSeat" />
+  </wsdl:message>
+  <wsdl:message name="IService_getAdjSeat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAdjSeatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_addMovieToRoom_InputMessage">
+    <wsdl:part name="parameters" element="tns:addMovieToRoom" />
+  </wsdl:message>
+  <wsdl:message name="IService_addMovieToRoom_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addMovieToRoomResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="createReservation">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/createReservation" message="tns:IService_createReservation_InputMessage" />
@@ -47,6 +143,70 @@
     <wsdl:operation name="createTicket">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/createTicket" message="tns:IService_createTicket_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/createTicketResponse" message="tns:IService_createTicket_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updateReservation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/updateReservation" message="tns:IService_updateReservation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/updateReservationResponse" message="tns:IService_updateReservation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updateMovie">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/updateMovie" message="tns:IService_updateMovie_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/updateMovieResponse" message="tns:IService_updateMovie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updateRoom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/updateRoom" message="tns:IService_updateRoom_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/updateRoomResponse" message="tns:IService_updateRoom_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updateTicket">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/updateTicket" message="tns:IService_updateTicket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/updateTicketResponse" message="tns:IService_updateTicket_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updateSeat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/updateSeat" message="tns:IService_updateSeat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/updateSeatResponse" message="tns:IService_updateSeat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getReservation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getReservation" message="tns:IService_getReservation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getReservationResponse" message="tns:IService_getReservation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getMovie">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getMovie" message="tns:IService_getMovie_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getMovieResponse" message="tns:IService_getMovie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getRoom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getRoom" message="tns:IService_getRoom_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getRoomResponse" message="tns:IService_getRoom_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getTicket">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getTicket" message="tns:IService_getTicket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getTicketResponse" message="tns:IService_getTicket_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getSeat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getSeat" message="tns:IService_getSeat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getSeatResponse" message="tns:IService_getSeat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="removeReservation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/removeReservation" message="tns:IService_removeReservation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/removeReservationResponse" message="tns:IService_removeReservation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="removeMovie">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/removeMovie" message="tns:IService_removeMovie_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/removeMovieResponse" message="tns:IService_removeMovie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="removeRoom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/removeRoom" message="tns:IService_removeRoom_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/removeRoomResponse" message="tns:IService_removeRoom_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="removeTicket">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/removeTicket" message="tns:IService_removeTicket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/removeTicketResponse" message="tns:IService_removeTicket_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getAdjSeat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getAdjSeat" message="tns:IService_getAdjSeat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getAdjSeatResponse" message="tns:IService_getAdjSeat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addMovieToRoom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/addMovieToRoom" message="tns:IService_addMovieToRoom_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/addMovieToRoomResponse" message="tns:IService_addMovieToRoom_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -80,6 +240,150 @@
     </wsdl:operation>
     <wsdl:operation name="createTicket">
       <soap:operation soapAction="http://tempuri.org/IService/createTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateReservation">
+      <soap:operation soapAction="http://tempuri.org/IService/updateReservation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateMovie">
+      <soap:operation soapAction="http://tempuri.org/IService/updateMovie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateRoom">
+      <soap:operation soapAction="http://tempuri.org/IService/updateRoom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateTicket">
+      <soap:operation soapAction="http://tempuri.org/IService/updateTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateSeat">
+      <soap:operation soapAction="http://tempuri.org/IService/updateSeat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReservation">
+      <soap:operation soapAction="http://tempuri.org/IService/getReservation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMovie">
+      <soap:operation soapAction="http://tempuri.org/IService/getMovie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRoom">
+      <soap:operation soapAction="http://tempuri.org/IService/getRoom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTicket">
+      <soap:operation soapAction="http://tempuri.org/IService/getTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSeat">
+      <soap:operation soapAction="http://tempuri.org/IService/getSeat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeReservation">
+      <soap:operation soapAction="http://tempuri.org/IService/removeReservation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeMovie">
+      <soap:operation soapAction="http://tempuri.org/IService/removeMovie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeRoom">
+      <soap:operation soapAction="http://tempuri.org/IService/removeRoom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeTicket">
+      <soap:operation soapAction="http://tempuri.org/IService/removeTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAdjSeat">
+      <soap:operation soapAction="http://tempuri.org/IService/getAdjSeat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addMovieToRoom">
+      <soap:operation soapAction="http://tempuri.org/IService/addMovieToRoom" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
