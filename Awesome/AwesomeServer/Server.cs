@@ -174,10 +174,14 @@ namespace AwesomeServer
             Reservation returnObj = null;
             try
             {
-                returnObj = (from r in db.Reservations
-                             where r.Id == reservation.Id
-                             select r).FirstOrDefault();
-
+                if (reservation.Id != 0)
+                    returnObj = (from r in db.Reservations
+                                 where r.Id == reservation.Id
+                                 select r).FirstOrDefault();
+                else if (reservation.Name != null)
+                    returnObj = (from r in db.Reservations
+                                 where r.Name.Contains(reservation.Name)
+                                 select r).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -191,10 +195,14 @@ namespace AwesomeServer
             Movie returnObj = null;
             try
             {
-                returnObj = (from m in db.Movies
-                             where m.Id == movie.Id
-                             select m).FirstOrDefault();
-
+                if (movie.Id != 0)
+                    returnObj = (from m in db.Movies
+                                 where m.Id == movie.Id
+                                 select m).FirstOrDefault();
+                else if (movie.Title != null)
+                    returnObj = (from m in db.Movies
+                                 where m.Title.Contains(movie.Title)
+                                 select m).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -211,7 +219,6 @@ namespace AwesomeServer
                 returnObj = (from r in db.Rooms
                              where r.Id == room.Id
                              select r).FirstOrDefault();
-
             }
             catch (Exception ex)
             {
@@ -242,9 +249,14 @@ namespace AwesomeServer
             Seat returnObj = null;
             try
             {
-                returnObj = (from r in db.Seats
-                             where r.Id == seat.Id
-                             select r).FirstOrDefault();
+                if (seat.Id != 0)
+                    returnObj = (from s in db.Seats
+                                 where s.Id == seat.Id
+                                 select s).FirstOrDefault();
+                else if (seat.No >= 0 && seat.No != null)
+                    returnObj = (from s in db.Seats
+                                 where s.No == seat.No
+                                 select s).FirstOrDefault();
 
             }
             catch (Exception ex)
@@ -261,7 +273,8 @@ namespace AwesomeServer
             string message = "The reservation was removed succesfully!";
             try
             {
-                db.Reservations.DeleteOnSubmit(reservation);
+
+                db.Reservations.DeleteOnSubmit(get(reservation));
                 db.SubmitChanges();
             }
             catch (Exception ex)
