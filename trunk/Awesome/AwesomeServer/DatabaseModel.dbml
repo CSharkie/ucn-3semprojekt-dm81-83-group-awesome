@@ -11,7 +11,7 @@
     <Type Name="Ticket">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Standard" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
-      <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,2)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,0)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="PaidAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="ReservationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="DiscountId" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -39,7 +39,7 @@
       <Column Name="SeatCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Reservation_Ticket" Member="Tickets" ThisKey="Id" OtherKey="ReservationId" Type="Ticket" />
       <Association Name="Reservation_Seat" Member="Seats" ThisKey="Id" OtherKey="ReservationId" Type="Seat" />
-      <Association Name="Movy_Reservation" Member="Movie" Storage="_Movy" ThisKey="MovieId" OtherKey="Id" Type="Movie" IsForeignKey="true" />
+      <Association Name="Movy_Reservation" Member="Movie" ThisKey="MovieId" OtherKey="Id" Type="Movie" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Rooms" Member="Rooms">
@@ -54,7 +54,8 @@
   <Table Name="dbo.Seats" Member="Seats">
     <Type Name="Seat">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="No" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Col" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Row" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Usable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="RoomId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ReservationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
