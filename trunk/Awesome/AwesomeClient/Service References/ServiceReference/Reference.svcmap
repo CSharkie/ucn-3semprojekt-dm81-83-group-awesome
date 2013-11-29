@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="234061e0-7712-4a0b-b897-4e9a1bca2f7c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7098f4fe-c60e-49e6-848c-a15f4d0381b2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/AwesomeService/Service/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://localhost:8733/AwesomeService/Service/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="2868e32c-d8b1-40d9-b9f6-e7c08aff6c40" SourceId="1" SourceUrl="http://localhost/AwesomeService/Service/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="936acef8-bb30-4fa3-9524-670bab112bd9" SourceId="1" SourceUrl="http://localhost/AwesomeService/Service/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="c9dbf01a-4e42-4ebb-ac71-3888b15bcd35" SourceId="1" SourceUrl="http://localhost/AwesomeService/Service/mex" />
-    <MetadataFile FileName="AwesomeServer.xsd" MetadataType="Schema" ID="f6615d4f-f155-42ab-80d6-a801e5e0cea0" SourceId="1" SourceUrl="http://localhost/AwesomeService/Service/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="1fd1eb93-2a8a-47c1-a9c4-1b10fa152f61" SourceId="1" SourceUrl="http://localhost:8733/AwesomeService/Service/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="d68a07fb-0dd8-437f-a973-b36929ea6261" SourceId="1" SourceUrl="http://localhost:8733/AwesomeService/Service/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="053faad5-19ba-4ab3-a1b0-5c427630852d" SourceId="1" SourceUrl="http://localhost:8733/AwesomeService/Service/mex" />
+    <MetadataFile FileName="AwesomeServer.xsd" MetadataType="Schema" ID="fd2e1705-810c-4336-8f38-00b8472aa9e4" SourceId="1" SourceUrl="http://localhost:8733/AwesomeService/Service/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

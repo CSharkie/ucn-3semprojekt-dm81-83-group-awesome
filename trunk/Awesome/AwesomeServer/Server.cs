@@ -218,7 +218,7 @@ namespace AwesomeServer
             {
                 returnObj = (from r in db.Rooms
                              where r.Id == room.Id
-                             select r).FirstOrDefault();
+                             select r).First();
             }
             catch (Exception ex)
             {
@@ -253,9 +253,9 @@ namespace AwesomeServer
                     returnObj = (from s in db.Seats
                                  where s.Id == seat.Id
                                  select s).FirstOrDefault();
-                else if (seat.No >= 0 && seat.No != null)
+                else if (seat.Col >= 0 && seat.Row >=0)
                     returnObj = (from s in db.Seats
-                                 where s.No == seat.No
+                                 where s.Col == seat.Col && s.Row ==seat.Row
                                  select s).FirstOrDefault();
 
             }
@@ -337,11 +337,5 @@ namespace AwesomeServer
             throw new NotImplementedException();
         }
         #endregion
-
-
-        public string addMovieToRoom(int noOfSeats)
-        {
-            return "";
-        }
     }
 }

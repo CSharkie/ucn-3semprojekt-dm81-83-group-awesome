@@ -128,12 +128,6 @@ namespace AwesomeClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeat", ReplyAction="http://tempuri.org/IService/getAdjSeatResponse")]
         System.Threading.Tasks.Task<AwesomeServer.Seat[]> getAdjSeatAsync(int noOfSeats);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/addMovieToRoom", ReplyAction="http://tempuri.org/IService/addMovieToRoomResponse")]
-        string addMovieToRoom(int noOfSeats);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/addMovieToRoom", ReplyAction="http://tempuri.org/IService/addMovieToRoomResponse")]
-        System.Threading.Tasks.Task<string> addMovieToRoomAsync(int noOfSeats);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -313,14 +307,6 @@ namespace AwesomeClient.ServiceReference {
         
         public System.Threading.Tasks.Task<AwesomeServer.Seat[]> getAdjSeatAsync(int noOfSeats) {
             return base.Channel.getAdjSeatAsync(noOfSeats);
-        }
-        
-        public string addMovieToRoom(int noOfSeats) {
-            return base.Channel.addMovieToRoom(noOfSeats);
-        }
-        
-        public System.Threading.Tasks.Task<string> addMovieToRoomAsync(int noOfSeats) {
-            return base.Channel.addMovieToRoomAsync(noOfSeats);
         }
     }
 }
