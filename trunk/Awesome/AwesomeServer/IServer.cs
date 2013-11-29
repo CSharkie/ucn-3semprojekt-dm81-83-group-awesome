@@ -17,9 +17,9 @@ namespace AwesomeServer
         //string updateRoom(int roomId, int cols, int rows);
         //string updateTicket(int ticketId, decimal standard, int reservationId, int discountId);
         //string updateSeat(int seatId, int col, int row, bool usable, int roomId, int reservationId);
-        ICollection<Reservation> getReservation(int reservationId, string name, int movieId);
+        Reservation getReservation(int reservationId, string name, int movieId);
         //ICollection<Movie> getMovie(int movieId, string title, int roomId);
-        //Room getRoom(int roomId);
+        Room getRoom(int roomId);
         //ICollection<Ticket> getTicket(int ticketId, int reservationId);
         //ICollection<Seat> getSeat(int seatId, int roomId);
         //string removeReservation(int reservationId, string name);
