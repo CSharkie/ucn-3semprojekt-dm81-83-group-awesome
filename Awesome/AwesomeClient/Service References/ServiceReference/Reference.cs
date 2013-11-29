@@ -9,125 +9,257 @@
 //------------------------------------------------------------------------------
 
 namespace AwesomeClient.ServiceReference {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Reservation", Namespace="http://schemas.datacontract.org/2004/07/AwesomeService")]
+    [System.SerializableAttribute()]
+    public partial class Reservation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateReservedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int MovieIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SeatCountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool TakenField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DateReserved {
+            get {
+                return this.DateReservedField;
+            }
+            set {
+                if ((this.DateReservedField.Equals(value) != true)) {
+                    this.DateReservedField = value;
+                    this.RaisePropertyChanged("DateReserved");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int MovieId {
+            get {
+                return this.MovieIdField;
+            }
+            set {
+                if ((this.MovieIdField.Equals(value) != true)) {
+                    this.MovieIdField = value;
+                    this.RaisePropertyChanged("MovieId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SeatCount {
+            get {
+                return this.SeatCountField;
+            }
+            set {
+                if ((this.SeatCountField.Equals(value) != true)) {
+                    this.SeatCountField = value;
+                    this.RaisePropertyChanged("SeatCount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Taken {
+            get {
+                return this.TakenField;
+            }
+            set {
+                if ((this.TakenField.Equals(value) != true)) {
+                    this.TakenField = value;
+                    this.RaisePropertyChanged("Taken");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Room", Namespace="http://schemas.datacontract.org/2004/07/AwesomeService")]
+    [System.SerializableAttribute()]
+    public partial class Room : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ColsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RowsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Cols {
+            get {
+                return this.ColsField;
+            }
+            set {
+                if ((this.ColsField.Equals(value) != true)) {
+                    this.ColsField = value;
+                    this.RaisePropertyChanged("Cols");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Rows {
+            get {
+                return this.RowsField;
+            }
+            set {
+                if ((this.RowsField.Equals(value) != true)) {
+                    this.RowsField = value;
+                    this.RaisePropertyChanged("Rows");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IService")]
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createReservation", ReplyAction="http://tempuri.org/IService/createReservationResponse")]
-        string createReservation(AwesomeServer.Reservation reservation);
+        string createReservation(string name, bool taken, System.DateTime dateReserved, int movieId, int seatCount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createReservation", ReplyAction="http://tempuri.org/IService/createReservationResponse")]
-        System.Threading.Tasks.Task<string> createReservationAsync(AwesomeServer.Reservation reservation);
+        System.Threading.Tasks.Task<string> createReservationAsync(string name, bool taken, System.DateTime dateReserved, int movieId, int seatCount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createMovie", ReplyAction="http://tempuri.org/IService/createMovieResponse")]
-        string createMovie(AwesomeServer.Movie movie);
+        string createMovie(string title, System.DateTime dateAndTime, int roomId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createMovie", ReplyAction="http://tempuri.org/IService/createMovieResponse")]
-        System.Threading.Tasks.Task<string> createMovieAsync(AwesomeServer.Movie movie);
+        System.Threading.Tasks.Task<string> createMovieAsync(string title, System.DateTime dateAndTime, int roomId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createRoom", ReplyAction="http://tempuri.org/IService/createRoomResponse")]
-        string createRoom(AwesomeServer.Room room);
+        string createRoom(int cols, int rows);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createRoom", ReplyAction="http://tempuri.org/IService/createRoomResponse")]
-        System.Threading.Tasks.Task<string> createRoomAsync(AwesomeServer.Room room);
+        System.Threading.Tasks.Task<string> createRoomAsync(int cols, int rows);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createTicket", ReplyAction="http://tempuri.org/IService/createTicketResponse")]
-        string createTicket(AwesomeServer.Ticket ticket);
+        string createTicket(decimal standard, int reservationId, int discountId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createTicket", ReplyAction="http://tempuri.org/IService/createTicketResponse")]
-        System.Threading.Tasks.Task<string> createTicketAsync(AwesomeServer.Ticket ticket);
+        System.Threading.Tasks.Task<string> createTicketAsync(decimal standard, int reservationId, int discountId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateReservation", ReplyAction="http://tempuri.org/IService/updateReservationResponse")]
-        string updateReservation(AwesomeServer.Reservation reservation, AwesomeServer.Reservation newReservation);
+        string updateReservation(int reservationId, string name, bool taken, int movieId, int seatCount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateReservation", ReplyAction="http://tempuri.org/IService/updateReservationResponse")]
-        System.Threading.Tasks.Task<string> updateReservationAsync(AwesomeServer.Reservation reservation, AwesomeServer.Reservation newReservation);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateMovie", ReplyAction="http://tempuri.org/IService/updateMovieResponse")]
-        string updateMovie(AwesomeServer.Movie movie, AwesomeServer.Movie newMovie);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateMovie", ReplyAction="http://tempuri.org/IService/updateMovieResponse")]
-        System.Threading.Tasks.Task<string> updateMovieAsync(AwesomeServer.Movie movie, AwesomeServer.Movie newMovie);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateRoom", ReplyAction="http://tempuri.org/IService/updateRoomResponse")]
-        string updateRoom(AwesomeServer.Room room, AwesomeServer.Room newRoom);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateRoom", ReplyAction="http://tempuri.org/IService/updateRoomResponse")]
-        System.Threading.Tasks.Task<string> updateRoomAsync(AwesomeServer.Room room, AwesomeServer.Room newRoom);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateTicket", ReplyAction="http://tempuri.org/IService/updateTicketResponse")]
-        string updateTicket(AwesomeServer.Ticket ticket, AwesomeServer.Ticket newTicket);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateTicket", ReplyAction="http://tempuri.org/IService/updateTicketResponse")]
-        System.Threading.Tasks.Task<string> updateTicketAsync(AwesomeServer.Ticket ticket, AwesomeServer.Ticket newTicket);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateSeat", ReplyAction="http://tempuri.org/IService/updateSeatResponse")]
-        string updateSeat(AwesomeServer.Seat seat, AwesomeServer.Seat newSeat);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateSeat", ReplyAction="http://tempuri.org/IService/updateSeatResponse")]
-        System.Threading.Tasks.Task<string> updateSeatAsync(AwesomeServer.Seat seat, AwesomeServer.Seat newSeat);
+        System.Threading.Tasks.Task<string> updateReservationAsync(int reservationId, string name, bool taken, int movieId, int seatCount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getReservation", ReplyAction="http://tempuri.org/IService/getReservationResponse")]
-        AwesomeServer.Reservation getReservation(AwesomeServer.Reservation reservation);
+        AwesomeClient.ServiceReference.Reservation getReservation(int reservationId, string name, int movieId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getReservation", ReplyAction="http://tempuri.org/IService/getReservationResponse")]
-        System.Threading.Tasks.Task<AwesomeServer.Reservation> getReservationAsync(AwesomeServer.Reservation reservation);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getMovie", ReplyAction="http://tempuri.org/IService/getMovieResponse")]
-        AwesomeServer.Movie getMovie(AwesomeServer.Movie movie);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getMovie", ReplyAction="http://tempuri.org/IService/getMovieResponse")]
-        System.Threading.Tasks.Task<AwesomeServer.Movie> getMovieAsync(AwesomeServer.Movie movie);
+        System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Reservation> getReservationAsync(int reservationId, string name, int movieId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getRoom", ReplyAction="http://tempuri.org/IService/getRoomResponse")]
-        AwesomeServer.Room getRoom(AwesomeServer.Room room);
+        AwesomeClient.ServiceReference.Room getRoom(int roomId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getRoom", ReplyAction="http://tempuri.org/IService/getRoomResponse")]
-        System.Threading.Tasks.Task<AwesomeServer.Room> getRoomAsync(AwesomeServer.Room room);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getTicket", ReplyAction="http://tempuri.org/IService/getTicketResponse")]
-        AwesomeServer.Ticket getTicket(AwesomeServer.Ticket ticket);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getTicket", ReplyAction="http://tempuri.org/IService/getTicketResponse")]
-        System.Threading.Tasks.Task<AwesomeServer.Ticket> getTicketAsync(AwesomeServer.Ticket ticket);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getSeat", ReplyAction="http://tempuri.org/IService/getSeatResponse")]
-        AwesomeServer.Seat getSeat(AwesomeServer.Seat seat);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getSeat", ReplyAction="http://tempuri.org/IService/getSeatResponse")]
-        System.Threading.Tasks.Task<AwesomeServer.Seat> getSeatAsync(AwesomeServer.Seat seat);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/removeReservation", ReplyAction="http://tempuri.org/IService/removeReservationResponse")]
-        string removeReservation(AwesomeServer.Reservation reservation);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/removeReservation", ReplyAction="http://tempuri.org/IService/removeReservationResponse")]
-        System.Threading.Tasks.Task<string> removeReservationAsync(AwesomeServer.Reservation reservation);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/removeMovie", ReplyAction="http://tempuri.org/IService/removeMovieResponse")]
-        string removeMovie(AwesomeServer.Movie movie);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/removeMovie", ReplyAction="http://tempuri.org/IService/removeMovieResponse")]
-        System.Threading.Tasks.Task<string> removeMovieAsync(AwesomeServer.Movie movie);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/removeRoom", ReplyAction="http://tempuri.org/IService/removeRoomResponse")]
-        string removeRoom(AwesomeServer.Room room);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/removeRoom", ReplyAction="http://tempuri.org/IService/removeRoomResponse")]
-        System.Threading.Tasks.Task<string> removeRoomAsync(AwesomeServer.Room room);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/removeTicket", ReplyAction="http://tempuri.org/IService/removeTicketResponse")]
-        string removeTicket(AwesomeServer.Ticket ticket);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/removeTicket", ReplyAction="http://tempuri.org/IService/removeTicketResponse")]
-        System.Threading.Tasks.Task<string> removeTicketAsync(AwesomeServer.Ticket ticket);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeat", ReplyAction="http://tempuri.org/IService/getAdjSeatResponse")]
-        AwesomeServer.Seat[] getAdjSeat(int noOfSeats);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeat", ReplyAction="http://tempuri.org/IService/getAdjSeatResponse")]
-        System.Threading.Tasks.Task<AwesomeServer.Seat[]> getAdjSeatAsync(int noOfSeats);
+        System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Room> getRoomAsync(int roomId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -157,156 +289,60 @@ namespace AwesomeClient.ServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public string createReservation(AwesomeServer.Reservation reservation) {
-            return base.Channel.createReservation(reservation);
+        public string createReservation(string name, bool taken, System.DateTime dateReserved, int movieId, int seatCount) {
+            return base.Channel.createReservation(name, taken, dateReserved, movieId, seatCount);
         }
         
-        public System.Threading.Tasks.Task<string> createReservationAsync(AwesomeServer.Reservation reservation) {
-            return base.Channel.createReservationAsync(reservation);
+        public System.Threading.Tasks.Task<string> createReservationAsync(string name, bool taken, System.DateTime dateReserved, int movieId, int seatCount) {
+            return base.Channel.createReservationAsync(name, taken, dateReserved, movieId, seatCount);
         }
         
-        public string createMovie(AwesomeServer.Movie movie) {
-            return base.Channel.createMovie(movie);
+        public string createMovie(string title, System.DateTime dateAndTime, int roomId) {
+            return base.Channel.createMovie(title, dateAndTime, roomId);
         }
         
-        public System.Threading.Tasks.Task<string> createMovieAsync(AwesomeServer.Movie movie) {
-            return base.Channel.createMovieAsync(movie);
+        public System.Threading.Tasks.Task<string> createMovieAsync(string title, System.DateTime dateAndTime, int roomId) {
+            return base.Channel.createMovieAsync(title, dateAndTime, roomId);
         }
         
-        public string createRoom(AwesomeServer.Room room) {
-            return base.Channel.createRoom(room);
+        public string createRoom(int cols, int rows) {
+            return base.Channel.createRoom(cols, rows);
         }
         
-        public System.Threading.Tasks.Task<string> createRoomAsync(AwesomeServer.Room room) {
-            return base.Channel.createRoomAsync(room);
+        public System.Threading.Tasks.Task<string> createRoomAsync(int cols, int rows) {
+            return base.Channel.createRoomAsync(cols, rows);
         }
         
-        public string createTicket(AwesomeServer.Ticket ticket) {
-            return base.Channel.createTicket(ticket);
+        public string createTicket(decimal standard, int reservationId, int discountId) {
+            return base.Channel.createTicket(standard, reservationId, discountId);
         }
         
-        public System.Threading.Tasks.Task<string> createTicketAsync(AwesomeServer.Ticket ticket) {
-            return base.Channel.createTicketAsync(ticket);
+        public System.Threading.Tasks.Task<string> createTicketAsync(decimal standard, int reservationId, int discountId) {
+            return base.Channel.createTicketAsync(standard, reservationId, discountId);
         }
         
-        public string updateReservation(AwesomeServer.Reservation reservation, AwesomeServer.Reservation newReservation) {
-            return base.Channel.updateReservation(reservation, newReservation);
+        public string updateReservation(int reservationId, string name, bool taken, int movieId, int seatCount) {
+            return base.Channel.updateReservation(reservationId, name, taken, movieId, seatCount);
         }
         
-        public System.Threading.Tasks.Task<string> updateReservationAsync(AwesomeServer.Reservation reservation, AwesomeServer.Reservation newReservation) {
-            return base.Channel.updateReservationAsync(reservation, newReservation);
+        public System.Threading.Tasks.Task<string> updateReservationAsync(int reservationId, string name, bool taken, int movieId, int seatCount) {
+            return base.Channel.updateReservationAsync(reservationId, name, taken, movieId, seatCount);
         }
         
-        public string updateMovie(AwesomeServer.Movie movie, AwesomeServer.Movie newMovie) {
-            return base.Channel.updateMovie(movie, newMovie);
+        public AwesomeClient.ServiceReference.Reservation getReservation(int reservationId, string name, int movieId) {
+            return base.Channel.getReservation(reservationId, name, movieId);
         }
         
-        public System.Threading.Tasks.Task<string> updateMovieAsync(AwesomeServer.Movie movie, AwesomeServer.Movie newMovie) {
-            return base.Channel.updateMovieAsync(movie, newMovie);
+        public System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Reservation> getReservationAsync(int reservationId, string name, int movieId) {
+            return base.Channel.getReservationAsync(reservationId, name, movieId);
         }
         
-        public string updateRoom(AwesomeServer.Room room, AwesomeServer.Room newRoom) {
-            return base.Channel.updateRoom(room, newRoom);
+        public AwesomeClient.ServiceReference.Room getRoom(int roomId) {
+            return base.Channel.getRoom(roomId);
         }
         
-        public System.Threading.Tasks.Task<string> updateRoomAsync(AwesomeServer.Room room, AwesomeServer.Room newRoom) {
-            return base.Channel.updateRoomAsync(room, newRoom);
-        }
-        
-        public string updateTicket(AwesomeServer.Ticket ticket, AwesomeServer.Ticket newTicket) {
-            return base.Channel.updateTicket(ticket, newTicket);
-        }
-        
-        public System.Threading.Tasks.Task<string> updateTicketAsync(AwesomeServer.Ticket ticket, AwesomeServer.Ticket newTicket) {
-            return base.Channel.updateTicketAsync(ticket, newTicket);
-        }
-        
-        public string updateSeat(AwesomeServer.Seat seat, AwesomeServer.Seat newSeat) {
-            return base.Channel.updateSeat(seat, newSeat);
-        }
-        
-        public System.Threading.Tasks.Task<string> updateSeatAsync(AwesomeServer.Seat seat, AwesomeServer.Seat newSeat) {
-            return base.Channel.updateSeatAsync(seat, newSeat);
-        }
-        
-        public AwesomeServer.Reservation getReservation(AwesomeServer.Reservation reservation) {
-            return base.Channel.getReservation(reservation);
-        }
-        
-        public System.Threading.Tasks.Task<AwesomeServer.Reservation> getReservationAsync(AwesomeServer.Reservation reservation) {
-            return base.Channel.getReservationAsync(reservation);
-        }
-        
-        public AwesomeServer.Movie getMovie(AwesomeServer.Movie movie) {
-            return base.Channel.getMovie(movie);
-        }
-        
-        public System.Threading.Tasks.Task<AwesomeServer.Movie> getMovieAsync(AwesomeServer.Movie movie) {
-            return base.Channel.getMovieAsync(movie);
-        }
-        
-        public AwesomeServer.Room getRoom(AwesomeServer.Room room) {
-            return base.Channel.getRoom(room);
-        }
-        
-        public System.Threading.Tasks.Task<AwesomeServer.Room> getRoomAsync(AwesomeServer.Room room) {
-            return base.Channel.getRoomAsync(room);
-        }
-        
-        public AwesomeServer.Ticket getTicket(AwesomeServer.Ticket ticket) {
-            return base.Channel.getTicket(ticket);
-        }
-        
-        public System.Threading.Tasks.Task<AwesomeServer.Ticket> getTicketAsync(AwesomeServer.Ticket ticket) {
-            return base.Channel.getTicketAsync(ticket);
-        }
-        
-        public AwesomeServer.Seat getSeat(AwesomeServer.Seat seat) {
-            return base.Channel.getSeat(seat);
-        }
-        
-        public System.Threading.Tasks.Task<AwesomeServer.Seat> getSeatAsync(AwesomeServer.Seat seat) {
-            return base.Channel.getSeatAsync(seat);
-        }
-        
-        public string removeReservation(AwesomeServer.Reservation reservation) {
-            return base.Channel.removeReservation(reservation);
-        }
-        
-        public System.Threading.Tasks.Task<string> removeReservationAsync(AwesomeServer.Reservation reservation) {
-            return base.Channel.removeReservationAsync(reservation);
-        }
-        
-        public string removeMovie(AwesomeServer.Movie movie) {
-            return base.Channel.removeMovie(movie);
-        }
-        
-        public System.Threading.Tasks.Task<string> removeMovieAsync(AwesomeServer.Movie movie) {
-            return base.Channel.removeMovieAsync(movie);
-        }
-        
-        public string removeRoom(AwesomeServer.Room room) {
-            return base.Channel.removeRoom(room);
-        }
-        
-        public System.Threading.Tasks.Task<string> removeRoomAsync(AwesomeServer.Room room) {
-            return base.Channel.removeRoomAsync(room);
-        }
-        
-        public string removeTicket(AwesomeServer.Ticket ticket) {
-            return base.Channel.removeTicket(ticket);
-        }
-        
-        public System.Threading.Tasks.Task<string> removeTicketAsync(AwesomeServer.Ticket ticket) {
-            return base.Channel.removeTicketAsync(ticket);
-        }
-        
-        public AwesomeServer.Seat[] getAdjSeat(int noOfSeats) {
-            return base.Channel.getAdjSeat(noOfSeats);
-        }
-        
-        public System.Threading.Tasks.Task<AwesomeServer.Seat[]> getAdjSeatAsync(int noOfSeats) {
-            return base.Channel.getAdjSeatAsync(noOfSeats);
+        public System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Room> getRoomAsync(int roomId) {
+            return base.Channel.getRoomAsync(roomId);
         }
     }
 }

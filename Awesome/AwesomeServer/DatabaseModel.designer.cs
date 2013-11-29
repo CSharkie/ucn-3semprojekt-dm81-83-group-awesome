@@ -630,7 +630,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movy_Reservation", Storage="_Reservations", ThisKey="Id", OtherKey="MovieId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movie_Reservation", Storage="_Reservations", ThisKey="Id", OtherKey="MovieId")]
 		public EntitySet<Reservation> Reservations
 		{
 			get
@@ -643,7 +643,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movy", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movie", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true)]
 		public Room Room
 		{
 			get
@@ -910,7 +910,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movy_Reservation", Storage="_Movie", ThisKey="MovieId", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movie_Reservation", Storage="_Movie", ThisKey="MovieId", OtherKey="Id", IsForeignKey=true)]
 		public Movie Movie
 		{
 			get
@@ -1097,7 +1097,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movy", Storage="_Movies", ThisKey="Id", OtherKey="RoomId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movie", Storage="_Movies", ThisKey="Id", OtherKey="RoomId")]
 		public EntitySet<Movie> Movies
 		{
 			get

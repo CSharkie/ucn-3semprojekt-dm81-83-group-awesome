@@ -25,8 +25,8 @@
       <Column Name="Title" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="DateAndTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="RoomId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Movy_Reservation" Member="Reservations" ThisKey="Id" OtherKey="MovieId" Type="Reservation" />
-      <Association Name="Room_Movy" Member="Room" ThisKey="RoomId" OtherKey="Id" Type="Room" IsForeignKey="true" />
+      <Association Name="Movie_Reservation" Member="Reservations" ThisKey="Id" OtherKey="MovieId" Type="Reservation" />
+      <Association Name="Room_Movie" Member="Room" ThisKey="RoomId" OtherKey="Id" Type="Room" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Reservations" Member="Reservations">
@@ -39,7 +39,7 @@
       <Column Name="SeatCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Reservation_Seat" Member="Seats" ThisKey="Id" OtherKey="ReservationId" Type="Seat" />
       <Association Name="Reservation_Ticket" Member="Tickets" ThisKey="Id" OtherKey="ReservationId" Type="Ticket" />
-      <Association Name="Movy_Reservation" Member="Movie" ThisKey="MovieId" OtherKey="Id" Type="Movie" IsForeignKey="true" />
+      <Association Name="Movie_Reservation" Member="Movie" ThisKey="MovieId" OtherKey="Id" Type="Movie" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Rooms" Member="Rooms">
@@ -48,7 +48,7 @@
       <Column Name="Cols" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Rows" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Room_Seat" Member="Seats" ThisKey="Id" OtherKey="RoomId" Type="Seat" />
-      <Association Name="Room_Movy" Member="Movies" ThisKey="Id" OtherKey="RoomId" Type="Movie" />
+      <Association Name="Room_Movie" Member="Movies" ThisKey="Id" OtherKey="RoomId" Type="Movie" />
     </Type>
   </Table>
   <Table Name="dbo.Tickets" Member="Tickets">

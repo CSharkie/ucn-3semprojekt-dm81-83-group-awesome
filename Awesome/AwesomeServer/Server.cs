@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Linq;
+using System.Data.Metadata.Edm;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -107,7 +110,10 @@ namespace AwesomeServer
                 string message = "The room was updated succesfully!";
                 try
                 {
-                    Reservation obj = getReservation(reservationId, null, 0).First();
+                    //Reservation obj = getReservation(reservationId, null, 0);//.First();
+                    var obj = (from r in db.Reservations
+                               where r.Id == reservationId
+                               select r).First();
                     if (name != null && name != "")
                         obj.Name = name;
                     if (obj.Taken != taken) //Liam N.
@@ -204,25 +210,33 @@ namespace AwesomeServer
         //#endregion
 
         //#region read
-        public ICollection<Reservation> getReservation(int reservationId, string name, int movieId)
+        public Reservation getReservation(int reservationId, string name, int movieId)
         {
 
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
-                ICollection<Reservation> returnObj = null;
+                var returnObj= (from r in db.Reservations
+                               where r.Id == reservationId
+                               select r).First(); //new Reservation();
                 try
                 {
                     if (reservationId != 0)
-                        returnObj.Add(db.Reservations.SingleOrDefault(r => r.Id == reservationId));
+                        returnObj = (db.Reservations.SingleOrDefault(r => r.Id == reservationId));
                     else if (name != null && name != "")
-                        returnObj.Add(db.Reservations.SingleOrDefault(r => r.Name.Contains(name)));
+                        returnObj = (db.Reservations.SingleOrDefault(r => r.Name.Contains(name)));
                     else if (movieId != 0)
-                        returnObj.Add(db.Reservations.SingleOrDefault(r => r.MovieId == movieId));
+                        returnObj = (db.Reservations.SingleOrDefault(r => r.MovieId == movieId));
                 }
                 catch (Exception ex)
                 {
                     throw (ex);
                 }
+                //Movie movie = returnObj.Movie;
+                //returnObj.Movie = movie;
+                //EntitySet<Seat> seats = returnObj.Seats;
+                //returnObj.Seats = seats;
+                //EntitySet<Ticket> tickets = returnObj.Tickets;
+                //returnObj.Tickets = tickets;
                 return returnObj;
             }
         }
@@ -246,19 +260,23 @@ namespace AwesomeServer
         //    return returnObj;
         //}
 
-        //public Room getRoom(int roomId)
-        //{
-        //    Room returnObj = null;
-        //    try
-        //    {
-        //        returnObj = db.Rooms.SingleOrDefault(r => r.Id == room.Id);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw (ex);
-        //    }
-        //    return returnObj;
-        //}
+        public Room getRoom(int roomId)
+        {
+
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                Room returnObj = null;
+                try
+                {
+                    returnObj = db.Rooms.SingleOrDefault(r => r.Id == roomId);
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
+                return returnObj; 
+            }
+        }
 
         //public ICollection<Ticket> getTicket(int ticketId, int reservationId)
         //{
