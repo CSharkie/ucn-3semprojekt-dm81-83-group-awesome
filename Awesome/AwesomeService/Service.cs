@@ -13,34 +13,34 @@ namespace AwesomeService
     public class Service : IService
     {
 
-
+        Server server = new Server();
         public string createReservation(string name, bool taken, DateTime dateReserved, int movieId, int seatCount)
         {
-            Server server = new Server();
+            
             return server.createReservation(name, taken, dateReserved, movieId, seatCount);
         }
 
         public string createMovie(string title, DateTime dateAndTime, int roomId)
         {
-            Server server = new Server();
+            
             return server.createMovie(title, dateAndTime, roomId);
         }
 
         public string createRoom(int cols, int rows)
         {
-            Server server = new Server();
+            
             return server.createRoom(cols, rows);
         }
 
         public string createTicket(decimal standard, int reservationId, int discountId)
         {
-            Server server = new Server();
+            
             return server.createTicket(standard, reservationId, discountId);
         }
 
         public string updateReservation(int reservationId, string name, bool taken, int movieId, int seatCount)
         {
-            Server server = new Server();
+            
             return server.updateReservation(reservationId, name, taken, movieId, seatCount);
         }
 
@@ -66,15 +66,15 @@ namespace AwesomeService
 
         public Reservation getReservation(int reservationId, string name, int movieId)
         {
-            Server server = new Server();
+            
             var res = server.getReservation(reservationId, name, movieId);
-            Reservation reserv = new Reservation();
-            reserv.Id = res.Id;
-            reserv.Name = res.Name;
-            reserv.Taken = res.Taken;
-            reserv.SeatCount = res.SeatCount;
-            reserv.MovieId = res.MovieId;
-            reserv.DateReserved = res.DateReserved;
+            Reservation reserv = new Reservation(
+                res.Id,
+                res.Name,
+                res.Taken,
+                res.DateReserved,
+                res.MovieId,
+                res.SeatCount);
             return reserv;
 
         }
@@ -86,7 +86,7 @@ namespace AwesomeService
 
         public Room getRoom(int roomId)
         {
-            Server server = new Server();
+            
             var room = server.getRoom(roomId);
             Room obj = new Room();
             obj.Id = room.Id;
