@@ -33,9 +33,9 @@ namespace AwesomeServer
     partial void InsertDiscount(Discount instance);
     partial void UpdateDiscount(Discount instance);
     partial void DeleteDiscount(Discount instance);
-    partial void InsertTicket(Ticket instance);
-    partial void UpdateTicket(Ticket instance);
-    partial void DeleteTicket(Ticket instance);
+    partial void InsertSeat(Seat instance);
+    partial void UpdateSeat(Seat instance);
+    partial void DeleteSeat(Seat instance);
     partial void InsertMovie(Movie instance);
     partial void UpdateMovie(Movie instance);
     partial void DeleteMovie(Movie instance);
@@ -45,9 +45,9 @@ namespace AwesomeServer
     partial void InsertRoom(Room instance);
     partial void UpdateRoom(Room instance);
     partial void DeleteRoom(Room instance);
-    partial void InsertSeat(Seat instance);
-    partial void UpdateSeat(Seat instance);
-    partial void DeleteSeat(Seat instance);
+    partial void InsertTicket(Ticket instance);
+    partial void UpdateTicket(Ticket instance);
+    partial void DeleteTicket(Ticket instance);
     #endregion
 		
 		public DatabaseModelDataContext() : 
@@ -88,11 +88,11 @@ namespace AwesomeServer
 			}
 		}
 		
-		public System.Data.Linq.Table<Ticket> Tickets
+		public System.Data.Linq.Table<Seat> Seats
 		{
 			get
 			{
-				return this.GetTable<Ticket>();
+				return this.GetTable<Seat>();
 			}
 		}
 		
@@ -120,11 +120,11 @@ namespace AwesomeServer
 			}
 		}
 		
-		public System.Data.Linq.Table<Seat> Seats
+		public System.Data.Linq.Table<Ticket> Tickets
 		{
 			get
 			{
-				return this.GetTable<Seat>();
+				return this.GetTable<Ticket>();
 			}
 		}
 	}
@@ -243,27 +243,27 @@ namespace AwesomeServer
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tickets")]
-	public partial class Ticket : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Seats")]
+	public partial class Seat : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _Id;
 		
-		private decimal _Standard;
+		private int _Col;
 		
-		private System.Nullable<decimal> _Price;
+		private int _Row;
 		
-		private System.Nullable<decimal> _PaidAmount;
+		private bool _Usable;
 		
-		private int _ReservationId;
+		private int _RoomId;
 		
-		private System.Nullable<int> _DiscountId;
-		
-		private EntityRef<Discount> _Discount;
+		private System.Nullable<int> _ReservationId;
 		
 		private EntityRef<Reservation> _Reservation;
+		
+		private EntityRef<Room> _Room;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -271,22 +271,22 @@ namespace AwesomeServer
     partial void OnCreated();
     partial void OnIdChanging(int value);
     partial void OnIdChanged();
-    partial void OnStandardChanging(decimal value);
-    partial void OnStandardChanged();
-    partial void OnPriceChanging(System.Nullable<decimal> value);
-    partial void OnPriceChanged();
-    partial void OnPaidAmountChanging(System.Nullable<decimal> value);
-    partial void OnPaidAmountChanged();
-    partial void OnReservationIdChanging(int value);
+    partial void OnColChanging(int value);
+    partial void OnColChanged();
+    partial void OnRowChanging(int value);
+    partial void OnRowChanged();
+    partial void OnUsableChanging(bool value);
+    partial void OnUsableChanged();
+    partial void OnRoomIdChanging(int value);
+    partial void OnRoomIdChanged();
+    partial void OnReservationIdChanging(System.Nullable<int> value);
     partial void OnReservationIdChanged();
-    partial void OnDiscountIdChanging(System.Nullable<int> value);
-    partial void OnDiscountIdChanged();
     #endregion
 		
-		public Ticket()
+		public Seat()
 		{
-			this._Discount = default(EntityRef<Discount>);
 			this._Reservation = default(EntityRef<Reservation>);
+			this._Room = default(EntityRef<Room>);
 			OnCreated();
 		}
 		
@@ -310,68 +310,92 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Standard", DbType="Decimal(18,2) NOT NULL")]
-		public decimal Standard
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Col", DbType="Int NOT NULL")]
+		public int Col
 		{
 			get
 			{
-				return this._Standard;
+				return this._Col;
 			}
 			set
 			{
-				if ((this._Standard != value))
+				if ((this._Col != value))
 				{
-					this.OnStandardChanging(value);
+					this.OnColChanging(value);
 					this.SendPropertyChanging();
-					this._Standard = value;
-					this.SendPropertyChanged("Standard");
-					this.OnStandardChanged();
+					this._Col = value;
+					this.SendPropertyChanged("Col");
+					this.OnColChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", AutoSync=AutoSync.Always, DbType="Decimal(18,0)", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<decimal> Price
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Row", DbType="Int NOT NULL")]
+		public int Row
 		{
 			get
 			{
-				return this._Price;
+				return this._Row;
 			}
 			set
 			{
-				if ((this._Price != value))
+				if ((this._Row != value))
 				{
-					this.OnPriceChanging(value);
+					this.OnRowChanging(value);
 					this.SendPropertyChanging();
-					this._Price = value;
-					this.SendPropertyChanged("Price");
-					this.OnPriceChanged();
+					this._Row = value;
+					this.SendPropertyChanged("Row");
+					this.OnRowChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaidAmount", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> PaidAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usable", DbType="Bit NOT NULL")]
+		public bool Usable
 		{
 			get
 			{
-				return this._PaidAmount;
+				return this._Usable;
 			}
 			set
 			{
-				if ((this._PaidAmount != value))
+				if ((this._Usable != value))
 				{
-					this.OnPaidAmountChanging(value);
+					this.OnUsableChanging(value);
 					this.SendPropertyChanging();
-					this._PaidAmount = value;
-					this.SendPropertyChanged("PaidAmount");
-					this.OnPaidAmountChanged();
+					this._Usable = value;
+					this.SendPropertyChanged("Usable");
+					this.OnUsableChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReservationId", DbType="Int NOT NULL")]
-		public int ReservationId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomId", DbType="Int NOT NULL")]
+		public int RoomId
+		{
+			get
+			{
+				return this._RoomId;
+			}
+			set
+			{
+				if ((this._RoomId != value))
+				{
+					if (this._Room.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRoomIdChanging(value);
+					this.SendPropertyChanging();
+					this._RoomId = value;
+					this.SendPropertyChanged("RoomId");
+					this.OnRoomIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReservationId", DbType="Int")]
+		public System.Nullable<int> ReservationId
 		{
 			get
 			{
@@ -394,65 +418,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiscountId", DbType="Int")]
-		public System.Nullable<int> DiscountId
-		{
-			get
-			{
-				return this._DiscountId;
-			}
-			set
-			{
-				if ((this._DiscountId != value))
-				{
-					if (this._Discount.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDiscountIdChanging(value);
-					this.SendPropertyChanging();
-					this._DiscountId = value;
-					this.SendPropertyChanged("DiscountId");
-					this.OnDiscountIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Discount_Ticket", Storage="_Discount", ThisKey="DiscountId", OtherKey="Id", IsForeignKey=true)]
-		public Discount Discount
-		{
-			get
-			{
-				return this._Discount.Entity;
-			}
-			set
-			{
-				Discount previousValue = this._Discount.Entity;
-				if (((previousValue != value) 
-							|| (this._Discount.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Discount.Entity = null;
-						previousValue.Tickets.Remove(this);
-					}
-					this._Discount.Entity = value;
-					if ((value != null))
-					{
-						value.Tickets.Add(this);
-						this._DiscountId = value.Id;
-					}
-					else
-					{
-						this._DiscountId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Discount");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reservation_Ticket", Storage="_Reservation", ThisKey="ReservationId", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reservation_Seat", Storage="_Reservation", ThisKey="ReservationId", OtherKey="Id", IsForeignKey=true)]
 		public Reservation Reservation
 		{
 			get
@@ -469,19 +435,53 @@ namespace AwesomeServer
 					if ((previousValue != null))
 					{
 						this._Reservation.Entity = null;
-						previousValue.Tickets.Remove(this);
+						previousValue.Seats.Remove(this);
 					}
 					this._Reservation.Entity = value;
 					if ((value != null))
 					{
-						value.Tickets.Add(this);
+						value.Seats.Add(this);
 						this._ReservationId = value.Id;
 					}
 					else
 					{
-						this._ReservationId = default(int);
+						this._ReservationId = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Reservation");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Seat", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true)]
+		public Room Room
+		{
+			get
+			{
+				return this._Room.Entity;
+			}
+			set
+			{
+				Room previousValue = this._Room.Entity;
+				if (((previousValue != value) 
+							|| (this._Room.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Room.Entity = null;
+						previousValue.Seats.Remove(this);
+					}
+					this._Room.Entity = value;
+					if ((value != null))
+					{
+						value.Seats.Add(this);
+						this._RoomId = value.Id;
+					}
+					else
+					{
+						this._RoomId = default(int);
+					}
+					this.SendPropertyChanged("Room");
 				}
 			}
 		}
@@ -728,9 +728,9 @@ namespace AwesomeServer
 		
 		private int _SeatCount;
 		
-		private EntitySet<Ticket> _Tickets;
-		
 		private EntitySet<Seat> _Seats;
+		
+		private EntitySet<Ticket> _Tickets;
 		
 		private EntityRef<Movie> _Movie;
 		
@@ -754,8 +754,8 @@ namespace AwesomeServer
 		
 		public Reservation()
 		{
-			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
 			this._Seats = new EntitySet<Seat>(new Action<Seat>(this.attach_Seats), new Action<Seat>(this.detach_Seats));
+			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
 			this._Movie = default(EntityRef<Movie>);
 			OnCreated();
 		}
@@ -884,19 +884,6 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reservation_Ticket", Storage="_Tickets", ThisKey="Id", OtherKey="ReservationId")]
-		public EntitySet<Ticket> Tickets
-		{
-			get
-			{
-				return this._Tickets;
-			}
-			set
-			{
-				this._Tickets.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reservation_Seat", Storage="_Seats", ThisKey="Id", OtherKey="ReservationId")]
 		public EntitySet<Seat> Seats
 		{
@@ -907,6 +894,19 @@ namespace AwesomeServer
 			set
 			{
 				this._Seats.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reservation_Ticket", Storage="_Tickets", ThisKey="Id", OtherKey="ReservationId")]
+		public EntitySet<Ticket> Tickets
+		{
+			get
+			{
+				return this._Tickets;
+			}
+			set
+			{
+				this._Tickets.Assign(value);
 			}
 		}
 		
@@ -964,18 +964,6 @@ namespace AwesomeServer
 			}
 		}
 		
-		private void attach_Tickets(Ticket entity)
-		{
-			this.SendPropertyChanging();
-			entity.Reservation = this;
-		}
-		
-		private void detach_Tickets(Ticket entity)
-		{
-			this.SendPropertyChanging();
-			entity.Reservation = null;
-		}
-		
 		private void attach_Seats(Seat entity)
 		{
 			this.SendPropertyChanging();
@@ -983,6 +971,18 @@ namespace AwesomeServer
 		}
 		
 		private void detach_Seats(Seat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Reservation = null;
+		}
+		
+		private void attach_Tickets(Ticket entity)
+		{
+			this.SendPropertyChanging();
+			entity.Reservation = this;
+		}
+		
+		private void detach_Tickets(Ticket entity)
 		{
 			this.SendPropertyChanging();
 			entity.Reservation = null;
@@ -1001,9 +1001,9 @@ namespace AwesomeServer
 		
 		private int _Rows;
 		
-		private EntitySet<Movie> _Movies;
-		
 		private EntitySet<Seat> _Seats;
+		
+		private EntitySet<Movie> _Movies;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1019,8 +1019,8 @@ namespace AwesomeServer
 		
 		public Room()
 		{
-			this._Movies = new EntitySet<Movie>(new Action<Movie>(this.attach_Movies), new Action<Movie>(this.detach_Movies));
 			this._Seats = new EntitySet<Seat>(new Action<Seat>(this.attach_Seats), new Action<Seat>(this.detach_Seats));
+			this._Movies = new EntitySet<Movie>(new Action<Movie>(this.attach_Movies), new Action<Movie>(this.detach_Movies));
 			OnCreated();
 		}
 		
@@ -1084,19 +1084,6 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movy", Storage="_Movies", ThisKey="Id", OtherKey="RoomId")]
-		public EntitySet<Movie> Movies
-		{
-			get
-			{
-				return this._Movies;
-			}
-			set
-			{
-				this._Movies.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Seat", Storage="_Seats", ThisKey="Id", OtherKey="RoomId")]
 		public EntitySet<Seat> Seats
 		{
@@ -1107,6 +1094,19 @@ namespace AwesomeServer
 			set
 			{
 				this._Seats.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movy", Storage="_Movies", ThisKey="Id", OtherKey="RoomId")]
+		public EntitySet<Movie> Movies
+		{
+			get
+			{
+				return this._Movies;
+			}
+			set
+			{
+				this._Movies.Assign(value);
 			}
 		}
 		
@@ -1130,18 +1130,6 @@ namespace AwesomeServer
 			}
 		}
 		
-		private void attach_Movies(Movie entity)
-		{
-			this.SendPropertyChanging();
-			entity.Room = this;
-		}
-		
-		private void detach_Movies(Movie entity)
-		{
-			this.SendPropertyChanging();
-			entity.Room = null;
-		}
-		
 		private void attach_Seats(Seat entity)
 		{
 			this.SendPropertyChanging();
@@ -1153,29 +1141,41 @@ namespace AwesomeServer
 			this.SendPropertyChanging();
 			entity.Room = null;
 		}
+		
+		private void attach_Movies(Movie entity)
+		{
+			this.SendPropertyChanging();
+			entity.Room = this;
+		}
+		
+		private void detach_Movies(Movie entity)
+		{
+			this.SendPropertyChanging();
+			entity.Room = null;
+		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Seats")]
-	public partial class Seat : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tickets")]
+	public partial class Ticket : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _Id;
 		
-		private int _Col;
+		private decimal _Standard;
 		
-		private int _Row;
+		private System.Nullable<decimal> _Price;
 		
-		private bool _Usable;
+		private System.Nullable<decimal> _PaidAmount;
 		
-		private int _RoomId;
+		private int _ReservationId;
 		
-		private System.Nullable<int> _ReservationId;
+		private System.Nullable<int> _DiscountId;
+		
+		private EntityRef<Discount> _Discount;
 		
 		private EntityRef<Reservation> _Reservation;
-		
-		private EntityRef<Room> _Room;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1183,22 +1183,22 @@ namespace AwesomeServer
     partial void OnCreated();
     partial void OnIdChanging(int value);
     partial void OnIdChanged();
-    partial void OnColChanging(int value);
-    partial void OnColChanged();
-    partial void OnRowChanging(int value);
-    partial void OnRowChanged();
-    partial void OnUsableChanging(bool value);
-    partial void OnUsableChanged();
-    partial void OnRoomIdChanging(int value);
-    partial void OnRoomIdChanged();
-    partial void OnReservationIdChanging(System.Nullable<int> value);
+    partial void OnStandardChanging(decimal value);
+    partial void OnStandardChanged();
+    partial void OnPriceChanging(System.Nullable<decimal> value);
+    partial void OnPriceChanged();
+    partial void OnPaidAmountChanging(System.Nullable<decimal> value);
+    partial void OnPaidAmountChanged();
+    partial void OnReservationIdChanging(int value);
     partial void OnReservationIdChanged();
+    partial void OnDiscountIdChanging(System.Nullable<int> value);
+    partial void OnDiscountIdChanged();
     #endregion
 		
-		public Seat()
+		public Ticket()
 		{
+			this._Discount = default(EntityRef<Discount>);
 			this._Reservation = default(EntityRef<Reservation>);
-			this._Room = default(EntityRef<Room>);
 			OnCreated();
 		}
 		
@@ -1222,92 +1222,68 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Col", DbType="Int NOT NULL")]
-		public int Col
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Standard", DbType="Decimal(18,2) NOT NULL")]
+		public decimal Standard
 		{
 			get
 			{
-				return this._Col;
+				return this._Standard;
 			}
 			set
 			{
-				if ((this._Col != value))
+				if ((this._Standard != value))
 				{
-					this.OnColChanging(value);
+					this.OnStandardChanging(value);
 					this.SendPropertyChanging();
-					this._Col = value;
-					this.SendPropertyChanged("Col");
-					this.OnColChanged();
+					this._Standard = value;
+					this.SendPropertyChanged("Standard");
+					this.OnStandardChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Row", DbType="Int NOT NULL")]
-		public int Row
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", AutoSync=AutoSync.Always, DbType="Decimal(18,0)", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<decimal> Price
 		{
 			get
 			{
-				return this._Row;
+				return this._Price;
 			}
 			set
 			{
-				if ((this._Row != value))
+				if ((this._Price != value))
 				{
-					this.OnRowChanging(value);
+					this.OnPriceChanging(value);
 					this.SendPropertyChanging();
-					this._Row = value;
-					this.SendPropertyChanged("Row");
-					this.OnRowChanged();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usable", DbType="Bit NOT NULL")]
-		public bool Usable
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaidAmount", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> PaidAmount
 		{
 			get
 			{
-				return this._Usable;
+				return this._PaidAmount;
 			}
 			set
 			{
-				if ((this._Usable != value))
+				if ((this._PaidAmount != value))
 				{
-					this.OnUsableChanging(value);
+					this.OnPaidAmountChanging(value);
 					this.SendPropertyChanging();
-					this._Usable = value;
-					this.SendPropertyChanged("Usable");
-					this.OnUsableChanged();
+					this._PaidAmount = value;
+					this.SendPropertyChanged("PaidAmount");
+					this.OnPaidAmountChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomId", DbType="Int NOT NULL")]
-		public int RoomId
-		{
-			get
-			{
-				return this._RoomId;
-			}
-			set
-			{
-				if ((this._RoomId != value))
-				{
-					if (this._Room.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRoomIdChanging(value);
-					this.SendPropertyChanging();
-					this._RoomId = value;
-					this.SendPropertyChanged("RoomId");
-					this.OnRoomIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReservationId", DbType="Int")]
-		public System.Nullable<int> ReservationId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReservationId", DbType="Int NOT NULL")]
+		public int ReservationId
 		{
 			get
 			{
@@ -1330,7 +1306,65 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reservation_Seat", Storage="_Reservation", ThisKey="ReservationId", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiscountId", DbType="Int")]
+		public System.Nullable<int> DiscountId
+		{
+			get
+			{
+				return this._DiscountId;
+			}
+			set
+			{
+				if ((this._DiscountId != value))
+				{
+					if (this._Discount.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDiscountIdChanging(value);
+					this.SendPropertyChanging();
+					this._DiscountId = value;
+					this.SendPropertyChanged("DiscountId");
+					this.OnDiscountIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Discount_Ticket", Storage="_Discount", ThisKey="DiscountId", OtherKey="Id", IsForeignKey=true)]
+		public Discount Discount
+		{
+			get
+			{
+				return this._Discount.Entity;
+			}
+			set
+			{
+				Discount previousValue = this._Discount.Entity;
+				if (((previousValue != value) 
+							|| (this._Discount.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Discount.Entity = null;
+						previousValue.Tickets.Remove(this);
+					}
+					this._Discount.Entity = value;
+					if ((value != null))
+					{
+						value.Tickets.Add(this);
+						this._DiscountId = value.Id;
+					}
+					else
+					{
+						this._DiscountId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Discount");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reservation_Ticket", Storage="_Reservation", ThisKey="ReservationId", OtherKey="Id", IsForeignKey=true)]
 		public Reservation Reservation
 		{
 			get
@@ -1347,53 +1381,19 @@ namespace AwesomeServer
 					if ((previousValue != null))
 					{
 						this._Reservation.Entity = null;
-						previousValue.Seats.Remove(this);
+						previousValue.Tickets.Remove(this);
 					}
 					this._Reservation.Entity = value;
 					if ((value != null))
 					{
-						value.Seats.Add(this);
+						value.Tickets.Add(this);
 						this._ReservationId = value.Id;
 					}
 					else
 					{
-						this._ReservationId = default(Nullable<int>);
+						this._ReservationId = default(int);
 					}
 					this.SendPropertyChanged("Reservation");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Seat", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true)]
-		public Room Room
-		{
-			get
-			{
-				return this._Room.Entity;
-			}
-			set
-			{
-				Room previousValue = this._Room.Entity;
-				if (((previousValue != value) 
-							|| (this._Room.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Room.Entity = null;
-						previousValue.Seats.Remove(this);
-					}
-					this._Room.Entity = value;
-					if ((value != null))
-					{
-						value.Seats.Add(this);
-						this._RoomId = value.Id;
-					}
-					else
-					{
-						this._RoomId = default(int);
-					}
-					this.SendPropertyChanged("Room");
 				}
 			}
 		}
