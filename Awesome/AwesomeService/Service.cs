@@ -16,31 +16,31 @@ namespace AwesomeService
         Server server = new Server();
         public string createReservation(string name, bool taken, DateTime dateReserved, int movieId, int seatCount)
         {
-            
+
             return server.createReservation(name, taken, dateReserved, movieId, seatCount);
         }
 
         public string createMovie(string title, DateTime dateAndTime, int roomId)
         {
-            
+
             return server.createMovie(title, dateAndTime, roomId);
         }
 
         public string createRoom(int cols, int rows)
         {
-            
+
             return server.createRoom(cols, rows);
         }
 
         public string createTicket(decimal standard, int reservationId, int discountId)
         {
-            
+
             return server.createTicket(standard, reservationId, discountId);
         }
 
         public string updateReservation(int reservationId, string name, bool taken, int movieId, int seatCount)
         {
-            
+
             return server.updateReservation(reservationId, name, taken, movieId, seatCount);
         }
 
@@ -64,18 +64,22 @@ namespace AwesomeService
         //    return server.update(seat, newSeat);
         //}
 
-        public Reservation getReservation(int reservationId, string name, int movieId)
+        public IList<Reservation> getReservation(int reservationId, string name, int movieId)
         {
-            
-            var res = server.getReservation(reservationId, name, movieId);
-            Reservation reserv = new Reservation(
-                res.Id,
-                res.Name,
-                res.Taken,
-                res.DateReserved,
-                res.MovieId,
-                res.SeatCount);
-            return reserv;
+            var reservationList = server.getReservation(reservationId, name, movieId);
+            List<Reservation> returnObj = new List<Reservation>();
+            foreach (var item in reservationList)
+            {
+                returnObj.Add(new Reservation(
+                        item.Id,
+                        item.Name,
+                        item.Taken,
+                        item.DateReserved,
+                        item.MovieId,
+                        item.SeatCount));
+            }
+            return returnObj;
+
 
         }
 
@@ -86,25 +90,50 @@ namespace AwesomeService
 
         public Room getRoom(int roomId)
         {
-            
+
             var room = server.getRoom(roomId);
-            Room obj = new Room();
-            obj.Id = room.Id;
-            obj.Cols = room.Cols;
-            obj.Rows = room.Rows;
-            
-            return obj;
+            Room returnObj = new Room(room.Id, room.Cols, room.Rows);
+
+            return returnObj;
         }
 
-        //public Ticket getTicket(Ticket ticket)
-        //{
-        //    return server.get(ticket);
-        //}
+        public IList<Ticket> getTicket(int ticketId, int reservationId)
+        {
+            var ticketList = server.getTicket(ticketId, reservationId);
+            IList<Ticket> returnObj = new List<Ticket>();
+            foreach(var item in ticketList)
+            {
+                returnObj.Add(new Ticket(
+                    item.Id,
+                    item.Standard,
+                    item.Price,
+                    item.PaidAmount,
+                    item.ReservationId,
+                    item.DiscountId
+                    ));
+            }
+            return returnObj;
 
-        //public Seat getSeat(Seat seat)
-        //{
-        //    return server.get(seat);
-        //}
+        }
+
+        public IList<Seat> getSeat(int seatId, int roomId, int col, int row)
+        {
+            var seatList = server.getSeat(seatId, roomId, col, row);
+            IList<Seat> returnObj = new List<Seat>();
+            foreach (var item in seatList)
+            {
+                returnObj.Add(new Seat(
+                    item.Id,
+                    item.Col,
+                    item.Row,
+                    item.Usable,
+                    item.RoomId,
+                    item.ReservationId
+                    ));
+            }
+            return returnObj;
+
+        }
 
         //public string removeReservation(Reservation reservation)
         //{

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Linq;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -32,15 +33,15 @@ namespace AwesomeService
         //[OperationContract]
         //string updateSeat(Seat seat, Seat newSeat);
         [OperationContract]
-        Reservation getReservation(int reservationId, string name, int movieId);
+        IList<Reservation> getReservation(int reservationId, string name, int movieId);
         //[OperationContract]
         //Movie getMovie(Movie movie);
         [OperationContract]
         Room getRoom(int roomId);
-        //[OperationContract]
-        //Ticket getTicket(Ticket ticket);
-        //[OperationContract]
-        //Seat getSeat(Seat seat);
+        [OperationContract]
+        IList<Ticket> getTicket(int ticketId, int reservationId);
+        [OperationContract]
+        IList<Seat> getSeat(int seatId, int roomId, int col, int row);
         //[OperationContract]
         //string removeReservation(Reservation reservation);
         //[OperationContract]
@@ -130,7 +131,7 @@ namespace AwesomeService
     [DataContract]
     public class Seat
     {
-        public Seat(int id, int col, int row, bool usable, int roomId, int reservationId)
+        public Seat(int id, int col, int row, bool usable, int roomId, int? reservationId)
         {
             this.Id = id;
             this.Col = col;
@@ -150,7 +151,7 @@ namespace AwesomeService
         [DataMember]
         public int RoomId { get; set; }
         [DataMember]
-        public int ReservationId { get; set; }
+        public int? ReservationId { get; set; }
         //[DataMember]
         //public Room Room { get; set; }
         //[DataMember]
@@ -159,7 +160,7 @@ namespace AwesomeService
     [DataContract]
     public class Ticket
     {
-        public Ticket(int id, decimal standard, decimal price, decimal paidAmmount, int reservationId, int discountId)
+        public Ticket(int id, decimal standard, decimal? price, decimal? paidAmmount, int reservationId, int? discountId)
         {
             this.Id = id;
             this.Standard = standard;
@@ -173,13 +174,13 @@ namespace AwesomeService
         [DataMember]
         public decimal Standard { get; set; }
         [DataMember]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         [DataMember]
-        public decimal PaidAmount { get; set; }
+        public decimal? PaidAmount { get; set; }
         [DataMember]
         public int ReservationId { get; set; }
         [DataMember]
-        public int DiscountId { get; set; }
+        public int? DiscountId { get; set; }
         //[DataMember]
         //public Reservation Reservation { get; set; }
         //[DataMember]

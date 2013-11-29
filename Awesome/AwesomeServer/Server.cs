@@ -100,6 +100,26 @@ namespace AwesomeServer
                 return message;
             }
         }
+
+        public string createDiscount(decimal dPercent)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The ticket was added succesfully!";
+                try
+                {
+                    Discount discount = new Discount();
+                    discount.DPercent = dPercent; // make it decimal in the database
+                    db.Discounts.InsertOnSubmit(discount);
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
+        }
         #endregion
 
         //#region update
@@ -210,34 +230,41 @@ namespace AwesomeServer
         //#endregion
 
         //#region read
-        public Reservation getReservation(int reservationId, string name, int movieId)
+
+        public IList<Reservation> getReservation(int reservationId, string name, int movieId)
         {
 
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
-                var returnObj= (from r in db.Reservations
-                               where r.Id == reservationId
-                               select r).First(); //new Reservation();
                 try
                 {
-                    if (reservationId != 0)
-                        returnObj = (db.Reservations.SingleOrDefault(r => r.Id == reservationId));
+                    IList<Reservation> returnObj = new List<Reservation>();
+                    if (reservationId > 0)
+                        returnObj.Add(db.Reservations.SingleOrDefault(r => r.Id == reservationId));
+                    else if (name != null && name != "" && movieId > 0)
+                    {
+                        var query = db.Reservations.Where(r => r.Name.Contains(name) && r.MovieId == movieId);
+                        foreach (Reservation r in query)
+                            returnObj.Add(r);
+                    }
                     else if (name != null && name != "")
-                        returnObj = (db.Reservations.SingleOrDefault(r => r.Name.Contains(name)));
-                    else if (movieId != 0)
-                        returnObj = (db.Reservations.SingleOrDefault(r => r.MovieId == movieId));
+                    {
+                        var query = db.Reservations.Where(r => r.Name.Contains(name));
+                        foreach (Reservation r in query)
+                            returnObj.Add(r);
+                    }
+                    else if (movieId > 0)
+                    {
+                        var query = db.Reservations.Where(r => r.MovieId == movieId);
+                        foreach (Reservation r in query)
+                            returnObj.Add(r);
+                    }
+                    return returnObj;
                 }
                 catch (Exception ex)
                 {
                     throw (ex);
                 }
-                //Movie movie = returnObj.Movie;
-                //returnObj.Movie = movie;
-                //EntitySet<Seat> seats = returnObj.Seats;
-                //returnObj.Seats = seats;
-                //EntitySet<Ticket> tickets = returnObj.Tickets;
-                //returnObj.Tickets = tickets;
-                return returnObj;
             }
         }
 
@@ -274,48 +301,62 @@ namespace AwesomeServer
                 {
                     throw (ex);
                 }
-                return returnObj; 
+                return returnObj;
             }
         }
 
-        //public ICollection<Ticket> getTicket(int ticketId, int reservationId)
-        //{
-        //    Ticket returnObj = null;
-        //    try
-        //    {
-        //        returnObj = (from r in db.Tickets
-        //                     where r.Id == ticket.Id
-        //                     select r).FirstOrDefault();
+        public IList<Ticket> getTicket(int ticketId, int reservationId)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                List<Ticket> returnObj = new List<Ticket>();
+                try
+                {
+                    if (ticketId > 0)
+                        returnObj.Add(db.Tickets.SingleOrDefault(r => r.Id == ticketId));
+                    else if (reservationId > 0)
+                    {
+                        var query = db.Tickets.Where(r => r.ReservationId == reservationId);
+                        foreach (Ticket item in query)
+                        {
+                            returnObj.Add(item);
+                        }
+                    }
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw (ex);
-        //    }
-        //    return returnObj;
-        //}
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
+                return returnObj;
+            }
+        }
 
-        //public ICollection<Seat> getSeat(int seatId, int roomId)
-        //{
-        //    Seat returnObj = null;
-        //    try
-        //    {
-        //        if (seat.Id != 0)
-        //            returnObj = (from s in db.Seats
-        //                         where s.Id == seat.Id
-        //                         select s).FirstOrDefault();
-        //        else if (seat.Col >= 0 && seat.Row >= 0)
-        //            returnObj = (from s in db.Seats
-        //                         where s.Col == seat.Col && s.Row == seat.Row
-        //                         select s).FirstOrDefault();
+        public IList<Seat> getSeat(int seatId, int roomId, int col, int row)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                try
+                {
+                    IList<Seat> returnObj = new List<Seat>();
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw (ex);
-        //    }
-        //    return returnObj;
-        //}
+                    if (seatId != 0)
+                        returnObj.Add(db.Seats.SingleOrDefault(r => r.Id == seatId));
+                    else if (roomId > 0)
+                        if(col > 0 && row > 0)
+                            returnObj.Add(db.Seats.SingleOrDefault(r => r.RoomId == roomId && r.Row == row && r.Col == col));
+                        else if(col > 0)
+                            returnObj.Add(db.Seats.SingleOrDefault(r => r.RoomId == roomId && r.Col == col));
+                        else if(row > 0)
+                            returnObj.Add(db.Seats.SingleOrDefault(r => r.RoomId == roomId && r.Row == row));
+                    return returnObj;
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
+            }
+        }
         //#endregion
 
         //#region remove
