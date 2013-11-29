@@ -288,7 +288,7 @@ namespace AwesomeServer
             try
             {
 
-                db.Reservations.DeleteOnSubmit(get(reservation));
+                db.Reservations.DeleteOnSubmit();
                 db.SubmitChanges();
             }
             catch (Exception ex)
