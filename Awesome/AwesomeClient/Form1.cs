@@ -24,9 +24,8 @@ namespace AwesomeClient
         private void button1_Click(object sender, EventArgs e)
         {
             Room room = new Room();
-            room.Cols = 7;
-            room.Rows = 7;
-            client.createRoom(room);
+            room.Id = 1;
+            text.Text = client.getRoom(room).Rows.ToString();
         }
     }
 }

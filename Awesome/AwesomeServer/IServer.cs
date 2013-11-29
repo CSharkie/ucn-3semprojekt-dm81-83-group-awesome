@@ -27,6 +27,5 @@ namespace AwesomeServer
         string remove(Room room);
         string remove(Ticket ticket);
         IList<Seat> getAdjSeat(int noOfSeats);
-        string addMovieToRoom(int noOfSeats);
     }
 }

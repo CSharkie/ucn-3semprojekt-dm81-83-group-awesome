@@ -50,7 +50,5 @@ namespace AwesomeService
         string removeTicket(Ticket ticket);
         [OperationContract]
         IList<Seat> getAdjSeat(int noOfSeats);
-        [OperationContract]
-        string addMovieToRoom(int noOfSeats);
     }
 }

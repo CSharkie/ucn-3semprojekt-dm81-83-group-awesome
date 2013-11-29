@@ -272,18 +272,4 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="addMovieToRoom">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addMovieToRoomResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="addMovieToRoomResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
 </xs:schema>

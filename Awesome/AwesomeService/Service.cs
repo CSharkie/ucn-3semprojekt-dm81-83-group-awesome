@@ -107,10 +107,5 @@ namespace AwesomeService
         {
             return server.getAdjSeat(noOfSeats);
         }
-
-        public string addMovieToRoom(int noOfSeats)
-        {
-            return server.addMovieToRoom(noOfSeats);
-        }
     }
 }
