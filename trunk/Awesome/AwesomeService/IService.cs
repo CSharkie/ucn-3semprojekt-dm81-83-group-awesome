@@ -55,6 +55,16 @@ namespace AwesomeService
     [DataContract]
     public class Reservation
     {
+        
+        public Reservation(int id, string name, bool taken, DateTime dateReserved, int movieId, int seatCount)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Taken = taken;
+            this.DateReserved = dateReserved;
+            this.MovieId = movieId;
+            this.SeatCount = seatCount;
+        }
         [DataMember]
         public int Id { get; set; }
         [DataMember]
@@ -77,6 +87,13 @@ namespace AwesomeService
     [DataContract]
     public class Movie
     {
+        public Movie(int id, string title, DateTime dateAndTime, int roomId)
+        {
+            this.Id = id;
+            this.Title = title;
+            this.DateAndTime = dateAndTime;
+            this.RoomId = roomId;
+        }
         [DataMember]
         public int Id { get; set; }
         [DataMember]
@@ -93,6 +110,12 @@ namespace AwesomeService
     [DataContract]
     public class Room
     {
+        public Room(int id, int cols, int rows)
+        {
+            this.Id = id;
+            this.Cols = cols;
+            this.Rows = rows;
+        }
         [DataMember]
         public int Id { get; set; }
         [DataMember]
@@ -107,6 +130,15 @@ namespace AwesomeService
     [DataContract]
     public class Seat
     {
+        public Seat(int id, int col, int row, bool usable, int roomId, int reservationId)
+        {
+            this.Id = id;
+            this.Col = col;
+            this.Row = row;
+            this.Usable = usable;
+            this.RoomId = roomId;
+            this.ReservationId = reservationId;
+        }
         [DataMember]
         public int Id { get; set; }
         [DataMember]
@@ -127,6 +159,15 @@ namespace AwesomeService
     [DataContract]
     public class Ticket
     {
+        public Ticket(int id, decimal standard, decimal price, decimal paidAmmount, int reservationId, int discountId)
+        {
+            this.Id = id;
+            this.Standard = standard;
+            this.Price = price;
+            this.PaidAmount = paidAmmount;
+            this.ReservationId = reservationId;
+            this.DiscountId = discountId;
+        }
         [DataMember]
         public int Id { get; set; }
         [DataMember]
@@ -147,9 +188,14 @@ namespace AwesomeService
     [DataContract]
     public class Discount
     {
+        public Discount(int id, decimal DPercent)
+        {
+            this.Id = id;
+            this.DPercent = DPercent;
+        }
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public decimal Dpercent { get; set; }
+        public decimal DPercent { get; set; }
     }
 }
