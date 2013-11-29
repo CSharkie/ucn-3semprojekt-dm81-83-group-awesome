@@ -15,42 +15,42 @@ namespace AwesomeService
     public interface IService
     {
         [OperationContract]
-        string createReservation(Reservation reservation);
+        string createReservation(string name, bool taken, DateTime dateReserved, int movieId, int seatCount);
         [OperationContract]
-        string createMovie(Movie movie);
+        string createMovie(string title, DateTime dateAndTime, int roomId);
         [OperationContract]
-        string createRoom(Room room);
+        string createRoom(int cols, int rows);
         [OperationContract]
-        string createTicket(Ticket ticket);
+        string createTicket(decimal standard, int reservationId, int discountId);
         [OperationContract]
-        string updateReservation(Reservation reservation, Reservation newReservation);
+        string updateReservation(int reservationId, string name, bool taken, int movieId, int seatCount);
+        //[OperationContract]
+        //string updateMovie(Movie movie, Movie newMovie);
+        //[OperationContract]
+        //string updateRoom(Room room, Room newRoom);
+        //[OperationContract]
+        //string updateTicket(Ticket ticket, Ticket newTicket);
+        //[OperationContract]
+        //string updateSeat(Seat seat, Seat newSeat);
         [OperationContract]
-        string updateMovie(Movie movie, Movie newMovie);
-        [OperationContract]
-        string updateRoom(Room room, Room newRoom);
-        [OperationContract]
-        string updateTicket(Ticket ticket, Ticket newTicket);
-        [OperationContract]
-        string updateSeat(Seat seat, Seat newSeat);
-        [OperationContract]
-        Reservation getReservation(Reservation reservation);
-        [OperationContract]
-        Movie getMovie(Movie movie);
-        [OperationContract]
-        Room getRoom(Room room);
-        [OperationContract]
-        Ticket getTicket(Ticket ticket);
-        [OperationContract]
-        Seat getSeat(Seat seat);
-        [OperationContract]
-        string removeReservation(Reservation reservation);
-        [OperationContract]
-        string removeMovie(Movie movie);
-        [OperationContract]
-        string removeRoom(Room room);
-        [OperationContract]
-        string removeTicket(Ticket ticket);
-        [OperationContract]
-        IList<Seat> getAdjSeat(int noOfSeats);
+        ICollection<Reservation> getReservation(int reservationId, string name, int movieId);
+        //[OperationContract]
+        //Movie getMovie(Movie movie);
+        //[OperationContract]
+        //Room getRoom(Room room);
+        //[OperationContract]
+        //Ticket getTicket(Ticket ticket);
+        //[OperationContract]
+        //Seat getSeat(Seat seat);
+        //[OperationContract]
+        //string removeReservation(Reservation reservation);
+        //[OperationContract]
+        //string removeMovie(Movie movie);
+        //[OperationContract]
+        //string removeRoom(Room room);
+        //[OperationContract]
+        //string removeTicket(Ticket ticket);
+        //[OperationContract]
+        //IList<Seat> getAdjSeat(int noOfSeats);
     }
 }
