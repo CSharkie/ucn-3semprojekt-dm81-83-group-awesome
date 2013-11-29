@@ -32,12 +32,9 @@ namespace AwesomeClient
         private void button2_Click(object sender, EventArgs e)
         {
             Movie movie = new Movie();
+            movie.Title = "TEST";
             movie.DateAndTime = DateTime.Now;
-            movie.Title = "GERAPPA";
-            Room room=new Room();
-            room.Id=1;
-            room = client.getRoom(room);
-            movie.Room = room;
+            movie.RoomId = 1;
             client.createMovie(movie);
         }
     }

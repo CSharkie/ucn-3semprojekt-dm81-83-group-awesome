@@ -10,11 +10,12 @@ namespace AwesomeServer
     {
         #region create
         DatabaseModelDataContext db = new DatabaseModelDataContext();
-        public string create(Reservation reservation)
+        public string createReservation(string name, bool taken, DateTime dateReserved, int movieId, int seatCount)
         {
             string message = "The reservation was added succesfully!";
             try
             {
+                Reservation reservation = new Reservation();
                 db.Reservations.InsertOnSubmit(reservation);
                 db.SubmitChanges();
             }
@@ -25,25 +26,29 @@ namespace AwesomeServer
             return message;
         }
 
-        public string create(Movie movie)
+        public string createMovie(string title, DateTime dateAndTime, int roomId)
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
                 string message = "The movie was added succesfully!";
                 try
                 {
-                    db.Movies.InsertOnSubmit(movie);
+                    Movie movie1 = new Movie();
+                    movie1.Title = "LOL";
+                    movie1.DateAndTime = DateTime.Now;
+                    movie1.RoomId = 1;
+                    db.Movies.InsertOnSubmit(movie1);
                     db.SubmitChanges();
                 }
                 catch (Exception ex)
                 {
                     message = "An error has occured: " + ex.Message;
                 }
-                return message; 
+                return message;
             }
         }
 
-        public string create(Room room)
+        public string createRoom(int cols, int rows)
         {
             string message = "The room was added succesfully!";
             try
@@ -58,7 +63,7 @@ namespace AwesomeServer
             return message;
         }
 
-        public string create(Ticket ticket)
+        public string createTicket(double standard, int reservationId, int discountId)
         {
             string message = "The ticket was added succesfully!";
             try
@@ -75,7 +80,7 @@ namespace AwesomeServer
         #endregion
 
         #region update
-        public string update(Reservation reservation, Reservation newReservation)
+        public string updateReservation(int reservationId, string name, bool taken, DateTime dateReserved, int movieId, int seatCount)
         {
             string message = "The room was updated succesfully!";
             try
@@ -92,7 +97,7 @@ namespace AwesomeServer
             return message;
         }
 
-        public string update(Movie movie, Movie newMovie)
+        public string updateMovie(int movieId, string title, DateTime dateAndTime, int roomId)
         {
             string message = "The movie was added succesfully!";
             try
@@ -111,7 +116,7 @@ namespace AwesomeServer
             return message;
         }
 
-        public string update(Room room, Room newRoom)
+        public string updateRoom(int roomId, int cols, int rows)
         {
             string message = "The room was added succesfully!";
             try
@@ -130,7 +135,7 @@ namespace AwesomeServer
             return message;
         }
 
-        public string update(Ticket ticket, Ticket newTicket)
+        public string updateTicket(int ticketId, double standard, int reservationId, int discountId)
         {
             string message = "The ticket was added succesfully!";
             try
@@ -149,7 +154,7 @@ namespace AwesomeServer
             return message;
         }
 
-        public string update(Seat seat, Seat newSeat)
+        public string updateSeat(int seatId, int col, int row, bool usable, int roomId, int reservationId)
         {
             string message = "The seat was added succesfully!";
             try
@@ -170,7 +175,7 @@ namespace AwesomeServer
         #endregion
 
         #region read
-        public Reservation get(Reservation reservation)
+        public ICollection<Reservation> getReservation(int reservationId, string name, int movieId)
         {
             Reservation returnObj = null;
             try
@@ -191,19 +196,17 @@ namespace AwesomeServer
             return returnObj;
         }
 
-        public Movie get(Movie movie)
+        public ICollection<Movie> getMovie(int movieId, string title, int roomId)
         {
             Movie returnObj = null;
             try
             {
                 if (movie.Id != 0)
-                    returnObj = (from m in db.Movies
-                                 where m.Id == movie.Id
-                                 select m).FirstOrDefault();
-                else if (movie.Title != null)
-                    returnObj = (from m in db.Movies
-                                 where m.Title.Contains(movie.Title)
-                                 select m).FirstOrDefault();
+                    returnObj = db.Movies.SingleOrDefault(m => m.Id == movie.Id);
+                //else if (movie.Title != null)
+                //    returnObj = (from m in db.Movies
+                //                 where m.Title.Contains(movie.Title)
+                //                 select m).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -212,14 +215,12 @@ namespace AwesomeServer
             return returnObj;
         }
 
-        public Room get(Room room)
+        public Room getRoom(int roomId)
         {
             Room returnObj = null;
             try
             {
-                returnObj = (from r in db.Rooms
-                             where r.Id == room.Id
-                             select r).First();
+                returnObj = db.Rooms.SingleOrDefault(r => r.Id == room.Id);
             }
             catch (Exception ex)
             {
@@ -228,7 +229,7 @@ namespace AwesomeServer
             return returnObj;
         }
 
-        public Ticket get(Ticket ticket)
+        public ICollection<Ticket> getTicket(int ticketId, int reservationId)
         {
             Ticket returnObj = null;
             try
@@ -245,7 +246,7 @@ namespace AwesomeServer
             return returnObj;
         }
 
-        public Seat get(Seat seat)
+        public ICollection<Seat> getSeat(int seatId, int roomId)
         {
             Seat returnObj = null;
             try
@@ -254,9 +255,9 @@ namespace AwesomeServer
                     returnObj = (from s in db.Seats
                                  where s.Id == seat.Id
                                  select s).FirstOrDefault();
-                else if (seat.Col >= 0 && seat.Row >=0)
+                else if (seat.Col >= 0 && seat.Row >= 0)
                     returnObj = (from s in db.Seats
-                                 where s.Col == seat.Col && s.Row ==seat.Row
+                                 where s.Col == seat.Col && s.Row == seat.Row
                                  select s).FirstOrDefault();
 
             }
@@ -269,7 +270,7 @@ namespace AwesomeServer
         #endregion
 
         #region remove
-        public string remove(Reservation reservation)
+        public string removeReservation(int reservationId, string name)
         {
             string message = "The reservation was removed succesfully!";
             try
@@ -285,7 +286,7 @@ namespace AwesomeServer
             return message;
         }
 
-        public string remove(Movie movie)
+        public string removeMovie(int movieId, string title, DateTime dateAndTime, int roomId)
         {
             string message = "The movie was removed succesfully!";
             try
@@ -300,7 +301,7 @@ namespace AwesomeServer
             return message;
         }
 
-        public string remove(Room room)
+        public string removeRoom(int roomId)
         {
             string message = "The room was removed succesfully!";
             try
@@ -316,7 +317,7 @@ namespace AwesomeServer
             return message;
         }
 
-        public string remove(Ticket ticket)
+        public string removeTicket(int ticketId, int reservationId)
         {
             string message = "The ticket was removed succesfully!";
             try
@@ -338,5 +339,6 @@ namespace AwesomeServer
             throw new NotImplementedException();
         }
         #endregion
+
     }
 }
