@@ -27,17 +27,20 @@ namespace AwesomeServer
 
         public string create(Movie movie)
         {
-            string message = "The movie was added succesfully!";
-            try
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
-                db.Movies.InsertOnSubmit(movie);
-                db.SubmitChanges();
+                string message = "The movie was added succesfully!";
+                try
+                {
+                    db.Movies.InsertOnSubmit(movie);
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message; 
             }
-            catch (Exception ex)
-            {
-                message = "An error has occured: " + ex.Message;
-            }
-            return message;
         }
 
         public string create(Room room)
@@ -74,12 +77,10 @@ namespace AwesomeServer
         #region update
         public string update(Reservation reservation, Reservation newReservation)
         {
-            string message = "The room was added succesfully!";
+            string message = "The room was updated succesfully!";
             try
             {
-                Reservation obj = (from r in db.Reservations
-                                   where r == reservation
-                                   select r).FirstOrDefault();
+                Reservation obj = get(reservation);
                 obj = newReservation;
 
                 db.SubmitChanges();
