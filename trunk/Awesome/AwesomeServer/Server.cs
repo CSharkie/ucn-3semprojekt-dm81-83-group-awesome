@@ -16,6 +16,11 @@ namespace AwesomeServer
             try
             {
                 Reservation reservation = new Reservation();
+                reservation.Name = name;
+                reservation.Taken = taken;
+                reservation.DateReserved = dateReserved;
+                reservation.MovieId = movieId;
+                reservation.SeatCount = seatCount;
                 db.Reservations.InsertOnSubmit(reservation);
                 db.SubmitChanges();
             }
@@ -33,11 +38,11 @@ namespace AwesomeServer
                 string message = "The movie was added succesfully!";
                 try
                 {
-                    Movie movie1 = new Movie();
-                    movie1.Title = "LOL";
-                    movie1.DateAndTime = DateTime.Now;
-                    movie1.RoomId = 1;
-                    db.Movies.InsertOnSubmit(movie1);
+                    Movie movie = new Movie();
+                    movie.Title = title;
+                    movie.DateAndTime = dateAndTime;
+                    movie.RoomId = roomId;
+                    db.Movies.InsertOnSubmit(movie);
                     db.SubmitChanges();
                 }
                 catch (Exception ex)
@@ -53,6 +58,9 @@ namespace AwesomeServer
             string message = "The room was added succesfully!";
             try
             {
+                Room room = new Room();
+                room.Cols = cols;
+                room.Rows = rows;
                 db.Rooms.InsertOnSubmit(room);
                 db.SubmitChanges();
             }
@@ -63,11 +71,15 @@ namespace AwesomeServer
             return message;
         }
 
-        public string createTicket(double standard, int reservationId, int discountId)
+        public string createTicket(decimal standard, int reservationId, int discountId)
         {
             string message = "The ticket was added succesfully!";
             try
             {
+                Ticket ticket = new Ticket();
+                ticket.Standard = standard;
+                ticket.ReservationId = reservationId;
+                ticket.DiscountId = discountId;
                 db.Tickets.InsertOnSubmit(ticket);
                 db.SubmitChanges();
             }
@@ -135,7 +147,7 @@ namespace AwesomeServer
             return message;
         }
 
-        public string updateTicket(int ticketId, double standard, int reservationId, int discountId)
+        public string updateTicket(int ticketId, decimal standard, int reservationId, int discountId)
         {
             string message = "The ticket was added succesfully!";
             try
