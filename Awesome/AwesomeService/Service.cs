@@ -18,94 +18,94 @@ namespace AwesomeService
             return server.createReservation(name, taken, dateReserved, movieId, seatCount);
         }
 
-        public string createMovie(Movie movie)
+        public string createMovie(string title, DateTime dateAndTime, int roomId)
         {
-            return server.create(movie);
+            return server.createMovie(title, dateAndTime, roomId);
         }
 
-        public string createRoom(Room room)
+        public string createRoom(int cols, int rows)
         {
-            return server.create(room);
+            return server.createRoom(cols, rows);
         }
 
-        public string createTicket(Ticket ticket)
+        public string createTicket(decimal standard, int reservationId, int discountId)
         {
-            return server.create(ticket);
+            return server.createTicket(standard,reservationId,discountId);
         }
 
-        public string updateReservation(Reservation reservation, Reservation newReservation)
+        public string updateReservation(int reservationId, string name, bool taken, int movieId, int seatCount)
         {
-            return server.update(reservation, newReservation);
+            return server.updateReservation(reservationId, name, taken, movieId, seatCount);
         }
 
-        public string updateMovie(Movie movie, Movie newMovie)
+        //public string updateMovie(Movie movie, Movie newMovie)
+        //{
+        //    return server.update(movie, newMovie);
+        //}
+
+        //public string updateRoom(Room room, Room newRoom)
+        //{
+        //    return server.update(room, newRoom);
+        //}
+
+        //public string updateTicket(Ticket ticket, Ticket newTicket)
+        //{
+        //    return server.update(ticket, newTicket);
+        //}
+
+        //public string updateSeat(Seat seat, Seat newSeat)
+        //{
+        //    return server.update(seat, newSeat);
+        //}
+
+        public ICollection<Reservation> getReservation(int reservationId, string name, int movieId)
         {
-            return server.update(movie, newMovie);
+            return server.getReservation(reservationId, name, movieId);
         }
 
-        public string updateRoom(Room room, Room newRoom)
-        {
-            return server.update(room, newRoom);
-        }
+        //public Movie getMovie(Movie movie)
+        //{
+        //    return server.get(movie);
+        //}
 
-        public string updateTicket(Ticket ticket, Ticket newTicket)
-        {
-            return server.update(ticket, newTicket);
-        }
+        //public Room getRoom(Room room)
+        //{
+        //    return server.get(room);
+        //}
 
-        public string updateSeat(Seat seat, Seat newSeat)
-        {
-            return server.update(seat, newSeat);
-        }
+        //public Ticket getTicket(Ticket ticket)
+        //{
+        //    return server.get(ticket);
+        //}
 
-        public Reservation getReservation(Reservation reservation)
-        {
-            return server.get(reservation);
-        }
+        //public Seat getSeat(Seat seat)
+        //{
+        //    return server.get(seat);
+        //}
 
-        public Movie getMovie(Movie movie)
-        {
-            return server.get(movie);
-        }
+        //public string removeReservation(Reservation reservation)
+        //{
+        //    return server.remove(reservation);
+        //}
 
-        public Room getRoom(Room room)
-        {
-            return server.get(room);
-        }
+        //public string removeMovie(Movie movie)
+        //{
+        //    return server.remove(movie);
+        //}
 
-        public Ticket getTicket(Ticket ticket)
-        {
-            return server.get(ticket);
-        }
+        //public string removeRoom(Room room)
+        //{
+        //    return server.remove(room);
+        //}
 
-        public Seat getSeat(Seat seat)
-        {
-            return server.get(seat);
-        }
+        //public string removeTicket(Ticket ticket)
+        //{
+        //    return server.remove(ticket);
+        //}
 
-        public string removeReservation(Reservation reservation)
-        {
-            return server.remove(reservation);
-        }
-
-        public string removeMovie(Movie movie)
-        {
-            return server.remove(movie);
-        }
-
-        public string removeRoom(Room room)
-        {
-            return server.remove(room);
-        }
-
-        public string removeTicket(Ticket ticket)
-        {
-            return server.remove(ticket);
-        }
-
-        public IList<Seat> getAdjSeat(int noOfSeats)
-        {
-            return server.getAdjSeat(noOfSeats);
-        }
+        //public IList<Seat> getAdjSeat(int noOfSeats)
+        //{
+        //    return server.getAdjSeat(noOfSeats);
+        //}
     }
 }
