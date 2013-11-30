@@ -19,7 +19,7 @@ namespace AwesomeServer
 
         #region update
         string updateReservation(int reservationId, string name, bool taken, int movieId, int seatCount);
-        //string updateMovie(int movieId, string title, DateTime dateAndTime, int roomId);
+        string updateMovie(int movieId, string title, DateTime dateAndTime, int roomId);
         //string updateRoom(int roomId, int cols, int rows);
         //string updateTicket(int ticketId, decimal standard, int reservationId, int discountId);
         //string updateSeat(int seatId, int col, int row, bool usable, int roomId, int reservationId);
@@ -35,10 +35,11 @@ namespace AwesomeServer
         #endregion
 
         #region remove
-        //string removeReservation(int reservationId, string name);
-        //string removeMovie(int movieId, string title, DateTime dateAndTime, int roomId);
-        //string removeRoom(int roomId);
-        //string removeTicket(int ticketId, int reservationId);
+        string removeReservation(int reservationId);
+        string removeMovie(int movieId);
+        string removeRoom(int roomId);
+        string removeTicket(int ticketId);
+        string removeDiscount(int discountId);
         #endregion
 
         #region methods
