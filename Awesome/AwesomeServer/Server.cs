@@ -419,9 +419,31 @@ namespace AwesomeServer
                         if (col > 0 && row > 0)
                             returnObj.Add(db.Seats.SingleOrDefault(r => r.RoomId == roomId && r.Row == row && r.Col == col));
                         else if (col > 0)
-                            returnObj.Add(db.Seats.SingleOrDefault(r => r.RoomId == roomId && r.Col == col));
+                        {
+                            var query = db.Seats.Where(s => s.RoomId == roomId && s.Col == col);
+                            foreach (Seat seat in query)
+                            {
+                                returnObj.Add(seat);
+                            }
+                        }
                         else if (row > 0)
-                            returnObj.Add(db.Seats.SingleOrDefault(r => r.RoomId == roomId && r.Row == row));
+                        {
+                            var query = db.Seats.Where(s => s.RoomId == roomId && s.Row == row);
+                            foreach (Seat seat in query)
+                            {
+                                returnObj.Add(seat);
+                            }
+                        }
+                        else
+                        {
+                            var query = db.Seats.Where(s => s.RoomId == roomId);
+                            foreach (Seat seat in query)
+                            {
+                                returnObj.Add(seat);
+                            }
+
+                        }
+
                     return returnObj;
                 }
                 catch (Exception ex)
