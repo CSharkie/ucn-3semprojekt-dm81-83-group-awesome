@@ -1,12 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="groupAwesomeDb_tmp" Class="DatabaseModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=gladiolus.arvixe.com;Initial Catalog=groupAwesomeDb_tmp;Persist Security Info=True;User ID=groupAwesome_tmp" SettingsObjectName="AwesomeServer.Properties.Settings" SettingsPropertyName="groupAwesomeDb_tmpConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Discounts" Member="Discounts">
-    <Type Name="Discount">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DPercent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Discount_Ticket" Member="Tickets" ThisKey="Id" OtherKey="DiscountId" Type="Ticket" />
-    </Type>
-  </Table>
   <Table Name="dbo.Seats" Member="Seats">
     <Type Name="Seat">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -59,8 +52,15 @@
       <Column Name="PaidAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="ReservationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="DiscountId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Discount_Ticket" Member="Discount" ThisKey="DiscountId" OtherKey="Id" Type="Discount" IsForeignKey="true" />
       <Association Name="Reservation_Ticket" Member="Reservation" ThisKey="ReservationId" OtherKey="Id" Type="Reservation" IsForeignKey="true" />
+      <Association Name="Discount_Ticket" Member="Discount" ThisKey="DiscountId" OtherKey="Id" Type="Discount" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Discounts" Member="Discounts">
+    <Type Name="Discount">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DPercent" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Association Name="Discount_Ticket" Member="Tickets" ThisKey="Id" OtherKey="DiscountId" Type="Ticket" />
     </Type>
   </Table>
 </Database>
