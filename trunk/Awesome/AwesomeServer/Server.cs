@@ -269,7 +269,6 @@ namespace AwesomeServer
                 }
             }
         }
-
         public IList<Movie> getMovie(int movieId, string title, int roomId)
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
@@ -312,10 +311,8 @@ namespace AwesomeServer
                 return returnObj;
             }
         }
-
         public Room getRoom(int roomId)
         {
-
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
                 Room returnObj = null;
@@ -369,7 +366,6 @@ namespace AwesomeServer
                 return returnObj;
             }
         }
-
         public IList<Seat> getSeat(int seatId, int roomId, int col, int row)
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
@@ -393,6 +389,22 @@ namespace AwesomeServer
                 {
                     throw (ex);
                 }
+            }
+        }
+        public Discount getDiscount(int discountId, decimal dPercent)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                Discount returnObj = null;
+                try
+                {
+                    returnObj = db.Discounts.SingleOrDefault(r => r.Id == discountId || r.DPercent == dPercent);
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
+                return returnObj;
             }
         }
         #endregion
