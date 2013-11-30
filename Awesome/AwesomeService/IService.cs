@@ -28,15 +28,17 @@ namespace AwesomeService
         #region update
         [OperationContract]
         string updateReservation(int reservationId, string name, bool taken, int movieId, int seatCount);
-        
-        //[OperationContract]
-        //string updateMovie(Movie movie, Movie newMovie);
-        //[OperationContract]
-        //string updateRoom(Room room, Room newRoom);
-        //[OperationContract]
-        //string updateTicket(Ticket ticket, Ticket newTicket);
-        //[OperationContract]
-        //string updateSeat(Seat seat, Seat newSeat);
+
+        [OperationContract]
+        string updateMovie(int movieId, string title, DateTime dateAndTime, int roomId);
+        [OperationContract]
+        string updateRoom(int roomId, int cols, int rows);
+        [OperationContract]
+        string updateTicket(int ticketId, decimal standard, int reservationId, int discountId);
+        [OperationContract]
+        string updateSeat(int seatId, int col, int row, bool usable, int roomId, int reservationId);
+        [OperationContract]
+        string updateDiscount(int discountId, decimal dPercent);
         #endregion
 
         #region read

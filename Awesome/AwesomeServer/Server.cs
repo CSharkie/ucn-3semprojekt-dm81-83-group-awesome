@@ -173,62 +173,101 @@ namespace AwesomeServer
             }
         }
 
-        //public string updateRoom(int roomId, int cols, int rows)
-        //{
-        //    string message = "The room was added succesfully!";
-        //    try
-        //    {
-        //        Room obj = (from r in db.Rooms
-        //                    where r == room
-        //                    select r).FirstOrDefault();
-        //        obj = newRoom;
+        public string updateRoom(int roomId, int cols, int rows)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The room was updated succesfully!";
+                try
+                {
+                    var obj = db.Rooms.SingleOrDefault(r => r.Id == roomId);
+                    if (rows != 0)
+                        obj.Rows = rows;
+                    if (cols != 0)
+                        obj.Cols = cols;
 
-        //        db.SubmitChanges();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        message = "An error has occured: " + ex.Message;
-        //    }
-        //    return message;
-        //}
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
+        }
 
-        //public string updateTicket(int ticketId, decimal standard, int reservationId, int discountId)
-        //{
-        //    string message = "The ticket was added succesfully!";
-        //    try
-        //    {
-        //        Ticket obj = (from r in db.Tickets
-        //                      where r == ticket
-        //                      select r).FirstOrDefault();
-        //        obj = newTicket;
+        public string updateTicket(int ticketId, decimal standard, int reservationId, int discountId)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The ticket was updated succesfully!";
+                try
+                {
+                    var obj = db.Tickets.SingleOrDefault(t => t.Id == ticketId);
+                    if (obj.Standard != standard)
+                        obj.Standard = standard;
+                    if (obj.ReservationId != reservationId)
+                        obj.ReservationId = reservationId;
+                    if (obj.DiscountId != discountId)
+                        obj.DiscountId = discountId;
 
-        //        db.SubmitChanges();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        message = "An error has occured: " + ex.Message;
-        //    }
-        //    return message;
-        //}
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
+        }
 
-        //public string updateSeat(int seatId, int col, int row, bool usable, int roomId, int reservationId)
-        //{
-        //    string message = "The seat was added succesfully!";
-        //    try
-        //    {
-        //        Seat obj = (from r in db.Seats
-        //                    where r == seat
-        //                    select r).FirstOrDefault();
-        //        obj = newSeat;
+        public string updateSeat(int seatId, int col, int row, bool usable, int roomId, int reservationId)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The seat was updated succesfully!";
+                try
+                {
+                    var obj = db.Seats.SingleOrDefault(s => s.Id == seatId);
+                    if (col >= 0)
+                        obj.Col = col;
+                    if (row >= 0)
+                        obj.Row = row;
+                    if (obj.Usable != usable)
+                        obj.Usable = usable;
+                    if (obj.ReservationId != reservationId)
+                        obj.ReservationId = reservationId;
 
-        //        db.SubmitChanges();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        message = "An error has occured: " + ex.Message;
-        //    }
-        //    return message;
-        //}
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
+        }
+        public string updateDiscount(int discountId, decimal dPercent)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The discount was updated succesfully!";
+                try
+                {
+                    var obj = db.Discounts.SingleOrDefault(d => d.Id == discountId);
+                    if (obj.DPercent != dPercent)
+                        obj.DPercent = dPercent;
+
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
+        }
+
         #endregion
 
         #region read

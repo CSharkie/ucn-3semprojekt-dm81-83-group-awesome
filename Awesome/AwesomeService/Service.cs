@@ -47,25 +47,30 @@ namespace AwesomeService
             return server.updateReservation(reservationId, name, taken, movieId, seatCount);
         }
 
-        //public string updateMovie(Movie movie, Movie newMovie)
-        //{
-        //    return server.update(movie, newMovie);
-        //}
+        public string updateMovie(int movieId, string title, DateTime dateAndTime, int roomId)
+        {
+            return server.updateMovie(movieId, title, dateAndTime, roomId);
+        }
 
-        //public string updateRoom(Room room, Room newRoom)
-        //{
-        //    return server.update(room, newRoom);
-        //}
+        public string updateRoom(int roomId, int cols, int rows)
+        {
+            return server.updateRoom(roomId, cols, rows);
+        }
 
-        //public string updateTicket(Ticket ticket, Ticket newTicket)
-        //{
-        //    return server.update(ticket, newTicket);
-        //}
+        public string updateTicket(int ticketId, decimal standard, int reservationId, int discountId)
+        {
+            return server.updateTicket(ticketId, standard, reservationId, discountId);
+        }
 
-        //public string updateSeat(Seat seat, Seat newSeat)
-        //{
-        //    return server.update(seat, newSeat);
-        //}
+        public string updateSeat(int seatId, int col, int row, bool usable, int roomId, int reservationId)
+        {
+            return server.updateSeat(seatId, col, row, usable, roomId, reservationId);
+        }
+
+        public string updateDiscount(int discountId, decimal dPercent)
+        {
+            return server.updateDiscount(discountId, dPercent);
+        }
         #endregion
 
         #region read
@@ -114,7 +119,7 @@ namespace AwesomeService
         {
             var roomList = server.getAllRooms();
             IList<Room> returnObj = new List<Room>();
-            foreach(var item in roomList)
+            foreach (var item in roomList)
             {
                 returnObj.Add(new Room(
                     item.Id,
@@ -128,7 +133,7 @@ namespace AwesomeService
         {
             var ticketList = server.getTicket(ticketId, reservationId);
             IList<Ticket> returnObj = new List<Ticket>();
-            foreach(var item in ticketList)
+            foreach (var item in ticketList)
             {
                 returnObj.Add(new Ticket(
                     item.Id,
