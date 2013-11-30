@@ -32,6 +32,7 @@ namespace AwesomeServer
         IList<Room> getAllRooms();
         IList<Ticket> getTicket(int ticketId, int reservationId);
         IList<Seat> getSeat(int seatId, int roomId, int col, int row);
+        Discount getDiscount(int discountId, decimal dPercent);
         #endregion
 
         #region remove

@@ -160,25 +160,35 @@ namespace AwesomeService
             return returnObj;
 
         }
+        public Discount getDiscount(int discountId, decimal dPercent)
+        {
+            var discount = server.getDiscount(discountId, dPercent);
+            Discount returnObj = new Discount(discount.Id, discount.DPercent);
+            return returnObj;
+        }
         #endregion
 
         #region remove
-        //public string removeReservation(Reservation reservation)
-        //{
-        //    return server.remove(reservation);
-        //}
-        //public string removeMovie(Movie movie)
-        //{
-        //    return server.remove(movie);
-        //}
-        //public string removeRoom(Room room)
-        //{
-        //    return server.remove(room);
-        //}
-        //public string removeTicket(Ticket ticket)
-        //{
-        //    return server.remove(ticket);
-        //}
+        public string removeReservation(int reservationId)
+        {
+            return server.removeReservation(reservationId);
+        }
+        public string removeMovie(int movieId)
+        {
+            return server.removeMovie(movieId);
+        }
+        public string removeRoom(int roomId)
+        {
+            return server.removeRoom(roomId);
+        }
+        public string removeTicket(int ticketId)
+        {
+            return server.removeTicket(ticketId);
+        }
+        public string removeDiscount(int discountId)
+        {
+            return server.removeDiscount(discountId);
+        }
         #endregion
 
         #region methods

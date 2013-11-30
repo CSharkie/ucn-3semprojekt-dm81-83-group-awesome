@@ -52,17 +52,21 @@ namespace AwesomeService
         IList<Ticket> getTicket(int ticketId, int reservationId);
         [OperationContract]
         IList<Seat> getSeat(int seatId, int roomId, int col, int row);
+        [OperationContract]
+        Discount getDiscount(int discountId, decimal dPercent);
         #endregion
 
         #region remove
-        //[OperationContract]
-        //string removeReservation(Reservation reservation);
-        //[OperationContract]
-        //string removeMovie(Movie movie);
-        //[OperationContract]
-        //string removeRoom(Room room);
-        //[OperationContract]
-        //string removeTicket(Ticket ticket);
+        [OperationContract]
+        string removeReservation(int reservationId);
+        [OperationContract]
+        string removeMovie(int movieId);
+        [OperationContract]
+        string removeRoom(int roomId);
+        [OperationContract]
+        string removeTicket(int ticketId);
+        [OperationContract]
+        string removeDiscount(int discountId);
         #endregion
 
         #region methods
