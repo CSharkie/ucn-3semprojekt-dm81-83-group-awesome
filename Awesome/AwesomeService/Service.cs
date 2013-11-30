@@ -9,35 +9,38 @@ using AwesomeServer;
 using System.Collections.ObjectModel;
 namespace AwesomeService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class Service : IService
     {
-
         Server server = new Server();
+
+        #region create
         public string createReservation(string name, bool taken, DateTime dateReserved, int movieId, int seatCount)
         {
 
             return server.createReservation(name, taken, dateReserved, movieId, seatCount);
         }
-
         public string createMovie(string title, DateTime dateAndTime, int roomId)
         {
 
             return server.createMovie(title, dateAndTime, roomId);
         }
-
         public string createRoom(int cols, int rows)
         {
 
             return server.createRoom(cols, rows);
         }
-
         public string createTicket(decimal standard, int reservationId, int discountId)
         {
 
             return server.createTicket(standard, reservationId, discountId);
         }
+        public string createDiscount(decimal dPercent)
+        {
+            return server.createDiscount(dPercent);
+        }
+        #endregion
 
+        #region update
         public string updateReservation(int reservationId, string name, bool taken, int movieId, int seatCount)
         {
 
@@ -63,7 +66,9 @@ namespace AwesomeService
         //{
         //    return server.update(seat, newSeat);
         //}
+        #endregion
 
+        #region read
         public IList<Reservation> getReservation(int reservationId, string name, int movieId)
         {
             var reservationList = server.getReservation(reservationId, name, movieId);
@@ -82,12 +87,21 @@ namespace AwesomeService
 
 
         }
-
-        //public Movie getMovie(Movie movie)
-        //{
-        //    return server.get(movie);
-        //}
-
+        public IList<Movie> getMovie(int movieId, string title, int roomId)
+        {
+            var movieList = server.getMovie(movieId, title, roomId);
+            List<Movie> returnObj = new List<Movie>();
+            foreach (var item in movieList)
+            {
+                returnObj.Add(new Movie(
+                    item.Id,
+                    item.Title,
+                    item.DateAndTime,
+                    item.RoomId
+                    ));
+            }
+            return returnObj;
+        }
         public Room getRoom(int roomId)
         {
 
@@ -96,7 +110,20 @@ namespace AwesomeService
 
             return returnObj;
         }
-
+        public IList<Room> getAllRooms()
+        {
+            var roomList = server.getAllRooms();
+            IList<Room> returnObj = new List<Room>();
+            foreach(var item in roomList)
+            {
+                returnObj.Add(new Room(
+                    item.Id,
+                    item.Cols,
+                    item.Rows
+                    ));
+            }
+            return returnObj;
+        }
         public IList<Ticket> getTicket(int ticketId, int reservationId)
         {
             var ticketList = server.getTicket(ticketId, reservationId);
@@ -115,7 +142,6 @@ namespace AwesomeService
             return returnObj;
 
         }
-
         public IList<Seat> getSeat(int seatId, int roomId, int col, int row)
         {
             var seatList = server.getSeat(seatId, roomId, col, row);
@@ -134,30 +160,32 @@ namespace AwesomeService
             return returnObj;
 
         }
+        #endregion
 
+        #region remove
         //public string removeReservation(Reservation reservation)
         //{
         //    return server.remove(reservation);
         //}
-
         //public string removeMovie(Movie movie)
         //{
         //    return server.remove(movie);
         //}
-
         //public string removeRoom(Room room)
         //{
         //    return server.remove(room);
         //}
-
         //public string removeTicket(Ticket ticket)
         //{
         //    return server.remove(ticket);
         //}
+        #endregion
 
+        #region methods
         //public IList<Seat> getAdjSeat(int noOfSeats)
         //{
         //    return server.getAdjSeat(noOfSeats);
         //}
+        #endregion
     }
 }

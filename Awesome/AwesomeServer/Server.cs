@@ -105,11 +105,11 @@ namespace AwesomeServer
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
-                string message = "The ticket was added succesfully!";
+                string message = "The discount was added succesfully!";
                 try
                 {
                     Discount discount = new Discount();
-                    discount.DPercent = dPercent; // make it decimal in the database
+                    discount.DPercent = dPercent;
                     db.Discounts.InsertOnSubmit(discount);
                     db.SubmitChanges();
                 }
@@ -122,7 +122,7 @@ namespace AwesomeServer
         }
         #endregion
 
-        //#region update
+        #region update
         public string updateReservation(int reservationId, string name, bool taken, int movieId, int seatCount)
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
@@ -130,10 +130,7 @@ namespace AwesomeServer
                 string message = "The room was updated succesfully!";
                 try
                 {
-                    //Reservation obj = getReservation(reservationId, null, 0);//.First();
-                    var obj = (from r in db.Reservations
-                               where r.Id == reservationId
-                               select r).First();
+                    var obj = db.Reservations.SingleOrDefault(r => r.Id == reservationId);
                     if (name != null && name != "")
                         obj.Name = name;
                     if (obj.Taken != taken) //Liam N.
@@ -152,24 +149,29 @@ namespace AwesomeServer
             }
         }
 
-        //public string updateMovie(int movieId, string title, DateTime dateAndTime, int roomId)
-        //{
-        //    string message = "The movie was added succesfully!";
-        //    try
-        //    {
-
-        //        Movie obj = getMovie(movieId, title, roomId).First();
-
-        //        obj = newMovie;
-
-        //        db.SubmitChanges();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        message = "An error has occured: " + ex.Message;
-        //    }
-        //    return message;
-        //}
+        public string updateMovie(int movieId, string title, DateTime dateAndTime, int roomId)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The movie was updated succesfully!";
+                try
+                {
+                    var obj = db.Movies.SingleOrDefault(m => m.Id == movieId);
+                    if (title != null && title != "")
+                        obj.Title = title;
+                    if (obj.DateAndTime != dateAndTime) //Liam N.
+                        obj.DateAndTime = dateAndTime;
+                    if (obj.RoomId != roomId)
+                        obj.RoomId = roomId;
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
+        }
 
         //public string updateRoom(int roomId, int cols, int rows)
         //{
@@ -227,9 +229,9 @@ namespace AwesomeServer
         //    }
         //    return message;
         //}
-        //#endregion
+        #endregion
 
-        //#region read
+        #region read
 
         public IList<Reservation> getReservation(int reservationId, string name, int movieId)
         {
@@ -268,24 +270,48 @@ namespace AwesomeServer
             }
         }
 
-        //public ICollection<Movie> getMovie(int movieId, string title, int roomId)
-        //{
-        //    Movie returnObj = null;
-        //    try
-        //    {
-        //        if (movie.Id != 0)
-        //            returnObj = db.Movies.SingleOrDefault(m => m.Id == movie.Id);
-        //        //else if (movie.Title != null)
-        //        //    returnObj = (from m in db.Movies
-        //        //                 where m.Title.Contains(movie.Title)
-        //        //                 select m).FirstOrDefault();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw (ex);
-        //    }
-        //    return returnObj;
-        //}
+        public IList<Movie> getMovie(int movieId, string title, int roomId)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                IList<Movie> returnObj = new List<Movie>();
+                try
+                {
+                    if (movieId > 0)
+                        returnObj.Add(db.Movies.SingleOrDefault(m => m.Id == movieId));
+                    else if (title != null && title != "" && roomId > 0)
+                    {
+                        var query = db.Movies.Where(m => m.Title.Contains(title) && m.RoomId == roomId);
+                        foreach (Movie item in query)
+                        {
+                            returnObj.Add(item);
+                        }
+                    }
+                    else if (title != null && title != "")
+                    {
+                        var query = db.Movies.Where(m => m.Title.Contains(title));
+                        foreach (Movie item in query)
+                        {
+                            returnObj.Add(item);
+                        }
+                    }
+                    else if (roomId > 0)
+                    {
+                        var query = db.Movies.Where(m => m.RoomId == roomId);
+                        foreach (Movie item in query)
+                        {
+                            returnObj.Add(item);
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
+                return returnObj;
+            }
+        }
 
         public Room getRoom(int roomId)
         {
@@ -304,7 +330,19 @@ namespace AwesomeServer
                 return returnObj;
             }
         }
-
+        public IList<Room> getAllRooms()
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                IList<Room> returnObj = new List<Room>();
+                var query = db.Rooms;
+                foreach (Room item in query)
+                {
+                    returnObj.Add(item);
+                }
+                return returnObj;
+            }
+        }
         public IList<Ticket> getTicket(int ticketId, int reservationId)
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
@@ -343,11 +381,11 @@ namespace AwesomeServer
                     if (seatId != 0)
                         returnObj.Add(db.Seats.SingleOrDefault(r => r.Id == seatId));
                     else if (roomId > 0)
-                        if(col > 0 && row > 0)
+                        if (col > 0 && row > 0)
                             returnObj.Add(db.Seats.SingleOrDefault(r => r.RoomId == roomId && r.Row == row && r.Col == col));
-                        else if(col > 0)
+                        else if (col > 0)
                             returnObj.Add(db.Seats.SingleOrDefault(r => r.RoomId == roomId && r.Col == col));
-                        else if(row > 0)
+                        else if (row > 0)
                             returnObj.Add(db.Seats.SingleOrDefault(r => r.RoomId == roomId && r.Row == row));
                     return returnObj;
                 }
@@ -357,9 +395,9 @@ namespace AwesomeServer
                 }
             }
         }
-        //#endregion
+        #endregion
 
-        //#region remove
+        #region remove
         //public string removeReservation(int reservationId, string name)
         //{
         //    string message = "The reservation was removed succesfully!";
@@ -421,14 +459,14 @@ namespace AwesomeServer
         //    }
         //    return message;
         //}
-        //#endregion
+        #endregion
 
-        //#region methods
+        #region methods
         //public IList<Seat> getAdjSeat(int noOfSeats)
         //{
         //    throw new NotImplementedException();
         //}
-        //#endregion
+        #endregion
 
     }
 }

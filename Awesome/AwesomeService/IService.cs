@@ -9,11 +9,10 @@ using System.Text;
 
 namespace AwesomeService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
-
     public interface IService
     {
+        #region create
         [OperationContract]
         string createReservation(string name, bool taken, DateTime dateReserved, int movieId, int seatCount);
         [OperationContract]
@@ -23,7 +22,13 @@ namespace AwesomeService
         [OperationContract]
         string createTicket(decimal standard, int reservationId, int discountId);
         [OperationContract]
+        string createDiscount(decimal dPercent);
+        #endregion
+
+        #region update
+        [OperationContract]
         string updateReservation(int reservationId, string name, bool taken, int movieId, int seatCount);
+        
         //[OperationContract]
         //string updateMovie(Movie movie, Movie newMovie);
         //[OperationContract]
@@ -32,16 +37,24 @@ namespace AwesomeService
         //string updateTicket(Ticket ticket, Ticket newTicket);
         //[OperationContract]
         //string updateSeat(Seat seat, Seat newSeat);
+        #endregion
+
+        #region read
         [OperationContract]
         IList<Reservation> getReservation(int reservationId, string name, int movieId);
-        //[OperationContract]
-        //Movie getMovie(Movie movie);
+        [OperationContract]
+        IList<Movie> getMovie(int movieId, string title, int roomId);
         [OperationContract]
         Room getRoom(int roomId);
+        [OperationContract]
+        IList<Room> getAllRooms();
         [OperationContract]
         IList<Ticket> getTicket(int ticketId, int reservationId);
         [OperationContract]
         IList<Seat> getSeat(int seatId, int roomId, int col, int row);
+        #endregion
+
+        #region remove
         //[OperationContract]
         //string removeReservation(Reservation reservation);
         //[OperationContract]
@@ -50,9 +63,14 @@ namespace AwesomeService
         //string removeRoom(Room room);
         //[OperationContract]
         //string removeTicket(Ticket ticket);
+        #endregion
+
+        #region methods
         //[OperationContract]
         //IList<Seat> getAdjSeat(int noOfSeats);
+        #endregion
     }
+    #region contracts
     [DataContract]
     public class Reservation
     {
@@ -199,4 +217,5 @@ namespace AwesomeService
         [DataMember]
         public decimal DPercent { get; set; }
     }
+    #endregion
 }
