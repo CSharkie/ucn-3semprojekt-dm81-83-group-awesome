@@ -14,17 +14,15 @@ namespace AwesomeService
     {
         #region create
         [OperationContract]
-        string createReservation(string name, bool taken, DateTime dateReserved, int movieId, int seatCount);
+        string createReservation(string name, bool taken, DateTime dateReserved, int movieId, IList<int> seats);
         [OperationContract]
         string createMovie(string title, DateTime dateAndTime, int roomId);
         [OperationContract]
         string createRoom(int cols, int rows);
         [OperationContract]
-        string createTicket(decimal standard, int reservationId, int discountId);
+        string createTicket(decimal standard, int reservationId, int discountId, int col, int row);
         [OperationContract]
         string createDiscount(decimal dPercent);
-        //[OperationContract]
-        //string createSeat(int col, int row, bool usable, int roomId);
         #endregion
 
         #region update
@@ -55,9 +53,9 @@ namespace AwesomeService
         [OperationContract]
         IList<Ticket> getTicket(int ticketId, int reservationId);
         [OperationContract]
-        IList<Seat> getSeat(int seatId, int roomId, int col, int row);
+        IList<Seat> getSeat(int seatId, int roomId, int col, int row, int reservationId);
         [OperationContract]
-        Discount getDiscount(int discountId, decimal dPercent);
+        Discount getDiscount(int? discountId, decimal dPercent);
         #endregion
 
         #region remove
@@ -108,8 +106,8 @@ namespace AwesomeService
         public int SeatCount { get; set; }
         //[DataMember]
         //public Movie Movie {get;set;}
-        //[DataMember]
-        //public EntitySet<Seat> Seats { get; set; }
+        [DataMember]
+        public IList<Seat> Seats { get; set; }
         //[DataMember]
         //public EntitySet<Ticket> Tickets { get; set; }
     }
@@ -133,8 +131,8 @@ namespace AwesomeService
         public int RoomId { get; set; }
         //[DataMember]
         //public EntitySet<Reservation> Reservations { get; set; }
-        //[DataMember]
-        //public Room Room { get; set; }
+        [DataMember]
+        public Room Room { get; set; }
     }
     [DataContract]
     public class Room
@@ -151,8 +149,6 @@ namespace AwesomeService
         public int Cols { get; set; }
         [DataMember]
         public int Rows { get; set; }
-    //    [DataMember]
-    //    public EntitySet<Movie> Movies { get; set; }
         [DataMember]
         public IList<Seat> Seats { get; set; }
     }
@@ -180,15 +176,11 @@ namespace AwesomeService
         public int RoomId { get; set; }
         [DataMember]
         public int? ReservationId { get; set; }
-        //[DataMember]
-        //public Room Room { get; set; }
-        //[DataMember]
-        //public Reservation Reservation { get; set; }
     }
     [DataContract]
     public class Ticket
     {
-        public Ticket(int id, decimal standard, decimal? price, decimal? paidAmmount, int reservationId, int? discountId)
+        public Ticket(int id, decimal standard, decimal? price, decimal? paidAmmount, int reservationId, int? discountId, int col, int row)
         {
             this.Id = id;
             this.Standard = standard;
@@ -196,6 +188,8 @@ namespace AwesomeService
             this.PaidAmount = paidAmmount;
             this.ReservationId = reservationId;
             this.DiscountId = discountId;
+            this.Col = col;
+            this.Row = row;
         }
         [DataMember]
         public int Id { get; set; }
@@ -209,10 +203,14 @@ namespace AwesomeService
         public int ReservationId { get; set; }
         [DataMember]
         public int? DiscountId { get; set; }
-        //[DataMember]
-        //public Reservation Reservation { get; set; }
-        //[DataMember]
-        //public Discount Discount { get; set; }
+        [DataMember]
+        public int Col { get; set; }
+        [DataMember]
+        public int Row { get; set; }
+        [DataMember]
+        public Reservation Reservation { get; set; }
+        [DataMember]
+        public Discount Discount { get; set; }
     }
     [DataContract]
     public class Discount

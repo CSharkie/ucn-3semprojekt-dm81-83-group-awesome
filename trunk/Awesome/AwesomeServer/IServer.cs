@@ -10,12 +10,11 @@ namespace AwesomeServer
     interface IServer
     {
         #region create
-        string createReservation(string name, bool taken, DateTime dateReserved, int movieId, int seatCount);
+        string createReservation(string name, bool taken, DateTime dateReserved, int movieId, IList<int> seatIds);
         string createMovie(string title, DateTime dateAndTime, int roomId);
         string createRoom(int cols, int rows);
-        string createTicket(decimal standard, int reservationId, int discountId);
+        string createTicket(decimal standard, int reservationId, int discountId, int col, int row);
         string createDiscount(decimal dPercent);
-        //Seat createSeat(int col, int row, bool usable, int roomId);
         #endregion
 
         #region update
@@ -33,8 +32,8 @@ namespace AwesomeServer
         Room getRoom(int roomId);
         IList<Room> getAllRooms();
         IList<Ticket> getTicket(int ticketId, int reservationId);
-        IList<Seat> getSeat(int seatId, int roomId, int col, int row);
-        Discount getDiscount(int discountId, decimal dPercent);
+        IList<Seat> getSeat(int seatId, int roomId, int col, int row, int reservationId);
+        Discount getDiscount(int? discountId, decimal dPercent);
         #endregion
 
         #region remove
@@ -49,6 +48,7 @@ namespace AwesomeServer
         #region methods
         //IList<Seat> getAdjSeat(int noOfSeats);
         bool emptyRoom(int roomId);
+        string takeTickets(int reservationId);
         #endregion
     }
 }

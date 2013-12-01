@@ -10,15 +10,15 @@ using System.Collections.ObjectModel;
 using System.Runtime.Remoting.Messaging;
 namespace AwesomeService
 {
-    public delegate IList<Seat> getSeatDelegate(int seatId,int roomId, int col, int row);
+    public delegate IList<Seat> getSeatDelegate(int seatId, int roomId, int col, int row, int reservationId);
     public class Service : IService
     {
         Server server = new Server();
 
         #region create
-        public string createReservation(string name, bool taken, DateTime dateReserved, int movieId, int seatCount)
+        public string createReservation(string name, bool taken, DateTime dateReserved, int movieId, IList<int> seatIds)
         {
-            return server.createReservation(name, taken, dateReserved, movieId, seatCount);
+            return server.createReservation(name, taken, dateReserved, movieId, seatIds);
         }
         public string createMovie(string title, DateTime dateAndTime, int roomId)
         {
@@ -30,20 +30,15 @@ namespace AwesomeService
 
             return server.createRoom(cols, rows);
         }
-        public string createTicket(decimal standard, int reservationId, int discountId)
+        public string createTicket(decimal standard, int reservationId, int discountId, int col, int row)
         {
-
-            return server.createTicket(standard, reservationId, discountId);
+            return server.createTicket(standard, reservationId, discountId, col, row);
         }
         public string createDiscount(decimal dPercent)
         {
             return server.createDiscount(dPercent);
         }
 
-        //public string createSeat(int col, int row, bool usable, int roomId)
-        //{
-        //    return server.createSeat(col, row, usable, roomId);
-        //}
         #endregion
 
         #region update
@@ -86,13 +81,15 @@ namespace AwesomeService
             List<Reservation> returnObj = new List<Reservation>();
             foreach (var item in reservationList)
             {
-                returnObj.Add(new Reservation(
+                Reservation r = new Reservation(
                         item.Id,
                         item.Name,
                         item.Taken,
                         item.DateReserved,
                         item.MovieId,
-                        item.SeatCount));
+                        item.SeatCount);
+                r.Seats = getSeat(0, 0, 0, 0, reservationId);
+                returnObj.Add(r);
             }
             return returnObj;
 
@@ -104,34 +101,31 @@ namespace AwesomeService
             List<Movie> returnObj = new List<Movie>();
             foreach (var item in movieList)
             {
-                returnObj.Add(new Movie(
-                    item.Id,
-                    item.Title,
-                    item.DateAndTime,
-                    item.RoomId
-                    ));
+                Movie m = new Movie(item.Id, item.Title, item.DateAndTime, item.RoomId);
+                m.Room = getRoom(item.RoomId);
+                returnObj.Add(m);
             }
             return returnObj;
         }
         public Room getRoom(int roomId)
         {
-            
+
             var room = server.getRoom(roomId);
             Room returnObj = new Room(room.Id, room.Cols, room.Rows);
 
             getSeatDelegate del = new getSeatDelegate(getSeat);
 
-            IAsyncResult result = del.BeginInvoke(0, roomId, 0, 0, new AsyncCallback((IAsyncResult async) =>
+            IAsyncResult result = del.BeginInvoke(0, roomId, 0, 0,0, new AsyncCallback((IAsyncResult async) =>
             {
                 AsyncResult ar = (AsyncResult)async;
                 getSeatDelegate del2 = (getSeatDelegate)ar.AsyncDelegate;
                 IList<Seat> x = del2.EndInvoke(async);
             }), "Success");
 
-            returnObj.Seats = getSeat(0,roomId,0,0);
+            returnObj.Seats = getSeat(0, roomId, 0, 0,0);
             return returnObj;
         }
-       
+
         public IList<Room> getAllRooms()
         {
             var roomList = server.getAllRooms();
@@ -140,7 +134,7 @@ namespace AwesomeService
             {
                 var room = server.getRoom(item.Id);
                 Room r = new Room(room.Id, room.Cols, room.Rows);
-                r.Seats = getSeat(0, item.Id, 0, 0);
+                r.Seats = getSeat(0, item.Id, 0, 0,0);
                 returnObj.Add(r);
             }
             return returnObj;
@@ -151,21 +145,25 @@ namespace AwesomeService
             IList<Ticket> returnObj = new List<Ticket>();
             foreach (var item in ticketList)
             {
-                returnObj.Add(new Ticket(
+                Ticket ticket = new Ticket(
                     item.Id,
                     item.Standard,
                     item.Price,
                     item.PaidAmount,
                     item.ReservationId,
-                    item.DiscountId
-                    ));
+                    item.DiscountId,
+                    item.Col,
+                    item.Row);
+                ticket.Discount = getDiscount(item.DiscountId, 0);
+                ticket.Reservation = getReservation(item.ReservationId, "", 0).First();
+                returnObj.Add(ticket);
             }
             return returnObj;
 
         }
-        public IList<Seat> getSeat(int seatId, int roomId, int col, int row)
+        public IList<Seat> getSeat(int seatId, int roomId, int col, int row, int reservationId)
         {
-            var seatList = server.getSeat(seatId, roomId, col, row);
+            var seatList = server.getSeat(seatId, roomId, col, row, reservationId);
             IList<Seat> returnObj = new List<Seat>();
             foreach (var item in seatList)
             {
@@ -181,7 +179,7 @@ namespace AwesomeService
             return returnObj;
 
         }
-        public Discount getDiscount(int discountId, decimal dPercent)
+        public Discount getDiscount(int? discountId, decimal dPercent)
         {
             var discount = server.getDiscount(discountId, dPercent);
             Discount returnObj = new Discount(discount.Id, discount.DPercent);

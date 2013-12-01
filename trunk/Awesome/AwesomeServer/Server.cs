@@ -14,21 +14,43 @@ namespace AwesomeServer
     public class Server : IServer
     {
         #region create
-        public string createReservation(string name, bool taken, DateTime dateReserved, int movieId, int seatCount)
+        public string createReservation(string name, bool taken, DateTime dateReserved, int movieId, IList<int> seatIds)
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
                 string message = "The reservation was added succesfully!";
                 try
                 {
-                    Reservation reservation = new Reservation();
-                    reservation.Name = name;
-                    reservation.Taken = taken;
-                    reservation.DateReserved = dateReserved;
-                    reservation.MovieId = movieId;
-                    reservation.SeatCount = seatCount;
-                    db.Reservations.InsertOnSubmit(reservation);
-                    db.SubmitChanges();
+                    bool allAvailable = true;
+                    foreach (int seatId in seatIds)
+                    {
+                        if (!getSeat(seatId, 0, 0, 0, 0).First().Usable)
+                        {
+                            allAvailable = false;
+                            break;
+                        }
+                    }
+                    if (allAvailable)
+                    {
+                        Reservation reservation = new Reservation();
+                        reservation.Name = name;
+                        reservation.Taken = taken;
+                        reservation.DateReserved = dateReserved;
+                        reservation.MovieId = movieId;
+                        reservation.SeatCount = seatIds.Count;
+                        db.Reservations.InsertOnSubmit(reservation);
+                        db.SubmitChanges();
+                        foreach (int seatId in seatIds)
+                        {
+                            var seat = db.Seats.SingleOrDefault(s => s.Id == seatId);
+                            seat.ReservationId = (from r in db.Reservations select r.Id).Max();
+
+                            seat.Usable = false;
+                        }
+                        db.SubmitChanges();
+                    }
+                    else
+                        message = "One or more of these seats are taken/unavailable!";
                 }
                 catch (Exception ex)
                 {
@@ -108,32 +130,9 @@ namespace AwesomeServer
             }
         }
 
-        //public Seat createSeat(int col, int row, bool usable, int roomId)
-        //{
-        //    using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-        //    {
-        //        string message = "The seat was added succesfully!";
-        //        Seat seat = new Seat();
-        //        try
-        //        {
-        //            seat.Col = col;
-        //            seat.Row = row;
-        //            seat.Usable = usable;
-        //            seat.RoomId = roomId;
+     
 
-        //            db.Seats.InsertOnSubmit(seat);
-        //            db.SubmitChanges();
-
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            message = "An error has occured: " + ex.Message;
-        //        }
-        //        return seat;
-        //    }
-        //}
-
-        public string createTicket(decimal standard, int reservationId, int discountId)
+        public string createTicket(decimal standard, int reservationId, int discountId, int col, int row)
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
@@ -144,6 +143,8 @@ namespace AwesomeServer
                     ticket.Standard = standard;
                     ticket.ReservationId = reservationId;
                     ticket.DiscountId = discountId;
+                    ticket.Col = col;
+                    ticket.Row = row;
                     db.Tickets.InsertOnSubmit(ticket);
                     db.SubmitChanges();
                 }
@@ -477,7 +478,7 @@ namespace AwesomeServer
                 return returnObj;
             }
         }
-        public IList<Seat> getSeat(int seatId, int roomId, int col, int row)
+        public IList<Seat> getSeat(int seatId, int roomId, int col, int row, int reservationId)
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
@@ -515,6 +516,14 @@ namespace AwesomeServer
                             }
 
                         }
+                    else if (reservationId > 0)
+                    {
+                        var query = db.Seats.Where(s => s.ReservationId == reservationId);
+                        foreach (Seat seat in query)
+                        {
+                            returnObj.Add(seat);
+                        }
+                    }
 
                     return returnObj;
                 }
@@ -524,7 +533,7 @@ namespace AwesomeServer
                 }
             }
         }
-        public Discount getDiscount(int discountId, decimal dPercent)
+        public Discount getDiscount(int? discountId, decimal dPercent)
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
@@ -727,6 +736,25 @@ namespace AwesomeServer
                 success = false;
             }
             return success;
+        }
+        public string takeTickets(int reservationId)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The tickets were printed: {0}";
+                try
+                {
+                    var obj = db.Tickets.Where(t => t.ReservationId == t.ReservationId);
+                    
+
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
         }
         #endregion
 
