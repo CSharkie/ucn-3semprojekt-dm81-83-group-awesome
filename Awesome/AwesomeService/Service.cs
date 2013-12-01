@@ -126,11 +126,8 @@ namespace AwesomeService
             IList<Room> returnObj = new List<Room>();
             foreach (var item in roomList)
             {
-                returnObj.Add(new Room(
-                    item.Id,
-                    item.Cols,
-                    item.Rows
-                    ));
+                Room room=getRoom(item.Id);
+                returnObj.Add(room);
             }
             return returnObj;
         }
