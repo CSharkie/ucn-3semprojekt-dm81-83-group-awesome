@@ -88,7 +88,9 @@ namespace AwesomeService
                         item.DateReserved,
                         item.MovieId,
                         item.SeatCount);
+                r.Movie = getMovie(item.MovieId, "", 0).First();
                 r.Seats = getSeat(0, 0, 0, 0, reservationId);
+                r.Tickets = getTicket(0, item.Id);
                 returnObj.Add(r);
             }
             return returnObj;
