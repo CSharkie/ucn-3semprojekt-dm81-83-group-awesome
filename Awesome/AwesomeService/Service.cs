@@ -124,10 +124,13 @@ namespace AwesomeService
         {
             var roomList = server.getAllRooms();
             IList<Room> returnObj = new List<Room>();
+            int i = 0;
             foreach (var item in roomList)
             {
                 Room room=getRoom(item.Id);
                 returnObj.Add(room);
+                i++;
+                returnObj[i].Seats = getSeat(0, item.Id, 0, 0);
             }
             return returnObj;
         }
@@ -203,6 +206,10 @@ namespace AwesomeService
         //{
         //    return server.getAdjSeat(noOfSeats);
         //}
+        public bool emptyRoom(int roomId)
+        {
+            return server.emptyRoom(roomId);
+        }
         #endregion
     }
 }

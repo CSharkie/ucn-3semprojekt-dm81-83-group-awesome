@@ -76,6 +76,8 @@ namespace AwesomeService
         #region methods
         //[OperationContract]
         //IList<Seat> getAdjSeat(int noOfSeats);
+        [OperationContract]
+        bool emptyRoom(int roomId);
         #endregion
     }
     #region contracts
