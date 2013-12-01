@@ -10,23 +10,21 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="DateReserved" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Movie" nillable="true" type="tns:Movie" />
       <xs:element minOccurs="0" name="MovieId" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SeatCount" type="xs:int" />
+      <xs:element minOccurs="0" name="Seats" nillable="true" type="tns:ArrayOfSeat" />
       <xs:element minOccurs="0" name="Taken" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Tickets" nillable="true" type="tns:ArrayOfTicket" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Reservation" nillable="true" type="tns:Reservation" />
-  <xs:complexType name="ArrayOfMovie">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Movie" nillable="true" type="tns:Movie" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMovie" nillable="true" type="tns:ArrayOfMovie" />
   <xs:complexType name="Movie">
     <xs:sequence>
       <xs:element minOccurs="0" name="DateAndTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Room" nillable="true" type="tns:Room" />
       <xs:element minOccurs="0" name="RoomId" type="xs:int" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -58,12 +56,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Seat" nillable="true" type="tns:Seat" />
-  <xs:complexType name="ArrayOfRoom">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Room" nillable="true" type="tns:Room" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfRoom" nillable="true" type="tns:ArrayOfRoom" />
   <xs:complexType name="ArrayOfTicket">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Ticket" nillable="true" type="tns:Ticket" />
@@ -72,11 +64,15 @@
   <xs:element name="ArrayOfTicket" nillable="true" type="tns:ArrayOfTicket" />
   <xs:complexType name="Ticket">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Col" type="xs:int" />
+      <xs:element minOccurs="0" name="Discount" nillable="true" type="tns:Discount" />
       <xs:element minOccurs="0" name="DiscountId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="PaidAmount" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Reservation" nillable="true" type="tns:Reservation" />
       <xs:element minOccurs="0" name="ReservationId" type="xs:int" />
+      <xs:element minOccurs="0" name="Row" type="xs:int" />
       <xs:element minOccurs="0" name="Standard" type="xs:decimal" />
     </xs:sequence>
   </xs:complexType>
@@ -88,4 +84,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Discount" nillable="true" type="tns:Discount" />
+  <xs:complexType name="ArrayOfMovie">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Movie" nillable="true" type="tns:Movie" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMovie" nillable="true" type="tns:ArrayOfMovie" />
+  <xs:complexType name="ArrayOfRoom">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Room" nillable="true" type="tns:Room" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRoom" nillable="true" type="tns:ArrayOfRoom" />
 </xs:schema>

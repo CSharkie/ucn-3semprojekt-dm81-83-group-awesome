@@ -29,6 +29,9 @@ namespace AwesomeClient.ServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private AwesomeClient.ServiceReference.Movie MovieField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int MovieIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -38,7 +41,13 @@ namespace AwesomeClient.ServiceReference {
         private int SeatCountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private AwesomeClient.ServiceReference.Seat[] SeatsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool TakenField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private AwesomeClient.ServiceReference.Ticket[] TicketsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -72,6 +81,19 @@ namespace AwesomeClient.ServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public AwesomeClient.ServiceReference.Movie Movie {
+            get {
+                return this.MovieField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MovieField, value) != true)) {
+                    this.MovieField = value;
+                    this.RaisePropertyChanged("Movie");
                 }
             }
         }
@@ -116,6 +138,19 @@ namespace AwesomeClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public AwesomeClient.ServiceReference.Seat[] Seats {
+            get {
+                return this.SeatsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SeatsField, value) != true)) {
+                    this.SeatsField = value;
+                    this.RaisePropertyChanged("Seats");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool Taken {
             get {
                 return this.TakenField;
@@ -124,6 +159,19 @@ namespace AwesomeClient.ServiceReference {
                 if ((this.TakenField.Equals(value) != true)) {
                     this.TakenField = value;
                     this.RaisePropertyChanged("Taken");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public AwesomeClient.ServiceReference.Ticket[] Tickets {
+            get {
+                return this.TicketsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TicketsField, value) != true)) {
+                    this.TicketsField = value;
+                    this.RaisePropertyChanged("Tickets");
                 }
             }
         }
@@ -152,6 +200,9 @@ namespace AwesomeClient.ServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private AwesomeClient.ServiceReference.Room RoomField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int RoomIdField;
@@ -196,6 +247,19 @@ namespace AwesomeClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public AwesomeClient.ServiceReference.Room Room {
+            get {
+                return this.RoomField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RoomField, value) != true)) {
+                    this.RoomField = value;
+                    this.RaisePropertyChanged("Room");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int RoomId {
             get {
                 return this.RoomIdField;
@@ -217,99 +281,6 @@ namespace AwesomeClient.ServiceReference {
                 if ((object.ReferenceEquals(this.TitleField, value) != true)) {
                     this.TitleField = value;
                     this.RaisePropertyChanged("Title");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Room", Namespace="http://schemas.datacontract.org/2004/07/AwesomeService")]
-    [System.SerializableAttribute()]
-    public partial class Room : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ColsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int RowsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private AwesomeClient.ServiceReference.Seat[] SeatsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Cols {
-            get {
-                return this.ColsField;
-            }
-            set {
-                if ((this.ColsField.Equals(value) != true)) {
-                    this.ColsField = value;
-                    this.RaisePropertyChanged("Cols");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Rows {
-            get {
-                return this.RowsField;
-            }
-            set {
-                if ((this.RowsField.Equals(value) != true)) {
-                    this.RowsField = value;
-                    this.RaisePropertyChanged("Rows");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public AwesomeClient.ServiceReference.Seat[] Seats {
-            get {
-                return this.SeatsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SeatsField, value) != true)) {
-                    this.SeatsField = value;
-                    this.RaisePropertyChanged("Seats");
                 }
             }
         }
@@ -459,6 +430,12 @@ namespace AwesomeClient.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ColField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private AwesomeClient.ServiceReference.Discount DiscountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> DiscountIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -471,7 +448,13 @@ namespace AwesomeClient.ServiceReference {
         private System.Nullable<decimal> PriceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private AwesomeClient.ServiceReference.Reservation ReservationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ReservationIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RowField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal StandardField;
@@ -483,6 +466,32 @@ namespace AwesomeClient.ServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Col {
+            get {
+                return this.ColField;
+            }
+            set {
+                if ((this.ColField.Equals(value) != true)) {
+                    this.ColField = value;
+                    this.RaisePropertyChanged("Col");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public AwesomeClient.ServiceReference.Discount Discount {
+            get {
+                return this.DiscountField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DiscountField, value) != true)) {
+                    this.DiscountField = value;
+                    this.RaisePropertyChanged("Discount");
+                }
             }
         }
         
@@ -539,6 +548,19 @@ namespace AwesomeClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public AwesomeClient.ServiceReference.Reservation Reservation {
+            get {
+                return this.ReservationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReservationField, value) != true)) {
+                    this.ReservationField = value;
+                    this.RaisePropertyChanged("Reservation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int ReservationId {
             get {
                 return this.ReservationIdField;
@@ -552,6 +574,19 @@ namespace AwesomeClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Row {
+            get {
+                return this.RowField;
+            }
+            set {
+                if ((this.RowField.Equals(value) != true)) {
+                    this.RowField = value;
+                    this.RaisePropertyChanged("Row");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public decimal Standard {
             get {
                 return this.StandardField;
@@ -560,6 +595,99 @@ namespace AwesomeClient.ServiceReference {
                 if ((this.StandardField.Equals(value) != true)) {
                     this.StandardField = value;
                     this.RaisePropertyChanged("Standard");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Room", Namespace="http://schemas.datacontract.org/2004/07/AwesomeService")]
+    [System.SerializableAttribute()]
+    public partial class Room : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ColsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RowsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private AwesomeClient.ServiceReference.Seat[] SeatsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Cols {
+            get {
+                return this.ColsField;
+            }
+            set {
+                if ((this.ColsField.Equals(value) != true)) {
+                    this.ColsField = value;
+                    this.RaisePropertyChanged("Cols");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Rows {
+            get {
+                return this.RowsField;
+            }
+            set {
+                if ((this.RowsField.Equals(value) != true)) {
+                    this.RowsField = value;
+                    this.RaisePropertyChanged("Rows");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public AwesomeClient.ServiceReference.Seat[] Seats {
+            get {
+                return this.SeatsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SeatsField, value) != true)) {
+                    this.SeatsField = value;
+                    this.RaisePropertyChanged("Seats");
                 }
             }
         }
@@ -640,10 +768,10 @@ namespace AwesomeClient.ServiceReference {
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createReservation", ReplyAction="http://tempuri.org/IService/createReservationResponse")]
-        string createReservation(string name, bool taken, System.DateTime dateReserved, int movieId, int seatCount);
+        string createReservation(string name, bool taken, System.DateTime dateReserved, int movieId, int[] seats);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createReservation", ReplyAction="http://tempuri.org/IService/createReservationResponse")]
-        System.Threading.Tasks.Task<string> createReservationAsync(string name, bool taken, System.DateTime dateReserved, int movieId, int seatCount);
+        System.Threading.Tasks.Task<string> createReservationAsync(string name, bool taken, System.DateTime dateReserved, int movieId, int[] seats);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createMovie", ReplyAction="http://tempuri.org/IService/createMovieResponse")]
         string createMovie(string title, System.DateTime dateAndTime, int roomId);
@@ -658,10 +786,10 @@ namespace AwesomeClient.ServiceReference {
         System.Threading.Tasks.Task<string> createRoomAsync(int cols, int rows);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createTicket", ReplyAction="http://tempuri.org/IService/createTicketResponse")]
-        string createTicket(decimal standard, int reservationId, int discountId);
+        string createTicket(decimal standard, int reservationId, int discountId, int col, int row);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createTicket", ReplyAction="http://tempuri.org/IService/createTicketResponse")]
-        System.Threading.Tasks.Task<string> createTicketAsync(decimal standard, int reservationId, int discountId);
+        System.Threading.Tasks.Task<string> createTicketAsync(decimal standard, int reservationId, int discountId, int col, int row);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/createDiscount", ReplyAction="http://tempuri.org/IService/createDiscountResponse")]
         string createDiscount(decimal dPercent);
@@ -736,16 +864,16 @@ namespace AwesomeClient.ServiceReference {
         System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Ticket[]> getTicketAsync(int ticketId, int reservationId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getSeat", ReplyAction="http://tempuri.org/IService/getSeatResponse")]
-        AwesomeClient.ServiceReference.Seat[] getSeat(int seatId, int roomId, int col, int row);
+        AwesomeClient.ServiceReference.Seat[] getSeat(int seatId, int roomId, int col, int row, int reservationId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getSeat", ReplyAction="http://tempuri.org/IService/getSeatResponse")]
-        System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getSeatAsync(int seatId, int roomId, int col, int row);
+        System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getSeatAsync(int seatId, int roomId, int col, int row, int reservationId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getDiscount", ReplyAction="http://tempuri.org/IService/getDiscountResponse")]
-        AwesomeClient.ServiceReference.Discount getDiscount(int discountId, decimal dPercent);
+        AwesomeClient.ServiceReference.Discount getDiscount(System.Nullable<int> discountId, decimal dPercent);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getDiscount", ReplyAction="http://tempuri.org/IService/getDiscountResponse")]
-        System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Discount> getDiscountAsync(int discountId, decimal dPercent);
+        System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Discount> getDiscountAsync(System.Nullable<int> discountId, decimal dPercent);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/removeReservation", ReplyAction="http://tempuri.org/IService/removeReservationResponse")]
         string removeReservation(int reservationId);
@@ -811,12 +939,12 @@ namespace AwesomeClient.ServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public string createReservation(string name, bool taken, System.DateTime dateReserved, int movieId, int seatCount) {
-            return base.Channel.createReservation(name, taken, dateReserved, movieId, seatCount);
+        public string createReservation(string name, bool taken, System.DateTime dateReserved, int movieId, int[] seats) {
+            return base.Channel.createReservation(name, taken, dateReserved, movieId, seats);
         }
         
-        public System.Threading.Tasks.Task<string> createReservationAsync(string name, bool taken, System.DateTime dateReserved, int movieId, int seatCount) {
-            return base.Channel.createReservationAsync(name, taken, dateReserved, movieId, seatCount);
+        public System.Threading.Tasks.Task<string> createReservationAsync(string name, bool taken, System.DateTime dateReserved, int movieId, int[] seats) {
+            return base.Channel.createReservationAsync(name, taken, dateReserved, movieId, seats);
         }
         
         public string createMovie(string title, System.DateTime dateAndTime, int roomId) {
@@ -835,12 +963,12 @@ namespace AwesomeClient.ServiceReference {
             return base.Channel.createRoomAsync(cols, rows);
         }
         
-        public string createTicket(decimal standard, int reservationId, int discountId) {
-            return base.Channel.createTicket(standard, reservationId, discountId);
+        public string createTicket(decimal standard, int reservationId, int discountId, int col, int row) {
+            return base.Channel.createTicket(standard, reservationId, discountId, col, row);
         }
         
-        public System.Threading.Tasks.Task<string> createTicketAsync(decimal standard, int reservationId, int discountId) {
-            return base.Channel.createTicketAsync(standard, reservationId, discountId);
+        public System.Threading.Tasks.Task<string> createTicketAsync(decimal standard, int reservationId, int discountId, int col, int row) {
+            return base.Channel.createTicketAsync(standard, reservationId, discountId, col, row);
         }
         
         public string createDiscount(decimal dPercent) {
@@ -939,19 +1067,19 @@ namespace AwesomeClient.ServiceReference {
             return base.Channel.getTicketAsync(ticketId, reservationId);
         }
         
-        public AwesomeClient.ServiceReference.Seat[] getSeat(int seatId, int roomId, int col, int row) {
-            return base.Channel.getSeat(seatId, roomId, col, row);
+        public AwesomeClient.ServiceReference.Seat[] getSeat(int seatId, int roomId, int col, int row, int reservationId) {
+            return base.Channel.getSeat(seatId, roomId, col, row, reservationId);
         }
         
-        public System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getSeatAsync(int seatId, int roomId, int col, int row) {
-            return base.Channel.getSeatAsync(seatId, roomId, col, row);
+        public System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getSeatAsync(int seatId, int roomId, int col, int row, int reservationId) {
+            return base.Channel.getSeatAsync(seatId, roomId, col, row, reservationId);
         }
         
-        public AwesomeClient.ServiceReference.Discount getDiscount(int discountId, decimal dPercent) {
+        public AwesomeClient.ServiceReference.Discount getDiscount(System.Nullable<int> discountId, decimal dPercent) {
             return base.Channel.getDiscount(discountId, dPercent);
         }
         
-        public System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Discount> getDiscountAsync(int discountId, decimal dPercent) {
+        public System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Discount> getDiscountAsync(System.Nullable<int> discountId, decimal dPercent) {
             return base.Channel.getDiscountAsync(discountId, dPercent);
         }
         

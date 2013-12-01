@@ -104,12 +104,12 @@ namespace AwesomeService
         public int MovieId { get; set; }
         [DataMember]
         public int SeatCount { get; set; }
-        //[DataMember]
-        //public Movie Movie {get;set;}
+        [DataMember]
+        public Movie Movie { get; set; }
         [DataMember]
         public IList<Seat> Seats { get; set; }
-        //[DataMember]
-        //public EntitySet<Ticket> Tickets { get; set; }
+        [DataMember]
+        public IList<Ticket> Tickets { get; set; }
     }
     [DataContract]
     public class Movie
