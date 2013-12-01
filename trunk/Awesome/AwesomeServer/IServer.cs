@@ -43,10 +43,12 @@ namespace AwesomeServer
         string removeRoom(int roomId);
         string removeTicket(int ticketId);
         string removeDiscount(int discountId);
+        string removeSeat(int seatId);
         #endregion
 
         #region methods
         //IList<Seat> getAdjSeat(int noOfSeats);
+        bool emptyRoom(int roomId);
         #endregion
     }
 }

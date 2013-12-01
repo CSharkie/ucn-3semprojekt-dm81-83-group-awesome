@@ -60,6 +60,7 @@ namespace AwesomeServer
 
         public string createRoom(int cols, int rows)
         {
+            //TODO: If we have time implement the custom stair!
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
                 string message = "The room was added succesfully!";
@@ -82,7 +83,7 @@ namespace AwesomeServer
                             room.Seats.Add(seat);
                         }
                     }
-                    
+
                     db.Rooms.InsertOnSubmit(room);
                     db.SubmitChanges();
                 }
@@ -215,17 +216,32 @@ namespace AwesomeServer
 
         public string updateRoom(int roomId, int cols, int rows)
         {
+            
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
                 string message = "The room was updated succesfully!";
                 try
                 {
+                    emptyRoom(roomId);
                     var obj = db.Rooms.SingleOrDefault(r => r.Id == roomId);
                     if (rows != 0)
                         obj.Rows = rows;
                     if (cols != 0)
                         obj.Cols = cols;
                     //TODO: AT UPDATE OF ROOM, MAKE NEW SEATS FOR THE WHOLE ROOM
+                    Room room = db.Rooms.SingleOrDefault(r => r.Id == roomId);
+                    for (int i = 1; i <= rows; i++)
+                    {
+                        for (int j = 1; j <= cols; j++)
+                        {
+                            Seat seat = new Seat();
+                            seat.Row = i;
+                            seat.Col = j;
+                            seat.Usable = true;
+                            seat.RoomId = room.Id;
+                            room.Seats.Add(seat);
+                        }
+                    }
 
 
                     db.SubmitChanges();
@@ -461,7 +477,7 @@ namespace AwesomeServer
                     else if (roomId > 0)
                         if (col > 0 && row > 0)
                             returnObj.Add(db.Seats.SingleOrDefault(r => r.RoomId == roomId && r.Row == row && r.Col == col));
-                           else if (col > 0)
+                        else if (col > 0)
                         {
                             var query = db.Seats.Where(s => s.RoomId == roomId && s.Col == col);
                             foreach (Seat seat in query)
@@ -642,6 +658,31 @@ namespace AwesomeServer
                 return message;
             }
         }
+        public string removeSeat(int seatId)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The Seat was removed succesfully!";
+                try
+                {
+                    var seat = db.Seats.SingleOrDefault(s => s.Id == seatId);
+                    if (seat != null)
+                    {
+                        db.Seats.DeleteOnSubmit(seat);
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        message = "There was nothing to remove.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
+        }
         #endregion
 
         #region methods
@@ -649,6 +690,31 @@ namespace AwesomeServer
         //{
         //    throw new NotImplementedException();
         //}
+        public bool emptyRoom(int roomId)
+        {
+            bool success = true;
+            try
+            {
+                using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+                {
+                    var seats = db.Seats.Where(s => s.RoomId == roomId);
+                    db.Seats.DeleteAllOnSubmit(seats);
+
+                    var room = db.Rooms.SingleOrDefault(r => r.Id == roomId);
+                    room.Cols = 0;
+                    room.Rows = 0;
+
+                    db.SubmitChanges();
+                }
+                
+
+            }
+            catch (Exception)
+            {
+                success = false;
+            }
+            return success;
+        }
         #endregion
 
     }
