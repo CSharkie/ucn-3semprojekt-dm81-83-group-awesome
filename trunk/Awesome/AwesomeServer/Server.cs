@@ -68,6 +68,21 @@ namespace AwesomeServer
                     Room room = new Room();
                     room.Cols = cols;
                     room.Rows = rows;
+
+                    //generating seats
+                    for (int i = 1; i <= rows; i++)
+                    {
+                        for (int j = 1; j <= cols; j++)
+                        {
+                            Seat seat = new Seat();
+                            seat.Row = i;
+                            seat.Col = j;
+                            seat.Usable = true;
+                            seat.RoomId = room.Id;
+                            room.Seats.Add(seat);
+                        }
+                    }
+                    
                     db.Rooms.InsertOnSubmit(room);
                     db.SubmitChanges();
                 }
@@ -78,6 +93,31 @@ namespace AwesomeServer
                 return message;
             }
         }
+
+        //public Seat createSeat(int col, int row, bool usable, int roomId)
+        //{
+        //    using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+        //    {
+        //        string message = "The seat was added succesfully!";
+        //        Seat seat = new Seat();
+        //        try
+        //        {
+        //            seat.Col = col;
+        //            seat.Row = row;
+        //            seat.Usable = usable;
+        //            seat.RoomId = roomId;
+
+        //            db.Seats.InsertOnSubmit(seat);
+        //            db.SubmitChanges();
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            message = "An error has occured: " + ex.Message;
+        //        }
+        //        return seat;
+        //    }
+        //}
 
         public string createTicket(decimal standard, int reservationId, int discountId)
         {
@@ -185,6 +225,8 @@ namespace AwesomeServer
                         obj.Rows = rows;
                     if (cols != 0)
                         obj.Cols = cols;
+                    //TODO: AT UPDATE OF ROOM, MAKE NEW SEATS FOR THE WHOLE ROOM
+
 
                     db.SubmitChanges();
                 }
@@ -366,6 +408,7 @@ namespace AwesomeServer
                 return returnObj;
             }
         }
+
         public IList<Room> getAllRooms()
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
@@ -418,7 +461,7 @@ namespace AwesomeServer
                     else if (roomId > 0)
                         if (col > 0 && row > 0)
                             returnObj.Add(db.Seats.SingleOrDefault(r => r.RoomId == roomId && r.Row == row && r.Col == col));
-                        else if (col > 0)
+                           else if (col > 0)
                         {
                             var query = db.Seats.Where(s => s.RoomId == roomId && s.Col == col);
                             foreach (Seat seat in query)

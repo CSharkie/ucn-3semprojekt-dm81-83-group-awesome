@@ -15,6 +15,7 @@ namespace AwesomeServer
         string createRoom(int cols, int rows);
         string createTicket(decimal standard, int reservationId, int discountId);
         string createDiscount(decimal dPercent);
+        //Seat createSeat(int col, int row, bool usable, int roomId);
         #endregion
 
         #region update

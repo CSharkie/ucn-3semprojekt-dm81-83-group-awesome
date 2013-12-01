@@ -23,6 +23,8 @@ namespace AwesomeService
         string createTicket(decimal standard, int reservationId, int discountId);
         [OperationContract]
         string createDiscount(decimal dPercent);
+        //[OperationContract]
+        //string createSeat(int col, int row, bool usable, int roomId);
         #endregion
 
         #region update
@@ -149,8 +151,8 @@ namespace AwesomeService
         public int Rows { get; set; }
     //    [DataMember]
     //    public EntitySet<Movie> Movies { get; set; }
-    //    [DataMember]
-    //    public EntitySet<Seat> Seats { get; set; }
+        [DataMember]
+        public IList<Seat> Seats { get; set; }
     }
     [DataContract]
     public class Seat
