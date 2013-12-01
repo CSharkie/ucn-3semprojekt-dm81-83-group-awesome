@@ -39,8 +39,12 @@ namespace AwesomeClient
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Reservation res = client.getReservation(7, "", 0);
-            MessageBox.Show(res.Name);
+            
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            textBox1.Text=client.getRoom(8).Id.ToString();
         }
     }
 }

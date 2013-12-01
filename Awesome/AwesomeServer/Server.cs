@@ -4,11 +4,13 @@ using System.Collections.ObjectModel;
 using System.Data.Linq;
 using System.Data.Metadata.Edm;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AwesomeServer
 {
+    public delegate void createSeatDelegate();
     public class Server : IServer
     {
         #region create
@@ -71,18 +73,29 @@ namespace AwesomeServer
                     room.Rows = rows;
 
                     //generating seats
-                    for (int i = 1; i <= rows; i++)
+
+                    createSeatDelegate del = new createSeatDelegate(() =>
                     {
-                        for (int j = 1; j <= cols; j++)
+                        for (int i = 1; i <= rows; i++)
                         {
-                            Seat seat = new Seat();
-                            seat.Row = i;
-                            seat.Col = j;
-                            seat.Usable = true;
-                            seat.RoomId = room.Id;
-                            room.Seats.Add(seat);
+                            for (int j = 1; j <= cols; j++)
+                            {
+                                Seat seat = new Seat();
+                                seat.Row = i;
+                                seat.Col = j;
+                                seat.Usable = true;
+                                seat.RoomId = room.Id;
+                                room.Seats.Add(seat);
+                            }
                         }
-                    }
+                    });
+
+                    IAsyncResult result = del.BeginInvoke(new AsyncCallback((IAsyncResult async) =>
+                    {
+                        del.EndInvoke(async);
+                    }), "Success");
+
+
 
                     db.Rooms.InsertOnSubmit(room);
                     db.SubmitChanges();
@@ -216,7 +229,7 @@ namespace AwesomeServer
 
         public string updateRoom(int roomId, int cols, int rows)
         {
-            
+
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
                 string message = "The room was updated succesfully!";
@@ -229,6 +242,7 @@ namespace AwesomeServer
                     if (cols != 0)
                         obj.Cols = cols;
                     //TODO: AT UPDATE OF ROOM, MAKE NEW SEATS FOR THE WHOLE ROOM
+                    //TODO: MAX connections to database 3
                     Room room = db.Rooms.SingleOrDefault(r => r.Id == roomId);
                     for (int i = 1; i <= rows; i++)
                     {
@@ -242,7 +256,6 @@ namespace AwesomeServer
                             room.Seats.Add(seat);
                         }
                     }
-
 
                     db.SubmitChanges();
                 }
@@ -425,7 +438,7 @@ namespace AwesomeServer
             }
         }
 
-        public IList<Room> getAllRooms() //test
+        public IList<Room> getAllRooms()
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
@@ -706,7 +719,7 @@ namespace AwesomeServer
 
                     db.SubmitChanges();
                 }
-                
+
 
             }
             catch (Exception)

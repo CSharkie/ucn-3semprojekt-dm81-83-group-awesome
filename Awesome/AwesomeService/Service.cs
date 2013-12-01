@@ -7,8 +7,10 @@ using System.ServiceModel;
 using System.Text;
 using AwesomeServer;
 using System.Collections.ObjectModel;
+using System.Runtime.Remoting.Messaging;
 namespace AwesomeService
 {
+    public delegate IList<Seat> getSeatDelegate(int seatId,int roomId, int col, int row);
     public class Service : IService
     {
         Server server = new Server();
@@ -113,9 +115,19 @@ namespace AwesomeService
         }
         public Room getRoom(int roomId)
         {
-
+            
             var room = server.getRoom(roomId);
             Room returnObj = new Room(room.Id, room.Cols, room.Rows);
+
+            getSeatDelegate del = new getSeatDelegate(getSeat);
+
+            IAsyncResult result = del.BeginInvoke(0, roomId, 0, 0, new AsyncCallback((IAsyncResult async) =>
+            {
+                AsyncResult ar = (AsyncResult)async;
+                getSeatDelegate del2 = (getSeatDelegate)ar.AsyncDelegate;
+                IList<Seat> x = del2.EndInvoke(async);
+            }), "Success");
+
             returnObj.Seats = getSeat(0,roomId,0,0);
             return returnObj;
         }
@@ -124,13 +136,12 @@ namespace AwesomeService
         {
             var roomList = server.getAllRooms();
             IList<Room> returnObj = new List<Room>();
-            int i = 0;
             foreach (var item in roomList)
             {
-                Room room=getRoom(item.Id);
-                returnObj.Add(room);
-                i++;
-                returnObj[i].Seats = getSeat(0, item.Id, 0, 0);
+                var room = server.getRoom(item.Id);
+                Room r = new Room(room.Id, room.Cols, room.Rows);
+                r.Seats = getSeat(0, item.Id, 0, 0);
+                returnObj.Add(r);
             }
             return returnObj;
         }
