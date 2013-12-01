@@ -425,7 +425,7 @@ namespace AwesomeServer
             }
         }
 
-        public IList<Room> getAllRooms()
+        public IList<Room> getAllRooms() //test
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
