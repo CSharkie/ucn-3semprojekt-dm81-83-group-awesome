@@ -29,88 +29,88 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.removeTab = new System.Windows.Forms.TabControl();
+            this.roomTab = new System.Windows.Forms.TabPage();
+            this.movieTab = new System.Windows.Forms.TabPage();
+            this.reservationTab = new System.Windows.Forms.TabPage();
+            this.discountTab = new System.Windows.Forms.TabPage();
+            this.ticketTab = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.removeTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.tabControl1);
+            this.panel1.Controls.Add(this.removeTab);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(650, 460);
             this.panel1.TabIndex = 1;
             // 
-            // tabControl1
+            // removeTab
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(650, 460);
-            this.tabControl1.TabIndex = 0;
+            this.removeTab.Controls.Add(this.roomTab);
+            this.removeTab.Controls.Add(this.movieTab);
+            this.removeTab.Controls.Add(this.reservationTab);
+            this.removeTab.Controls.Add(this.discountTab);
+            this.removeTab.Controls.Add(this.ticketTab);
+            this.removeTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.removeTab.Location = new System.Drawing.Point(0, 0);
+            this.removeTab.Name = "removeTab";
+            this.removeTab.SelectedIndex = 0;
+            this.removeTab.Size = new System.Drawing.Size(650, 460);
+            this.removeTab.TabIndex = 0;
             // 
-            // tabPage1
+            // roomTab
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(642, 434);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Room";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.roomTab.Location = new System.Drawing.Point(4, 22);
+            this.roomTab.Name = "roomTab";
+            this.roomTab.Padding = new System.Windows.Forms.Padding(3);
+            this.roomTab.Size = new System.Drawing.Size(642, 434);
+            this.roomTab.TabIndex = 0;
+            this.roomTab.Text = "Room";
+            this.roomTab.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // movieTab
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(276, 235);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Movie";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.movieTab.Location = new System.Drawing.Point(4, 22);
+            this.movieTab.Name = "movieTab";
+            this.movieTab.Padding = new System.Windows.Forms.Padding(3);
+            this.movieTab.Size = new System.Drawing.Size(642, 434);
+            this.movieTab.TabIndex = 1;
+            this.movieTab.Text = "Movie";
+            this.movieTab.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // reservationTab
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(276, 235);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Reservation";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.reservationTab.Location = new System.Drawing.Point(4, 22);
+            this.reservationTab.Name = "reservationTab";
+            this.reservationTab.Padding = new System.Windows.Forms.Padding(3);
+            this.reservationTab.Size = new System.Drawing.Size(642, 434);
+            this.reservationTab.TabIndex = 2;
+            this.reservationTab.Text = "Reservation";
+            this.reservationTab.UseVisualStyleBackColor = true;
             // 
-            // tabPage4
+            // discountTab
             // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(276, 235);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Discount";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.discountTab.Location = new System.Drawing.Point(4, 22);
+            this.discountTab.Name = "discountTab";
+            this.discountTab.Padding = new System.Windows.Forms.Padding(3);
+            this.discountTab.Size = new System.Drawing.Size(642, 434);
+            this.discountTab.TabIndex = 3;
+            this.discountTab.Text = "Discount";
+            this.discountTab.UseVisualStyleBackColor = true;
             // 
-            // tabPage5
+            // ticketTab
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(276, 235);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Ticket";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.ticketTab.Location = new System.Drawing.Point(4, 22);
+            this.ticketTab.Name = "ticketTab";
+            this.ticketTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ticketTab.Size = new System.Drawing.Size(642, 434);
+            this.ticketTab.TabIndex = 4;
+            this.ticketTab.Text = "Ticket";
+            this.ticketTab.UseVisualStyleBackColor = true;
             // 
             // Remove
             // 
@@ -121,7 +121,7 @@
             this.Name = "Remove";
             this.Text = "Remove";
             this.panel1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.removeTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -129,11 +129,11 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabControl removeTab;
+        private System.Windows.Forms.TabPage roomTab;
+        private System.Windows.Forms.TabPage movieTab;
+        private System.Windows.Forms.TabPage reservationTab;
+        private System.Windows.Forms.TabPage discountTab;
+        private System.Windows.Forms.TabPage ticketTab;
     }
 }
