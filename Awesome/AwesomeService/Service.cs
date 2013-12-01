@@ -16,7 +16,6 @@ namespace AwesomeService
         #region create
         public string createReservation(string name, bool taken, DateTime dateReserved, int movieId, int seatCount)
         {
-
             return server.createReservation(name, taken, dateReserved, movieId, seatCount);
         }
         public string createMovie(string title, DateTime dateAndTime, int roomId)
@@ -38,6 +37,11 @@ namespace AwesomeService
         {
             return server.createDiscount(dPercent);
         }
+
+        //public string createSeat(int col, int row, bool usable, int roomId)
+        //{
+        //    return server.createSeat(col, row, usable, roomId);
+        //}
         #endregion
 
         #region update
@@ -112,9 +116,10 @@ namespace AwesomeService
 
             var room = server.getRoom(roomId);
             Room returnObj = new Room(room.Id, room.Cols, room.Rows);
-
+            returnObj.Seats = getSeat(0,roomId,0,0);
             return returnObj;
         }
+       
         public IList<Room> getAllRooms()
         {
             var roomList = server.getAllRooms();
