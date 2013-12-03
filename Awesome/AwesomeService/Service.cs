@@ -250,6 +250,25 @@ namespace AwesomeService
             //return server.getAdjSeat(noOfSeats, roomId);
         }
         public string adj2(int noOfSeats, int roomId) { return server.adj2(noOfSeats, roomId); }
+        public IList<Seat> getAdjSeatSingleThreadV2(int noOfSeats, int roomId)
+        {
+            var seatList = server.getAdjSeatSingleThreadV2(noOfSeats, roomId);
+            IList<Seat> returnObj = new List<Seat>();
+            foreach (var item in seatList)
+            {
+                returnObj.Add(new Seat(
+                    item.Id,
+                    item.Col,
+                    item.Row,
+                    item.Usable,
+                    item.RoomId,
+                    item.ReservationId
+                    ));
+            }
+            return returnObj;
+            //return server.getAdjSeat(noOfSeats, roomId);
+        }
+
         public bool emptyRoom(int roomId)
         {
             return server.emptyRoom(roomId);
