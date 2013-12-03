@@ -716,9 +716,6 @@ namespace AwesomeServer
             int rows = room.Rows;
             IList<Seat> adjSeats = new List<Seat>();  //this is being returned
             IList<Seat> permSeats = new List<Seat>();
-            Stopwatch s = new Stopwatch();
-            s.Reset();
-            s.Start();
             for (int i = 1; i <= rows; i++) //i = rows
             {
                 IList<Seat> seats = getSeat(0, roomId, 0, i, 0);
@@ -729,11 +726,9 @@ namespace AwesomeServer
                         permSeats.Add(seats[j]);
                         if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
                         {
-                            int k = 0;
                             foreach (Seat seat in permSeats)
                             {
-                                adjSeats.Add(permSeats[k]);
-                                k++;
+                                adjSeats.Add(seat);
                             }
                             permSeats.Clear();
                         }
@@ -745,7 +740,6 @@ namespace AwesomeServer
                 }
                 permSeats.Clear();
             }
-            s.Stop();
             return adjSeats;
         }
 
@@ -769,11 +763,9 @@ namespace AwesomeServer
                             permSeats.Add(seats[j]);
                             if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
                             {
-                                int k = 0;
                                 foreach (Seat seat in permSeats)
                                 {
-                                    adjSeats.Add(permSeats[k]);
-                                    k++;
+                                    adjSeats.Add(seat);
                                 }
                                 permSeats.Clear();
                             }
@@ -785,35 +777,7 @@ namespace AwesomeServer
                     }
                     permSeats.Clear();
                 }));
-                //threads[i].Name = String.Format("Working Thread: {0}", i);
             }
-            //for (int i = 1; i <= rows; i++) //i = rows
-            //{
-
-            //                    IList<Seat> seats = getSeat(0, roomId, 0, i, 0);
-            //                    for (int j = 0; j <= room.Cols - 1; j++)  //j= cols
-            //                    {
-            //                        if (seats[j].Usable == true)
-            //                        {
-            //                            permSeats.Add(seats[j]);
-            //                            if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
-            //                            {
-            //                                int k = 0;
-            //                                foreach (Seat seat in permSeats)
-            //                                {
-            //                                    adjSeats.Add(permSeats[k]);
-            //                                    k++;
-            //                                }
-            //                                permSeats.Clear();
-            //                            }
-            //                        }
-            //                        else
-            //                        {
-            //                            permSeats.Clear();
-            //                        }
-            //                    }
-            //                    permSeats.Clear();
-            //}
 
             return adjSeats;
         }
@@ -824,15 +788,63 @@ namespace AwesomeServer
             Stopwatch s = new Stopwatch();
             s.Reset();
             s.Start();
-            getAdjSeatSingleThread(noOfSeats, roomId);
+            getAdjSeatSingleThreadV2(noOfSeats, roomId);
             s.Stop();
-            message = "Single Thread: " + s.ElapsedMilliseconds.ToString() + "Multi Thread: ";
-            s.Reset();
-            s.Start();
-            getAdjSeatMultiThread(noOfSeats, roomId);
-            s.Stop();
-            message += s.ElapsedMilliseconds.ToString();
+            message = "Single Thread: " + s.ElapsedMilliseconds.ToString() + " Multi Thread: ";
+            //s.Reset();
+            //s.Start();
+            //getAdjSeatMultiThread(noOfSeats, roomId);
+            //s.Stop();
+            //message += s.ElapsedMilliseconds.ToString();
             return message;
+        }
+
+        public IList<Seat> getAdjSeatSingleThreadV2(int noOfSeats, int roomId)
+        {
+            Room room = getRoom(roomId);
+            int rows = room.Rows;
+            IList<Seat> adjSeats = new List<Seat>();  //this is being returned
+            IList<Seat> permSeats = new List<Seat>();
+
+            for (int i = 1; i <= rows; i++) //i = rows
+            {
+                IList<Seat> seats = (List<Seat>)getSeat(0, roomId, 0, i, 0);
+                //for (int j = noOfSeats-1; j+noOfSeats <= room.Cols - 1; j++)  //j= cols
+                int j = noOfSeats - 1;
+                while (j < room.Cols)
+                {
+                    if (seats[j].Usable)
+                    {
+                        for (int k = j - noOfSeats + 1; k <= j; k++)
+                        {
+                            if (seats[k].Usable)
+                            {
+                                permSeats.Add(seats[k]);
+                            }
+                            else
+                            {
+                                j = k + noOfSeats;
+                                break;
+                            }
+                        }
+                        if (permSeats.Count >= noOfSeats)
+                        {
+                            foreach (Seat seat in permSeats)
+                            {
+                                adjSeats.Add(seat);
+                            }
+                            j += noOfSeats;
+                        }
+                        permSeats.Clear();
+                    }
+                    else
+                    {
+                        j += noOfSeats;
+                    }
+                }
+
+            }
+            return adjSeats;
         }
 
         public bool emptyRoom(int roomId)
