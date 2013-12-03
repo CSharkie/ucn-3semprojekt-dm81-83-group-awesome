@@ -47,7 +47,7 @@ namespace AwesomeServer
 
         #region methods
         IList<Seat> getAdjSeatSingleThread(int noOfSeats, int roomId);
-        string adj2(int noOfSeats, int roomId);
+        IList<string> adj2(int noOfSeats, int roomId);
         IList<Seat> getAdjSeatSingleThreadV2(int noOfSeats, int roomId);
         IList<Seat> getAdjSeatMultiThreadV2(int noOfSeats, int roomId);
         bool emptyRoom(int roomId);

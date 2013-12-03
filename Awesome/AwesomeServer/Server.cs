@@ -782,21 +782,34 @@ namespace AwesomeServer
             return adjSeats;
         }
 
-        public string adj2(int noOfSeats, int roomId)
+        public IList<string> adj2(int noOfSeats, int roomId)
         {
-            string message = "";
+            IList<string> messages = new List<string>();
             Stopwatch s = new Stopwatch();
+            s.Reset();
+            s.Start();
+            getAdjSeatSingleThread(noOfSeats, roomId);
+            s.Stop();
+            Thread.Sleep(500);
+            messages.Add(s.ElapsedMilliseconds.ToString());
+            s.Reset();
+            s.Start();
+            getAdjSeatMultiThread(noOfSeats, roomId);
+            s.Stop();
+            Thread.Sleep(500);
+            messages.Add(s.ElapsedMilliseconds.ToString());
             s.Reset();
             s.Start();
             getAdjSeatSingleThreadV2(noOfSeats, roomId);
             s.Stop();
-            message = "Single Thread: " + s.ElapsedMilliseconds.ToString() + " Multi Thread: ";
+            Thread.Sleep(500);
+            messages.Add(s.ElapsedMilliseconds.ToString());
             s.Reset();
             s.Start();
             getAdjSeatMultiThreadV2(noOfSeats, roomId);
             s.Stop();
-            message += s.ElapsedMilliseconds.ToString();
-            return message;
+            messages.Add(s.ElapsedMilliseconds.ToString());
+            return messages;
         }
 
         public IList<Seat> getAdjSeatSingleThreadV2(int noOfSeats, int roomId)

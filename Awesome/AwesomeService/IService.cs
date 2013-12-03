@@ -81,7 +81,7 @@ namespace AwesomeService
         [OperationContract]
         IList<Seat> getAdjSeatMultiThreadV2(int noOfSeats, int roomId);
         [OperationContract]
-        string adj2(int noOfSeats, int roomId);
+        IList<string> adj2(int noOfSeats, int roomId);
         [OperationContract]
         bool emptyRoom(int roomId);
         #endregion

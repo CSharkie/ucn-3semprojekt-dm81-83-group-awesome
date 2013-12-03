@@ -249,7 +249,7 @@ namespace AwesomeService
             return returnObj;
             //return server.getAdjSeat(noOfSeats, roomId);
         }
-        public string adj2(int noOfSeats, int roomId) { return server.adj2(noOfSeats, roomId); }
+        public IList<string> adj2(int noOfSeats, int roomId) { return server.adj2(noOfSeats, roomId); }
         public IList<Seat> getAdjSeatSingleThreadV2(int noOfSeats, int roomId)
         {
             var seatList = server.getAdjSeatSingleThreadV2(noOfSeats, roomId);
