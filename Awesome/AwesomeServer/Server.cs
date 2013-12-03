@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Linq;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AwesomeServer
@@ -130,7 +132,7 @@ namespace AwesomeServer
             }
         }
 
-     
+
 
         public string createTicket(decimal standard, int reservationId, int discountId, int col, int row)
         {
@@ -708,10 +710,131 @@ namespace AwesomeServer
         #endregion
 
         #region methods
-        //public IList<Seat> getAdjSeat(int noOfSeats)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public IList<Seat> getAdjSeatSingleThread(int noOfSeats, int roomId)
+        {
+            Room room = getRoom(roomId);
+            int rows = room.Rows;
+            IList<Seat> adjSeats = new List<Seat>();  //this is being returned
+            IList<Seat> permSeats = new List<Seat>();
+            Stopwatch s = new Stopwatch();
+            s.Reset();
+            s.Start();
+            for (int i = 1; i <= rows; i++) //i = rows
+            {
+                IList<Seat> seats = getSeat(0, roomId, 0, i, 0);
+                for (int j = 0; j <= room.Cols - 1; j++)  //j= cols
+                {
+                    if (seats[j].Usable == true)
+                    {
+                        permSeats.Add(seats[j]);
+                        if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
+                        {
+                            int k = 0;
+                            foreach (Seat seat in permSeats)
+                            {
+                                adjSeats.Add(permSeats[k]);
+                                k++;
+                            }
+                            permSeats.Clear();
+                        }
+                    }
+                    else
+                    {
+                        permSeats.Clear();
+                    }
+                }
+                permSeats.Clear();
+            }
+            s.Stop();
+            return adjSeats;
+        }
+
+        public IList<Seat> getAdjSeatMultiThread(int noOfSeats, int roomId)
+        {
+            Room room = getRoom(roomId);
+            int rows = room.Rows;
+            IList<Seat> adjSeats = new List<Seat>();  //this is being returned
+            IList<Seat> permSeats = new List<Seat>();
+            Thread[] threads = new Thread[rows];
+
+            for (int i = 0; i < rows; i++)
+            {
+                threads[i] = new Thread(new ThreadStart(() =>
+                {
+                    IList<Seat> seats = getSeat(0, roomId, 0, i, 0);
+                    for (int j = 0; j <= room.Cols - 1; j++)  //j= cols
+                    {
+                        if (seats[j].Usable == true)
+                        {
+                            permSeats.Add(seats[j]);
+                            if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
+                            {
+                                int k = 0;
+                                foreach (Seat seat in permSeats)
+                                {
+                                    adjSeats.Add(permSeats[k]);
+                                    k++;
+                                }
+                                permSeats.Clear();
+                            }
+                        }
+                        else
+                        {
+                            permSeats.Clear();
+                        }
+                    }
+                    permSeats.Clear();
+                }));
+                //threads[i].Name = String.Format("Working Thread: {0}", i);
+            }
+            //for (int i = 1; i <= rows; i++) //i = rows
+            //{
+
+            //                    IList<Seat> seats = getSeat(0, roomId, 0, i, 0);
+            //                    for (int j = 0; j <= room.Cols - 1; j++)  //j= cols
+            //                    {
+            //                        if (seats[j].Usable == true)
+            //                        {
+            //                            permSeats.Add(seats[j]);
+            //                            if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
+            //                            {
+            //                                int k = 0;
+            //                                foreach (Seat seat in permSeats)
+            //                                {
+            //                                    adjSeats.Add(permSeats[k]);
+            //                                    k++;
+            //                                }
+            //                                permSeats.Clear();
+            //                            }
+            //                        }
+            //                        else
+            //                        {
+            //                            permSeats.Clear();
+            //                        }
+            //                    }
+            //                    permSeats.Clear();
+            //}
+
+            return adjSeats;
+        }
+
+        public string adj2(int noOfSeats, int roomId)
+        {
+            string message = "";
+            Stopwatch s = new Stopwatch();
+            s.Reset();
+            s.Start();
+            getAdjSeatSingleThread(noOfSeats, roomId);
+            s.Stop();
+            message = "Single Thread: " + s.ElapsedMilliseconds.ToString() + "Multi Thread: ";
+            s.Reset();
+            s.Start();
+            getAdjSeatMultiThread(noOfSeats, roomId);
+            s.Stop();
+            message += s.ElapsedMilliseconds.ToString();
+            return message;
+        }
+
         public bool emptyRoom(int roomId)
         {
             bool success = true;
@@ -745,7 +868,7 @@ namespace AwesomeServer
                 try
                 {
                     var obj = db.Tickets.Where(t => t.ReservationId == t.ReservationId);
-                    
+
 
                     db.SubmitChanges();
                 }

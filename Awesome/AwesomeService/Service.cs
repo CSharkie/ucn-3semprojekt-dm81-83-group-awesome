@@ -213,10 +213,43 @@ namespace AwesomeService
         #endregion
 
         #region methods
-        //public IList<Seat> getAdjSeat(int noOfSeats)
-        //{
-        //    return server.getAdjSeat(noOfSeats);
-        //}
+        public IList<Seat> getAdjSeatSingleThread(int noOfSeats, int roomId)
+        {
+            var seatList = server.getAdjSeatSingleThread(noOfSeats, roomId);
+            IList<Seat> returnObj = new List<Seat>();
+            foreach (var item in seatList)
+            {
+                returnObj.Add(new Seat(
+                    item.Id,
+                    item.Col,
+                    item.Row,
+                    item.Usable,
+                    item.RoomId,
+                    item.ReservationId
+                    ));
+            }
+            return returnObj;
+            //return server.getAdjSeat(noOfSeats, roomId);
+        }
+        public IList<Seat> getAdjSeatMultiThread(int noOfSeats, int roomId)
+        {
+            var seatList = server.getAdjSeatSingleThread(noOfSeats, roomId);
+            IList<Seat> returnObj = new List<Seat>();
+            foreach (var item in seatList)
+            {
+                returnObj.Add(new Seat(
+                    item.Id,
+                    item.Col,
+                    item.Row,
+                    item.Usable,
+                    item.RoomId,
+                    item.ReservationId
+                    ));
+            }
+            return returnObj;
+            //return server.getAdjSeat(noOfSeats, roomId);
+        }
+        public string adj2(int noOfSeats, int roomId) { return server.adj2(noOfSeats, roomId); }
         public bool emptyRoom(int roomId)
         {
             return server.emptyRoom(roomId);

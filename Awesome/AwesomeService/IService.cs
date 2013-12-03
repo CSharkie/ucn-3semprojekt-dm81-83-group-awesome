@@ -72,8 +72,12 @@ namespace AwesomeService
         #endregion
 
         #region methods
-        //[OperationContract]
-        //IList<Seat> getAdjSeat(int noOfSeats);
+        [OperationContract]
+        IList<Seat> getAdjSeatSingleThread(int noOfSeats, int roomId);
+        [OperationContract]
+        IList<Seat> getAdjSeatMultiThread(int noOfSeats, int roomId);
+        [OperationContract]
+        string adj2(int noOfSeats, int roomId);
         [OperationContract]
         bool emptyRoom(int roomId);
         #endregion
