@@ -791,11 +791,11 @@ namespace AwesomeServer
             getAdjSeatSingleThreadV2(noOfSeats, roomId);
             s.Stop();
             message = "Single Thread: " + s.ElapsedMilliseconds.ToString() + " Multi Thread: ";
-            //s.Reset();
-            //s.Start();
-            //getAdjSeatMultiThread(noOfSeats, roomId);
-            //s.Stop();
-            //message += s.ElapsedMilliseconds.ToString();
+            s.Reset();
+            s.Start();
+            getAdjSeatMultiThreadV2(noOfSeats, roomId);
+            s.Stop();
+            message += s.ElapsedMilliseconds.ToString();
             return message;
         }
 
@@ -846,6 +846,60 @@ namespace AwesomeServer
             }
             return adjSeats;
         }
+
+        public IList<Seat> getAdjSeatMultiThreadV2(int noOfSeats, int roomId)
+        {
+            Room room = getRoom(roomId);
+            int rows = room.Rows;
+            IList<Seat> adjSeats = new List<Seat>();  //this is being returned
+            IList<Seat> permSeats = new List<Seat>();
+
+            Thread[] threads = new Thread[rows];
+
+            for (int i = 0; i < rows; i++)
+            {
+                threads[i] = new Thread(new ThreadStart(() =>
+                {
+                    IList<Seat> seats = (List<Seat>)getSeat(0, roomId, 0, i, 0);
+                    //for (int j = noOfSeats-1; j+noOfSeats <= room.Cols - 1; j++)  //j= cols
+                    int j = noOfSeats - 1;
+                    while (j < room.Cols)
+                    {
+                        if (seats[j].Usable)
+                        {
+                            for (int k = j - noOfSeats + 1; k <= j; k++)
+                            {
+                                if (seats[k].Usable)
+                                {
+                                    permSeats.Add(seats[k]);
+                                }
+                                else
+                                {
+                                    j = k + noOfSeats;
+                                    break;
+                                }
+                            }
+                            if (permSeats.Count >= noOfSeats)
+                            {
+                                foreach (Seat seat in permSeats)
+                                {
+                                    adjSeats.Add(seat);
+                                }
+                                j += noOfSeats;
+                            }
+                            permSeats.Clear();
+                        }
+                        else
+                        {
+                            j += noOfSeats;
+                        }
+                    }
+                }));
+
+            }
+            return adjSeats;
+        }
+
 
         public bool emptyRoom(int roomId)
         {
