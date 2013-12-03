@@ -36,12 +36,14 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.seats_btn = new System.Windows.Forms.Button();
             this.menuPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuPanel
             // 
+            this.menuPanel.Controls.Add(this.seats_btn);
             this.menuPanel.Controls.Add(this.remove);
             this.menuPanel.Controls.Add(this.update);
             this.menuPanel.Controls.Add(this.create);
@@ -114,6 +116,16 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             // 
+            // seats_btn
+            // 
+            this.seats_btn.Location = new System.Drawing.Point(255, 232);
+            this.seats_btn.Name = "seats_btn";
+            this.seats_btn.Size = new System.Drawing.Size(75, 23);
+            this.seats_btn.TabIndex = 5;
+            this.seats_btn.Text = "Seats";
+            this.seats_btn.UseVisualStyleBackColor = true;
+            this.seats_btn.Click += new System.EventHandler(this.seats_btn_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -140,5 +152,6 @@
         private System.Windows.Forms.Button update;
         private System.Windows.Forms.Button create;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Button seats_btn;
     }
 }
