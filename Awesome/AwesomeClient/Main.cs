@@ -45,5 +45,11 @@ namespace AwesomeClient
         {
             this.Close();
         }
+
+        private void seats_btn_Click(object sender, EventArgs e)
+        {
+            Seats form = new Seats();
+            form.ShowDialog();
+        }
     }
 }
