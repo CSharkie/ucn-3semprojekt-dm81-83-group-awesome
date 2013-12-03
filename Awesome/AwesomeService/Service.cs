@@ -233,7 +233,7 @@ namespace AwesomeService
         }
         public IList<Seat> getAdjSeatMultiThread(int noOfSeats, int roomId)
         {
-            var seatList = server.getAdjSeatSingleThread(noOfSeats, roomId);
+            var seatList = server.getAdjSeatMultiThread(noOfSeats, roomId);
             IList<Seat> returnObj = new List<Seat>();
             foreach (var item in seatList)
             {
@@ -271,7 +271,7 @@ namespace AwesomeService
 
         public IList<Seat> getAdjSeatMultiThreadV2(int noOfSeats, int roomId)
         {
-            var seatList = server.getAdjSeatSingleThreadV2(noOfSeats, roomId);
+            var seatList = server.getAdjSeatMultiThreadV2(noOfSeats, roomId);
             IList<Seat> returnObj = new List<Seat>();
             foreach (var item in seatList)
             {
