@@ -749,16 +749,14 @@ namespace AwesomeServer
             int rows = room.Rows;
             IList<Seat> adjSeats = new List<Seat>();  //this is being returned
             IList<Seat> permSeats = new List<Seat>();
-            int tCount = rows / 4;
-            //Thread[] threads = new Thread[tCount];
+            Thread[] threads = new Thread[rows];
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 1; i <= rows; i++)
             {
-                if (int.Parse((i / 4).ToString()) > 0)
+                IList<Seat> seats = getSeat(0, roomId, 0, i, 0);
+                threads[i - 1] = new Thread(new ThreadStart(() =>
                 {
-                    Thread thread = new Thread(new ThreadStart(() =>
-                    {
-                        IList<Seat> seats = getSeat(0, roomId, 0, i, 0);
+                    if (seats.Count > 0)
                         for (int j = 0; j <= room.Cols - 1; j++)  //j= cols
                         {
                             if (seats[j].Usable == true)
@@ -778,9 +776,13 @@ namespace AwesomeServer
                                 permSeats.Clear();
                             }
                         }
-                        permSeats.Clear();
-                    }));
-                }
+                    permSeats.Clear();
+                }));
+            }
+            foreach (Thread t in threads)
+            {
+                t.Start();
+                t.Join();
             }
             return adjSeats;
         }
@@ -791,16 +793,16 @@ namespace AwesomeServer
             Stopwatch s = new Stopwatch();
             s.Reset();
             s.Start();
-            //getAdjSeatSingleThread(noOfSeats, roomId);
-            //s.Stop();
+            getAdjSeatSingleThread(noOfSeats, roomId);
+            s.Stop();
             //Thread.Sleep(500);
-            //messages.Add(s.ElapsedMilliseconds.ToString());
-            //s.Reset();
-            //s.Start();
-            //getAdjSeatMultiThread(noOfSeats, roomId);
-            //s.Stop();
+            messages.Add(s.ElapsedMilliseconds.ToString());
+            s.Reset();
+            s.Start();
+            getAdjSeatMultiThread(noOfSeats, roomId);
+            s.Stop();
             //Thread.Sleep(500);
-            //messages.Add(s.ElapsedMilliseconds.ToString());
+            messages.Add(s.ElapsedMilliseconds.ToString());
             //s.Reset();
             //s.Start();
             //getAdjSeatSingleThreadV2(noOfSeats, roomId);
@@ -813,9 +815,9 @@ namespace AwesomeServer
             //s.Stop();
             //messages.Add(s.ElapsedMilliseconds.ToString());
             //return messages;
-            messages.Add(threadingTest());
-            s.Stop();
-            messages.Add(s.ElapsedMilliseconds.ToString());
+            //messages.Add(threadingTest());
+            //s.Stop();
+            //messages.Add(s.ElapsedMilliseconds.ToString());
 
             return messages;
         }
@@ -879,7 +881,7 @@ namespace AwesomeServer
 
             for (int i = 0; i < rows; i++)
             {
-                threads[i] = new Thread(new ThreadStart(() =>
+                Thread thread = new Thread(() =>
                 {
                     IList<Seat> seats = (List<Seat>)getSeat(0, roomId, 0, i, 0);
                     //for (int j = noOfSeats-1; j+noOfSeats <= room.Cols - 1; j++)  //j= cols
@@ -915,7 +917,14 @@ namespace AwesomeServer
                             j += noOfSeats;
                         }
                     }
-                }));
+                });
+                threads[i] = thread;
+                threads[i].Start();
+
+            }
+            foreach (Thread t in threads)
+            {
+                t.Join();
             }
             return adjSeats;
         }
@@ -928,7 +937,7 @@ namespace AwesomeServer
             Thread thread = new Thread(() => { message = "ASD"; });
             thread.Start();
             Thread.Sleep(2000);
-            
+
 
             return message;
         }
