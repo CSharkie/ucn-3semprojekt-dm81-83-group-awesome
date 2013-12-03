@@ -46,7 +46,8 @@ namespace AwesomeServer
         #endregion
 
         #region methods
-        //IList<Seat> getAdjSeat(int noOfSeats);
+        IList<Seat> getAdjSeatSingleThread(int noOfSeats, int roomId);
+        string adj2(int noOfSeats, int roomId);
         bool emptyRoom(int roomId);
         string takeTickets(int reservationId);
         #endregion
