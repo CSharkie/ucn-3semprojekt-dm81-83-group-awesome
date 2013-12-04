@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.seats_panel = new System.Windows.Forms.Panel();
-            this.seats_pictureBox = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.getRoom_btn = new System.Windows.Forms.Button();
             this.txt_roomId = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.seats_pictureBox = new System.Windows.Forms.PictureBox();
             this.seats_panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.seats_pictureBox)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.seats_pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // seats_panel
@@ -49,13 +49,25 @@
             this.seats_panel.Size = new System.Drawing.Size(612, 438);
             this.seats_panel.TabIndex = 0;
             // 
-            // seats_pictureBox
+            // panel1
             // 
-            this.seats_pictureBox.Location = new System.Drawing.Point(0, 32);
-            this.seats_pictureBox.Name = "seats_pictureBox";
-            this.seats_pictureBox.Size = new System.Drawing.Size(612, 406);
-            this.seats_pictureBox.TabIndex = 0;
-            this.seats_pictureBox.TabStop = false;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.getRoom_btn);
+            this.panel1.Controls.Add(this.txt_roomId);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(612, 32);
+            this.panel1.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Room Id:";
             // 
             // getRoom_btn
             // 
@@ -74,25 +86,13 @@
             this.txt_roomId.Size = new System.Drawing.Size(100, 20);
             this.txt_roomId.TabIndex = 2;
             // 
-            // label1
+            // seats_pictureBox
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Room Id:";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.getRoom_btn);
-            this.panel1.Controls.Add(this.txt_roomId);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(612, 32);
-            this.panel1.TabIndex = 4;
+            this.seats_pictureBox.Location = new System.Drawing.Point(0, 32);
+            this.seats_pictureBox.Name = "seats_pictureBox";
+            this.seats_pictureBox.Size = new System.Drawing.Size(612, 406);
+            this.seats_pictureBox.TabIndex = 0;
+            this.seats_pictureBox.TabStop = false;
             // 
             // Seats
             // 
@@ -103,9 +103,9 @@
             this.Name = "Seats";
             this.Text = "Seats";
             this.seats_panel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.seats_pictureBox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.seats_pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
