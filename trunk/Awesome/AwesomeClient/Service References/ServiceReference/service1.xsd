@@ -361,6 +361,96 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getAdjSeatSingleThread">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
+        <xs:element minOccurs="0" name="roomId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAdjSeatSingleThreadResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getAdjSeatSingleThreadResult" nillable="true" type="q9:ArrayOfSeat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAdjSeatMultiThread">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
+        <xs:element minOccurs="0" name="roomId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAdjSeatMultiThreadResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getAdjSeatMultiThreadResult" nillable="true" type="q10:ArrayOfSeat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAdjSeatParallel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
+        <xs:element minOccurs="0" name="roomId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAdjSeatParallelResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getAdjSeatParallelResult" nillable="true" type="q11:ArrayOfSeat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAdjSeatSingleThreadV2">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
+        <xs:element minOccurs="0" name="roomId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAdjSeatSingleThreadV2Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getAdjSeatSingleThreadV2Result" nillable="true" type="q12:ArrayOfSeat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAdjSeatMultiThreadV2">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
+        <xs:element minOccurs="0" name="roomId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAdjSeatMultiThreadV2Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getAdjSeatMultiThreadV2Result" nillable="true" type="q13:ArrayOfSeat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="adj2">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
+        <xs:element minOccurs="0" name="roomId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="adj2Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="adj2Result" nillable="true" type="q14:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="emptyRoom">
     <xs:complexType>
       <xs:sequence>

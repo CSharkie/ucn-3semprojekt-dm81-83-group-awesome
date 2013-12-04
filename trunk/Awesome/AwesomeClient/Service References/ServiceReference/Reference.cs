@@ -905,6 +905,42 @@ namespace AwesomeClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/removeDiscount", ReplyAction="http://tempuri.org/IService/removeDiscountResponse")]
         System.Threading.Tasks.Task<string> removeDiscountAsync(int discountId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeatSingleThread", ReplyAction="http://tempuri.org/IService/getAdjSeatSingleThreadResponse")]
+        AwesomeClient.ServiceReference.Seat[] getAdjSeatSingleThread(int noOfSeats, int roomId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeatSingleThread", ReplyAction="http://tempuri.org/IService/getAdjSeatSingleThreadResponse")]
+        System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getAdjSeatSingleThreadAsync(int noOfSeats, int roomId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeatMultiThread", ReplyAction="http://tempuri.org/IService/getAdjSeatMultiThreadResponse")]
+        AwesomeClient.ServiceReference.Seat[] getAdjSeatMultiThread(int noOfSeats, int roomId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeatMultiThread", ReplyAction="http://tempuri.org/IService/getAdjSeatMultiThreadResponse")]
+        System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getAdjSeatMultiThreadAsync(int noOfSeats, int roomId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeatParallel", ReplyAction="http://tempuri.org/IService/getAdjSeatParallelResponse")]
+        AwesomeClient.ServiceReference.Seat[] getAdjSeatParallel(int noOfSeats, int roomId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeatParallel", ReplyAction="http://tempuri.org/IService/getAdjSeatParallelResponse")]
+        System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getAdjSeatParallelAsync(int noOfSeats, int roomId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeatSingleThreadV2", ReplyAction="http://tempuri.org/IService/getAdjSeatSingleThreadV2Response")]
+        AwesomeClient.ServiceReference.Seat[] getAdjSeatSingleThreadV2(int noOfSeats, int roomId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeatSingleThreadV2", ReplyAction="http://tempuri.org/IService/getAdjSeatSingleThreadV2Response")]
+        System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getAdjSeatSingleThreadV2Async(int noOfSeats, int roomId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeatMultiThreadV2", ReplyAction="http://tempuri.org/IService/getAdjSeatMultiThreadV2Response")]
+        AwesomeClient.ServiceReference.Seat[] getAdjSeatMultiThreadV2(int noOfSeats, int roomId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAdjSeatMultiThreadV2", ReplyAction="http://tempuri.org/IService/getAdjSeatMultiThreadV2Response")]
+        System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getAdjSeatMultiThreadV2Async(int noOfSeats, int roomId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/adj2", ReplyAction="http://tempuri.org/IService/adj2Response")]
+        string[] adj2(int noOfSeats, int roomId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/adj2", ReplyAction="http://tempuri.org/IService/adj2Response")]
+        System.Threading.Tasks.Task<string[]> adj2Async(int noOfSeats, int roomId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/emptyRoom", ReplyAction="http://tempuri.org/IService/emptyRoomResponse")]
         bool emptyRoom(int roomId);
         
@@ -1121,6 +1157,54 @@ namespace AwesomeClient.ServiceReference {
         
         public System.Threading.Tasks.Task<string> removeDiscountAsync(int discountId) {
             return base.Channel.removeDiscountAsync(discountId);
+        }
+        
+        public AwesomeClient.ServiceReference.Seat[] getAdjSeatSingleThread(int noOfSeats, int roomId) {
+            return base.Channel.getAdjSeatSingleThread(noOfSeats, roomId);
+        }
+        
+        public System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getAdjSeatSingleThreadAsync(int noOfSeats, int roomId) {
+            return base.Channel.getAdjSeatSingleThreadAsync(noOfSeats, roomId);
+        }
+        
+        public AwesomeClient.ServiceReference.Seat[] getAdjSeatMultiThread(int noOfSeats, int roomId) {
+            return base.Channel.getAdjSeatMultiThread(noOfSeats, roomId);
+        }
+        
+        public System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getAdjSeatMultiThreadAsync(int noOfSeats, int roomId) {
+            return base.Channel.getAdjSeatMultiThreadAsync(noOfSeats, roomId);
+        }
+        
+        public AwesomeClient.ServiceReference.Seat[] getAdjSeatParallel(int noOfSeats, int roomId) {
+            return base.Channel.getAdjSeatParallel(noOfSeats, roomId);
+        }
+        
+        public System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getAdjSeatParallelAsync(int noOfSeats, int roomId) {
+            return base.Channel.getAdjSeatParallelAsync(noOfSeats, roomId);
+        }
+        
+        public AwesomeClient.ServiceReference.Seat[] getAdjSeatSingleThreadV2(int noOfSeats, int roomId) {
+            return base.Channel.getAdjSeatSingleThreadV2(noOfSeats, roomId);
+        }
+        
+        public System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getAdjSeatSingleThreadV2Async(int noOfSeats, int roomId) {
+            return base.Channel.getAdjSeatSingleThreadV2Async(noOfSeats, roomId);
+        }
+        
+        public AwesomeClient.ServiceReference.Seat[] getAdjSeatMultiThreadV2(int noOfSeats, int roomId) {
+            return base.Channel.getAdjSeatMultiThreadV2(noOfSeats, roomId);
+        }
+        
+        public System.Threading.Tasks.Task<AwesomeClient.ServiceReference.Seat[]> getAdjSeatMultiThreadV2Async(int noOfSeats, int roomId) {
+            return base.Channel.getAdjSeatMultiThreadV2Async(noOfSeats, roomId);
+        }
+        
+        public string[] adj2(int noOfSeats, int roomId) {
+            return base.Channel.adj2(noOfSeats, roomId);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> adj2Async(int noOfSeats, int roomId) {
+            return base.Channel.adj2Async(noOfSeats, roomId);
         }
         
         public bool emptyRoom(int roomId) {
