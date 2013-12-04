@@ -69,7 +69,7 @@ CREATE TABLE [dbo].[ReservedSeats]
 	[MovieId] int NOT NULL,
 	FOREIGN KEY (ReservationId) REFERENCES Reservations(Id) ON DELETE CASCADE,
 	FOREIGN KEY (SeatId) REFERENCES Seats(Id) ON DELETE CASCADE,
-	FOREIGN KEY (MovieId) REFERENCES Movies(Id) ON DELETE CASCADE
+	FOREIGN KEY (MovieId) REFERENCES Movies(Id)
 )
 CREATE TABLE [dbo].[Tickets]
 (
