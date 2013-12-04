@@ -36,7 +36,7 @@ CREATE TABLE [dbo].[Movies]
 	[Title] varchar(100) NOT NULL,
 	[DateAndTime] datetime NOT NULL,
 	[RoomId] int NOT NULL,
-	FOREIGN KEY (RoomId) REFERENCES Rooms(Id),
+	FOREIGN KEY (RoomId) REFERENCES Rooms(Id) ON UPDATE CASCADE,
 	PRIMARY KEY(Id)
 )
 CREATE TABLE [dbo].[Reservations]
@@ -47,7 +47,7 @@ CREATE TABLE [dbo].[Reservations]
 	[DateReserved] datetime NOT NULL DEFAULT(GETDATE()),
 	[MovieId] int NOT NULL,
 	[SeatCount] int NOT NULL,
-	FOREIGN KEY (MovieId) REFERENCES Movies(Id),
+	FOREIGN KEY (MovieId) REFERENCES Movies(Id) ON DELETE CASCADE,
 	PRIMARY KEY (Id)
 )
 CREATE TABLE [dbo].[Seats]
@@ -58,8 +58,8 @@ CREATE TABLE [dbo].[Seats]
 	[Usable] bit NOT NULL DEFAULT(0),
 	[RoomId] int NOT NULL,
 	[ReservationId] int NULL,
-	FOREIGN KEY (RoomId) REFERENCES Rooms(Id),
-	FOREIGN KEY (ReservationId) REFERENCES Reservations(Id),
+	FOREIGN KEY (RoomId) REFERENCES Rooms(Id) ON DELETE CASCADE,
+	FOREIGN KEY (ReservationId) REFERENCES Reservations(Id) ON UPDATE CASCADE,
 	PRIMARY KEY (Id)
 )
 CREATE TABLE [dbo].[Tickets]
@@ -72,8 +72,8 @@ CREATE TABLE [dbo].[Tickets]
 	[DiscountId] int NULL,
 	[Col] int NOT NULL,
 	[Row] int NOT NULL,
-	FOREIGN KEY(ReservationId) References Reservations(Id),
-	FOREIGN KEY(DiscountId) References Discounts(Id),
+	FOREIGN KEY(ReservationId) References Reservations(Id) ON DELETE CASCADE,
+	FOREIGN KEY(DiscountId) References Discounts(Id) ON UPDATE CASCADE,
 	PRIMARY KEY(Id)
 )
 

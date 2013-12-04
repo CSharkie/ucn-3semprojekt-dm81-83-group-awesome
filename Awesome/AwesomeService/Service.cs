@@ -77,115 +77,166 @@ namespace AwesomeService
         #region read
         public IList<Reservation> getReservation(int reservationId, string name, int movieId)
         {
-            var reservationList = server.getReservation(reservationId, name, movieId);
-            List<Reservation> returnObj = new List<Reservation>();
-            foreach (var item in reservationList)
+            try
             {
-                Reservation r = new Reservation(
-                        item.Id,
-                        item.Name,
-                        item.Taken,
-                        item.DateReserved,
-                        item.MovieId,
-                        item.SeatCount);
-                r.Movie = getMovie(item.MovieId, "", 0).First();
-                r.Seats = getSeat(0, 0, 0, 0, reservationId);
-                r.Tickets = getTicket(0, item.Id);
-                returnObj.Add(r);
+                var reservationList = server.getReservation(reservationId, name, movieId);
+                List<Reservation> returnObj = new List<Reservation>();
+                foreach (var item in reservationList)
+                {
+                    Reservation r = new Reservation(
+                            item.Id,
+                            item.Name,
+                            item.Taken,
+                            item.DateReserved,
+                            item.MovieId,
+                            item.SeatCount);
+                    r.Movie = getMovie(item.MovieId, "", 0).First();
+                    r.Seats = getSeat(0, 0, 0, 0, reservationId);
+                    r.Tickets = getTicket(0, item.Id);
+                    returnObj.Add(r);
+                }
+                return returnObj;
             }
-            return returnObj;
+            catch (Exception)
+            {
+
+                return null;
+            }
 
 
         }
         public IList<Movie> getMovie(int movieId, string title, int roomId)
         {
-            var movieList = server.getMovie(movieId, title, roomId);
-            List<Movie> returnObj = new List<Movie>();
-            foreach (var item in movieList)
+            try
             {
-                Movie m = new Movie(item.Id, item.Title, item.DateAndTime, item.RoomId);
-                m.Room = getRoom(item.RoomId);
-                returnObj.Add(m);
+                var movieList = server.getMovie(movieId, title, roomId);
+                List<Movie> returnObj = new List<Movie>();
+                foreach (var item in movieList)
+                {
+                    Movie m = new Movie(item.Id, item.Title, item.DateAndTime, item.RoomId);
+                    m.Room = getRoom(item.RoomId);
+                    returnObj.Add(m);
+                }
+                return returnObj;
             }
-            return returnObj;
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
         public Room getRoom(int roomId)
         {
-
-            var room = server.getRoom(roomId);
-            Room returnObj = new Room(room.Id, room.Cols, room.Rows);
-
-            getSeatDelegate del = new getSeatDelegate(getSeat);
-
-            IAsyncResult result = del.BeginInvoke(0, roomId, 0, 0,0, new AsyncCallback((IAsyncResult async) =>
+            try
             {
-                AsyncResult ar = (AsyncResult)async;
-                getSeatDelegate del2 = (getSeatDelegate)ar.AsyncDelegate;
-                IList<Seat> x = del2.EndInvoke(async);
-            }), "Success");
+                var room = server.getRoom(roomId);
+                Room returnObj = new Room(room.Id, room.Cols, room.Rows);
 
-            returnObj.Seats = getSeat(0, roomId, 0, 0,0);
-            return returnObj;
+                getSeatDelegate del = new getSeatDelegate(getSeat);
+
+                IAsyncResult result = del.BeginInvoke(0, roomId, 0, 0, 0, new AsyncCallback((IAsyncResult async) =>
+                {
+                    AsyncResult ar = (AsyncResult)async;
+                    getSeatDelegate del2 = (getSeatDelegate)ar.AsyncDelegate;
+                    IList<Seat> x = del2.EndInvoke(async);
+                }), "Success");
+
+                returnObj.Seats = getSeat(0, roomId, 0, 0, 0);
+                return returnObj;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
 
         public IList<Room> getAllRooms()
         {
-            var roomList = server.getAllRooms();
-            IList<Room> returnObj = new List<Room>();
-            foreach (var item in roomList)
+            try
             {
-                var room = server.getRoom(item.Id);
-                Room r = new Room(room.Id, room.Cols, room.Rows);
-                r.Seats = getSeat(0, item.Id, 0, 0,0);
-                returnObj.Add(r);
+                var roomList = server.getAllRooms();
+                IList<Room> returnObj = new List<Room>();
+                foreach (var item in roomList)
+                {
+                    var room = server.getRoom(item.Id);
+                    Room r = new Room(room.Id, room.Cols, room.Rows);
+                    r.Seats = getSeat(0, item.Id, 0, 0, 0);
+                    returnObj.Add(r);
+                }
+                return returnObj;
             }
-            return returnObj;
+            catch (Exception)
+            {
+                return null;   
+            }
         }
         public IList<Ticket> getTicket(int ticketId, int reservationId)
         {
-            var ticketList = server.getTicket(ticketId, reservationId);
-            IList<Ticket> returnObj = new List<Ticket>();
-            foreach (var item in ticketList)
+            try
             {
-                Ticket ticket = new Ticket(
-                    item.Id,
-                    item.Standard,
-                    item.Price,
-                    item.PaidAmount,
-                    item.ReservationId,
-                    item.DiscountId,
-                    item.Col,
-                    item.Row);
-                ticket.Discount = getDiscount(item.DiscountId, 0);
-                ticket.Reservation = getReservation(item.ReservationId, "", 0).First();
-                returnObj.Add(ticket);
+                var ticketList = server.getTicket(ticketId, reservationId);
+                IList<Ticket> returnObj = new List<Ticket>();
+                foreach (var item in ticketList)
+                {
+                    Ticket ticket = new Ticket(
+                        item.Id,
+                        item.Standard,
+                        item.Price,
+                        item.PaidAmount,
+                        item.ReservationId,
+                        item.DiscountId,
+                        item.Col,
+                        item.Row);
+                    ticket.Discount = getDiscount(item.DiscountId, 0);
+                    ticket.Reservation = getReservation(item.ReservationId, "", 0).First();
+                    returnObj.Add(ticket);
+                }
+                return returnObj;
             }
-            return returnObj;
+            catch (Exception)
+            {
+                return null;   
+            }
 
         }
         public IList<Seat> getSeat(int seatId, int roomId, int col, int row, int reservationId)
         {
-            var seatList = server.getSeat(seatId, roomId, col, row, reservationId);
-            IList<Seat> returnObj = new List<Seat>();
-            foreach (var item in seatList)
+            try
             {
-                returnObj.Add(new Seat(
-                    item.Id,
-                    item.Col,
-                    item.Row,
-                    item.Usable,
-                    item.RoomId,
-                    item.ReservationId
-                    ));
+                var seatList = server.getSeat(seatId, roomId, col, row, reservationId);
+                IList<Seat> returnObj = new List<Seat>();
+                foreach (var item in seatList)
+                {
+                    returnObj.Add(new Seat(
+                        item.Id,
+                        item.Col,
+                        item.Row,
+                        item.Usable,
+                        item.RoomId,
+                        item.ReservationId
+                        ));
+                }
+                return returnObj;
             }
-            return returnObj;
+            catch (Exception)
+            {
+                return null;
+            }
 
         }
         public Discount getDiscount(int? discountId, decimal dPercent)
         {
-            var discount = server.getDiscount(discountId, dPercent);
-            Discount returnObj = new Discount(discount.Id, discount.DPercent);
-            return returnObj;
+            try
+            {
+                var discount = server.getDiscount(discountId, dPercent);
+                Discount returnObj = new Discount(discount.Id, discount.DPercent);
+                return returnObj;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
         #endregion
 
