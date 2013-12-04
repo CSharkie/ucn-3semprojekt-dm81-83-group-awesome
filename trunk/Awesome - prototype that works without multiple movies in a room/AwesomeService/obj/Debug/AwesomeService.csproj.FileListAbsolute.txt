@@ -1,0 +1,8 @@
+C:\Users\Ellis\Desktop\Group Awesome\Awesome\AwesomeService\bin\Debug\AwesomeService.dll.config
+C:\Users\Ellis\Desktop\Group Awesome\Awesome\AwesomeService\bin\Debug\AwesomeService.dll
+C:\Users\Ellis\Desktop\Group Awesome\Awesome\AwesomeService\bin\Debug\AwesomeService.pdb
+C:\Users\Ellis\Desktop\Group Awesome\Awesome\AwesomeService\bin\Debug\AwesomeServer.dll
+C:\Users\Ellis\Desktop\Group Awesome\Awesome\AwesomeService\bin\Debug\AwesomeServer.pdb
+C:\Users\Ellis\Desktop\Group Awesome\Awesome\AwesomeService\obj\Debug\AwesomeService.csprojResolveAssemblyReference.cache
+C:\Users\Ellis\Desktop\Group Awesome\Awesome\AwesomeService\obj\Debug\AwesomeService.dll
+C:\Users\Ellis\Desktop\Group Awesome\Awesome\AwesomeService\obj\Debug\AwesomeService.pdb

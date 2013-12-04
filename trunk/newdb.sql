@@ -35,6 +35,7 @@ CREATE TABLE [dbo].[Movies]
 	[Id] int NOT NULL IDENTITY(1,1),
 	[Title] varchar(100) NOT NULL,
 	[DateAndTime] datetime NOT NULL,
+	[Duration] time NOT NULL,
 	[RoomId] int NOT NULL,
 	FOREIGN KEY (RoomId) REFERENCES Rooms(Id) ON UPDATE CASCADE,
 	PRIMARY KEY(Id)
@@ -56,11 +57,19 @@ CREATE TABLE [dbo].[Seats]
 	[Col] int NOT NULL,
 	[Row] int NOT NULL,
 	[Usable] bit NOT NULL DEFAULT(0),
+	[DateAndTime] datetime NULL,
 	[RoomId] int NOT NULL,
-	[ReservationId] int NULL,
 	FOREIGN KEY (RoomId) REFERENCES Rooms(Id) ON DELETE CASCADE,
-	FOREIGN KEY (ReservationId) REFERENCES Reservations(Id) ON UPDATE CASCADE,
 	PRIMARY KEY (Id)
+)
+CREATE TABLE [dbo].[ReservedSeats]
+(
+	[ReservationId] int NOT NULL,
+	[SeatId] int NOT NULL,
+	[MovieId] int NOT NULL,
+	FOREIGN KEY (ReservationId) REFERENCES Reservations(Id) ON DELETE CASCADE,
+	FOREIGN KEY (SeatId) REFERENCES Seats(Id) ON DELETE CASCADE,
+	FOREIGN KEY (MovieId) REFERENCES Movies(Id) ON DELETE CASCADE,
 )
 CREATE TABLE [dbo].[Tickets]
 (
