@@ -77,6 +77,8 @@ namespace AwesomeService
         [OperationContract]
         IList<Seat> getAdjSeatMultiThread(int noOfSeats, int roomId);
         [OperationContract]
+        IList<Seat> getAdjSeatParallel(int noOfSeats, int roomId);
+        [OperationContract]
         IList<Seat> getAdjSeatSingleThreadV2(int noOfSeats, int roomId);
         [OperationContract]
         IList<Seat> getAdjSeatMultiThreadV2(int noOfSeats, int roomId);

@@ -29,25 +29,34 @@
         private void InitializeComponent()
         {
             this.seats_panel = new System.Windows.Forms.Panel();
+            this.seats_pictureBox = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.getRoom_btn = new System.Windows.Forms.Button();
             this.txt_roomId = new System.Windows.Forms.TextBox();
-            this.seats_pictureBox = new System.Windows.Forms.PictureBox();
             this.seats_panel.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.seats_pictureBox)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // seats_panel
             // 
-            this.seats_panel.Controls.Add(this.panel1);
             this.seats_panel.Controls.Add(this.seats_pictureBox);
+            this.seats_panel.Controls.Add(this.panel1);
             this.seats_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.seats_panel.Location = new System.Drawing.Point(0, 0);
             this.seats_panel.Name = "seats_panel";
             this.seats_panel.Size = new System.Drawing.Size(612, 438);
             this.seats_panel.TabIndex = 0;
+            // 
+            // seats_pictureBox
+            // 
+            this.seats_pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.seats_pictureBox.Location = new System.Drawing.Point(0, 32);
+            this.seats_pictureBox.Name = "seats_pictureBox";
+            this.seats_pictureBox.Size = new System.Drawing.Size(612, 406);
+            this.seats_pictureBox.TabIndex = 5;
+            this.seats_pictureBox.TabStop = false;
             // 
             // panel1
             // 
@@ -71,7 +80,7 @@
             // 
             // getRoom_btn
             // 
-            this.getRoom_btn.Location = new System.Drawing.Point(161, 4);
+            this.getRoom_btn.Location = new System.Drawing.Point(160, 4);
             this.getRoom_btn.Name = "getRoom_btn";
             this.getRoom_btn.Size = new System.Drawing.Size(75, 23);
             this.getRoom_btn.TabIndex = 1;
@@ -86,14 +95,6 @@
             this.txt_roomId.Size = new System.Drawing.Size(100, 20);
             this.txt_roomId.TabIndex = 2;
             // 
-            // seats_pictureBox
-            // 
-            this.seats_pictureBox.Location = new System.Drawing.Point(0, 32);
-            this.seats_pictureBox.Name = "seats_pictureBox";
-            this.seats_pictureBox.Size = new System.Drawing.Size(612, 406);
-            this.seats_pictureBox.TabIndex = 0;
-            this.seats_pictureBox.TabStop = false;
-            // 
             // Seats
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,10 +103,11 @@
             this.Controls.Add(this.seats_panel);
             this.Name = "Seats";
             this.Text = "Seats";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.seats_panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.seats_pictureBox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.seats_pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -113,10 +115,10 @@
         #endregion
 
         private System.Windows.Forms.Panel seats_panel;
-        private System.Windows.Forms.PictureBox seats_pictureBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_roomId;
         private System.Windows.Forms.Button getRoom_btn;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox seats_pictureBox;
     }
 }
