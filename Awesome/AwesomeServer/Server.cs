@@ -724,19 +724,19 @@ namespace AwesomeServer
                     if (seats[j].Usable == true)
                     {
                         permSeats.Add(seats[j]);
-                        if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
-                        {
-                            foreach (Seat seat in permSeats)
-                            {
-                                adjSeats.Add(seat);
-                            }
-                            permSeats.Clear();
-                        }
                     }
                     else
                     {
                         permSeats.Clear();
                     }
+                }
+                if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
+                {
+                    foreach (Seat seat in permSeats)
+                    {
+                        adjSeats.Add(seat);
+                    }
+                    permSeats.Clear();
                 }
                 permSeats.Clear();
             }
@@ -749,41 +749,79 @@ namespace AwesomeServer
             int rows = room.Rows;
             IList<Seat> adjSeats = new List<Seat>();  //this is being returned
             IList<Seat> permSeats = new List<Seat>();
+            var temp = new Object();
             Thread[] threads = new Thread[rows];
 
-            for (int i = 1; i <= rows; i++)
+
+            for (int i = 0; i < rows; i++)
             {
-                IList<Seat> seats = getSeat(0, roomId, 0, i, 0);
-                threads[i - 1] = new Thread(new ThreadStart(() =>
+                IList<Seat> seats = getSeat(0, roomId, 0, 0, 0);
+                threads[i] = new Thread(new ThreadStart(() =>
                 {
-                    if (seats.Count > 0)
-                        for (int j = 0; j <= room.Cols - 1; j++)  //j= cols
+                    for (int j = 0; j < room.Cols; j++)
+                    {
+                        lock (temp)
                         {
-                            if (seats[j].Usable == true)
-                            {
+                            if (seats[j].Usable)
                                 permSeats.Add(seats[j]);
-                                if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
-                                {
-                                    foreach (Seat seat in permSeats)
-                                    {
-                                        adjSeats.Add(seat);
-                                    }
-                                    permSeats.Clear();
-                                }
-                            }
                             else
                             {
+                                if (permSeats.Count >= noOfSeats)
+                                    foreach (Seat s in permSeats)
+                                        adjSeats.Add(s);
                                 permSeats.Clear();
                             }
                         }
-                    permSeats.Clear();
+                    }
                 }));
             }
             foreach (Thread t in threads)
             {
                 t.Start();
+            }
+            foreach (Thread t in threads)
+            {
                 t.Join();
             }
+            return adjSeats;
+        }
+
+        public IList<Seat> getAdjSeatParallel(int noOfSeats, int roomId)
+        {
+            Room room = getRoom(roomId);
+            int rows = room.Rows;
+            var temp = new Object();
+            IList<Seat> adjSeats = new List<Seat>();  //this is being returned
+            IList<Seat> permSeats = new List<Seat>();
+
+            Parallel.For(1, rows + 1, (i) =>
+            {
+                IList<Seat> seats = getSeat(0, roomId, 0, i, 0);
+                if (seats.Count > 0)
+                {
+                    for (int j = 0; j <= room.Cols - 1; j++)  //j= cols
+                    {
+                        if (seats[j].Usable == true)
+                        {
+                            permSeats.Add(seats[j]);
+                        }
+                        else
+                        {
+                            permSeats.Clear();
+                        }
+                    }
+                    if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
+                    {
+                        foreach (Seat seat in permSeats)
+                        {
+                            adjSeats.Add(seat);
+                        }
+                        permSeats.Clear();
+                    }
+                    permSeats.Clear();
+                }
+            });
+
             return adjSeats;
         }
 
@@ -803,21 +841,25 @@ namespace AwesomeServer
             s.Stop();
             //Thread.Sleep(500);
             messages.Add(s.ElapsedMilliseconds.ToString());
-            //s.Reset();
-            //s.Start();
-            //getAdjSeatSingleThreadV2(noOfSeats, roomId);
-            //s.Stop();
+            s.Reset();
+            s.Start();
+            getAdjSeatParallel(noOfSeats, roomId);
+            messages.Add(s.ElapsedMilliseconds.ToString());
+            s.Reset();
+            s.Start();
+            getAdjSeatSingleThreadV2(noOfSeats, roomId);
+            s.Stop();
             //Thread.Sleep(500);
-            //messages.Add(s.ElapsedMilliseconds.ToString());
-            //s.Reset();
-            //s.Start();
-            //getAdjSeatMultiThreadV2(noOfSeats, roomId);
-            //s.Stop();
+            messages.Add(s.ElapsedMilliseconds.ToString());
+            s.Reset();
+            s.Start();
+            getAdjSeatMultiThreadV2(noOfSeats, roomId);
+            s.Stop();
             //messages.Add(s.ElapsedMilliseconds.ToString());
             //return messages;
             //messages.Add(threadingTest());
             //s.Stop();
-            //messages.Add(s.ElapsedMilliseconds.ToString());
+            messages.Add(s.ElapsedMilliseconds.ToString());
 
             return messages;
         }
@@ -919,9 +961,9 @@ namespace AwesomeServer
                     }
                 });
                 threads[i] = thread;
-                threads[i].Start();
-
             }
+            foreach (Thread t in threads)
+                t.Start();
             foreach (Thread t in threads)
             {
                 t.Join();

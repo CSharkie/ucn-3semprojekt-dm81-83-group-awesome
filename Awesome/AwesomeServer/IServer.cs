@@ -49,6 +49,7 @@ namespace AwesomeServer
         IList<Seat> getAdjSeatSingleThread(int noOfSeats, int roomId);
         IList<string> adj2(int noOfSeats, int roomId);
         IList<Seat> getAdjSeatSingleThreadV2(int noOfSeats, int roomId);
+        IList<Seat> getAdjSeatParallel(int noOfSeats, int roomId);
         IList<Seat> getAdjSeatMultiThreadV2(int noOfSeats, int roomId);
         bool emptyRoom(int roomId);
         string takeTickets(int reservationId);
