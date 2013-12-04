@@ -146,6 +146,42 @@
   <wsdl:message name="IService_removeDiscount_OutputMessage">
     <wsdl:part name="parameters" element="tns:removeDiscountResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_getAdjSeatSingleThread_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAdjSeatSingleThread" />
+  </wsdl:message>
+  <wsdl:message name="IService_getAdjSeatSingleThread_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAdjSeatSingleThreadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_getAdjSeatMultiThread_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAdjSeatMultiThread" />
+  </wsdl:message>
+  <wsdl:message name="IService_getAdjSeatMultiThread_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAdjSeatMultiThreadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_getAdjSeatParallel_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAdjSeatParallel" />
+  </wsdl:message>
+  <wsdl:message name="IService_getAdjSeatParallel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAdjSeatParallelResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_getAdjSeatSingleThreadV2_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAdjSeatSingleThreadV2" />
+  </wsdl:message>
+  <wsdl:message name="IService_getAdjSeatSingleThreadV2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAdjSeatSingleThreadV2Response" />
+  </wsdl:message>
+  <wsdl:message name="IService_getAdjSeatMultiThreadV2_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAdjSeatMultiThreadV2" />
+  </wsdl:message>
+  <wsdl:message name="IService_getAdjSeatMultiThreadV2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAdjSeatMultiThreadV2Response" />
+  </wsdl:message>
+  <wsdl:message name="IService_adj2_InputMessage">
+    <wsdl:part name="parameters" element="tns:adj2" />
+  </wsdl:message>
+  <wsdl:message name="IService_adj2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:adj2Response" />
+  </wsdl:message>
   <wsdl:message name="IService_emptyRoom_InputMessage">
     <wsdl:part name="parameters" element="tns:emptyRoom" />
   </wsdl:message>
@@ -244,6 +280,30 @@
     <wsdl:operation name="removeDiscount">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/removeDiscount" message="tns:IService_removeDiscount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/removeDiscountResponse" message="tns:IService_removeDiscount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getAdjSeatSingleThread">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getAdjSeatSingleThread" message="tns:IService_getAdjSeatSingleThread_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getAdjSeatSingleThreadResponse" message="tns:IService_getAdjSeatSingleThread_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getAdjSeatMultiThread">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getAdjSeatMultiThread" message="tns:IService_getAdjSeatMultiThread_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getAdjSeatMultiThreadResponse" message="tns:IService_getAdjSeatMultiThread_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getAdjSeatParallel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getAdjSeatParallel" message="tns:IService_getAdjSeatParallel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getAdjSeatParallelResponse" message="tns:IService_getAdjSeatParallel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getAdjSeatSingleThreadV2">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getAdjSeatSingleThreadV2" message="tns:IService_getAdjSeatSingleThreadV2_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getAdjSeatSingleThreadV2Response" message="tns:IService_getAdjSeatSingleThreadV2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getAdjSeatMultiThreadV2">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getAdjSeatMultiThreadV2" message="tns:IService_getAdjSeatMultiThreadV2_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getAdjSeatMultiThreadV2Response" message="tns:IService_getAdjSeatMultiThreadV2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="adj2">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/adj2" message="tns:IService_adj2_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/adj2Response" message="tns:IService_adj2_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="emptyRoom">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/emptyRoom" message="tns:IService_emptyRoom_InputMessage" />
@@ -452,6 +512,60 @@
     </wsdl:operation>
     <wsdl:operation name="removeDiscount">
       <soap:operation soapAction="http://tempuri.org/IService/removeDiscount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAdjSeatSingleThread">
+      <soap:operation soapAction="http://tempuri.org/IService/getAdjSeatSingleThread" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAdjSeatMultiThread">
+      <soap:operation soapAction="http://tempuri.org/IService/getAdjSeatMultiThread" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAdjSeatParallel">
+      <soap:operation soapAction="http://tempuri.org/IService/getAdjSeatParallel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAdjSeatSingleThreadV2">
+      <soap:operation soapAction="http://tempuri.org/IService/getAdjSeatSingleThreadV2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAdjSeatMultiThreadV2">
+      <soap:operation soapAction="http://tempuri.org/IService/getAdjSeatMultiThreadV2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="adj2">
+      <soap:operation soapAction="http://tempuri.org/IService/adj2" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
