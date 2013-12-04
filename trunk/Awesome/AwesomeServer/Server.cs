@@ -712,35 +712,42 @@ namespace AwesomeServer
         #region methods
         public IList<Seat> getAdjSeatSingleThread(int noOfSeats, int roomId)
         {
-            Room room = getRoom(roomId);
-            int rows = room.Rows;
-            IList<Seat> adjSeats = new List<Seat>();  //this is being returned
-            IList<Seat> permSeats = new List<Seat>();
-            for (int i = 1; i <= rows; i++) //i = rows
+            try
             {
-                IList<Seat> seats = getSeat(0, roomId, 0, i, 0);
-                for (int j = 0; j <= room.Cols - 1; j++)  //j= cols
+                Room room = getRoom(roomId);
+                int rows = room.Rows;
+                IList<Seat> adjSeats = new List<Seat>();  //this is being returned
+                IList<Seat> permSeats = new List<Seat>();
+                for (int i = 1; i <= rows; i++) //i = rows
                 {
-                    if (seats[j].Usable == true)
+                    IList<Seat> seats = getSeat(0, roomId, 0, i, 0);
+                    for (int j = 0; j <= room.Cols - 1; j++)  //j= cols
                     {
-                        permSeats.Add(seats[j]);
+                        if (seats[j].Usable == true)
+                        {
+                            permSeats.Add(seats[j]);
+                        }
+                        else
+                        {
+                            permSeats.Clear();
+                        }
                     }
-                    else
+                    if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
                     {
+                        foreach (Seat seat in permSeats)
+                        {
+                            adjSeats.Add(seat);
+                        }
                         permSeats.Clear();
-                    }
-                }
-                if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
-                {
-                    foreach (Seat seat in permSeats)
-                    {
-                        adjSeats.Add(seat);
                     }
                     permSeats.Clear();
                 }
-                permSeats.Clear();
+                return adjSeats;
             }
-            return adjSeats;
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public IList<Seat> getAdjSeatMultiThread(int noOfSeats, int roomId)

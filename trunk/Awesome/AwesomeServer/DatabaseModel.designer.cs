@@ -30,6 +30,9 @@ namespace AwesomeServer
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertDiscount(Discount instance);
+    partial void UpdateDiscount(Discount instance);
+    partial void DeleteDiscount(Discount instance);
     partial void InsertTicket(Ticket instance);
     partial void UpdateTicket(Ticket instance);
     partial void DeleteTicket(Ticket instance);
@@ -45,9 +48,6 @@ namespace AwesomeServer
     partial void InsertSeat(Seat instance);
     partial void UpdateSeat(Seat instance);
     partial void DeleteSeat(Seat instance);
-    partial void InsertDiscount(Discount instance);
-    partial void UpdateDiscount(Discount instance);
-    partial void DeleteDiscount(Discount instance);
     #endregion
 		
 		public DatabaseModelDataContext() : 
@@ -78,6 +78,14 @@ namespace AwesomeServer
 				base(connection, mappingSource)
 		{
 			OnCreated();
+		}
+		
+		public System.Data.Linq.Table<Discount> Discounts
+		{
+			get
+			{
+				return this.GetTable<Discount>();
+			}
 		}
 		
 		public System.Data.Linq.Table<Ticket> Tickets
@@ -119,13 +127,119 @@ namespace AwesomeServer
 				return this.GetTable<Seat>();
 			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Discounts")]
+	public partial class Discount : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		public System.Data.Linq.Table<Discount> Discounts
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private decimal _DPercent;
+		
+		private EntitySet<Ticket> _Tickets;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnDPercentChanging(decimal value);
+    partial void OnDPercentChanged();
+    #endregion
+		
+		public Discount()
+		{
+			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
 		{
 			get
 			{
-				return this.GetTable<Discount>();
+				return this._Id;
 			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DPercent", DbType="Decimal(18,2) NOT NULL")]
+		public decimal DPercent
+		{
+			get
+			{
+				return this._DPercent;
+			}
+			set
+			{
+				if ((this._DPercent != value))
+				{
+					this.OnDPercentChanging(value);
+					this.SendPropertyChanging();
+					this._DPercent = value;
+					this.SendPropertyChanged("DPercent");
+					this.OnDPercentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Discount_Ticket", Storage="_Tickets", ThisKey="Id", OtherKey="DiscountId")]
+		public EntitySet<Ticket> Tickets
+		{
+			get
+			{
+				return this._Tickets;
+			}
+			set
+			{
+				this._Tickets.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Tickets(Ticket entity)
+		{
+			this.SendPropertyChanging();
+			entity.Discount = this;
+		}
+		
+		private void detach_Tickets(Ticket entity)
+		{
+			this.SendPropertyChanging();
+			entity.Discount = null;
 		}
 	}
 	
@@ -151,9 +265,9 @@ namespace AwesomeServer
 		
 		private int _Row;
 		
-		private EntityRef<Reservation> _Reservation;
-		
 		private EntityRef<Discount> _Discount;
+		
+		private EntityRef<Reservation> _Reservation;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -179,8 +293,8 @@ namespace AwesomeServer
 		
 		public Ticket()
 		{
-			this._Reservation = default(EntityRef<Reservation>);
 			this._Discount = default(EntityRef<Discount>);
+			this._Reservation = default(EntityRef<Reservation>);
 			OnCreated();
 		}
 		
@@ -352,40 +466,6 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reservation_Ticket", Storage="_Reservation", ThisKey="ReservationId", OtherKey="Id", IsForeignKey=true)]
-		public Reservation Reservation
-		{
-			get
-			{
-				return this._Reservation.Entity;
-			}
-			set
-			{
-				Reservation previousValue = this._Reservation.Entity;
-				if (((previousValue != value) 
-							|| (this._Reservation.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Reservation.Entity = null;
-						previousValue.Tickets.Remove(this);
-					}
-					this._Reservation.Entity = value;
-					if ((value != null))
-					{
-						value.Tickets.Add(this);
-						this._ReservationId = value.Id;
-					}
-					else
-					{
-						this._ReservationId = default(int);
-					}
-					this.SendPropertyChanged("Reservation");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Discount_Ticket", Storage="_Discount", ThisKey="DiscountId", OtherKey="Id", IsForeignKey=true)]
 		public Discount Discount
 		{
@@ -416,6 +496,40 @@ namespace AwesomeServer
 						this._DiscountId = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Discount");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reservation_Ticket", Storage="_Reservation", ThisKey="ReservationId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Reservation Reservation
+		{
+			get
+			{
+				return this._Reservation.Entity;
+			}
+			set
+			{
+				Reservation previousValue = this._Reservation.Entity;
+				if (((previousValue != value) 
+							|| (this._Reservation.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Reservation.Entity = null;
+						previousValue.Tickets.Remove(this);
+					}
+					this._Reservation.Entity = value;
+					if ((value != null))
+					{
+						value.Tickets.Add(this);
+						this._ReservationId = value.Id;
+					}
+					else
+					{
+						this._ReservationId = default(int);
+					}
+					this.SendPropertyChanged("Reservation");
 				}
 			}
 		}
@@ -564,7 +678,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movie_Reservation", Storage="_Reservations", ThisKey="Id", OtherKey="MovieId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movy_Reservation", Storage="_Reservations", ThisKey="Id", OtherKey="MovieId")]
 		public EntitySet<Reservation> Reservations
 		{
 			get
@@ -577,7 +691,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movie", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movy", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true)]
 		public Room Room
 		{
 			get
@@ -844,7 +958,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movie_Reservation", Storage="_Movie", ThisKey="MovieId", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movy_Reservation", Storage="_Movie", ThisKey="MovieId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Movie Movie
 		{
 			get
@@ -1018,7 +1132,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movie", Storage="_Movies", ThisKey="Id", OtherKey="RoomId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movy", Storage="_Movies", ThisKey="Id", OtherKey="RoomId")]
 		public EntitySet<Movie> Movies
 		{
 			get
@@ -1298,7 +1412,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Seat", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Seat", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Room Room
 		{
 			get
@@ -1350,120 +1464,6 @@ namespace AwesomeServer
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Discounts")]
-	public partial class Discount : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private decimal _DPercent;
-		
-		private EntitySet<Ticket> _Tickets;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnDPercentChanging(decimal value);
-    partial void OnDPercentChanged();
-    #endregion
-		
-		public Discount()
-		{
-			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DPercent", DbType="Decimal(18,2) NOT NULL")]
-		public decimal DPercent
-		{
-			get
-			{
-				return this._DPercent;
-			}
-			set
-			{
-				if ((this._DPercent != value))
-				{
-					this.OnDPercentChanging(value);
-					this.SendPropertyChanging();
-					this._DPercent = value;
-					this.SendPropertyChanged("DPercent");
-					this.OnDPercentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Discount_Ticket", Storage="_Tickets", ThisKey="Id", OtherKey="DiscountId")]
-		public EntitySet<Ticket> Tickets
-		{
-			get
-			{
-				return this._Tickets;
-			}
-			set
-			{
-				this._Tickets.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Tickets(Ticket entity)
-		{
-			this.SendPropertyChanging();
-			entity.Discount = this;
-		}
-		
-		private void detach_Tickets(Ticket entity)
-		{
-			this.SendPropertyChanging();
-			entity.Discount = null;
 		}
 	}
 }
