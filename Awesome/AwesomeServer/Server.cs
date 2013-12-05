@@ -436,7 +436,7 @@ namespace AwesomeServer
                 Room returnObj = null;
                 try
                 {
-                    returnObj = db.Rooms.SingleOrDefault(r => r.Id == roomId);
+                    returnObj = (from r in db.Rooms where r.Id == roomId select r).FirstOrDefault();
                 }
                 catch (Exception ex)
                 {

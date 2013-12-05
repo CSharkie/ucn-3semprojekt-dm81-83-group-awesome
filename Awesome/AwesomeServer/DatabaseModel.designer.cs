@@ -18,6 +18,7 @@ namespace AwesomeServer
 	using System.Reflection;
 	using System.Linq;
 	using System.Linq.Expressions;
+	using System.Runtime.Serialization;
 	using System.ComponentModel;
 	using System;
 	
@@ -141,6 +142,7 @@ namespace AwesomeServer
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Discounts")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Discount : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -151,6 +153,8 @@ namespace AwesomeServer
 		private decimal _DPercent;
 		
 		private EntitySet<Ticket> _Tickets;
+		
+		private bool serializing;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -164,11 +168,11 @@ namespace AwesomeServer
 		
 		public Discount()
 		{
-			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int Id
 		{
 			get
@@ -189,6 +193,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DPercent", DbType="Decimal(18,2) NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public decimal DPercent
 		{
 			get
@@ -209,10 +214,16 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Discount_Ticket", Storage="_Tickets", ThisKey="Id", OtherKey="DiscountId")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3, EmitDefaultValue=false)]
 		public EntitySet<Ticket> Tickets
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Tickets.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Tickets;
 			}
 			set
@@ -252,9 +263,37 @@ namespace AwesomeServer
 			this.SendPropertyChanging();
 			entity.Discount = null;
 		}
+		
+		private void Initialize()
+		{
+			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tickets")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Ticket : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -304,12 +343,11 @@ namespace AwesomeServer
 		
 		public Ticket()
 		{
-			this._Discount = default(EntityRef<Discount>);
-			this._Reservation = default(EntityRef<Reservation>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int Id
 		{
 			get
@@ -330,6 +368,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Standard", DbType="Decimal(18,2) NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public decimal Standard
 		{
 			get
@@ -350,6 +389,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", AutoSync=AutoSync.Always, DbType="Decimal(18,0)", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public System.Nullable<decimal> Price
 		{
 			get
@@ -370,6 +410,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaidAmount", DbType="Decimal(18,2)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public System.Nullable<decimal> PaidAmount
 		{
 			get
@@ -390,6 +431,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReservationId", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public int ReservationId
 		{
 			get
@@ -414,6 +456,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiscountId", DbType="Int")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
 		public System.Nullable<int> DiscountId
 		{
 			get
@@ -438,6 +481,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Col", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7)]
 		public int Col
 		{
 			get
@@ -458,6 +502,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Row", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8)]
 		public int Row
 		{
 			get
@@ -564,9 +609,24 @@ namespace AwesomeServer
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void Initialize()
+		{
+			this._Discount = default(EntityRef<Discount>);
+			this._Reservation = default(EntityRef<Reservation>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Movies")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Movie : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -586,6 +646,8 @@ namespace AwesomeServer
 		
 		private EntityRef<Room> _Room;
 		
+		private bool serializing;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -604,12 +666,11 @@ namespace AwesomeServer
 		
 		public Movie()
 		{
-			this._MovieSeats = new EntitySet<MovieSeat>(new Action<MovieSeat>(this.attach_MovieSeats), new Action<MovieSeat>(this.detach_MovieSeats));
-			this._Room = default(EntityRef<Room>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int Id
 		{
 			get
@@ -630,6 +691,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public string Title
 		{
 			get
@@ -650,6 +712,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateAndTime", DbType="DateTime NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public System.DateTime DateAndTime
 		{
 			get
@@ -670,6 +733,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Duration", DbType="Time NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public System.TimeSpan Duration
 		{
 			get
@@ -690,6 +754,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomId", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public int RoomId
 		{
 			get
@@ -713,11 +778,17 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movy_MovieSeat", Storage="_MovieSeats", ThisKey="Id", OtherKey="MovieId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movie_MovieSeat", Storage="_MovieSeats", ThisKey="Id", OtherKey="MovieId")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6, EmitDefaultValue=false)]
 		public EntitySet<MovieSeat> MovieSeats
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._MovieSeats.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._MovieSeats;
 			}
 			set
@@ -726,7 +797,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movy", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movie", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true)]
 		public Room Room
 		{
 			get
@@ -791,9 +862,38 @@ namespace AwesomeServer
 			this.SendPropertyChanging();
 			entity.Movie = null;
 		}
+		
+		private void Initialize()
+		{
+			this._MovieSeats = new EntitySet<MovieSeat>(new Action<MovieSeat>(this.attach_MovieSeats), new Action<MovieSeat>(this.detach_MovieSeats));
+			this._Room = default(EntityRef<Room>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MovieSeats")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class MovieSeat : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -829,13 +929,11 @@ namespace AwesomeServer
 		
 		public MovieSeat()
 		{
-			this._Movie = default(EntityRef<Movie>);
-			this._Reservation = default(EntityRef<Reservation>);
-			this._Seat = default(EntityRef<Seat>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int Id
 		{
 			get
@@ -856,6 +954,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MovieId", DbType="Int")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Nullable<int> MovieId
 		{
 			get
@@ -880,6 +979,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SeatId", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public int SeatId
 		{
 			get
@@ -904,6 +1004,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReservationId", DbType="Int")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public System.Nullable<int> ReservationId
 		{
 			get
@@ -927,7 +1028,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movy_MovieSeat", Storage="_Movie", ThisKey="MovieId", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movie_MovieSeat", Storage="_Movie", ThisKey="MovieId", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Movie Movie
 		{
 			get
@@ -1048,9 +1149,25 @@ namespace AwesomeServer
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void Initialize()
+		{
+			this._Movie = default(EntityRef<Movie>);
+			this._Reservation = default(EntityRef<Reservation>);
+			this._Seat = default(EntityRef<Seat>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Reservations")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Reservation : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1070,6 +1187,8 @@ namespace AwesomeServer
 		
 		private EntitySet<MovieSeat> _MovieSeats;
 		
+		private bool serializing;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1088,12 +1207,11 @@ namespace AwesomeServer
 		
 		public Reservation()
 		{
-			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
-			this._MovieSeats = new EntitySet<MovieSeat>(new Action<MovieSeat>(this.attach_MovieSeats), new Action<MovieSeat>(this.detach_MovieSeats));
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int Id
 		{
 			get
@@ -1114,6 +1232,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public string Name
 		{
 			get
@@ -1134,6 +1253,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Taken", DbType="Bit NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public bool Taken
 		{
 			get
@@ -1154,6 +1274,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOfReserve", DbType="DateTime NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public System.DateTime DateOfReserve
 		{
 			get
@@ -1174,6 +1295,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SeatCount", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public int SeatCount
 		{
 			get
@@ -1194,10 +1316,16 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reservation_Ticket", Storage="_Tickets", ThisKey="Id", OtherKey="ReservationId")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6, EmitDefaultValue=false)]
 		public EntitySet<Ticket> Tickets
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Tickets.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Tickets;
 			}
 			set
@@ -1207,10 +1335,16 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reservation_MovieSeat", Storage="_MovieSeats", ThisKey="Id", OtherKey="ReservationId")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
 		public EntitySet<MovieSeat> MovieSeats
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._MovieSeats.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._MovieSeats;
 			}
 			set
@@ -1262,9 +1396,38 @@ namespace AwesomeServer
 			this.SendPropertyChanging();
 			entity.Reservation = null;
 		}
+		
+		private void Initialize()
+		{
+			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
+			this._MovieSeats = new EntitySet<MovieSeat>(new Action<MovieSeat>(this.attach_MovieSeats), new Action<MovieSeat>(this.detach_MovieSeats));
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rooms")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Room : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1280,6 +1443,8 @@ namespace AwesomeServer
 		
 		private EntitySet<Seat> _Seats;
 		
+		private bool serializing;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1294,12 +1459,11 @@ namespace AwesomeServer
 		
 		public Room()
 		{
-			this._Movies = new EntitySet<Movie>(new Action<Movie>(this.attach_Movies), new Action<Movie>(this.detach_Movies));
-			this._Seats = new EntitySet<Seat>(new Action<Seat>(this.attach_Seats), new Action<Seat>(this.detach_Seats));
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int Id
 		{
 			get
@@ -1320,6 +1484,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cols", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public int Cols
 		{
 			get
@@ -1340,6 +1505,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rows", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public int Rows
 		{
 			get
@@ -1359,11 +1525,17 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movy", Storage="_Movies", ThisKey="Id", OtherKey="RoomId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movie", Storage="_Movies", ThisKey="Id", OtherKey="RoomId")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4, EmitDefaultValue=false)]
 		public EntitySet<Movie> Movies
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Movies.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Movies;
 			}
 			set
@@ -1373,10 +1545,16 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Seat", Storage="_Seats", ThisKey="Id", OtherKey="RoomId")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5, EmitDefaultValue=false)]
 		public EntitySet<Seat> Seats
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Seats.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Seats;
 			}
 			set
@@ -1428,9 +1606,38 @@ namespace AwesomeServer
 			this.SendPropertyChanging();
 			entity.Room = null;
 		}
+		
+		private void Initialize()
+		{
+			this._Movies = new EntitySet<Movie>(new Action<Movie>(this.attach_Movies), new Action<Movie>(this.detach_Movies));
+			this._Seats = new EntitySet<Seat>(new Action<Seat>(this.attach_Seats), new Action<Seat>(this.detach_Seats));
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Seats")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Seat : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1452,6 +1659,8 @@ namespace AwesomeServer
 		
 		private EntityRef<Room> _Room;
 		
+		private bool serializing;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1472,12 +1681,11 @@ namespace AwesomeServer
 		
 		public Seat()
 		{
-			this._MovieSeats = new EntitySet<MovieSeat>(new Action<MovieSeat>(this.attach_MovieSeats), new Action<MovieSeat>(this.detach_MovieSeats));
-			this._Room = default(EntityRef<Room>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int Id
 		{
 			get
@@ -1498,6 +1706,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Col", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public int Col
 		{
 			get
@@ -1518,6 +1727,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Row", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public int Row
 		{
 			get
@@ -1538,6 +1748,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usable", DbType="Bit NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public bool Usable
 		{
 			get
@@ -1558,6 +1769,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateAndTime", DbType="DateTime")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public System.Nullable<System.DateTime> DateAndTime
 		{
 			get
@@ -1578,6 +1790,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomId", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
 		public int RoomId
 		{
 			get
@@ -1602,10 +1815,16 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Seat_MovieSeat", Storage="_MovieSeats", ThisKey="Id", OtherKey="SeatId")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
 		public EntitySet<MovieSeat> MovieSeats
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._MovieSeats.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._MovieSeats;
 			}
 			set
@@ -1678,6 +1897,34 @@ namespace AwesomeServer
 		{
 			this.SendPropertyChanging();
 			entity.Seat = null;
+		}
+		
+		private void Initialize()
+		{
+			this._MovieSeats = new EntitySet<MovieSeat>(new Action<MovieSeat>(this.attach_MovieSeats), new Action<MovieSeat>(this.detach_MovieSeats));
+			this._Room = default(EntityRef<Room>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
 		}
 	}
 }
