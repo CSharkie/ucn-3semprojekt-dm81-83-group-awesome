@@ -15,9 +15,9 @@ namespace AwesomeService
         Server server = new Server();
 
         #region create
-        public string createReservation(string name, bool taken, DateTime dateOfReserve, int seatCount)
+        public string createReservation(string name, bool taken, int seatCount, int movieId, IList<int> movieSeatIds)
         {
-            return server.createReservation(name, taken, dateOfReserve,seatCount);
+            return server.createReservation(name, taken,seatCount, movieId, movieSeatIds);
         }
         public string createMovie(string title, DateTime dateAndTime, TimeSpan Duration, int roomId)
         {
