@@ -175,92 +175,103 @@ namespace AwesomeServer
         #endregion
 
         #region update
-        public string updateReservation(int reservationId, string name, bool taken, DateTime dateOfReserve, int seatCount)
+        public string updateReservation(int reservationId, string name, bool taken)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
             string message = "The room was updated succesfully!";
-            //    try
-            //    {
-            //        var obj = db.Reservations.SingleOrDefault(r => r.Id == reservationId);
-            //        if (name != null && name != "")
-            //            obj.Name = name;
-            //        if (obj.Taken != taken) //Liam N.
-            //            obj.Taken = taken;
-            //        if (obj.MovieId != movieId)
-            //            obj.MovieId = movieId;
-            //        if (obj.SeatCount != seatCount)
-            //            obj.SeatCount = seatCount;
-            //        db.SubmitChanges();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
+                try
+                {
+                    var obj = db.Reservations.SingleOrDefault(r => r.Id == reservationId);
+                    if (name != null && name != "")
+                        obj.Name = name;
+                    if (obj.Taken != taken) 
+                        obj.Taken = taken;
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
             return message;
-            //}
+            }
         }
         public string updateMovie(int movieId, string title, DateTime dateAndTime, TimeSpan Duration, int roomId)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The movie was updated succesfully!";
-            //    try
-            //    {
-            //        var obj = db.Movies.SingleOrDefault(m => m.Id == movieId);
-            //        if (title != null && title != "")
-            //            obj.Title = title;
-            //        if (obj.DateAndTime != dateAndTime) //Liam N.
-            //            obj.DateAndTime = dateAndTime;
-            //        if (obj.RoomId != roomId)
-            //            obj.RoomId = roomId;
-            //        db.SubmitChanges();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
-            return message;
-            //}
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The movie was updated succesfully!";
+                try
+                {
+                    var obj = db.Movies.SingleOrDefault(m => m.Id == movieId);
+                    if (title != null && title != "")
+                        obj.Title = title;
+                    if (obj.DateAndTime != dateAndTime)
+                        obj.DateAndTime = dateAndTime;
+                    if (roomId != 0)
+                    {
+                        obj.RoomId = roomId;
+                        var seats = db.Seats.Where(s => s.RoomId == roomId);
+                        foreach (var item in seats)
+                        {
+                            MovieSeat ms = new MovieSeat();
+                            ms.MovieId = movieId;
+                            ms.SeatId = item.Id;
+                            db.MovieSeats.InsertOnSubmit(ms);
+                        }
+                    }
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
         }
         public string updateRoom(int roomId, int cols, int rows)
         {
 
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The room was updated succesfully!";
-            //    try
-            //    {
-            //        emptyRoom(roomId);
-            //        var obj = db.Rooms.SingleOrDefault(r => r.Id == roomId);
-            //        if (rows != 0)
-            //            obj.Rows = rows;
-            //        if (cols != 0)
-            //            obj.Cols = cols;
-            //        //TODO: AT UPDATE OF ROOM, MAKE NEW SEATS FOR THE WHOLE ROOM
-            //        //TODO: MAX connections to database 3
-            //        Room room = db.Rooms.SingleOrDefault(r => r.Id == roomId);
-            //        for (int i = 1; i <= rows; i++)
-            //        {
-            //            for (int j = 1; j <= cols; j++)
-            //            {
-            //                Seat seat = new Seat();
-            //                seat.Row = i;
-            //                seat.Col = j;
-            //                seat.Usable = true;
-            //                seat.RoomId = room.Id;
-            //                room.Seats.Add(seat);
-            //            }
-            //        }
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The room was updated succesfully!";
+                try
+                {
+                    emptyRoom(roomId);
+                    var obj = db.Rooms.SingleOrDefault(r => r.Id == roomId);
+                    if (rows != 0)
+                        obj.Rows = rows;
+                    if (cols != 0)
+                        obj.Cols = cols;
+                    //TODO: AT UPDATE OF ROOM, MAKE NEW SEATS FOR THE WHOLE ROOM
+                    //TODO: MAX connections to database 3
+                    Room room = db.Rooms.SingleOrDefault(r => r.Id == roomId);
+                    for (int i = 1; i <= rows; i++)
+                    {
+                        for (int j = 1; j <= cols; j++)
+                        {
+                            Seat seat = new Seat();
+                            seat.Row = i;
+                            seat.Col = j;
+                            seat.Usable = true;
+                            seat.RoomId = room.Id;
+                            room.Seats.Add(seat);
+                        }
+                    }
+                    var movies = db.Movies.Where(m => m.RoomId == roomId);
+                    foreach (var item in movies)
+                    {
+                        updateMovie(item.Id, "", item.DateAndTime, item.Duration, roomId);
+                    }
 
-            //        db.SubmitChanges();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
-            return message;
-            //}
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
         }
         public string updateTicket(int ticketId, decimal standard, int reservationId, int discountId)
         {
@@ -998,31 +1009,33 @@ namespace AwesomeServer
 
         //    return message;
         //}
-        //public bool emptyRoom(int roomId)
-        //{
-        //    bool success = true;
-        //    try
-        //    {
-        //        using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-        //        {
-        //            var seats = db.Seats.Where(s => s.RoomId == roomId);
-        //            db.Seats.DeleteAllOnSubmit(seats);
+        public bool emptyRoom(int roomId)
+        {
+            bool success = true;
+            try
+            {
+                using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+                {
+                    var seats = db.Seats.Where(s => s.RoomId == roomId);
+                    db.Seats.DeleteAllOnSubmit(seats);
+                    var movieSeats = db.MovieSeats.Where(ms => ms.Movie.RoomId == roomId);
+                    db.MovieSeats.DeleteAllOnSubmit(movieSeats);
 
-        //            var room = db.Rooms.SingleOrDefault(r => r.Id == roomId);
-        //            room.Cols = 0;
-        //            room.Rows = 0;
+                    var room = db.Rooms.SingleOrDefault(r => r.Id == roomId);
+                    room.Cols = 0;
+                    room.Rows = 0;
 
-        //            db.SubmitChanges();
-        //        }
+                    db.SubmitChanges();
+                }
 
 
-        //    }
-        //    catch (Exception)
-        //    {
-        //        success = false;
-        //    }
-        //    return success;
-        //}
+            }
+            catch (Exception)
+            {
+                success = false;
+            }
+            return success;
+        }
         //public string takeTickets(int reservationId)
         //{
         //    using (DatabaseModelDataContext db = new DatabaseModelDataContext())
