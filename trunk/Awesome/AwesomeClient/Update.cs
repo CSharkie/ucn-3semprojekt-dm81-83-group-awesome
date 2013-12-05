@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AwesomeServer;
 using AwesomeClient.ServiceReference;
 
 namespace AwesomeClient
@@ -48,7 +49,6 @@ namespace AwesomeClient
                 room = client.getRoom(Convert.ToInt32(room_txt_roomId.Text));
                 room_txt_cols.Text = room.Cols.ToString();
                 room_txt_rows.Text = room.Rows.ToString();
-                room_txt_seats.Text = room.Seats.Count().ToString();
 
                 // Sets the buttons to Usable after you get something
                 room_btn_edit.Enabled = true;

@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/AwesomeService" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/AwesomeServer" />
   <xs:element name="createReservation">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="taken" type="xs:boolean" />
-        <xs:element minOccurs="0" name="dateReserved" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="seatCounts" type="xs:int" />
         <xs:element minOccurs="0" name="movieId" type="xs:int" />
-        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="seats" nillable="true" type="q1:ArrayOfint" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="movieSeatIds" nillable="true" type="q1:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -25,6 +26,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="dateAndTime" type="xs:dateTime" />
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="Duration" type="q2:duration" />
         <xs:element minOccurs="0" name="roomId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -89,7 +91,7 @@
         <xs:element minOccurs="0" name="reservationId" type="xs:int" />
         <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="taken" type="xs:boolean" />
-        <xs:element minOccurs="0" name="movieId" type="xs:int" />
+        <xs:element minOccurs="0" name="dateOfReserve" type="xs:dateTime" />
         <xs:element minOccurs="0" name="seatCount" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -107,6 +109,7 @@
         <xs:element minOccurs="0" name="movieId" type="xs:int" />
         <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="dateAndTime" type="xs:dateTime" />
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="Duration" type="q3:duration" />
         <xs:element minOccurs="0" name="roomId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -158,8 +161,8 @@
         <xs:element minOccurs="0" name="col" type="xs:int" />
         <xs:element minOccurs="0" name="row" type="xs:int" />
         <xs:element minOccurs="0" name="usable" type="xs:boolean" />
+        <xs:element minOccurs="0" name="dateAndTime" type="xs:dateTime" />
         <xs:element minOccurs="0" name="roomId" type="xs:int" />
-        <xs:element minOccurs="0" name="reservationId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -190,14 +193,13 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="reservationId" type="xs:int" />
         <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="movieId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="getReservationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getReservationResult" nillable="true" type="q2:ArrayOfReservation" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getReservationResult" nillable="true" type="q4:ArrayOfReservation" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -213,7 +215,7 @@
   <xs:element name="getMovieResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getMovieResult" nillable="true" type="q3:ArrayOfMovie" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getMovieResult" nillable="true" type="q5:ArrayOfMovie" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -227,7 +229,7 @@
   <xs:element name="getRoomResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getRoomResult" nillable="true" type="q4:Room" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getRoomResult" nillable="true" type="q6:Room" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -239,7 +241,7 @@
   <xs:element name="getAllRoomsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getAllRoomsResult" nillable="true" type="q5:ArrayOfRoom" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getAllRoomsResult" nillable="true" type="q7:ArrayOfRoom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -254,7 +256,7 @@
   <xs:element name="getTicketResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getTicketResult" nillable="true" type="q6:ArrayOfTicket" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getTicketResult" nillable="true" type="q8:ArrayOfTicket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -265,14 +267,14 @@
         <xs:element minOccurs="0" name="roomId" type="xs:int" />
         <xs:element minOccurs="0" name="col" type="xs:int" />
         <xs:element minOccurs="0" name="row" type="xs:int" />
-        <xs:element minOccurs="0" name="reservationId" type="xs:int" />
+        <xs:element minOccurs="0" name="movieId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="getSeatResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getSeatResult" nillable="true" type="q7:ArrayOfSeat" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getSeatResult" nillable="true" type="q9:ArrayOfSeat" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -287,7 +289,7 @@
   <xs:element name="getDiscountResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getDiscountResult" nillable="true" type="q8:Discount" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getDiscountResult" nillable="true" type="q10:Discount" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -358,110 +360,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="removeDiscountResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getAdjSeatSingleThread">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
-        <xs:element minOccurs="0" name="roomId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getAdjSeatSingleThreadResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getAdjSeatSingleThreadResult" nillable="true" type="q9:ArrayOfSeat" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getAdjSeatMultiThread">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
-        <xs:element minOccurs="0" name="roomId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getAdjSeatMultiThreadResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getAdjSeatMultiThreadResult" nillable="true" type="q10:ArrayOfSeat" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getAdjSeatParallel">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
-        <xs:element minOccurs="0" name="roomId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getAdjSeatParallelResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getAdjSeatParallelResult" nillable="true" type="q11:ArrayOfSeat" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getAdjSeatSingleThreadV2">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
-        <xs:element minOccurs="0" name="roomId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getAdjSeatSingleThreadV2Response">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getAdjSeatSingleThreadV2Result" nillable="true" type="q12:ArrayOfSeat" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getAdjSeatMultiThreadV2">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
-        <xs:element minOccurs="0" name="roomId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getAdjSeatMultiThreadV2Response">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/AwesomeService" minOccurs="0" name="getAdjSeatMultiThreadV2Result" nillable="true" type="q13:ArrayOfSeat" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="adj2">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="noOfSeats" type="xs:int" />
-        <xs:element minOccurs="0" name="roomId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="adj2Response">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="adj2Result" nillable="true" type="q14:ArrayOfstring" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="emptyRoom">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="roomId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="emptyRoomResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="emptyRoomResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -26,7 +26,7 @@
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="cd5ac78f-7844-4519-aade-38de78ec39f7" SourceId="1" SourceUrl="http://localhost:8733/AwesomeService/Service/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="381fb19e-ade8-407e-a956-2f9e5fbecbef" SourceId="1" SourceUrl="http://localhost:8733/AwesomeService/Service/mex" />
     <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="edb332ab-e3db-4c90-b477-78df93e9ea7e" SourceId="1" SourceUrl="http://localhost:8733/AwesomeService/Service/mex" />
-    <MetadataFile FileName="AwesomeService.xsd" MetadataType="Schema" ID="5910eafd-c0de-4bd2-8259-6b9739eafdf5" SourceId="1" SourceUrl="http://localhost:8733/AwesomeService/Service/mex" />
+    <MetadataFile FileName="AwesomeServer.xsd" MetadataType="Schema" ID="8c5a69f8-4734-4c46-be0c-079cf1bc8f1b" SourceId="1" SourceUrl="http://localhost:8733/AwesomeService/Service/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

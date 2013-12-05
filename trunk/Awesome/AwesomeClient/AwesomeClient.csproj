@@ -117,6 +117,7 @@
     <EmbeddedResource Include="Update.resx">
       <DependentUpon>Update.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\AwesomeServer.Discount.datasource" />
     <None Include="Properties\DataSources\AwesomeServer.Movie.datasource" />
     <None Include="Properties\DataSources\AwesomeServer.Reservation.datasource" />
     <None Include="Properties\DataSources\AwesomeServer.Room.datasource" />
@@ -134,25 +135,7 @@
     <None Include="Service References\ServiceReference\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference\AwesomeClient.ServiceReference.Discount.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServiceReference\AwesomeClient.ServiceReference.Movie.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServiceReference\AwesomeClient.ServiceReference.Reservation.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServiceReference\AwesomeClient.ServiceReference.Room.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServiceReference\AwesomeClient.ServiceReference.Seat.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServiceReference\AwesomeClient.ServiceReference.Ticket.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServiceReference\AwesomeService.xsd">
+    <None Include="Service References\ServiceReference\AwesomeServer.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceReference\service.wsdl" />
