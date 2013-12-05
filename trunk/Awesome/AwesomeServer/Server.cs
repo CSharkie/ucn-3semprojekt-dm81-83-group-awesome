@@ -387,6 +387,8 @@ namespace AwesomeServer
                 }
             }
         }
+
+        //TODO : we should get back the movieseats too
         public IList<Movie> getMovie(int movieId, string title, int roomId)
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
@@ -560,156 +562,157 @@ namespace AwesomeServer
         #region remove
         public string removeReservation(int reservationId)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The reservation was removed succesfully!";
-            //    try
-            //    {
-            //        var reservation = db.Reservations.SingleOrDefault(r => r.Id == reservationId);
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The reservation was removed succesfully!";
+                try
+                {
+                    var reservation = db.Reservations.SingleOrDefault(r => r.Id == reservationId);
 
-            //        if (reservation != null)
-            //        {
-            //            db.Reservations.DeleteOnSubmit(reservation);
-            //            db.SubmitChanges();
-            //        }
-            //        else
-            //            message = "There was nothing to remove.";
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
-            return message;
-            //}
+                    if (reservation != null)
+                    {
+                        db.Reservations.DeleteOnSubmit(reservation);
+                        db.SubmitChanges();
+                    }
+                    else
+                        message = "There was nothing to remove.";
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
         }
 
         public string removeMovie(int movieId)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The reservation was removed succesfully!";
-            //    try
-            //    {
-            //        var movie = db.Movies.SingleOrDefault(m => m.Id == movieId);
-            //        if (movie != null)
-            //        {
-            //            db.Movies.DeleteOnSubmit(movie);
-            //            db.SubmitChanges();
-            //        }
-            //        else
-            //        {
-            //            message = "There was nothing to remove.";
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+            string message = "The movie was removed succesfully!";
+                try
+                {
+                    var movie = db.Movies.SingleOrDefault(m => m.Id == movieId);
+                    if (movie != null)
+                    {
+                        var movieSeats = db.MovieSeats.Where(ms => ms.Movie.RoomId == movie.RoomId);
+                        db.Movies.DeleteOnSubmit(movie);
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        message = "There was nothing to remove.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
             return message;
-            //}
+            }
 
         }
 
         public string removeRoom(int roomId)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
             string message = "The Room was removed succesfully!";
-            //    try
-            //    {
-            //        var room = db.Rooms.SingleOrDefault(r => r.Id == roomId);
-            //        if (room != null)
-            //        {
-            //            db.Rooms.DeleteOnSubmit(room);
-            //            db.SubmitChanges();
-            //        }
-            //        else
-            //        {
-            //            message = "There was nothing to remove.";
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
+                try
+                {
+                    var room = db.Rooms.SingleOrDefault(r => r.Id == roomId);
+                    if (room != null)
+                    {
+                        db.Rooms.DeleteOnSubmit(room);
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        message = "There was nothing to remove.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
             return message;
-            //}
+            }
         }
 
         public string removeTicket(int ticketId)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The Ticket was removed succesfully!";
-            //    try
-            //    {
-            //        var ticket = db.Tickets.SingleOrDefault(t => t.Id == ticketId);
-            //        if (ticket != null)
-            //        {
-            //            db.Tickets.DeleteOnSubmit(ticket);
-            //            db.SubmitChanges();
-            //        }
-            //        else
-            //        {
-            //            message = "There was nothing to remove.";
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
-            return message;
-            //}
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The Ticket was removed succesfully!";
+                try
+                {
+                    var ticket = db.Tickets.SingleOrDefault(t => t.Id == ticketId);
+                    if (ticket != null)
+                    {
+                        db.Tickets.DeleteOnSubmit(ticket);
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        message = "There was nothing to remove.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
         }
         public string removeDiscount(int discountId)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The Discount was removed succesfully!";
-            //    try
-            //    {
-            //        var discount = db.Discounts.SingleOrDefault(d => d.Id == discountId);
-            //        if (discount != null)
-            //        {
-            //            db.Discounts.DeleteOnSubmit(discount);
-            //            db.SubmitChanges();
-            //        }
-            //        else
-            //        {
-            //            message = "There was nothing to remove.";
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
-            return message;
-            //}
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The Discount was removed succesfully!";
+                try
+                {
+                    var discount = db.Discounts.SingleOrDefault(d => d.Id == discountId);
+                    if (discount != null)
+                    {
+                        db.Discounts.DeleteOnSubmit(discount);
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        message = "There was nothing to remove.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
         }
         public string removeSeat(int seatId)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The Seat was removed succesfully!";
-            //    try
-            //    {
-            //        var seat = db.Seats.SingleOrDefault(s => s.Id == seatId);
-            //        if (seat != null)
-            //        {
-            //            db.Seats.DeleteOnSubmit(seat);
-            //            db.SubmitChanges();
-            //        }
-            //        else
-            //        {
-            //            message = "There was nothing to remove.";
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
-            return message;
-            //}
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The Seat was removed succesfully!";
+                try
+                {
+                    var seat = db.Seats.SingleOrDefault(s => s.Id == seatId);
+                    if (seat != null)
+                    {
+                        db.Seats.DeleteOnSubmit(seat);
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        message = "There was nothing to remove.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
         }
         #endregion
 
