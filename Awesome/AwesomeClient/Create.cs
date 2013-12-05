@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AwesomeServer;
 using AwesomeClient.ServiceReference;
 
 namespace AwesomeClient
@@ -44,7 +45,7 @@ namespace AwesomeClient
                 movie.Title = movie_txt_title.Text;
                 movie.DateAndTime = movie_date_picker.Value;
                 movie.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
-                client.createMovie(movie.Title, movie.DateAndTime, movie.RoomId);
+                client.createMovie(movie.Title, movie.DateAndTime,movie.Duration, movie.RoomId);
                 MessageBox.Show("The movie was added succesfully!");
             }
             catch (Exception ex)
@@ -67,8 +68,8 @@ namespace AwesomeClient
                 {
                     reserv.Taken = false;
                 }
-                reserv.DateReserved = reserv_date_picker.Value;
-                reserv.MovieId = Convert.ToInt32(reserv_txt_movieId.Text);
+                reserv.DateOfReserve = reserv_date_picker.Value;
+                //reserv.MovieId = Convert.ToInt32(reserv_txt_movieId.Text);
                 reserv.SeatCount = Convert.ToInt32(reserv_txt_seatCount.Text);
                 // TODO Fix create reservation
                 //client.createReservation(reserv.Name, reserv.Taken, reserv.DateReserved, reserv.MovieId, reserv.SeatCount);
