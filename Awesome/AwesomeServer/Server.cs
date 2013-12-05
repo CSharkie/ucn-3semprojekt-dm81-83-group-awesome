@@ -210,6 +210,8 @@ namespace AwesomeServer
                         obj.DateAndTime = dateAndTime;
                     if (roomId != 0)
                     {
+                        var movieSeats = db.MovieSeats.Where(ms => ms.Movie.RoomId == roomId);
+                        db.MovieSeats.DeleteAllOnSubmit(movieSeats);
                         obj.RoomId = roomId;
                         var seats = db.Seats.Where(s => s.RoomId == roomId);
                         foreach (var item in seats)
@@ -258,6 +260,7 @@ namespace AwesomeServer
                             room.Seats.Add(seat);
                         }
                     }
+                    db.SubmitChanges();
                     var movies = db.Movies.Where(m => m.RoomId == roomId);
                     foreach (var item in movies)
                     {
