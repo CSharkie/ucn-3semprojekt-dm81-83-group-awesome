@@ -28,7 +28,7 @@ namespace AwesomeClient
                 room.Cols = Convert.ToInt32(room_txt_col.Text);
                 room.Rows = Convert.ToInt32(room_txt_row.Text);
                 client.createRoom(room.Cols, room.Rows);
-                MessageBox.Show("The room was added succesfully!");
+                MessageBox.Show("The room was created succesfully!");
             }
             catch (Exception ex)
             {
@@ -87,7 +87,7 @@ namespace AwesomeClient
                 Discount disc = new Discount();
                 disc.DPercent = Convert.ToDecimal(discount_txt_dPercent.Text);
                 client.createDiscount(disc.DPercent);
-                MessageBox.Show("The discoutn has been added succesfully!");
+                MessageBox.Show("The discount has been added succesfully!");
             }
             catch (Exception ex)
             {
