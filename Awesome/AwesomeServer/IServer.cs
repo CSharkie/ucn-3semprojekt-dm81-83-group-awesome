@@ -10,7 +10,7 @@ namespace AwesomeServer
     interface IServer
     {
         #region create
-        string createReservation(string name, bool taken, DateTime dateOfReserve, int seatCount);
+        string createReservation(string name, bool taken, int seatCount, int movieId, IList<int> seatIds);
         string createMovie(string title, DateTime dateAndTime, TimeSpan Duration, int roomId);
         string createRoom(int cols, int rows);
         string createTicket(decimal standard, int reservationId, int discountId, int col, int row);

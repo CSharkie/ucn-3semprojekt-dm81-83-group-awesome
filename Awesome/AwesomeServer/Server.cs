@@ -16,160 +16,161 @@ namespace AwesomeServer
     public class Server : IServer
     {
         #region create
-        public string createReservation(string name, bool taken, DateTime dateOfReserve, int seatCount)
+        public string createReservation(string name, bool taken, int seatCount, int movieId, IList<int> seatIds)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The reservation was added succesfully!";
-            //    try
-            //    {
-            //        bool allAvailable = true;
-            //        foreach (int seatId in seatIds)
-            //        {
-            //            if (!getSeat(seatId, 0, 0, 0, 0).First().Usable)
-            //            {
-            //                allAvailable = false;
-            //                break;
-            //            }
-            //        }
-            //        if (allAvailable)
-            //        {
-            //            Reservation reservation = new Reservation();
-            //            reservation.Name = name;
-            //            reservation.Taken = taken;
-            //            reservation.DateReserved = dateReserved;
-            //            reservation.MovieId = movieId;
-            //            reservation.SeatCount = seatIds.Count;
-            //            db.Reservations.InsertOnSubmit(reservation);
-            //            db.SubmitChanges();
-            //            foreach (int seatId in seatIds)
-            //            {
-            //                var seat = db.Seats.SingleOrDefault(s => s.Id == seatId);
-            //                seat.ReservationId = (from r in db.Reservations select r.Id).Max();
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The reservation was added succesfully!";
+                try
+                {
+                    bool allAvailable = true;
+                    foreach (int id in seatIds)
+                    {
+                        var movieSeats = db.MovieSeats.Where(ms => ms.MovieId == movieId && ms.SeatId == id).First();
+                        if (movieSeats.ReservationId != null && movieSeats.ReservationId != 0)
+                        {
+                            allAvailable = false;
+                            message = "Some or all of the seats are taken!";
+                            break;
+                        }
+                    }
+                    if (allAvailable)
+                    {
+                        Reservation reservation = new Reservation();
+                        reservation.Name = name;
+                        reservation.Taken = taken;
+                        reservation.DateOfReserve = (from m in db.Movies where m.Id == movieId select m.DateAndTime).First();
+                        reservation.SeatCount = seatIds.Count;
+                        db.Reservations.InsertOnSubmit(reservation);
+                        db.SubmitChanges();
 
-            //                seat.Usable = false;
-            //            }
-            //            db.SubmitChanges();
-            //        }
-            //        else
-            //            message = "One or more of these seats are taken/unavailable!";
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
-            return message;
-            //}
-        }
-        public string createMovie(string title, DateTime dateAndTime, TimeSpan Duration, int roomId)
-        {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The movie was added succesfully!";
-            //    try
-            //    {
-            //        Movie movie = new Movie();
-            //        movie.Title = title;
-            //        movie.DateAndTime = dateAndTime;
-            //        movie.RoomId = roomId;
-            //        db.Movies.InsertOnSubmit(movie);
-            //        db.SubmitChanges();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
+                        int reservationId = (from r in db.Reservations select r.Id).Max();
+                        foreach (int id in seatIds)
+                        {
+                            var movieSeats = db.MovieSeats.Where(ms => ms.MovieId == movieId && ms.SeatId == id).First();
+                            movieSeats.ReservationId = reservationId;
+                        }
+                        db.SubmitChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
                 return message;
-            //}
+            }
+        }
+        public string createMovie(string title, DateTime dateAndTime, TimeSpan duration, int roomId)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The movie was added succesfully!";
+                try
+                {
+                    Movie movie = new Movie();
+                    movie.Title = title;
+                    movie.DateAndTime = dateAndTime;
+
+                    movie.Duration = duration;
+                    movie.RoomId = roomId;
+
+                    //TODO CHECK IF MOVIE ENDED IN THE ROOM
+                    db.Movies.InsertOnSubmit(movie);
+                    db.SubmitChanges();
+                    var seats = db.Seats.Where(s => s.RoomId == movie.RoomId);
+                    int movieId = (from m in db.Movies select m.Id).Max();
+                    foreach (Seat seat in seats)
+                    {
+                        MovieSeat movieSeat = new MovieSeat();
+                        movieSeat.MovieId = movieId;
+                        movieSeat.SeatId = seat.Id;
+                        db.MovieSeats.InsertOnSubmit(movieSeat);
+                    }
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
         }
         public string createRoom(int cols, int rows)
         {
-        //    //TODO: If we have time implement the custom stair!
-        //    using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-        //    {
+            //    //TODO: If we have time implement the custom stair!
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
                 string message = "The room was added succesfully!";
-        //        try
-        //        {
-        //            Room room = new Room();
-        //            room.Cols = cols;
-        //            room.Rows = rows;
+                try
+                {
+                    Room room = new Room();
+                    room.Cols = cols;
+                    room.Rows = rows;
 
-        //            //generating seats
+                    for (int i = 1; i <= rows; i++)
+                    {
+                        for (int j = 1; j <= cols; j++)
+                        {
+                            Seat seat = new Seat();
+                            seat.Row = i;
+                            seat.Col = j;
+                            seat.Usable = true;
+                            seat.RoomId = room.Id;
+                            room.Seats.Add(seat);
+                        }
+                    }
 
-        //            createSeatDelegate del = new createSeatDelegate(() =>
-        //            {
-        //                for (int i = 1; i <= rows; i++)
-        //                {
-        //                    for (int j = 1; j <= cols; j++)
-        //                    {
-        //                        Seat seat = new Seat();
-        //                        seat.Row = i;
-        //                        seat.Col = j;
-        //                        seat.Usable = true;
-        //                        seat.RoomId = room.Id;
-        //                        room.Seats.Add(seat);
-        //                    }
-        //                }
-        //            });
-
-        //            IAsyncResult result = del.BeginInvoke(new AsyncCallback((IAsyncResult async) =>
-        //            {
-        //                del.EndInvoke(async);
-        //            }), "Success");
-
-
-
-        //            db.Rooms.InsertOnSubmit(room);
-        //            db.SubmitChanges();
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            message = "An error has occured: " + ex.Message;
-        //        }
+                    db.Rooms.InsertOnSubmit(room);
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
                 return message;
-        //    }
+            }
         }
         public string createTicket(decimal standard, int reservationId, int discountId, int col, int row)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The ticket was added succesfully!";
-            //    try
-            //    {
-            //        Ticket ticket = new Ticket();
-            //        ticket.Standard = standard;
-            //        ticket.ReservationId = reservationId;
-            //        ticket.DiscountId = discountId;
-            //        ticket.Col = col;
-            //        ticket.Row = row;
-            //        db.Tickets.InsertOnSubmit(ticket);
-            //        db.SubmitChanges();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
-            return message;
-            //}
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The ticket was added succesfully!";
+                try
+                {
+                    Ticket ticket = new Ticket();
+                    ticket.Standard = standard;
+                    ticket.ReservationId = reservationId;
+                    ticket.DiscountId = discountId;
+                    ticket.Col = col;
+                    ticket.Row = row;
+                    db.Tickets.InsertOnSubmit(ticket);
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
         }
         public string createDiscount(decimal dPercent)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The discount was added succesfully!";
-            //    try
-            //    {
-            //        Discount discount = new Discount();
-            //        discount.DPercent = dPercent;
-            //        db.Discounts.InsertOnSubmit(discount);
-            //        db.SubmitChanges();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        message = "An error has occured: " + ex.Message;
-            //    }
-            return message;
-            //}
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The discount was added succesfully!";
+                try
+                {
+                    Discount discount = new Discount();
+                    discount.DPercent = dPercent;
+                    db.Discounts.InsertOnSubmit(discount);
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
         }
         #endregion
 
@@ -196,7 +197,7 @@ namespace AwesomeServer
             //    {
             //        message = "An error has occured: " + ex.Message;
             //    }
-                return message;
+            return message;
             //}
         }
         public string updateMovie(int movieId, string title, DateTime dateAndTime, TimeSpan Duration, int roomId)
