@@ -340,80 +340,80 @@ namespace AwesomeServer
         public IList<Reservation> getReservation(int reservationId, string name)
         {
 
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            //    try
-            //    {
-            IList<Reservation> returnObj = new List<Reservation>();
-            //        if (reservationId > 0)
-            //            returnObj.Add(db.Reservations.SingleOrDefault(r => r.Id == reservationId));
-            //        else if (name != null && name != "" && movieId > 0)
-            //        {
-            //            var query = db.Reservations.Where(r => r.Name.Contains(name) && r.MovieId == movieId);
-            //            foreach (Reservation r in query)
-            //                returnObj.Add(r);
-            //        }
-            //        else if (name != null && name != "")
-            //        {
-            //            var query = db.Reservations.Where(r => r.Name.Contains(name));
-            //            foreach (Reservation r in query)
-            //                returnObj.Add(r);
-            //        }
-            //        else if (movieId > 0)
-            //        {
-            //            var query = db.Reservations.Where(r => r.MovieId == movieId);
-            //            foreach (Reservation r in query)
-            //                returnObj.Add(r);
-            //        }
-            return returnObj;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        throw (ex);
-            //    }
-            //}
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                try
+                {
+                    IList<Reservation> returnObj = new List<Reservation>();
+                    if (reservationId > 0)
+                        returnObj.Add(db.Reservations.SingleOrDefault(r => r.Id == reservationId));
+                    else if (name != null && name != "" && reservationId > 0)
+                    {
+                        var query = db.Reservations.Where(r => r.Name.Contains(name) && r.Id == reservationId);
+                        foreach (Reservation r in query)
+                            returnObj.Add(r);
+                    }
+                    else if (name != null && name != "")
+                    {
+                        var query = db.Reservations.Where(r => r.Name.Contains(name));
+                        foreach (Reservation r in query)
+                            returnObj.Add(r);
+                    }
+                    else if (reservationId > 0)
+                    {
+                        var query = db.Reservations.Where(r => r.Id == reservationId);
+                        foreach (Reservation r in query)
+                            returnObj.Add(r);
+                    }
+                    return returnObj;
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
+            }
         }
         public IList<Movie> getMovie(int movieId, string title, int roomId)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            IList<Movie> returnObj = new List<Movie>();
-            //    try
-            //    {
-            //        if (movieId > 0)
-            //            returnObj.Add(db.Movies.SingleOrDefault(m => m.Id == movieId));
-            //        else if (title != null && title != "" && roomId > 0)
-            //        {
-            //            var query = db.Movies.Where(m => m.Title.Contains(title) && m.RoomId == roomId);
-            //            foreach (Movie item in query)
-            //            {
-            //                returnObj.Add(item);
-            //            }
-            //        }
-            //        else if (title != null && title != "")
-            //        {
-            //            var query = db.Movies.Where(m => m.Title.Contains(title));
-            //            foreach (Movie item in query)
-            //            {
-            //                returnObj.Add(item);
-            //            }
-            //        }
-            //        else if (roomId > 0)
-            //        {
-            //            var query = db.Movies.Where(m => m.RoomId == roomId);
-            //            foreach (Movie item in query)
-            //            {
-            //                returnObj.Add(item);
-            //            }
-            //        }
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                IList<Movie> returnObj = new List<Movie>();
+                try
+                {
+                    if (movieId > 0)
+                        returnObj.Add(db.Movies.SingleOrDefault(m => m.Id == movieId));
+                    else if (title != null && title != "" && roomId > 0)
+                    {
+                        var query = db.Movies.Where(m => m.Title.Contains(title) && m.RoomId == roomId);
+                        foreach (Movie item in query)
+                        {
+                            returnObj.Add(item);
+                        }
+                    }
+                    else if (title != null && title != "")
+                    {
+                        var query = db.Movies.Where(m => m.Title.Contains(title));
+                        foreach (Movie item in query)
+                        {
+                            returnObj.Add(item);
+                        }
+                    }
+                    else if (roomId > 0)
+                    {
+                        var query = db.Movies.Where(m => m.RoomId == roomId);
+                        foreach (Movie item in query)
+                        {
+                            returnObj.Add(item);
+                        }
+                    }
 
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        throw (ex);
-            //    }
-            return returnObj;
-            //}
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
+                return returnObj;
+            }
         }
         public Room getRoom(int roomId)
         {
