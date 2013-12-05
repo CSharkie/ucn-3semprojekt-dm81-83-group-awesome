@@ -38,8 +38,8 @@
       <Column Name="MovieId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SeatId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ReservationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Movy_MovieSeat" Member="Movie" ThisKey="MovieId" OtherKey="Id" Type="Movie" IsForeignKey="true" />
-      <Association Name="Reservation_MovieSeat" Member="Reservation" ThisKey="ReservationId" OtherKey="Id" Type="Reservation" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Movy_MovieSeat" Member="Movie" ThisKey="MovieId" OtherKey="Id" Type="Movie" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Reservation_MovieSeat" Member="Reservation" ThisKey="ReservationId" OtherKey="Id" Type="Reservation" IsForeignKey="true" />
       <Association Name="Seat_MovieSeat" Member="Seat" ThisKey="SeatId" OtherKey="Id" Type="Seat" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
