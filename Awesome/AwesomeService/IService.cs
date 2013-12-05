@@ -28,7 +28,7 @@ namespace AwesomeService
 
         #region update
         [OperationContract]
-        string updateReservation(int reservationId, string name, bool taken, DateTime dateOfReserve, int seatCount);
+        string updateReservation(int reservationId, string name, bool taken);
 
         [OperationContract]
         string updateMovie(int movieId, string title, DateTime dateAndTime, TimeSpan Duration, int roomId);
@@ -85,8 +85,8 @@ namespace AwesomeService
         //IList<Seat> getAdjSeatMultiThreadV2(int noOfSeats, int roomId);
         //[OperationContract]
         //IList<string> adj2(int noOfSeats, int roomId);
-        //[OperationContract]
-        //bool emptyRoom(int roomId);
+        [OperationContract]
+        bool emptyRoom(int roomId);
         #endregion
     }
   

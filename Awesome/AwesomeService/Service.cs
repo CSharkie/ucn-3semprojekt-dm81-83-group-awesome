@@ -41,10 +41,10 @@ namespace AwesomeService
         #endregion
 
         #region update
-        public string updateReservation(int reservationId, string name, bool taken, DateTime dateOfReserve, int seatCount)
+        public string updateReservation(int reservationId, string name, bool taken)
         {
 
-            return server.updateReservation(reservationId, name, taken, dateOfReserve , seatCount);
+            return server.updateReservation(reservationId, name, taken);
         }
 
         public string updateMovie(int movieId, string title, DateTime dateAndTime, TimeSpan Duration, int roomId)
@@ -159,10 +159,10 @@ namespace AwesomeService
         //    return server.getAdjSeatSingleThreadV2(noOfSeats, roomId);
         //}
 
-        //public bool emptyRoom(int roomId)
-        //{
-        //    return server.emptyRoom(roomId);
-        //}
+        public bool emptyRoom(int roomId)
+        {
+            return server.emptyRoom(roomId);
+        }
         #endregion
     }
 }
