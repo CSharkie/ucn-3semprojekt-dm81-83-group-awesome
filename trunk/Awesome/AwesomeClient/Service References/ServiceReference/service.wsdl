@@ -146,6 +146,12 @@
   <wsdl:message name="IService_removeDiscount_OutputMessage">
     <wsdl:part name="parameters" element="tns:removeDiscountResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_emptyRoom_InputMessage">
+    <wsdl:part name="parameters" element="tns:emptyRoom" />
+  </wsdl:message>
+  <wsdl:message name="IService_emptyRoom_OutputMessage">
+    <wsdl:part name="parameters" element="tns:emptyRoomResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="createReservation">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/createReservation" message="tns:IService_createReservation_InputMessage" />
@@ -238,6 +244,10 @@
     <wsdl:operation name="removeDiscount">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/removeDiscount" message="tns:IService_removeDiscount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/removeDiscountResponse" message="tns:IService_removeDiscount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="emptyRoom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/emptyRoom" message="tns:IService_emptyRoom_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/emptyRoomResponse" message="tns:IService_emptyRoom_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -442,6 +452,15 @@
     </wsdl:operation>
     <wsdl:operation name="removeDiscount">
       <soap:operation soapAction="http://tempuri.org/IService/removeDiscount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="emptyRoom">
+      <soap:operation soapAction="http://tempuri.org/IService/emptyRoom" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

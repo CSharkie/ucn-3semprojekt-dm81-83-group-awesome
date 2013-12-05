@@ -45,6 +45,8 @@ namespace AwesomeClient
         {
             try
             {
+
+
                 Room room = new Room();
                 room = client.getRoom(Convert.ToInt32(room_txt_roomId.Text));
                 room_txt_cols.Text = room.Cols.ToString();
