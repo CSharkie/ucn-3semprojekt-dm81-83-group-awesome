@@ -48,6 +48,8 @@ namespace AwesomeService
         [OperationContract]
         IList<Movie> getMovie(int movieId, string title, int roomId);
         [OperationContract]
+        IList<MovieSeat> getMovieSeatsForMovie(int movieId);
+        [OperationContract]
         Room getRoom(int roomId);
         [OperationContract]
         IList<Room> getAllRooms();
