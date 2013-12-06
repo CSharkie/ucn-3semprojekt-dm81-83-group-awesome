@@ -29,6 +29,7 @@ namespace AwesomeServer
         #region read
         IList<Reservation> getReservation(int reservationId, string name);
         IList<Movie> getMovie(int movieId, string title, int roomId);
+        IList<MovieSeat> getMovieSeatsForMovie(int movieId);
         Room getRoom(int roomId);
         IList<Room> getAllRooms();
         IList<Ticket> getTicket(int ticketId, int reservationId);

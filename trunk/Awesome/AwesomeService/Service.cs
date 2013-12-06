@@ -82,12 +82,14 @@ namespace AwesomeService
         {
             return server.getMovie(movieId, title, roomId);
         }
+        public IList<MovieSeat> getMovieSeatsForMovie(int movieId)
+        {
+            return server.getMovieSeatsForMovie(movieId);
+        }
         public Room getRoom(int roomId)
         {
             return server.getRoom(roomId);
-
         }
-
         public IList<Room> getAllRooms()
         {
             return server.getAllRooms();

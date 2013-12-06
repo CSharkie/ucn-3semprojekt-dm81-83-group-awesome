@@ -179,13 +179,13 @@ namespace AwesomeServer
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
-            string message = "The room was updated succesfully!";
+                string message = "The room was updated succesfully!";
                 try
                 {
                     var obj = db.Reservations.SingleOrDefault(r => r.Id == reservationId);
                     if (name != null && name != "")
                         obj.Name = name;
-                    if (obj.Taken != taken) 
+                    if (obj.Taken != taken)
                         obj.Taken = taken;
                     db.SubmitChanges();
                 }
@@ -193,7 +193,7 @@ namespace AwesomeServer
                 {
                     message = "An error has occured: " + ex.Message;
                 }
-            return message;
+                return message;
             }
         }
         public string updateMovie(int movieId, string title, DateTime dateAndTime, TimeSpan Duration, int roomId)
@@ -389,6 +389,7 @@ namespace AwesomeServer
         }
 
         //TODO : we should get back the movieseats too
+        //TODO : FIX THE MOVIESEAT GET BACK, because now its working if you go step by step, but not if you just run it =))
         public IList<Movie> getMovie(int movieId, string title, int roomId)
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
@@ -397,20 +398,40 @@ namespace AwesomeServer
                 try
                 {
                     if (movieId > 0)
-                        returnObj.Add(db.Movies.SingleOrDefault(m => m.Id == movieId));
+                    {
+                        var movie=db.Movies.SingleOrDefault(m => m.Id == movieId);
+                        var query = db.MovieSeats.Where(ms => ms.MovieId == movie.Id);
+                        foreach (MovieSeat ms in query)
+                        {
+                            movie.MovieSeats.Add(ms);
+                        }
+                        returnObj.Add(movie);
+                    }
                     else if (title != null && title != "" && roomId > 0)
                     {
                         var query = db.Movies.Where(m => m.Title.Contains(title) && m.RoomId == roomId);
                         foreach (Movie item in query)
                         {
+                            var query2 = db.MovieSeats.Where(ms => ms.MovieId == item.Id);
+                            foreach (MovieSeat ms in query2)
+                            {
+                                item.MovieSeats.Add(ms);
+                            }
                             returnObj.Add(item);
+
                         }
+
                     }
                     else if (title != null && title != "")
                     {
                         var query = db.Movies.Where(m => m.Title.Contains(title));
                         foreach (Movie item in query)
                         {
+                            var query2 = db.MovieSeats.Where(ms => ms.MovieId == item.Id);
+                            foreach (MovieSeat ms in query2)
+                            {
+                                item.MovieSeats.Add(ms);
+                            }
                             returnObj.Add(item);
                         }
                     }
@@ -419,13 +440,44 @@ namespace AwesomeServer
                         var query = db.Movies.Where(m => m.RoomId == roomId);
                         foreach (Movie item in query)
                         {
+                            var query2 = db.MovieSeats.Where(ms => ms.MovieId == item.Id);
+                            foreach (MovieSeat ms in query2)
+                            {
+                                item.MovieSeats.Add(ms);
+                            }
                             returnObj.Add(item);
                         }
                     }
 
                 }
+
                 catch (Exception ex)
                 {
+                    throw (ex);
+                }
+                return returnObj;
+            }
+        }
+
+        public IList<MovieSeat> getMovieSeatsForMovie(int movieId)
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                IList<MovieSeat> returnObj = new List<MovieSeat>();
+                try
+                {
+                    if (movieId > 0)
+                    {
+                        var query = db.MovieSeats.Where(ms => ms.MovieId == movieId);
+                        foreach (MovieSeat ms in query)
+                        {
+                            returnObj.Add(ms);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
                     throw (ex);
                 }
                 return returnObj;
@@ -589,7 +641,7 @@ namespace AwesomeServer
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
-            string message = "The movie was removed succesfully!";
+                string message = "The movie was removed succesfully!";
                 try
                 {
                     var movie = db.Movies.SingleOrDefault(m => m.Id == movieId);
@@ -608,7 +660,7 @@ namespace AwesomeServer
                 {
                     message = "An error has occured: " + ex.Message;
                 }
-            return message;
+                return message;
             }
 
         }
@@ -617,7 +669,7 @@ namespace AwesomeServer
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
-            string message = "The Room was removed succesfully!";
+                string message = "The Room was removed succesfully!";
                 try
                 {
                     var room = db.Rooms.SingleOrDefault(r => r.Id == roomId);
@@ -635,7 +687,7 @@ namespace AwesomeServer
                 {
                     message = "An error has occured: " + ex.Message;
                 }
-            return message;
+                return message;
             }
         }
 
