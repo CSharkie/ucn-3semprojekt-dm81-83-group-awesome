@@ -38,6 +38,8 @@ namespace AwesomeClient
             this.room_txt_row = new System.Windows.Forms.TextBox();
             this.room_txt_col = new System.Windows.Forms.TextBox();
             this.create_movieTab = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.movie_txt_duration = new System.Windows.Forms.TextBox();
             this.movie_date_picker = new System.Windows.Forms.DateTimePicker();
             this.movie_btn_create = new System.Windows.Forms.Button();
             this.movie_roomId_lbl = new System.Windows.Forms.Label();
@@ -46,15 +48,17 @@ namespace AwesomeClient
             this.movie_txt_roomId = new System.Windows.Forms.TextBox();
             this.movie_txt_title = new System.Windows.Forms.TextBox();
             this.create_reservationTab = new System.Windows.Forms.TabPage();
+            this.reserv_btn_getRoom = new System.Windows.Forms.Button();
+            this.reserv_txt_title = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.reserv_panel_room = new System.Windows.Forms.Panel();
             this.reserv_btn_create = new System.Windows.Forms.Button();
-            this.reserv_seatCount_lbl = new System.Windows.Forms.Label();
             this.reserv_movieId_lbl = new System.Windows.Forms.Label();
             this.reserv_date_lbl = new System.Windows.Forms.Label();
-            this.reserv_txt_seatCount = new System.Windows.Forms.TextBox();
             this.reserv_txt_movieId = new System.Windows.Forms.TextBox();
             this.reserv_txt_name = new System.Windows.Forms.TextBox();
             this.reserv_date_picker = new System.Windows.Forms.DateTimePicker();
-            this.reserv_taken_chk = new System.Windows.Forms.CheckBox();
+            this.reserv_chk_taken = new System.Windows.Forms.CheckBox();
             this.reserv_name_lbl = new System.Windows.Forms.Label();
             this.create_discountTab = new System.Windows.Forms.TabPage();
             this.discount_percent_lbl = new System.Windows.Forms.Label();
@@ -149,6 +153,8 @@ namespace AwesomeClient
             // 
             // create_movieTab
             // 
+            this.create_movieTab.Controls.Add(this.label1);
+            this.create_movieTab.Controls.Add(this.movie_txt_duration);
             this.create_movieTab.Controls.Add(this.movie_date_picker);
             this.create_movieTab.Controls.Add(this.movie_btn_create);
             this.create_movieTab.Controls.Add(this.movie_roomId_lbl);
@@ -164,6 +170,22 @@ namespace AwesomeClient
             this.create_movieTab.Text = "Movie";
             this.create_movieTab.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(96, 89);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Duration:";
+            // 
+            // movie_txt_duration
+            // 
+            this.movie_txt_duration.Location = new System.Drawing.Point(152, 86);
+            this.movie_txt_duration.Name = "movie_txt_duration";
+            this.movie_txt_duration.Size = new System.Drawing.Size(200, 20);
+            this.movie_txt_duration.TabIndex = 8;
+            // 
             // movie_date_picker
             // 
             this.movie_date_picker.CustomFormat = "MM/dd/yyyy hh:mm tt";
@@ -175,7 +197,7 @@ namespace AwesomeClient
             // 
             // movie_btn_create
             // 
-            this.movie_btn_create.Location = new System.Drawing.Point(152, 111);
+            this.movie_btn_create.Location = new System.Drawing.Point(152, 138);
             this.movie_btn_create.Name = "movie_btn_create";
             this.movie_btn_create.Size = new System.Drawing.Size(75, 23);
             this.movie_btn_create.TabIndex = 6;
@@ -186,7 +208,7 @@ namespace AwesomeClient
             // movie_roomId_lbl
             // 
             this.movie_roomId_lbl.AutoSize = true;
-            this.movie_roomId_lbl.Location = new System.Drawing.Point(96, 88);
+            this.movie_roomId_lbl.Location = new System.Drawing.Point(96, 115);
             this.movie_roomId_lbl.Name = "movie_roomId_lbl";
             this.movie_roomId_lbl.Size = new System.Drawing.Size(50, 13);
             this.movie_roomId_lbl.TabIndex = 5;
@@ -212,7 +234,7 @@ namespace AwesomeClient
             // 
             // movie_txt_roomId
             // 
-            this.movie_txt_roomId.Location = new System.Drawing.Point(152, 85);
+            this.movie_txt_roomId.Location = new System.Drawing.Point(152, 112);
             this.movie_txt_roomId.Name = "movie_txt_roomId";
             this.movie_txt_roomId.Size = new System.Drawing.Size(200, 20);
             this.movie_txt_roomId.TabIndex = 2;
@@ -226,15 +248,17 @@ namespace AwesomeClient
             // 
             // create_reservationTab
             // 
+            this.create_reservationTab.Controls.Add(this.reserv_btn_getRoom);
+            this.create_reservationTab.Controls.Add(this.reserv_txt_title);
+            this.create_reservationTab.Controls.Add(this.label2);
+            this.create_reservationTab.Controls.Add(this.reserv_panel_room);
             this.create_reservationTab.Controls.Add(this.reserv_btn_create);
-            this.create_reservationTab.Controls.Add(this.reserv_seatCount_lbl);
             this.create_reservationTab.Controls.Add(this.reserv_movieId_lbl);
             this.create_reservationTab.Controls.Add(this.reserv_date_lbl);
-            this.create_reservationTab.Controls.Add(this.reserv_txt_seatCount);
             this.create_reservationTab.Controls.Add(this.reserv_txt_movieId);
             this.create_reservationTab.Controls.Add(this.reserv_txt_name);
             this.create_reservationTab.Controls.Add(this.reserv_date_picker);
-            this.create_reservationTab.Controls.Add(this.reserv_taken_chk);
+            this.create_reservationTab.Controls.Add(this.reserv_chk_taken);
             this.create_reservationTab.Controls.Add(this.reserv_name_lbl);
             this.create_reservationTab.Location = new System.Drawing.Point(4, 22);
             this.create_reservationTab.Name = "create_reservationTab";
@@ -244,24 +268,49 @@ namespace AwesomeClient
             this.create_reservationTab.Text = "Reservation";
             this.create_reservationTab.UseVisualStyleBackColor = true;
             // 
+            // reserv_btn_getRoom
+            // 
+            this.reserv_btn_getRoom.Location = new System.Drawing.Point(228, 141);
+            this.reserv_btn_getRoom.Name = "reserv_btn_getRoom";
+            this.reserv_btn_getRoom.Size = new System.Drawing.Size(75, 23);
+            this.reserv_btn_getRoom.TabIndex = 15;
+            this.reserv_btn_getRoom.Text = "Get Room";
+            this.reserv_btn_getRoom.UseVisualStyleBackColor = true;
+            this.reserv_btn_getRoom.Click += new System.EventHandler(this.reserv_btn_getRoom_Click);
+            // 
+            // reserv_txt_title
+            // 
+            this.reserv_txt_title.Location = new System.Drawing.Point(327, 115);
+            this.reserv_txt_title.Name = "reserv_txt_title";
+            this.reserv_txt_title.Size = new System.Drawing.Size(101, 20);
+            this.reserv_txt_title.TabIndex = 14;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(291, 118);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(30, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Title:";
+            // 
+            // reserv_panel_room
+            // 
+            this.reserv_panel_room.Location = new System.Drawing.Point(33, 199);
+            this.reserv_panel_room.Name = "reserv_panel_room";
+            this.reserv_panel_room.Size = new System.Drawing.Size(558, 227);
+            this.reserv_panel_room.TabIndex = 12;
+            // 
             // reserv_btn_create
             // 
-            this.reserv_btn_create.Location = new System.Drawing.Point(228, 167);
+            this.reserv_btn_create.Enabled = false;
+            this.reserv_btn_create.Location = new System.Drawing.Point(228, 170);
             this.reserv_btn_create.Name = "reserv_btn_create";
             this.reserv_btn_create.Size = new System.Drawing.Size(75, 23);
             this.reserv_btn_create.TabIndex = 11;
             this.reserv_btn_create.Text = "Create";
             this.reserv_btn_create.UseVisualStyleBackColor = true;
             this.reserv_btn_create.Click += new System.EventHandler(this.reserv_btn_create_Click);
-            // 
-            // reserv_seatCount_lbl
-            // 
-            this.reserv_seatCount_lbl.AutoSize = true;
-            this.reserv_seatCount_lbl.Location = new System.Drawing.Point(159, 144);
-            this.reserv_seatCount_lbl.Name = "reserv_seatCount_lbl";
-            this.reserv_seatCount_lbl.Size = new System.Drawing.Size(63, 13);
-            this.reserv_seatCount_lbl.TabIndex = 10;
-            this.reserv_seatCount_lbl.Text = "Seat Count:";
             // 
             // reserv_movieId_lbl
             // 
@@ -281,19 +330,13 @@ namespace AwesomeClient
             this.reserv_date_lbl.TabIndex = 8;
             this.reserv_date_lbl.Text = "Reservation Date:";
             // 
-            // reserv_txt_seatCount
-            // 
-            this.reserv_txt_seatCount.Location = new System.Drawing.Point(228, 141);
-            this.reserv_txt_seatCount.Name = "reserv_txt_seatCount";
-            this.reserv_txt_seatCount.Size = new System.Drawing.Size(200, 20);
-            this.reserv_txt_seatCount.TabIndex = 7;
-            // 
             // reserv_txt_movieId
             // 
             this.reserv_txt_movieId.Location = new System.Drawing.Point(228, 115);
             this.reserv_txt_movieId.Name = "reserv_txt_movieId";
-            this.reserv_txt_movieId.Size = new System.Drawing.Size(200, 20);
+            this.reserv_txt_movieId.Size = new System.Drawing.Size(57, 20);
             this.reserv_txt_movieId.TabIndex = 4;
+            this.reserv_txt_movieId.TextChanged += new System.EventHandler(this.reserv_txt_movieId_TextChanged);
             // 
             // reserv_txt_name
             // 
@@ -311,18 +354,16 @@ namespace AwesomeClient
             this.reserv_date_picker.Size = new System.Drawing.Size(200, 20);
             this.reserv_date_picker.TabIndex = 6;
             // 
-            // reserv_taken_chk
+            // reserv_chk_taken
             // 
-            this.reserv_taken_chk.AccessibleDescription = "";
-            this.reserv_taken_chk.AutoSize = true;
-            this.reserv_taken_chk.Checked = true;
-            this.reserv_taken_chk.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.reserv_taken_chk.Location = new System.Drawing.Point(228, 66);
-            this.reserv_taken_chk.Name = "reserv_taken_chk";
-            this.reserv_taken_chk.Size = new System.Drawing.Size(57, 17);
-            this.reserv_taken_chk.TabIndex = 5;
-            this.reserv_taken_chk.Text = "Taken";
-            this.reserv_taken_chk.UseVisualStyleBackColor = true;
+            this.reserv_chk_taken.AccessibleDescription = "";
+            this.reserv_chk_taken.AutoSize = true;
+            this.reserv_chk_taken.Location = new System.Drawing.Point(228, 66);
+            this.reserv_chk_taken.Name = "reserv_chk_taken";
+            this.reserv_chk_taken.Size = new System.Drawing.Size(57, 17);
+            this.reserv_chk_taken.TabIndex = 5;
+            this.reserv_chk_taken.Text = "Taken";
+            this.reserv_chk_taken.UseVisualStyleBackColor = true;
             // 
             // reserv_name_lbl
             // 
@@ -414,18 +455,22 @@ namespace AwesomeClient
         private System.Windows.Forms.TextBox movie_txt_title;
         private System.Windows.Forms.TabPage create_reservationTab;
         private System.Windows.Forms.Button reserv_btn_create;
-        private System.Windows.Forms.Label reserv_seatCount_lbl;
         private System.Windows.Forms.Label reserv_movieId_lbl;
         private System.Windows.Forms.Label reserv_date_lbl;
-        private System.Windows.Forms.TextBox reserv_txt_seatCount;
         private System.Windows.Forms.TextBox reserv_txt_movieId;
         private System.Windows.Forms.TextBox reserv_txt_name;
         private System.Windows.Forms.DateTimePicker reserv_date_picker;
-        private System.Windows.Forms.CheckBox reserv_taken_chk;
+        private System.Windows.Forms.CheckBox reserv_chk_taken;
         private System.Windows.Forms.Label reserv_name_lbl;
         private System.Windows.Forms.TabPage create_discountTab;
         private System.Windows.Forms.Label discount_percent_lbl;
         private System.Windows.Forms.Button discount_btn_create;
         private System.Windows.Forms.TextBox discount_txt_dPercent;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox movie_txt_duration;
+        private System.Windows.Forms.Panel reserv_panel_room;
+        private System.Windows.Forms.TextBox reserv_txt_title;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button reserv_btn_getRoom;
     }
 }

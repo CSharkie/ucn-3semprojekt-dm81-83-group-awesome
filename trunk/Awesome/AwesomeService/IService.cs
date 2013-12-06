@@ -15,7 +15,7 @@ namespace AwesomeService
     {
         #region create
         [OperationContract]
-        string createReservation(string name, bool taken, int seatCounts,int movieId, IList<int> movieSeatIds);
+        string createReservation(string name, bool taken, int seatCounts,int movieId, IList<int> seatIds);
         [OperationContract]
         string createMovie(string title, DateTime dateAndTime, TimeSpan Duration, int roomId);
         [OperationContract]

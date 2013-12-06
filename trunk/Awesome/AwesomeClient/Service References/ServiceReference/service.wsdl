@@ -86,6 +86,12 @@
   <wsdl:message name="IService_getMovie_OutputMessage">
     <wsdl:part name="parameters" element="tns:getMovieResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_getMovieSeatsForMovie_InputMessage">
+    <wsdl:part name="parameters" element="tns:getMovieSeatsForMovie" />
+  </wsdl:message>
+  <wsdl:message name="IService_getMovieSeatsForMovie_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getMovieSeatsForMovieResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_getRoom_InputMessage">
     <wsdl:part name="parameters" element="tns:getRoom" />
   </wsdl:message>
@@ -204,6 +210,10 @@
     <wsdl:operation name="getMovie">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/getMovie" message="tns:IService_getMovie_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/getMovieResponse" message="tns:IService_getMovie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getMovieSeatsForMovie">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/getMovieSeatsForMovie" message="tns:IService_getMovieSeatsForMovie_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/getMovieSeatsForMovieResponse" message="tns:IService_getMovieSeatsForMovie_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getRoom">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/getRoom" message="tns:IService_getRoom_InputMessage" />
@@ -362,6 +372,15 @@
     </wsdl:operation>
     <wsdl:operation name="getMovie">
       <soap:operation soapAction="http://tempuri.org/IService/getMovie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMovieSeatsForMovie">
+      <soap:operation soapAction="http://tempuri.org/IService/getMovieSeatsForMovie" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

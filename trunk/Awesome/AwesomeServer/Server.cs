@@ -399,56 +399,65 @@ namespace AwesomeServer
                 {
                     if (movieId > 0)
                     {
-                        var movie=db.Movies.SingleOrDefault(m => m.Id == movieId);
-                        var query = db.MovieSeats.Where(ms => ms.MovieId == movie.Id);
-                        foreach (MovieSeat ms in query)
-                        {
-                            movie.MovieSeats.Add(ms);
-                        }
+                        Movie movie = new Movie();
+                        var theMovie=db.Movies.SingleOrDefault(m => m.Id == movieId);
+                        movie.Id = theMovie.Id;
+                        movie.Title = theMovie.Title;
+                        movie.DateAndTime = theMovie.DateAndTime;
+                        movie.Duration = theMovie.Duration;
+                        movie.RoomId = theMovie.RoomId;
+                        movie.Room = theMovie.Room;
+                        movie.MovieSeats = theMovie.MovieSeats;
                         returnObj.Add(movie);
                     }
                     else if (title != null && title != "" && roomId > 0)
                     {
                         var query = db.Movies.Where(m => m.Title.Contains(title) && m.RoomId == roomId);
-                        foreach (Movie item in query)
+                        foreach (Movie theMovie in query)
                         {
-                            var query2 = db.MovieSeats.Where(ms => ms.MovieId == item.Id);
-                            foreach (MovieSeat ms in query2)
-                            {
-                                item.MovieSeats.Add(ms);
-                            }
-                            returnObj.Add(item);
-
+                            Movie movie = new Movie();
+                            movie.Id = theMovie.Id;
+                            movie.Title = theMovie.Title;
+                            movie.DateAndTime = theMovie.DateAndTime;
+                            movie.Duration = theMovie.Duration;
+                            movie.RoomId = theMovie.RoomId;
+                            movie.Room = theMovie.Room;
+                            movie.MovieSeats = theMovie.MovieSeats;
+                            returnObj.Add(movie);
                         }
-
                     }
                     else if (title != null && title != "")
                     {
                         var query = db.Movies.Where(m => m.Title.Contains(title));
-                        foreach (Movie item in query)
+                        foreach (Movie theMovie in query)
                         {
-                            var query2 = db.MovieSeats.Where(ms => ms.MovieId == item.Id);
-                            foreach (MovieSeat ms in query2)
-                            {
-                                item.MovieSeats.Add(ms);
-                            }
-                            returnObj.Add(item);
+                            Movie movie = new Movie();
+                            movie.Id = theMovie.Id;
+                            movie.Title = theMovie.Title;
+                            movie.DateAndTime = theMovie.DateAndTime;
+                            movie.Duration = theMovie.Duration;
+                            movie.RoomId = theMovie.RoomId;
+                            movie.Room = theMovie.Room;
+                            movie.MovieSeats = theMovie.MovieSeats;
+                            returnObj.Add(movie);
                         }
                     }
                     else if (roomId > 0)
                     {
                         var query = db.Movies.Where(m => m.RoomId == roomId);
-                        foreach (Movie item in query)
+                        foreach (Movie theMovie in query)
                         {
-                            var query2 = db.MovieSeats.Where(ms => ms.MovieId == item.Id);
-                            foreach (MovieSeat ms in query2)
-                            {
-                                item.MovieSeats.Add(ms);
-                            }
-                            returnObj.Add(item);
+                            Movie movie = new Movie();
+                            movie.Id = theMovie.Id;
+                            movie.Title = theMovie.Title;
+                            movie.DateAndTime = theMovie.DateAndTime;
+                            movie.Duration = theMovie.Duration;
+                            movie.RoomId = theMovie.RoomId;
+                            movie.Room = theMovie.Room;
+                            movie.MovieSeats = theMovie.MovieSeats;
+                            returnObj.Add(movie);
                         }
                     }
-
                 }
 
                 catch (Exception ex)
@@ -487,15 +496,22 @@ namespace AwesomeServer
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
-                Room returnObj = null;
+                Room returnObj = new Room(); ;
                 try
                 {
-                    returnObj = (from r in db.Rooms where r.Id == roomId select r).FirstOrDefault();
+                    var theRoom = db.Rooms.SingleOrDefault(r => r.Id == roomId);
+                    returnObj.Id = theRoom.Id;
+                    returnObj.Cols = theRoom.Cols;
+                    returnObj.Rows = theRoom.Rows;
+                    returnObj.Movies = theRoom.Movies;
+                    returnObj.Seats = theRoom.Seats;
                 }
                 catch (Exception ex)
                 {
-                    throw (ex);
+                    return null;
                 }
+                var seats = returnObj.Seats;
+                
                 return returnObj;
             }
         }
@@ -505,9 +521,15 @@ namespace AwesomeServer
             {
                 IList<Room> returnObj = new List<Room>();
                 var query = db.Rooms;
-                foreach (Room item in query)
+                foreach (Room theRoom in query)
                 {
-                    returnObj.Add(item);
+                    Room room = new Room();
+                    room.Id = theRoom.Id;
+                    room.Cols = theRoom.Cols;
+                    room.Rows = theRoom.Rows;
+                    room.Movies = theRoom.Movies;
+                    room.Seats = theRoom.Seats;
+                    returnObj.Add(room);
                 }
                 return returnObj;
             }
