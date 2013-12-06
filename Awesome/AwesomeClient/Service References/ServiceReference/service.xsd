@@ -10,7 +10,7 @@
         <xs:element minOccurs="0" name="taken" type="xs:boolean" />
         <xs:element minOccurs="0" name="seatCounts" type="xs:int" />
         <xs:element minOccurs="0" name="movieId" type="xs:int" />
-        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="movieSeatIds" nillable="true" type="q1:ArrayOfint" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="seatIds" nillable="true" type="q1:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -217,6 +217,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getMovieSeatsForMovie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="movieId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getMovieSeatsForMovieResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getMovieSeatsForMovieResult" nillable="true" type="q6:ArrayOfMovieSeat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="getRoom">
     <xs:complexType>
       <xs:sequence>
@@ -227,7 +241,7 @@
   <xs:element name="getRoomResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getRoomResult" nillable="true" type="q6:Room" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getRoomResult" nillable="true" type="q7:Room" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -239,7 +253,7 @@
   <xs:element name="getAllRoomsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getAllRoomsResult" nillable="true" type="q7:ArrayOfRoom" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getAllRoomsResult" nillable="true" type="q8:ArrayOfRoom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -254,7 +268,7 @@
   <xs:element name="getTicketResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getTicketResult" nillable="true" type="q8:ArrayOfTicket" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getTicketResult" nillable="true" type="q9:ArrayOfTicket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -272,7 +286,7 @@
   <xs:element name="getSeatResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getSeatResult" nillable="true" type="q9:ArrayOfSeat" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getSeatResult" nillable="true" type="q10:ArrayOfSeat" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -287,7 +301,7 @@
   <xs:element name="getDiscountResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getDiscountResult" nillable="true" type="q10:Discount" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/AwesomeServer" minOccurs="0" name="getDiscountResult" nillable="true" type="q11:Discount" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

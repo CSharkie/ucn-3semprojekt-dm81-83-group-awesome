@@ -35,6 +35,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
@@ -119,6 +120,7 @@
     </EmbeddedResource>
     <None Include="Properties\DataSources\AwesomeServer.Discount.datasource" />
     <None Include="Properties\DataSources\AwesomeServer.Movie.datasource" />
+    <None Include="Properties\DataSources\AwesomeServer.MovieSeat.datasource" />
     <None Include="Properties\DataSources\AwesomeServer.Reservation.datasource" />
     <None Include="Properties\DataSources\AwesomeServer.Room.datasource" />
     <None Include="Properties\DataSources\AwesomeServer.Seat.datasource" />
