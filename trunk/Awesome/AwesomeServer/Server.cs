@@ -23,34 +23,41 @@ namespace AwesomeServer
                 string message = "The reservation was added succesfully!";
                 try
                 {
-                    bool allAvailable = true;
-                    foreach (int id in seatIds)
+                    if (seatIds.Count > 0)
                     {
-                        var movieSeats = db.MovieSeats.Where(ms => ms.MovieId == movieId && ms.SeatId == id).First();
-                        if (movieSeats.ReservationId != null && movieSeats.ReservationId != 0)
-                        {
-                            allAvailable = false;
-                            message = "Some or all of the seats are taken!";
-                            break;
-                        }
-                    }
-                    if (allAvailable)
-                    {
-                        Reservation reservation = new Reservation();
-                        reservation.Name = name;
-                        reservation.Taken = taken;
-                        reservation.DateOfReserve = (from m in db.Movies where m.Id == movieId select m.DateAndTime).First();
-                        reservation.SeatCount = seatIds.Count;
-                        db.Reservations.InsertOnSubmit(reservation);
-                        db.SubmitChanges();
-
-                        int reservationId = (from r in db.Reservations select r.Id).Max();
+                        bool allAvailable = true;
                         foreach (int id in seatIds)
                         {
                             var movieSeats = db.MovieSeats.Where(ms => ms.MovieId == movieId && ms.SeatId == id).First();
-                            movieSeats.ReservationId = reservationId;
+                            if (movieSeats.ReservationId != null && movieSeats.ReservationId != 0)
+                            {
+                                allAvailable = false;
+                                message = "Some or all of the seats are taken!";
+                                break;
+                            }
                         }
-                        db.SubmitChanges();
+                        if (allAvailable)
+                        {
+                            Reservation reservation = new Reservation();
+                            reservation.Name = name;
+                            reservation.Taken = taken;
+                            reservation.DateOfReserve = (from m in db.Movies where m.Id == movieId select m.DateAndTime).First();
+                            reservation.SeatCount = seatIds.Count;
+                            db.Reservations.InsertOnSubmit(reservation);
+                            db.SubmitChanges();
+
+                            int reservationId = (from r in db.Reservations select r.Id).Max();
+                            foreach (int id in seatIds)
+                            {
+                                var movieSeats = db.MovieSeats.Where(ms => ms.MovieId == movieId && ms.SeatId == id).First();
+                                movieSeats.ReservationId = reservationId;
+                            }
+                            db.SubmitChanges();
+                        } 
+                    }
+                    else
+                    {
+                        message = "At least one seat must be reserved.";
                     }
                 }
                 catch (Exception ex)
