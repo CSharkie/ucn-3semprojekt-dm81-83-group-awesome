@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AwesomeServer;
 using AwesomeClient.ServiceReference;
+using System.Threading;
 
 namespace AwesomeClient
 {
@@ -178,7 +179,6 @@ namespace AwesomeClient
                 }
                 else
                 {
-
                     reserv_combo_movie.Enabled = false;
                     reserv_btn_getRoom.Enabled = false;
                     Room room = client.getRoom(movie.First().RoomId);
@@ -208,6 +208,7 @@ namespace AwesomeClient
                     }
                     //if everything went right, enable the crete button
                     reserv_btn_create.Enabled = true;
+                    reserv_txt_movieId.Text = movie.First().Id.ToString();
                 }
 
             }
@@ -224,7 +225,7 @@ namespace AwesomeClient
             {
                 MessageBox.Show("An error occured: " + ex.Message);
             }
-            
+
         }
 
         private void reserv_btn_reset_Click(object sender, EventArgs e)
@@ -242,6 +243,74 @@ namespace AwesomeClient
             reserv_txt_title.Text = "";
 
             reserv_panel_room.Controls.Clear();
+        }
+        List<CheckBox> adjList = new List<CheckBox>();
+        int index = 0;
+        int noOfSeats = 5;
+
+        private void reserv_btn_getAdj_Click(object sender, EventArgs e)
+        {
+            adjList = new List<CheckBox>();
+            index = 0;
+            noOfSeats = 5;
+
+
+            Room room = new Room();
+            Movie movie = new Movie();
+            Thread.Sleep(50);
+            movie = client.getMovie(Convert.ToInt32(reserv_txt_movieId.Text), "", 0).First();
+            room = client.getRoom(movie.RoomId);
+
+
+            List<CheckBox> permSeats = new List<CheckBox>();
+            int k = -1;
+            for (int i = 0; i < room.Rows; i++)
+            {
+                for (int j = 0; j < room.Cols; j++)
+                {
+                    k++;
+                    if (reserv_panel_room.Controls[k].Enabled == true)
+                    {
+                        permSeats.Add((CheckBox)reserv_panel_room.Controls[k]);
+                        if (permSeats.Count != 0 && permSeats.Count == noOfSeats)
+                        {
+                            foreach (var item in permSeats)
+                            {
+                                adjList.Add(item);
+                            }
+                            permSeats.Clear();
+                        }
+                    }
+                    else
+                    {
+                        if (permSeats.Count != 0 && permSeats.Count == noOfSeats)
+                        {
+                            foreach (var item in permSeats)
+                            {
+                                adjList.Add(item);
+                            }
+                        }
+                        permSeats.Clear();
+                    }
+                }
+                permSeats.Clear();
+            }
+
+        }
+
+        private void reserv_btn_next_Click(object sender, EventArgs e)
+        {
+            foreach (CheckBox item in adjList)
+            {
+                item.Checked = false;
+            }
+            int limit = index + noOfSeats;
+            for (int i = index; i < limit; i++)
+            {
+                adjList[i].Checked = true;
+            }
+            index++;
+            
         }
 
 

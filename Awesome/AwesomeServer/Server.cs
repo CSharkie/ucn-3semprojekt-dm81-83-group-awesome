@@ -467,9 +467,9 @@ namespace AwesomeServer
                     }
                 }
 
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw (ex);
+                   return null;
                 }
                 return returnObj;
             }
