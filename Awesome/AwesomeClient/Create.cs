@@ -246,13 +246,12 @@ namespace AwesomeClient
         }
         List<CheckBox> adjList = new List<CheckBox>();
         int index = 0;
-        int noOfSeats = 5;
+        int noOfSeats = 2;
 
         private void reserv_btn_getAdj_Click(object sender, EventArgs e)
         {
             adjList = new List<CheckBox>();
             index = 0;
-            noOfSeats = 5;
 
 
             Room room = new Room();
@@ -295,7 +294,12 @@ namespace AwesomeClient
                 }
                 permSeats.Clear();
             }
+            //if (adjList.Count == 0)
+            //{
+            //    noOfSeats = noOfSeats - 1;
+            //    reserv_btn_getAdj_Click(this, null);
 
+            //}
         }
 
         private void reserv_btn_next_Click(object sender, EventArgs e)
@@ -309,7 +313,7 @@ namespace AwesomeClient
             {
                 adjList[i].Checked = true;
             }
-            index++;
+            index = limit;
             
         }
 
