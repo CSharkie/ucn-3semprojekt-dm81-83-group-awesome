@@ -25,8 +25,8 @@ namespace AwesomeClient
 
         private void getRoom_btn_Click(object sender, EventArgs e)
         {
-            Task task = new Task(() =>
-                {
+            //Task task = new Task(() =>
+            //    {
                     try
                     {
 
@@ -59,8 +59,8 @@ namespace AwesomeClient
                     {
                         MessageBox.Show("An error occured: " + ex.Message);
                     }
-                });
-            task.Start();
+            //    });
+            //task.Start();
         }
     }
 }
