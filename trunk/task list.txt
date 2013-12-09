@@ -13,3 +13,7 @@ thread pool?
 semaphore for parallel adj seats
 
 reservation + email address and regex !!!
+
+algorithm complexity big(O)
+
+timebased trigger to delete the movie!
