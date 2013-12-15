@@ -301,10 +301,13 @@ namespace AwesomeClient
                 discount_btn_edit.Enabled = true;
                 discount_btn_save.Enabled = true;
             }
-            catch (Exception)
+            catch (NullReferenceException)
             {
-
-                throw;
+                MessageBox.Show("The room does not exist.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured: " + ex.Message);
             }
 
 
