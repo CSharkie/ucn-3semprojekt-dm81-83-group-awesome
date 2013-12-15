@@ -4,7 +4,7 @@ movie start date - end date
 
 every movie 3 times each day 
 
-adj recursive to decrement the number of noOfSeatss
+adj recursive to decrement the number of noOfSeatss     DONE
 
 trigger for sql deleting movies
 
