@@ -184,6 +184,7 @@ namespace AwesomeClient
                     Room room = client.getRoom(movie.First().RoomId);
                     IList<MovieSeat> movieSeats = movie.First().MovieSeats.ToList();
                     reserv_panel_room.Controls.Clear();
+                    int k = -1;
                     for (int i = 0; i < room.Rows; i++)
                     {
                         IList<Seat> seats = client.getSeat(0, room.Id, 0, i + 1, 0);
@@ -191,8 +192,10 @@ namespace AwesomeClient
 
                         for (int j = 0; j < room.Cols; j++)
                         {
+                            k++;
                             CheckBox cb = new CheckBox();
-                            cb.Name = seats[j].Id.ToString();
+                            //cb.Name = seats[j].Id.ToString();
+                            cb.Name = k.ToString();        //this will show the Checkboxes(the seats) place in the list while they are in the adjseats
                             cb.Text = seats[j].Id.ToString();
                             cb.Location = new System.Drawing.Point(j * 50, i * 50);
                             cb.Size = new System.Drawing.Size(50, 50);
@@ -271,18 +274,10 @@ namespace AwesomeClient
                     if (reserv_panel_room.Controls[k].Enabled == true)
                     {
                         permSeats.Add((CheckBox)reserv_panel_room.Controls[k]);
-                        if (permSeats.Count != 0 && permSeats.Count == noOfSeats)
-                        {
-                            foreach (var item in permSeats)
-                            {
-                                adjList.Add(item);
-                            }
-                            permSeats.Clear();
-                        }
                     }
                     else
                     {
-                        if (permSeats.Count != 0 && permSeats.Count == noOfSeats)
+                        if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
                         {
                             foreach (var item in permSeats)
                             {
@@ -291,6 +286,14 @@ namespace AwesomeClient
                         }
                         permSeats.Clear();
                     }
+                }
+                if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
+                {
+                    foreach (var item in permSeats)
+                    {
+                        adjList.Add(item);
+                    }
+                    //permSeats.Clear();
                 }
                 permSeats.Clear();
             }
@@ -304,19 +307,39 @@ namespace AwesomeClient
 
         private void reserv_btn_next_Click(object sender, EventArgs e)
         {
+            Room room = new Room();
+            Movie movie = new Movie();
+            Thread.Sleep(50);
+            movie = client.getMovie(Convert.ToInt32(reserv_txt_movieId.Text), "", 0).First();
+            room = client.getRoom(movie.RoomId);
+            int i = 0;
+        Mark1:
             foreach (CheckBox item in adjList)
             {
                 item.Checked = false;
             }
             int limit = index + noOfSeats;
-            for (int i = index; i < limit; i++)
+            while(client.getSeat(Convert.ToInt32(adjList[index].Text),0,0,0,0).First().Row==client.getSeat(Convert.ToInt32(adjList[limit-1].Text),0,0,0,0).First().Row)
             {
-                adjList[i].Checked = true;
+                for (i = index; i < limit - 1; i++)
+                {
+                    if (Convert.ToInt32(adjList[i].Text) + 1 != Convert.ToInt32(adjList[i + 1].Text))
+                    {
+                        index++;
+                        goto Mark1;
+                    }
+
+                }
+                for (i = index; i < limit; i++)
+                {
+                    adjList[i].Checked = true;
+                }
+                break;
             }
-            index = limit;
-            
+            index++;
         }
 
-
     }
+
+
 }
