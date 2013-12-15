@@ -53,7 +53,7 @@ namespace AwesomeServer
                                 movieSeats.ReservationId = reservationId;
                             }
                             db.SubmitChanges();
-                        } 
+                        }
                     }
                     else
                     {
@@ -194,10 +194,14 @@ namespace AwesomeServer
                         obj.Name = name;
                     if (obj.Taken != taken)
                         obj.Taken = taken;
-                    db.SubmitChanges();
+                    db.SubmitChanges(ConflictMode.FailOnFirstConflict);
                 }
-                catch (Exception ex)
+                catch (ChangeConflictException ex)
                 {
+                    foreach (ObjectChangeConflict objchangeconf in db.ChangeConflicts)
+                    {
+                        objchangeconf.Resolve(RefreshMode.OverwriteCurrentValues);
+                    }
                     message = "An error has occured: " + ex.Message;
                 }
                 return message;
@@ -229,10 +233,14 @@ namespace AwesomeServer
                             db.MovieSeats.InsertOnSubmit(ms);
                         }
                     }
-                    db.SubmitChanges();
+                    db.SubmitChanges(ConflictMode.FailOnFirstConflict);
                 }
-                catch (Exception ex)
+                catch (ChangeConflictException ex)
                 {
+                    foreach (ObjectChangeConflict objchangeconf in db.ChangeConflicts)
+                    {
+                        objchangeconf.Resolve(RefreshMode.OverwriteCurrentValues);
+                    }
                     message = "An error has occured: " + ex.Message;
                 }
                 return message;
@@ -274,10 +282,14 @@ namespace AwesomeServer
                         updateMovie(item.Id, "", item.DateAndTime, item.Duration, roomId);
                     }
 
-                    db.SubmitChanges();
+                    db.SubmitChanges(ConflictMode.FailOnFirstConflict);
                 }
-                catch (Exception ex)
+                catch (ChangeConflictException ex)
                 {
+                    foreach (ObjectChangeConflict objchangeconf in db.ChangeConflicts)
+                    {
+                        objchangeconf.Resolve(RefreshMode.OverwriteCurrentValues);
+                    }
                     message = "An error has occured: " + ex.Message;
                 }
                 return message;
@@ -298,10 +310,14 @@ namespace AwesomeServer
             //        if (obj.DiscountId != discountId)
             //            obj.DiscountId = discountId;
 
-            //        db.SubmitChanges();
+            //        db.SubmitChanges(ConflictMode.FailOnFirstConflict);
             //    }
-            //    catch (Exception ex)
+            //    catch (ChangeConflictException ex)
             //    {
+                     //foreach (ObjectChangeConflict objchangeconf in db.ChangeConflicts)
+                     //   {
+                     //       objchangeconf.Resolve(RefreshMode.OverwriteCurrentValues);
+                     //   }
             //        message = "An error has occured: " + ex.Message;
             //    }
             return message;
@@ -324,10 +340,14 @@ namespace AwesomeServer
             //        if (obj.ReservationId != reservationId)
             //            obj.ReservationId = reservationId;
 
-            //        db.SubmitChanges();
+            //        db.SubmitChanges(ConflictMode.FailOnFirstConflict);
             //    }
-            //    catch (Exception ex)
-            //    {
+            //    catch (ChangeConflictException ex)
+            //    {      
+                     //foreach (ObjectChangeConflict objchangeconf in db.ChangeConflicts)
+                      //{
+                   //    objchangeconf.Resolve(RefreshMode.OverwriteCurrentValues);
+                      //}
             //        message = "An error has occured: " + ex.Message;
             //    }
             return message;
@@ -344,10 +364,14 @@ namespace AwesomeServer
             //        if (obj.DPercent != dPercent)
             //            obj.DPercent = dPercent;
 
-            //        db.SubmitChanges();
+            //        db.SubmitChanges(ConflictMode.FailOnFirstConflict);
             //    }
-            //    catch (Exception ex)
+            //    catch (ChangeConflictException ex)
             //    {
+                    //foreach (ObjectChangeConflict objchangeconf in db.ChangeConflicts)
+                    //{
+                        //objchangeconf.Resolve(RefreshMode.OverwriteCurrentValues);
+                    //}
             //        message = "An error has occured: " + ex.Message;
             //    }
             return message;
@@ -407,7 +431,7 @@ namespace AwesomeServer
                     if (movieId > 0)
                     {
                         Movie movie = new Movie();
-                        var theMovie=db.Movies.SingleOrDefault(m => m.Id == movieId);
+                        var theMovie = db.Movies.SingleOrDefault(m => m.Id == movieId);
                         movie.Id = theMovie.Id;
                         movie.Title = theMovie.Title;
                         movie.DateAndTime = theMovie.DateAndTime;
@@ -469,7 +493,7 @@ namespace AwesomeServer
 
                 catch (Exception)
                 {
-                   return null;
+                    return null;
                 }
                 return returnObj;
             }
@@ -493,7 +517,7 @@ namespace AwesomeServer
                 }
                 catch (Exception ex)
                 {
-                    
+
                     throw (ex);
                 }
                 return returnObj;
@@ -518,7 +542,7 @@ namespace AwesomeServer
                     return null;
                 }
                 var seats = returnObj.Seats;
-                
+
                 return returnObj;
             }
         }
