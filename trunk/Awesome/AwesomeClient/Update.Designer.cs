@@ -43,6 +43,9 @@
             this.room_cols_lbl = new System.Windows.Forms.Label();
             this.room_roomId_lbl = new System.Windows.Forms.Label();
             this.movieTab = new System.Windows.Forms.TabPage();
+            this.movie_btn_find = new System.Windows.Forms.Button();
+            this.movie_combo_movies = new System.Windows.Forms.ComboBox();
+            this.movie_lbl_dropdown = new System.Windows.Forms.Label();
             this.movie_roomId_lbl = new System.Windows.Forms.Label();
             this.movie_date_lbl = new System.Windows.Forms.Label();
             this.movie_title_lbl = new System.Windows.Forms.Label();
@@ -243,6 +246,9 @@
             // 
             // movieTab
             // 
+            this.movieTab.Controls.Add(this.movie_btn_find);
+            this.movieTab.Controls.Add(this.movie_combo_movies);
+            this.movieTab.Controls.Add(this.movie_lbl_dropdown);
             this.movieTab.Controls.Add(this.movie_roomId_lbl);
             this.movieTab.Controls.Add(this.movie_date_lbl);
             this.movieTab.Controls.Add(this.movie_title_lbl);
@@ -262,10 +268,37 @@
             this.movieTab.Text = "Movie";
             this.movieTab.UseVisualStyleBackColor = true;
             // 
+            // movie_btn_find
+            // 
+            this.movie_btn_find.Location = new System.Drawing.Point(171, 165);
+            this.movie_btn_find.Name = "movie_btn_find";
+            this.movie_btn_find.Size = new System.Drawing.Size(100, 23);
+            this.movie_btn_find.TabIndex = 31;
+            this.movie_btn_find.Text = "Find Movie";
+            this.movie_btn_find.UseVisualStyleBackColor = true;
+            this.movie_btn_find.Click += new System.EventHandler(this.movie__Click);
+            // 
+            // movie_combo_movies
+            // 
+            this.movie_combo_movies.FormattingEnabled = true;
+            this.movie_combo_movies.Location = new System.Drawing.Point(120, 85);
+            this.movie_combo_movies.Name = "movie_combo_movies";
+            this.movie_combo_movies.Size = new System.Drawing.Size(200, 21);
+            this.movie_combo_movies.TabIndex = 30;
+            // 
+            // movie_lbl_dropdown
+            // 
+            this.movie_lbl_dropdown.AutoSize = true;
+            this.movie_lbl_dropdown.Location = new System.Drawing.Point(70, 88);
+            this.movie_lbl_dropdown.Name = "movie_lbl_dropdown";
+            this.movie_lbl_dropdown.Size = new System.Drawing.Size(44, 13);
+            this.movie_lbl_dropdown.TabIndex = 29;
+            this.movie_lbl_dropdown.Text = "Movies:";
+            // 
             // movie_roomId_lbl
             // 
             this.movie_roomId_lbl.AutoSize = true;
-            this.movie_roomId_lbl.Location = new System.Drawing.Point(64, 114);
+            this.movie_roomId_lbl.Location = new System.Drawing.Point(64, 142);
             this.movie_roomId_lbl.Name = "movie_roomId_lbl";
             this.movie_roomId_lbl.Size = new System.Drawing.Size(50, 13);
             this.movie_roomId_lbl.TabIndex = 27;
@@ -274,7 +307,7 @@
             // movie_date_lbl
             // 
             this.movie_date_lbl.AutoSize = true;
-            this.movie_date_lbl.Location = new System.Drawing.Point(34, 88);
+            this.movie_date_lbl.Location = new System.Drawing.Point(34, 116);
             this.movie_date_lbl.Name = "movie_date_lbl";
             this.movie_date_lbl.Size = new System.Drawing.Size(80, 13);
             this.movie_date_lbl.TabIndex = 26;
@@ -300,7 +333,7 @@
             // 
             // movie_btn_show
             // 
-            this.movie_btn_show.Location = new System.Drawing.Point(174, 137);
+            this.movie_btn_show.Location = new System.Drawing.Point(171, 194);
             this.movie_btn_show.Name = "movie_btn_show";
             this.movie_btn_show.Size = new System.Drawing.Size(100, 23);
             this.movie_btn_show.TabIndex = 21;
@@ -311,7 +344,7 @@
             // movie_btn_save
             // 
             this.movie_btn_save.Enabled = false;
-            this.movie_btn_save.Location = new System.Drawing.Point(174, 195);
+            this.movie_btn_save.Location = new System.Drawing.Point(171, 252);
             this.movie_btn_save.Name = "movie_btn_save";
             this.movie_btn_save.Size = new System.Drawing.Size(100, 23);
             this.movie_btn_save.TabIndex = 23;
@@ -322,7 +355,7 @@
             // movie_btn_edit
             // 
             this.movie_btn_edit.Enabled = false;
-            this.movie_btn_edit.Location = new System.Drawing.Point(174, 166);
+            this.movie_btn_edit.Location = new System.Drawing.Point(171, 223);
             this.movie_btn_edit.Name = "movie_btn_edit";
             this.movie_btn_edit.Size = new System.Drawing.Size(100, 23);
             this.movie_btn_edit.TabIndex = 22;
@@ -335,7 +368,7 @@
             this.movie_date_picker.CustomFormat = "MM/dd/yyyy hh:mm tt";
             this.movie_date_picker.Enabled = false;
             this.movie_date_picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.movie_date_picker.Location = new System.Drawing.Point(120, 85);
+            this.movie_date_picker.Location = new System.Drawing.Point(120, 113);
             this.movie_date_picker.Name = "movie_date_picker";
             this.movie_date_picker.Size = new System.Drawing.Size(200, 20);
             this.movie_date_picker.TabIndex = 3;
@@ -344,7 +377,7 @@
             // movie_txt_roomId
             // 
             this.movie_txt_roomId.Enabled = false;
-            this.movie_txt_roomId.Location = new System.Drawing.Point(120, 111);
+            this.movie_txt_roomId.Location = new System.Drawing.Point(120, 139);
             this.movie_txt_roomId.Name = "movie_txt_roomId";
             this.movie_txt_roomId.Size = new System.Drawing.Size(200, 20);
             this.movie_txt_roomId.TabIndex = 2;
@@ -774,5 +807,8 @@
         private System.Windows.Forms.TextBox ticket_txt_reservId;
         private System.Windows.Forms.TextBox ticket_txt_price;
         private System.Windows.Forms.TextBox ticket_txt_id;
+        private System.Windows.Forms.ComboBox movie_combo_movies;
+        private System.Windows.Forms.Label movie_lbl_dropdown;
+        private System.Windows.Forms.Button movie_btn_find;
     }
 }

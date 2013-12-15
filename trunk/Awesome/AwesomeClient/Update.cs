@@ -266,5 +266,61 @@ namespace AwesomeClient
             ticket_btn_save.Enabled = false;
         }
         #endregion
+
+        private void movie__Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var movie = client.getMovie(movie_txt_movieId.Text != "" ? Convert.ToInt32(movie_txt_movieId.Text) : 0, movie_txt_title.Text, 0);
+
+                if (movie_combo_movies.SelectedItem != null)
+                {
+
+                    int indexStart = movie_combo_movies.SelectedItem.ToString().IndexOf("(");
+                    int indexStop = movie_combo_movies.SelectedItem.ToString().IndexOf(")");
+                    string stringId = movie_combo_movies.SelectedItem.ToString().Substring(indexStart + 1, indexStop - 1);
+                    if (indexStart != -1 && indexStop != -1)
+                    {
+                        movie = client.getMovie(Convert.ToInt32(stringId), "", 0);
+                        movie_txt_movieId.Text = movie.First().Id.ToString();
+                    }
+
+                    IList<string> dataSource = new List<string>();
+                    dataSource.Add("Select One...");
+                    foreach (var item in movie)
+                        dataSource.Add("(" + item.Id + ")" + item.Title + " @ " + item.DateAndTime);
+
+                    movie_combo_movies.DataSource = dataSource;
+                    movie_combo_movies.SelectedIndex = movie.ToList().Count == 1 ? 1 : 0;
+
+
+                    if (movie.ToList().Count == 0)
+                    {
+                        MessageBox.Show("No movie found with that id or title");
+                    }
+                    else if (movie.ToList().Count > 1)
+                    {
+                        movie_combo_movies.Enabled = true;
+                        movie_btn_show.Enabled = true;
+                    }
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("The room does not exist.");
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Please select the movie from the list!");
+                movie_btn_show.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured: " + ex.Message);
+            }
+
+
+
+        }
     }
 }
