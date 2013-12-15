@@ -130,24 +130,24 @@ namespace AwesomeClient
                         movie_txt_movieId.Text = movie.First().Id.ToString();
                     }
 
-                    IList<string> dataSource = new List<string>();
-                    dataSource.Add("Select One...");
-                    foreach (var item in movie)
-                        dataSource.Add("(" + item.Id + ")" + item.Title + " @ " + item.DateAndTime);
+                }
+                IList<string> dataSource = new List<string>();
+                dataSource.Add("Select One...");
+                foreach (var item in movie)
+                    dataSource.Add("(" + item.Id + ")" + item.Title + " @ " + item.DateAndTime);
 
-                    movie_combo_movies.DataSource = dataSource;
-                    movie_combo_movies.SelectedIndex = movie.ToList().Count == 1 ? 1 : 0;
+                movie_combo_movies.DataSource = dataSource;
+                movie_combo_movies.SelectedIndex = movie.ToList().Count == 1 ? 1 : 0;
 
 
-                    if (movie.ToList().Count == 0)
-                    {
-                        MessageBox.Show("No movie found with that id or title");
-                    }
-                    else if (movie.ToList().Count > 1)
-                    {
-                        movie_combo_movies.Enabled = true;
-                        movie_btn_show.Enabled = true;
-                    }
+                if (movie.ToList().Count == 0)
+                {
+                    MessageBox.Show("No movie found with that id or title");
+                }
+                else if (movie.ToList().Count > 1)
+                {
+                    movie_combo_movies.Enabled = true;
+                    movie_btn_show.Enabled = true;
                 }
             }
             catch (NullReferenceException)
