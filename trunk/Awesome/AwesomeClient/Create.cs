@@ -297,6 +297,7 @@ namespace AwesomeClient
             }
             if (adjList.Count == 0)
             {
+                MessageBox.Show("There are no " + noOfSeats + " adjecent seats available, checking for " + (noOfSeats - 1));
                 noOfSeats = noOfSeats - 1;
                 reserv_btn_getAdj_Click(this, null);
 
