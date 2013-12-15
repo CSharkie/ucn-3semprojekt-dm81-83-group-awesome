@@ -152,7 +152,7 @@ namespace AwesomeClient
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("The room does not exist.");
+                MessageBox.Show("The movie does not exist.");
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -293,7 +293,7 @@ namespace AwesomeClient
             try
             {
                 Discount discount = new Discount();
-                discount = client.getDiscount(Convert.ToInt32(discount_txt_id.Text), Convert.ToDecimal(discount_txt_percent.Text));
+                discount = client.getDiscount(discount_txt_id.Text != "" ? Convert.ToInt32(discount_txt_id.Text) : 0, discount_txt_percent.Text != "" ? Convert.ToDecimal(discount_txt_percent.Text) : 0);
                 discount_txt_id.Text = discount.Id.ToString();
                 discount_txt_percent.Text = discount.DPercent.ToString();
 
