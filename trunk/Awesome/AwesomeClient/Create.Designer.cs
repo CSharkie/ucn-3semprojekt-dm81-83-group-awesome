@@ -67,6 +67,8 @@ namespace AwesomeClient
             this.discount_percent_lbl = new System.Windows.Forms.Label();
             this.discount_btn_create = new System.Windows.Forms.Button();
             this.discount_txt_dPercent = new System.Windows.Forms.TextBox();
+            this.reserv_txt_SeatsNo = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.createTab.SuspendLayout();
             this.create_roomTab.SuspendLayout();
@@ -107,7 +109,7 @@ namespace AwesomeClient
             this.create_roomTab.Location = new System.Drawing.Point(4, 22);
             this.create_roomTab.Name = "create_roomTab";
             this.create_roomTab.Padding = new System.Windows.Forms.Padding(3);
-            this.create_roomTab.Size = new System.Drawing.Size(744, 527);
+            this.create_roomTab.Size = new System.Drawing.Size(642, 434);
             this.create_roomTab.TabIndex = 0;
             this.create_roomTab.Text = "Room";
             this.create_roomTab.UseVisualStyleBackColor = true;
@@ -251,6 +253,8 @@ namespace AwesomeClient
             // 
             // create_reservationTab
             // 
+            this.create_reservationTab.Controls.Add(this.label4);
+            this.create_reservationTab.Controls.Add(this.reserv_txt_SeatsNo);
             this.create_reservationTab.Controls.Add(this.reserv_btn_next);
             this.create_reservationTab.Controls.Add(this.reserv_btn_getAdj);
             this.create_reservationTab.Controls.Add(this.reserv_btn_reset);
@@ -450,6 +454,23 @@ namespace AwesomeClient
             this.discount_txt_dPercent.Size = new System.Drawing.Size(100, 20);
             this.discount_txt_dPercent.TabIndex = 0;
             // 
+            // reserv_txt_SeatsNo
+            // 
+            this.reserv_txt_SeatsNo.Location = new System.Drawing.Point(409, 85);
+            this.reserv_txt_SeatsNo.Name = "reserv_txt_SeatsNo";
+            this.reserv_txt_SeatsNo.Size = new System.Drawing.Size(101, 20);
+            this.reserv_txt_SeatsNo.TabIndex = 21;
+            this.reserv_txt_SeatsNo.TextChanged += new System.EventHandler(this.reserv_txt_SeatsNo_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(314, 88);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "No. of adj Seats: ";
+            // 
             // Create
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -514,5 +535,7 @@ namespace AwesomeClient
         private System.Windows.Forms.Button reserv_btn_reset;
         private System.Windows.Forms.Button reserv_btn_getAdj;
         private System.Windows.Forms.Button reserv_btn_next;
+        private System.Windows.Forms.TextBox reserv_txt_SeatsNo;
+        private System.Windows.Forms.Label label4;
     }
 }

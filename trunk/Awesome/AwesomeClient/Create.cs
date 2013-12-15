@@ -194,8 +194,7 @@ namespace AwesomeClient
                         {
                             k++;
                             CheckBox cb = new CheckBox();
-                            //cb.Name = seats[j].Id.ToString();
-                            cb.Name = k.ToString();        //this will show the Checkboxes(the seats) place in the list while they are in the adjseats
+                            cb.Name = seats[j].Id.ToString();
                             cb.Text = seats[j].Id.ToString();
                             cb.Location = new System.Drawing.Point(j * 50, i * 50);
                             cb.Size = new System.Drawing.Size(50, 50);
@@ -247,16 +246,15 @@ namespace AwesomeClient
 
             reserv_panel_room.Controls.Clear();
         }
+
         List<CheckBox> adjList = new List<CheckBox>();
         int index = 0;
-        int noOfSeats = 2;
+        int noOfSeats = 1;
 
         private void reserv_btn_getAdj_Click(object sender, EventArgs e)
         {
             adjList = new List<CheckBox>();
             index = 0;
-
-
             Room room = new Room();
             Movie movie = new Movie();
             Thread.Sleep(50);
@@ -297,12 +295,12 @@ namespace AwesomeClient
                 }
                 permSeats.Clear();
             }
-            //if (adjList.Count == 0)
-            //{
-            //    noOfSeats = noOfSeats - 1;
-            //    reserv_btn_getAdj_Click(this, null);
+            if (adjList.Count == 0)
+            {
+                noOfSeats = noOfSeats - 1;
+                reserv_btn_getAdj_Click(this, null);
 
-            //}
+            }
         }
 
         private void reserv_btn_next_Click(object sender, EventArgs e)
@@ -337,6 +335,11 @@ namespace AwesomeClient
                 break;
             }
             index++;
+        }
+
+        private void reserv_txt_SeatsNo_TextChanged(object sender, EventArgs e)
+        {
+            noOfSeats = Convert.ToInt32(reserv_txt_SeatsNo.Text);
         }
 
     }
