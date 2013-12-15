@@ -577,7 +577,6 @@
             // 
             // discount_txt_percent
             // 
-            this.discount_txt_percent.Enabled = false;
             this.discount_txt_percent.Location = new System.Drawing.Point(230, 63);
             this.discount_txt_percent.Name = "discount_txt_percent";
             this.discount_txt_percent.Size = new System.Drawing.Size(100, 20);
