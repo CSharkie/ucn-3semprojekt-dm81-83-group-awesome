@@ -67,8 +67,12 @@ namespace AwesomeClient
             this.discount_percent_lbl = new System.Windows.Forms.Label();
             this.discount_btn_create = new System.Windows.Forms.Button();
             this.discount_txt_dPercent = new System.Windows.Forms.TextBox();
+
+            this.Validation = new System.Windows.Forms.Label();
+
             this.reserv_txt_SeatsNo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+
             this.panel1.SuspendLayout();
             this.createTab.SuspendLayout();
             this.create_roomTab.SuspendLayout();
@@ -250,11 +254,16 @@ namespace AwesomeClient
             this.movie_txt_title.Name = "movie_txt_title";
             this.movie_txt_title.Size = new System.Drawing.Size(200, 20);
             this.movie_txt_title.TabIndex = 0;
+            this.movie_txt_title.TextChanged += new System.EventHandler(this.movie_txt_title_TextChanged);
             // 
             // create_reservationTab
             // 
+
+            this.create_reservationTab.Controls.Add(this.Validation);
+
             this.create_reservationTab.Controls.Add(this.label4);
             this.create_reservationTab.Controls.Add(this.reserv_txt_SeatsNo);
+
             this.create_reservationTab.Controls.Add(this.reserv_btn_next);
             this.create_reservationTab.Controls.Add(this.reserv_btn_getAdj);
             this.create_reservationTab.Controls.Add(this.reserv_btn_reset);
@@ -277,6 +286,7 @@ namespace AwesomeClient
             this.create_reservationTab.TabIndex = 2;
             this.create_reservationTab.Text = "Reservation";
             this.create_reservationTab.UseVisualStyleBackColor = true;
+            //this.create_reservationTab.Click += new System.EventHandler(this.create_reservationTab_Click);
             // 
             // reserv_btn_next
             // 
@@ -394,6 +404,7 @@ namespace AwesomeClient
             this.reserv_txt_name.Name = "reserv_txt_name";
             this.reserv_txt_name.Size = new System.Drawing.Size(200, 20);
             this.reserv_txt_name.TabIndex = 2;
+            this.reserv_txt_name.TextChanged += new System.EventHandler(this.reserv_txt_name_TextChanged);
             // 
             // reserv_chk_taken
             // 
@@ -454,6 +465,17 @@ namespace AwesomeClient
             this.discount_txt_dPercent.Size = new System.Drawing.Size(100, 20);
             this.discount_txt_dPercent.TabIndex = 0;
             // 
+
+            // Validation
+            // 
+            this.Validation.AutoSize = true;
+            this.Validation.Location = new System.Drawing.Point(314, 15);
+            this.Validation.Name = "Validation";
+            this.Validation.Size = new System.Drawing.Size(31, 13);
+            this.Validation.TabIndex = 21;
+            this.Validation.Text = "        ";
+            // 
+           
             // reserv_txt_SeatsNo
             // 
             this.reserv_txt_SeatsNo.Location = new System.Drawing.Point(409, 85);
@@ -471,6 +493,7 @@ namespace AwesomeClient
             this.label4.TabIndex = 22;
             this.label4.Text = "No. of adj Seats: ";
             // 
+
             // Create
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -535,7 +558,9 @@ namespace AwesomeClient
         private System.Windows.Forms.Button reserv_btn_reset;
         private System.Windows.Forms.Button reserv_btn_getAdj;
         private System.Windows.Forms.Button reserv_btn_next;
+        private System.Windows.Forms.Label Validation;
         private System.Windows.Forms.TextBox reserv_txt_SeatsNo;
         private System.Windows.Forms.Label label4;
+
     }
 }

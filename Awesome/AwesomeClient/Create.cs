@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using AwesomeServer;
 using AwesomeClient.ServiceReference;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace AwesomeClient
 {
@@ -69,6 +70,10 @@ namespace AwesomeClient
                 var movieSeats = movie.First().MovieSeats.ToList();
                 int[] seatIds = new int[movieSeats.Count];
                 int index = -1;
+              
+               
+              
+               
                 foreach (CheckBox c in reserv_panel_room.Controls)
                 {
                     if (c.Enabled && c.Checked)
@@ -88,6 +93,7 @@ namespace AwesomeClient
                 {
                     MessageBox.Show(client.createReservation(
                         reserv_txt_name.Text,
+                        //reserv_txt_email.Text,
                         reserv_chk_taken.Checked,
                         index,
                         movie.First().Id,
@@ -137,6 +143,7 @@ namespace AwesomeClient
                 reserv_btn_getRoom.Enabled = false;
                 reserv_txt_movieId.Enabled = false;
                 reserv_txt_name.Enabled = false;
+                //reserv_txt_email.Enabled = false;
                 reserv_txt_title.Enabled = false;
                 reserv_chk_taken.Enabled = false;
 
@@ -208,7 +215,7 @@ namespace AwesomeClient
                             this.reserv_panel_room.Controls.Add(cb);
                         }
                     }
-                    //if everything went right, enable the crete button
+                    //if everything went right, enable the create button
                     reserv_btn_create.Enabled = true;
                     reserv_txt_movieId.Text = movie.First().Id.ToString();
                 }
@@ -241,6 +248,8 @@ namespace AwesomeClient
             reserv_txt_movieId.Text = "";
             reserv_txt_name.Enabled = true;
             reserv_txt_name.Text = "";
+            //reserv_txt_email.Enabled = true;
+            //reserv_txt_email.Text = "";
             reserv_txt_title.Enabled = true;
             reserv_txt_title.Text = "";
 
@@ -338,10 +347,57 @@ namespace AwesomeClient
             index++;
         }
 
+
+        private void reserv_txt_name_TextChanged(object sender, EventArgs e)
+        {
+            try
+            { 
+                
+                string text = reserv_txt_name.Text;
+                string reg = @"^[(a-zA-z)]+\s?[(a-zA-z)]+\s[(a-zA-z)]*$";
+                int number = reserv_txt_name.TextLength;
+             
+                    if (number>=5 && number<=25 && Regex.IsMatch(text,reg))
+                    {
+                        Validation.Text = "Validated!";
+                        //Validation.Font = new System.Drawing.Font(Validation.Font.FontFamily.Name, 12);
+                        reserv_btn_create.Enabled = true;
+                        //MessageBox.Show("Validated").ToString();
+                    }
+                    else
+                    {
+                        Validation.Text = "Not Valid";
+                        reserv_btn_create.Enabled = false;
+                    }     
+ 
+            }
+            catch (Exception exception)
+            {
+
+                MessageBox.Show("Not valid name: " + exception.Message);
+            }
+
+        }
+
         private void reserv_txt_SeatsNo_TextChanged(object sender, EventArgs e)
         {
             noOfSeats = Convert.ToInt32(reserv_txt_SeatsNo.Text);
         }
+
+
+        private void create_reservationTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void movie_txt_title_TextChanged(object sender, EventArgs e)
+        {
+            
+          
+        }
+
+        
+
 
     }
 
