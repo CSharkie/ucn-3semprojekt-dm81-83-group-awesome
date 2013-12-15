@@ -48,6 +48,7 @@ namespace AwesomeClient
             this.movie_txt_roomId = new System.Windows.Forms.TextBox();
             this.movie_txt_title = new System.Windows.Forms.TextBox();
             this.create_reservationTab = new System.Windows.Forms.TabPage();
+            this.reserv_btn_next = new System.Windows.Forms.Button();
             this.reserv_btn_getAdj = new System.Windows.Forms.Button();
             this.reserv_btn_reset = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -66,7 +67,6 @@ namespace AwesomeClient
             this.discount_percent_lbl = new System.Windows.Forms.Label();
             this.discount_btn_create = new System.Windows.Forms.Button();
             this.discount_txt_dPercent = new System.Windows.Forms.TextBox();
-            this.reserv_btn_next = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.createTab.SuspendLayout();
             this.create_roomTab.SuspendLayout();
@@ -107,7 +107,7 @@ namespace AwesomeClient
             this.create_roomTab.Location = new System.Drawing.Point(4, 22);
             this.create_roomTab.Name = "create_roomTab";
             this.create_roomTab.Padding = new System.Windows.Forms.Padding(3);
-            this.create_roomTab.Size = new System.Drawing.Size(642, 434);
+            this.create_roomTab.Size = new System.Drawing.Size(744, 527);
             this.create_roomTab.TabIndex = 0;
             this.create_roomTab.Text = "Room";
             this.create_roomTab.UseVisualStyleBackColor = true;
@@ -274,6 +274,16 @@ namespace AwesomeClient
             this.create_reservationTab.Text = "Reservation";
             this.create_reservationTab.UseVisualStyleBackColor = true;
             // 
+            // reserv_btn_next
+            // 
+            this.reserv_btn_next.Location = new System.Drawing.Point(379, 113);
+            this.reserv_btn_next.Name = "reserv_btn_next";
+            this.reserv_btn_next.Size = new System.Drawing.Size(75, 23);
+            this.reserv_btn_next.TabIndex = 20;
+            this.reserv_btn_next.Text = "Next";
+            this.reserv_btn_next.UseVisualStyleBackColor = true;
+            this.reserv_btn_next.Click += new System.EventHandler(this.reserv_btn_next_Click);
+            // 
             // reserv_btn_getAdj
             // 
             this.reserv_btn_getAdj.Location = new System.Drawing.Point(270, 113);
@@ -340,6 +350,7 @@ namespace AwesomeClient
             // 
             // reserv_panel_room
             // 
+            this.reserv_panel_room.AutoScroll = true;
             this.reserv_panel_room.Location = new System.Drawing.Point(6, 142);
             this.reserv_panel_room.Name = "reserv_panel_room";
             this.reserv_panel_room.Size = new System.Drawing.Size(628, 284);
@@ -439,20 +450,12 @@ namespace AwesomeClient
             this.discount_txt_dPercent.Size = new System.Drawing.Size(100, 20);
             this.discount_txt_dPercent.TabIndex = 0;
             // 
-            // reserv_btn_next
-            // 
-            this.reserv_btn_next.Location = new System.Drawing.Point(379, 113);
-            this.reserv_btn_next.Name = "reserv_btn_next";
-            this.reserv_btn_next.Size = new System.Drawing.Size(75, 23);
-            this.reserv_btn_next.TabIndex = 20;
-            this.reserv_btn_next.Text = "Next";
-            this.reserv_btn_next.UseVisualStyleBackColor = true;
-            this.reserv_btn_next.Click += new System.EventHandler(this.reserv_btn_next_Click);
-            // 
             // Create
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(650, 460);
             this.Controls.Add(this.panel1);
             this.Name = "Create";
