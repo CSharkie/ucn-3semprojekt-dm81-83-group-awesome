@@ -384,21 +384,6 @@ namespace AwesomeClient
             noOfSeats = Convert.ToInt32(reserv_txt_SeatsNo.Text);
         }
 
-
-        private void create_reservationTab_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void movie_txt_title_TextChanged(object sender, EventArgs e)
-        {
-            
-          
-        }
-
-        
-
-
     }
 
 

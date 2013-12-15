@@ -6,14 +6,14 @@ every movie 3 times each day
 
 adj recursive to decrement the number of noOfSeatss     DONE
 
-trigger for sql deleting movies
+trigger for sql deleting movies         half-done
 
 thread pool?
 
-semaphore for parallel adj seats
+semaphore for parallel adj seats 
 
-reservation + email address and regex !!!
+reservation + email address and regex !!!        half-done
 
 algorithm complexity big(O)
 
-timebased trigger to delete the movie!
+timebased trigger to delete the movie!  half-done
