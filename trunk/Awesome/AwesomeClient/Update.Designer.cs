@@ -58,6 +58,8 @@
             this.movie_txt_title = new System.Windows.Forms.TextBox();
             this.movie_txt_movieId = new System.Windows.Forms.TextBox();
             this.reservationTab = new System.Windows.Forms.TabPage();
+            this.reserv_lbl_reservations = new System.Windows.Forms.Label();
+            this.reserv_combo_reservations = new System.Windows.Forms.ComboBox();
             this.reserv_reservId_lbl = new System.Windows.Forms.Label();
             this.reserv_txt_reservId = new System.Windows.Forms.TextBox();
             this.reserv_seatCount_lbl = new System.Windows.Forms.Label();
@@ -90,8 +92,6 @@
             this.ticket_txt_reservId = new System.Windows.Forms.TextBox();
             this.ticket_txt_price = new System.Windows.Forms.TextBox();
             this.ticket_txt_id = new System.Windows.Forms.TextBox();
-            this.reserv_combo_reservations = new System.Windows.Forms.ComboBox();
-            this.reserv_lbl_reservations = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.updateTabs.SuspendLayout();
             this.roomTab.SuspendLayout();
@@ -427,6 +427,23 @@
             this.reservationTab.Text = "Reservation";
             this.reservationTab.UseVisualStyleBackColor = true;
             // 
+            // reserv_lbl_reservations
+            // 
+            this.reserv_lbl_reservations.AutoSize = true;
+            this.reserv_lbl_reservations.Location = new System.Drawing.Point(85, 52);
+            this.reserv_lbl_reservations.Name = "reserv_lbl_reservations";
+            this.reserv_lbl_reservations.Size = new System.Drawing.Size(72, 13);
+            this.reserv_lbl_reservations.TabIndex = 37;
+            this.reserv_lbl_reservations.Text = "Reservations:";
+            // 
+            // reserv_combo_reservations
+            // 
+            this.reserv_combo_reservations.FormattingEnabled = true;
+            this.reserv_combo_reservations.Location = new System.Drawing.Point(163, 49);
+            this.reserv_combo_reservations.Name = "reserv_combo_reservations";
+            this.reserv_combo_reservations.Size = new System.Drawing.Size(164, 21);
+            this.reserv_combo_reservations.TabIndex = 36;
+            // 
             // reserv_reservId_lbl
             // 
             this.reserv_reservId_lbl.AutoSize = true;
@@ -688,7 +705,7 @@
             // ticket_reservId_lbl
             // 
             this.ticket_reservId_lbl.AutoSize = true;
-            this.ticket_reservId_lbl.Location = new System.Drawing.Point(139, 100);
+            this.ticket_reservId_lbl.Location = new System.Drawing.Point(139, 73);
             this.ticket_reservId_lbl.Name = "ticket_reservId_lbl";
             this.ticket_reservId_lbl.Size = new System.Drawing.Size(79, 13);
             this.ticket_reservId_lbl.TabIndex = 6;
@@ -697,7 +714,7 @@
             // ticket_price_lbl
             // 
             this.ticket_price_lbl.AutoSize = true;
-            this.ticket_price_lbl.Location = new System.Drawing.Point(184, 74);
+            this.ticket_price_lbl.Location = new System.Drawing.Point(184, 99);
             this.ticket_price_lbl.Name = "ticket_price_lbl";
             this.ticket_price_lbl.Size = new System.Drawing.Size(34, 13);
             this.ticket_price_lbl.TabIndex = 5;
@@ -723,8 +740,7 @@
             // 
             // ticket_txt_reservId
             // 
-            this.ticket_txt_reservId.Enabled = false;
-            this.ticket_txt_reservId.Location = new System.Drawing.Point(224, 97);
+            this.ticket_txt_reservId.Location = new System.Drawing.Point(224, 70);
             this.ticket_txt_reservId.Name = "ticket_txt_reservId";
             this.ticket_txt_reservId.Size = new System.Drawing.Size(100, 20);
             this.ticket_txt_reservId.TabIndex = 2;
@@ -733,7 +749,7 @@
             // ticket_txt_price
             // 
             this.ticket_txt_price.Enabled = false;
-            this.ticket_txt_price.Location = new System.Drawing.Point(224, 71);
+            this.ticket_txt_price.Location = new System.Drawing.Point(224, 96);
             this.ticket_txt_price.Name = "ticket_txt_price";
             this.ticket_txt_price.Size = new System.Drawing.Size(100, 20);
             this.ticket_txt_price.TabIndex = 1;
@@ -746,23 +762,6 @@
             this.ticket_txt_id.Size = new System.Drawing.Size(100, 20);
             this.ticket_txt_id.TabIndex = 0;
             this.ticket_txt_id.TextChanged += new System.EventHandler(this.ticket_id_txt_TextChanged);
-            // 
-            // reserv_combo_reservations
-            // 
-            this.reserv_combo_reservations.FormattingEnabled = true;
-            this.reserv_combo_reservations.Location = new System.Drawing.Point(163, 49);
-            this.reserv_combo_reservations.Name = "reserv_combo_reservations";
-            this.reserv_combo_reservations.Size = new System.Drawing.Size(164, 21);
-            this.reserv_combo_reservations.TabIndex = 36;
-            // 
-            // reserv_lbl_reservations
-            // 
-            this.reserv_lbl_reservations.AutoSize = true;
-            this.reserv_lbl_reservations.Location = new System.Drawing.Point(85, 52);
-            this.reserv_lbl_reservations.Name = "reserv_lbl_reservations";
-            this.reserv_lbl_reservations.Size = new System.Drawing.Size(72, 13);
-            this.reserv_lbl_reservations.TabIndex = 37;
-            this.reserv_lbl_reservations.Text = "Reservations:";
             // 
             // Update
             // 

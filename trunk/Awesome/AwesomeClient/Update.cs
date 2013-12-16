@@ -177,7 +177,7 @@ namespace AwesomeClient
                     movie.Id = Convert.ToInt32(movie_txt_movieId.Text);
                     movie.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
                     movies = client.getMovie(movie.Id, movie.Title, movie.RoomId);
-                    // TODO Need to display the found movie/movies
+                    // TODO Need to get the displayed movie on select from Combo Box
                 }
 
                 movie_btn_edit.Enabled = true;
@@ -292,14 +292,14 @@ namespace AwesomeClient
         {
             try
             {
-                Discount discount = new Discount();
-                discount = client.getDiscount(discount_txt_id.Text != "" ? Convert.ToInt32(discount_txt_id.Text) : 0, discount_txt_percent.Text != "" ? Convert.ToDecimal(discount_txt_percent.Text) : 0);
+                //Discount discount = new Discount();
+                var discount = client.getDiscount(discount_txt_id.Text != "" ? Convert.ToInt32(discount_txt_id.Text) : 0, discount_txt_percent.Text != "" ? Convert.ToDecimal(discount_txt_percent.Text) : 0);
                 discount_txt_id.Text = discount.Id.ToString();
                 discount_txt_percent.Text = discount.DPercent.ToString();
 
 
                 discount_btn_edit.Enabled = true;
-                discount_btn_save.Enabled = true;
+                discount_btn_save.Enabled = false;
             }
             catch (NullReferenceException)
             {
@@ -315,14 +315,28 @@ namespace AwesomeClient
 
         private void discount_edit_btn_Click(object sender, EventArgs e)
         {
-            discount_txt_percent.Enabled = true;
+            discount_btn_show.Enabled = false;
+            discount_btn_edit.Enabled = false;
+            discount_btn_save.Enabled = true;
         }
 
         private void discount_save_btn_Click(object sender, EventArgs e)
         {
-            discount_txt_percent.Enabled = false;
-            discount_btn_edit.Enabled = false;
-            discount_btn_save.Enabled = false;
+            try
+            {
+                Discount discount = new Discount();
+                discount.Id = Convert.ToInt32(discount_txt_id.Text);
+                discount.DPercent = Convert.ToDecimal(discount_txt_percent.Text);
+                client.updateDiscount(discount.Id, discount.DPercent);
+                // Sets the buttons to Not Usable after you save
+                discount_btn_edit.Enabled = false;
+                discount_btn_save.Enabled = false;
+                discount_btn_show.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error has occured: " + ex.Message);
+            }
         }
         #endregion
         #region Ticket
@@ -348,8 +362,24 @@ namespace AwesomeClient
 
         private void ticket_show_btn_Click(object sender, EventArgs e)
         {
-            ticket_btn_edit.Enabled = true;
-            ticket_btn_save.Enabled = true;
+            try
+            {
+                Ticket ticket = new Ticket();
+                var tickets = client.getTicket(ticket_txt_id.Text != "" ? Convert.ToInt32(ticket_txt_id.Text) : 0, ticket_txt_reservId.Text != "" ? Convert.ToInt32(ticket_txt_reservId.Text) : 0);
+
+                ticket_txt_id.Text = ticket.Id.ToString();
+                ticket_txt_reservId.Text = ticket.ReservationId.ToString();
+                ticket_txt_price.Text = ticket.Price.ToString();
+                ticket_txt_discount.Text = ticket.Discount.ToString();
+
+                ticket_btn_edit.Enabled = true;
+                ticket_btn_save.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
         }
 
         private void ticket_edit_btn_Click(object sender, EventArgs e)
