@@ -297,31 +297,31 @@ namespace AwesomeServer
         }
         public string updateTicket(int ticketId, decimal standard, int reservationId, int discountId)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The ticket was updated succesfully!";
-            //    try
-            //    {
-            //        var obj = db.Tickets.SingleOrDefault(t => t.Id == ticketId);
-            //        if (obj.Standard != standard)
-            //            obj.Standard = standard;
-            //        if (obj.ReservationId != reservationId)
-            //            obj.ReservationId = reservationId;
-            //        if (obj.DiscountId != discountId)
-            //            obj.DiscountId = discountId;
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The ticket was updated succesfully!";
+                try
+                {
+                    var obj = db.Tickets.SingleOrDefault(t => t.Id == ticketId);
+                    if (obj.Standard != standard)
+                        obj.Standard = standard;
+                    if (obj.ReservationId != reservationId)
+                        obj.ReservationId = reservationId;
+                    if (obj.DiscountId != discountId)
+                        obj.DiscountId = discountId;
 
-            //        db.SubmitChanges(ConflictMode.FailOnFirstConflict);
-            //    }
-            //    catch (ChangeConflictException ex)
-            //    {
-                     //foreach (ObjectChangeConflict objchangeconf in db.ChangeConflicts)
-                     //   {
-                     //       objchangeconf.Resolve(RefreshMode.OverwriteCurrentValues);
-                     //   }
-            //        message = "An error has occured: " + ex.Message;
-            //    }
-            return message;
-            //}
+                    db.SubmitChanges(ConflictMode.FailOnFirstConflict);
+                }
+                catch (ChangeConflictException ex)
+                {
+                    foreach (ObjectChangeConflict objchangeconf in db.ChangeConflicts)
+                    {
+                        objchangeconf.Resolve(RefreshMode.OverwriteCurrentValues);
+                    }
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
         }
         public string updateSeat(int seatId, int col, int row, bool usable, DateTime dateAndTime, int roomId)
         {
@@ -355,27 +355,27 @@ namespace AwesomeServer
         }
         public string updateDiscount(int discountId, decimal dPercent)
         {
-            //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
-            //{
-            string message = "The discount was updated succesfully!";
-            //    try
-            //    {
-            //        var obj = db.Discounts.SingleOrDefault(d => d.Id == discountId);
-            //        if (obj.DPercent != dPercent)
-            //            obj.DPercent = dPercent;
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                string message = "The discount was updated succesfully!";
+                try
+                {
+                    var obj = db.Discounts.SingleOrDefault(d => d.Id == discountId);
+                    if (obj.DPercent != dPercent)
+                        obj.DPercent = dPercent;
 
-            //        db.SubmitChanges(ConflictMode.FailOnFirstConflict);
-            //    }
-            //    catch (ChangeConflictException ex)
-            //    {
-                    //foreach (ObjectChangeConflict objchangeconf in db.ChangeConflicts)
-                    //{
-                        //objchangeconf.Resolve(RefreshMode.OverwriteCurrentValues);
-                    //}
-            //        message = "An error has occured: " + ex.Message;
-            //    }
-            return message;
-            //}
+                    db.SubmitChanges(ConflictMode.FailOnFirstConflict);
+                }
+                catch (ChangeConflictException ex)
+                {
+                    foreach (ObjectChangeConflict objchangeconf in db.ChangeConflicts)
+                    {
+                        objchangeconf.Resolve(RefreshMode.OverwriteCurrentValues);
+                    }
+                    message = "An error has occured: " + ex.Message;
+                }
+                return message;
+            }
         }
 
         #endregion
