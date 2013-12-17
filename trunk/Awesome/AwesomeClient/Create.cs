@@ -41,24 +41,44 @@ namespace AwesomeClient
 
         private void movie_btn_create_Click(object sender, EventArgs e)
         {
-            Task task = new Task(new Action(() =>
-                {
+            //Task task = new Task(new Action(() =>
+            //    {
                     try
                     {
-                        Movie movie = new Movie();
-                        movie.Title = movie_txt_title.Text;
-                        movie.DateAndTime = movie_date_picker.Value;
-                        movie.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
-                        movie.Duration = new TimeSpan(0, Convert.ToInt32(movie_txt_duration.Text), 0);
+                        int item = Convert.ToInt32(movie_txt_daysNo.Text);
 
-                        MessageBox.Show(client.createMovie(movie.Title, movie.DateAndTime, movie.Duration, movie.RoomId));
+                        // TODO Create with day increment
+
+                        for (int i = 0; i < item; i++)
+                        {
+                            Movie movie = new Movie();
+                            movie.Title = movie_txt_title.Text;
+                            movie.DateAndTime = movie_date_picker1.Value;
+                            movie.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
+                            movie.Duration = new TimeSpan(0, Convert.ToInt32(movie_txt_duration.Text), 0);
+                            MessageBox.Show(client.createMovie(movie.Title, movie.DateAndTime, movie.Duration, movie.RoomId));
+
+                            Movie movie2 = new Movie();
+                            movie2.Title = movie_txt_title.Text;
+                            movie2.DateAndTime = movie_date_picker2.Value;
+                            movie2.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
+                            movie2.Duration = new TimeSpan(0, Convert.ToInt32(movie_txt_duration.Text), 0);
+                            MessageBox.Show(client.createMovie(movie2.Title, movie2.DateAndTime, movie2.Duration, movie2.RoomId));
+
+                            Movie movie3 = new Movie();
+                            movie3.Title = movie_txt_title.Text;
+                            movie3.DateAndTime = movie_date_picker3.Value;
+                            movie3.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
+                            movie3.Duration = new TimeSpan(0, Convert.ToInt32(movie_txt_duration.Text), 0);
+                            MessageBox.Show(client.createMovie(movie3.Title, movie3.DateAndTime, movie3.Duration, movie3.RoomId));
+                        }
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("An error has occured: " + ex.Message);
                     }
-                }));
-            task.Start();
+            //    }));
+            //task.Start();
         }
 
         private void reserv_btn_create_Click(object sender, EventArgs e)
@@ -70,10 +90,10 @@ namespace AwesomeClient
                 var movieSeats = movie.First().MovieSeats.ToList();
                 int[] seatIds = new int[movieSeats.Count];
                 int index = -1;
-              
-               
-              
-               
+
+
+
+
                 foreach (CheckBox c in reserv_panel_room.Controls)
                 {
                     if (c.Enabled && c.Checked)
@@ -327,7 +347,7 @@ namespace AwesomeClient
                 item.Checked = false;
             }
             int limit = index + noOfSeats;
-            while(client.getSeat(Convert.ToInt32(adjList[index].Text),0,0,0,0).First().Row==client.getSeat(Convert.ToInt32(adjList[limit-1].Text),0,0,0,0).First().Row)
+            while (client.getSeat(Convert.ToInt32(adjList[index].Text), 0, 0, 0, 0).First().Row == client.getSeat(Convert.ToInt32(adjList[limit - 1].Text), 0, 0, 0, 0).First().Row)
             {
                 for (i = index; i < limit - 1; i++)
                 {
@@ -351,25 +371,25 @@ namespace AwesomeClient
         private void reserv_txt_name_TextChanged(object sender, EventArgs e)
         {
             try
-            { 
-                
+            {
+
                 string text = reserv_txt_name.Text;
                 string reg = @"^[(a-zA-z)]+\s?[(a-zA-z)]+\s[(a-zA-z)]*$";
                 int number = reserv_txt_name.TextLength;
-             
-                    if (number>=5 && number<=25 && Regex.IsMatch(text,reg))
-                    {
-                        Validation.Text = "Validated!";
-                        //Validation.Font = new System.Drawing.Font(Validation.Font.FontFamily.Name, 12);
-                        reserv_btn_create.Enabled = true;
-                        //MessageBox.Show("Validated").ToString();
-                    }
-                    else
-                    {
-                        Validation.Text = "Not Valid";
-                        reserv_btn_create.Enabled = false;
-                    }     
- 
+
+                if (number >= 5 && number <= 25 && Regex.IsMatch(text, reg))
+                {
+                    Validation.Text = "Validated!";
+                    //Validation.Font = new System.Drawing.Font(Validation.Font.FontFamily.Name, 12);
+                    reserv_btn_create.Enabled = true;
+                    //MessageBox.Show("Validated").ToString();
+                }
+                else
+                {
+                    Validation.Text = "Not Valid";
+                    reserv_btn_create.Enabled = false;
+                }
+
             }
             catch (Exception exception)
             {

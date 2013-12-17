@@ -2,7 +2,7 @@ movie alocation for rooms (if time available)
 
 movie start date - end date 
 
-every movie 3 times each day 
+every movie 3 times each day      half-done (I think date and time needs to be splited to be able to do increment by day)
 
 adj recursive to decrement the number of noOfSeatss     DONE
 
