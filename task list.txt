@@ -1,8 +1,8 @@
 movie alocation for rooms (if time available)
 
-movie start date - end date 
+movie start date - end date    ( do we still need this cause the trigger to delete the movies it's kinda the same )
 
-every movie 3 times each day      done ( but it takes time for a large ammount of days :D )
+every movie 3 times each day      done
 
 adj recursive to decrement the number of noOfSeatss     DONE
 
