@@ -43,40 +43,39 @@ namespace AwesomeClient
         {
             //Task task = new Task(new Action(() =>
             //    {
-                    try
-                    {
-                        int item = Convert.ToInt32(movie_txt_daysNo.Text);
+            try
+            {
+                int item = Convert.ToInt32(movie_txt_daysNo.Text);
 
-                        // TODO Create with day increment
+                for (int i = 0; i < item; i++)
+                {
+                    Movie movie = new Movie();
+                    movie.Title = movie_txt_title.Text;
+                    movie.DateAndTime = movie_date_picker1.Value.AddDays(i);
+                    movie.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
+                    movie.Duration = new TimeSpan(0, Convert.ToInt32(movie_txt_duration.Text), 0);
+                    client.createMovie(movie.Title, movie.DateAndTime, movie.Duration, movie.RoomId);
 
-                        for (int i = 0; i < item; i++)
-                        {
-                            Movie movie = new Movie();
-                            movie.Title = movie_txt_title.Text;
-                            movie.DateAndTime = movie_date_picker1.Value;
-                            movie.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
-                            movie.Duration = new TimeSpan(0, Convert.ToInt32(movie_txt_duration.Text), 0);
-                            MessageBox.Show(client.createMovie(movie.Title, movie.DateAndTime, movie.Duration, movie.RoomId));
+                    Movie movie2 = new Movie();
+                    movie2.Title = movie_txt_title.Text;
+                    movie2.DateAndTime = movie_date_picker2.Value.AddDays(i);
+                    movie2.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
+                    movie2.Duration = new TimeSpan(0, Convert.ToInt32(movie_txt_duration.Text), 0);
+                    client.createMovie(movie2.Title, movie2.DateAndTime, movie2.Duration, movie2.RoomId);
 
-                            Movie movie2 = new Movie();
-                            movie2.Title = movie_txt_title.Text;
-                            movie2.DateAndTime = movie_date_picker2.Value;
-                            movie2.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
-                            movie2.Duration = new TimeSpan(0, Convert.ToInt32(movie_txt_duration.Text), 0);
-                            MessageBox.Show(client.createMovie(movie2.Title, movie2.DateAndTime, movie2.Duration, movie2.RoomId));
-
-                            Movie movie3 = new Movie();
-                            movie3.Title = movie_txt_title.Text;
-                            movie3.DateAndTime = movie_date_picker3.Value;
-                            movie3.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
-                            movie3.Duration = new TimeSpan(0, Convert.ToInt32(movie_txt_duration.Text), 0);
-                            MessageBox.Show(client.createMovie(movie3.Title, movie3.DateAndTime, movie3.Duration, movie3.RoomId));
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("An error has occured: " + ex.Message);
-                    }
+                    Movie movie3 = new Movie();
+                    movie3.Title = movie_txt_title.Text;
+                    movie3.DateAndTime = movie_date_picker3.Value.AddDays(i);
+                    movie3.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
+                    movie3.Duration = new TimeSpan(0, Convert.ToInt32(movie_txt_duration.Text), 0);
+                    client.createMovie(movie3.Title, movie3.DateAndTime, movie3.Duration, movie3.RoomId);
+                }
+                MessageBox.Show("All movies for " + item + " days from now have been added succesfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error has occured: " + ex.Message);
+            }
             //    }));
             //task.Start();
         }
