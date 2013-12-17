@@ -40,10 +40,10 @@ namespace AwesomeClient
             this.create_movieTab = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.movie_txt_duration = new System.Windows.Forms.TextBox();
-            this.movie_date_picker = new System.Windows.Forms.DateTimePicker();
+            this.movie_date_picker1 = new System.Windows.Forms.DateTimePicker();
             this.movie_btn_create = new System.Windows.Forms.Button();
             this.movie_roomId_lbl = new System.Windows.Forms.Label();
-            this.movie_date_lbl = new System.Windows.Forms.Label();
+            this.movie_lbl_date1 = new System.Windows.Forms.Label();
             this.movie_title_lbl = new System.Windows.Forms.Label();
             this.movie_txt_roomId = new System.Windows.Forms.TextBox();
             this.movie_txt_title = new System.Windows.Forms.TextBox();
@@ -70,6 +70,12 @@ namespace AwesomeClient
             this.discount_percent_lbl = new System.Windows.Forms.Label();
             this.discount_btn_create = new System.Windows.Forms.Button();
             this.discount_txt_dPercent = new System.Windows.Forms.TextBox();
+            this.movie_date_picker2 = new System.Windows.Forms.DateTimePicker();
+            this.movie_date_picker3 = new System.Windows.Forms.DateTimePicker();
+            this.movie_txt_daysNo = new System.Windows.Forms.TextBox();
+            this.movie_lbl_date2 = new System.Windows.Forms.Label();
+            this.movie_lbl_date3 = new System.Windows.Forms.Label();
+            this.movie_lbl_daysNo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.createTab.SuspendLayout();
             this.create_roomTab.SuspendLayout();
@@ -159,12 +165,18 @@ namespace AwesomeClient
             // 
             // create_movieTab
             // 
+            this.create_movieTab.Controls.Add(this.movie_lbl_daysNo);
+            this.create_movieTab.Controls.Add(this.movie_lbl_date3);
+            this.create_movieTab.Controls.Add(this.movie_lbl_date2);
+            this.create_movieTab.Controls.Add(this.movie_txt_daysNo);
+            this.create_movieTab.Controls.Add(this.movie_date_picker3);
+            this.create_movieTab.Controls.Add(this.movie_date_picker2);
             this.create_movieTab.Controls.Add(this.label1);
             this.create_movieTab.Controls.Add(this.movie_txt_duration);
-            this.create_movieTab.Controls.Add(this.movie_date_picker);
+            this.create_movieTab.Controls.Add(this.movie_date_picker1);
             this.create_movieTab.Controls.Add(this.movie_btn_create);
             this.create_movieTab.Controls.Add(this.movie_roomId_lbl);
-            this.create_movieTab.Controls.Add(this.movie_date_lbl);
+            this.create_movieTab.Controls.Add(this.movie_lbl_date1);
             this.create_movieTab.Controls.Add(this.movie_title_lbl);
             this.create_movieTab.Controls.Add(this.movie_txt_roomId);
             this.create_movieTab.Controls.Add(this.movie_txt_title);
@@ -179,7 +191,7 @@ namespace AwesomeClient
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(96, 89);
+            this.label1.Location = new System.Drawing.Point(96, 166);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 9;
@@ -187,23 +199,23 @@ namespace AwesomeClient
             // 
             // movie_txt_duration
             // 
-            this.movie_txt_duration.Location = new System.Drawing.Point(152, 86);
+            this.movie_txt_duration.Location = new System.Drawing.Point(152, 163);
             this.movie_txt_duration.Name = "movie_txt_duration";
             this.movie_txt_duration.Size = new System.Drawing.Size(200, 20);
             this.movie_txt_duration.TabIndex = 8;
             // 
-            // movie_date_picker
+            // movie_date_picker1
             // 
-            this.movie_date_picker.CustomFormat = "MM/dd/yyyy hh:mm tt";
-            this.movie_date_picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.movie_date_picker.Location = new System.Drawing.Point(152, 59);
-            this.movie_date_picker.Name = "movie_date_picker";
-            this.movie_date_picker.Size = new System.Drawing.Size(200, 20);
-            this.movie_date_picker.TabIndex = 7;
+            this.movie_date_picker1.CustomFormat = "MM/dd/yyyy hh:mm tt";
+            this.movie_date_picker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.movie_date_picker1.Location = new System.Drawing.Point(152, 59);
+            this.movie_date_picker1.Name = "movie_date_picker1";
+            this.movie_date_picker1.Size = new System.Drawing.Size(200, 20);
+            this.movie_date_picker1.TabIndex = 7;
             // 
             // movie_btn_create
             // 
-            this.movie_btn_create.Location = new System.Drawing.Point(152, 138);
+            this.movie_btn_create.Location = new System.Drawing.Point(152, 215);
             this.movie_btn_create.Name = "movie_btn_create";
             this.movie_btn_create.Size = new System.Drawing.Size(75, 23);
             this.movie_btn_create.TabIndex = 6;
@@ -214,20 +226,20 @@ namespace AwesomeClient
             // movie_roomId_lbl
             // 
             this.movie_roomId_lbl.AutoSize = true;
-            this.movie_roomId_lbl.Location = new System.Drawing.Point(96, 115);
+            this.movie_roomId_lbl.Location = new System.Drawing.Point(96, 192);
             this.movie_roomId_lbl.Name = "movie_roomId_lbl";
             this.movie_roomId_lbl.Size = new System.Drawing.Size(50, 13);
             this.movie_roomId_lbl.TabIndex = 5;
             this.movie_roomId_lbl.Text = "Room Id:";
             // 
-            // movie_date_lbl
+            // movie_lbl_date1
             // 
-            this.movie_date_lbl.AutoSize = true;
-            this.movie_date_lbl.Location = new System.Drawing.Point(66, 62);
-            this.movie_date_lbl.Name = "movie_date_lbl";
-            this.movie_date_lbl.Size = new System.Drawing.Size(80, 13);
-            this.movie_date_lbl.TabIndex = 4;
-            this.movie_date_lbl.Text = "Date and Time:";
+            this.movie_lbl_date1.AutoSize = true;
+            this.movie_lbl_date1.Location = new System.Drawing.Point(98, 62);
+            this.movie_lbl_date1.Name = "movie_lbl_date1";
+            this.movie_lbl_date1.Size = new System.Drawing.Size(48, 13);
+            this.movie_lbl_date1.TabIndex = 4;
+            this.movie_lbl_date1.Text = "Movie 1:";
             // 
             // movie_title_lbl
             // 
@@ -240,7 +252,7 @@ namespace AwesomeClient
             // 
             // movie_txt_roomId
             // 
-            this.movie_txt_roomId.Location = new System.Drawing.Point(152, 112);
+            this.movie_txt_roomId.Location = new System.Drawing.Point(152, 189);
             this.movie_txt_roomId.Name = "movie_txt_roomId";
             this.movie_txt_roomId.Size = new System.Drawing.Size(200, 20);
             this.movie_txt_roomId.TabIndex = 2;
@@ -483,6 +495,58 @@ namespace AwesomeClient
             this.discount_txt_dPercent.Size = new System.Drawing.Size(100, 20);
             this.discount_txt_dPercent.TabIndex = 0;
             // 
+            // movie_date_picker2
+            // 
+            this.movie_date_picker2.CustomFormat = "MM/dd/yyyy hh:mm tt";
+            this.movie_date_picker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.movie_date_picker2.Location = new System.Drawing.Point(152, 85);
+            this.movie_date_picker2.Name = "movie_date_picker2";
+            this.movie_date_picker2.Size = new System.Drawing.Size(200, 20);
+            this.movie_date_picker2.TabIndex = 10;
+            // 
+            // movie_date_picker3
+            // 
+            this.movie_date_picker3.CustomFormat = "MM/dd/yyyy hh:mm tt";
+            this.movie_date_picker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.movie_date_picker3.Location = new System.Drawing.Point(152, 111);
+            this.movie_date_picker3.Name = "movie_date_picker3";
+            this.movie_date_picker3.Size = new System.Drawing.Size(200, 20);
+            this.movie_date_picker3.TabIndex = 11;
+            // 
+            // movie_txt_daysNo
+            // 
+            this.movie_txt_daysNo.Location = new System.Drawing.Point(152, 137);
+            this.movie_txt_daysNo.Name = "movie_txt_daysNo";
+            this.movie_txt_daysNo.Size = new System.Drawing.Size(200, 20);
+            this.movie_txt_daysNo.TabIndex = 12;
+            // 
+            // movie_lbl_date2
+            // 
+            this.movie_lbl_date2.AutoSize = true;
+            this.movie_lbl_date2.Location = new System.Drawing.Point(98, 88);
+            this.movie_lbl_date2.Name = "movie_lbl_date2";
+            this.movie_lbl_date2.Size = new System.Drawing.Size(48, 13);
+            this.movie_lbl_date2.TabIndex = 13;
+            this.movie_lbl_date2.Text = "Movie 2:";
+            // 
+            // movie_lbl_date3
+            // 
+            this.movie_lbl_date3.AutoSize = true;
+            this.movie_lbl_date3.Location = new System.Drawing.Point(98, 114);
+            this.movie_lbl_date3.Name = "movie_lbl_date3";
+            this.movie_lbl_date3.Size = new System.Drawing.Size(48, 13);
+            this.movie_lbl_date3.TabIndex = 14;
+            this.movie_lbl_date3.Text = "Movie 3:";
+            // 
+            // movie_lbl_daysNo
+            // 
+            this.movie_lbl_daysNo.AutoSize = true;
+            this.movie_lbl_daysNo.Location = new System.Drawing.Point(81, 140);
+            this.movie_lbl_daysNo.Name = "movie_lbl_daysNo";
+            this.movie_lbl_daysNo.Size = new System.Drawing.Size(66, 13);
+            this.movie_lbl_daysNo.TabIndex = 15;
+            this.movie_lbl_daysNo.Text = "No. of Days:";
+            // 
             // Create
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -518,10 +582,10 @@ namespace AwesomeClient
         private System.Windows.Forms.TextBox room_txt_row;
         private System.Windows.Forms.TextBox room_txt_col;
         private System.Windows.Forms.TabPage create_movieTab;
-        private System.Windows.Forms.DateTimePicker movie_date_picker;
+        private System.Windows.Forms.DateTimePicker movie_date_picker1;
         private System.Windows.Forms.Button movie_btn_create;
         private System.Windows.Forms.Label movie_roomId_lbl;
-        private System.Windows.Forms.Label movie_date_lbl;
+        private System.Windows.Forms.Label movie_lbl_date1;
         private System.Windows.Forms.Label movie_title_lbl;
         private System.Windows.Forms.TextBox movie_txt_roomId;
         private System.Windows.Forms.TextBox movie_txt_title;
@@ -550,6 +614,12 @@ namespace AwesomeClient
         private System.Windows.Forms.Label Validation;
         private System.Windows.Forms.TextBox reserv_txt_SeatsNo;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label movie_lbl_daysNo;
+        private System.Windows.Forms.Label movie_lbl_date3;
+        private System.Windows.Forms.Label movie_lbl_date2;
+        private System.Windows.Forms.TextBox movie_txt_daysNo;
+        private System.Windows.Forms.DateTimePicker movie_date_picker3;
+        private System.Windows.Forms.DateTimePicker movie_date_picker2;
 
     }
 }
