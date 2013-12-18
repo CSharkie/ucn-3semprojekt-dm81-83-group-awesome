@@ -325,9 +325,14 @@ namespace AwesomeClient
             }
             if (adjList.Count == 0)
             {
-                MessageBox.Show("There are no " + noOfSeats + " adjecent seats available, checking for " + (noOfSeats - 1));
-                noOfSeats = noOfSeats - 1;
-                reserv_btn_getAdj_Click(this, null);
+                if (noOfSeats > 2)
+                {
+                    MessageBox.Show("There are no " + noOfSeats + " adjecent seats available, checking for " + (noOfSeats - 1));
+                    noOfSeats = noOfSeats - 1;
+                    reserv_btn_getAdj_Click(this, null);
+                }
+                else
+                    MessageBox.Show("No seats available for more than 1 person next to each other");
 
             }
         }
@@ -364,6 +369,12 @@ namespace AwesomeClient
                 break;
             }
             index++;
+            if (adjList[adjList.Count - 1].Checked == true)
+            {
+                MessageBox.Show("You have reached the end of the seats");
+                i = 0;
+                index = 0;
+            }
         }
 
 
@@ -400,10 +411,68 @@ namespace AwesomeClient
 
         private void reserv_txt_SeatsNo_TextChanged(object sender, EventArgs e)
         {
-            noOfSeats = Convert.ToInt32(reserv_txt_SeatsNo.Text);
+            if (reserv_txt_SeatsNo.Text != "")
+                noOfSeats = Convert.ToInt32(reserv_txt_SeatsNo.Text);
         }
 
-    }
+        private void reserv_btn_prl_Click(object sender, EventArgs e)
+        {
+            adjList = new List<CheckBox>();
+            index = 0;
+            Room room = new Room();
+            Movie movie = new Movie();
+            Thread.Sleep(50);
+            movie = client.getMovie(Convert.ToInt32(reserv_txt_movieId.Text), "", 0).First();
+            room = client.getRoom(movie.RoomId);
 
+
+            List<CheckBox> permSeats = new List<CheckBox>();
+            int k = -1;
+
+            Parallel.For(1, room.Rows + 1, (i) =>
+            {
+                for (int j = 0; j < room.Cols; j++)
+                {
+                    k++;
+                    if (reserv_panel_room.Controls[k].Enabled == true)
+                    {
+                        permSeats.Add((CheckBox)reserv_panel_room.Controls[k]);
+                    }
+                    else
+                    {
+                        if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
+                        {
+                            foreach (var item in permSeats)
+                            {
+                                adjList.Add(item);
+                            }
+                        }
+                        permSeats.Clear();
+                    }
+                }
+                if (permSeats.Count != 0 && permSeats.Count >= noOfSeats)
+                {
+                    foreach (var item in permSeats)
+                    {
+                        adjList.Add(item);
+                    }
+                    //permSeats.Clear();
+                }
+                permSeats.Clear();
+            });
+            if (adjList.Count == 0)
+            {
+                if (noOfSeats > 2)
+                {
+                    MessageBox.Show("There are no " + noOfSeats + " adjecent seats available, checking for " + (noOfSeats - 1));
+                    noOfSeats = noOfSeats - 1;
+                    reserv_btn_getAdj_Click(this, null);
+                }
+                else
+                    MessageBox.Show("No seats available for more than 1 person next to each other");
+
+            }
+        }
+    }
 
 }

@@ -1,6 +1,6 @@
 movie alocation for rooms (if time available)
 
-movie start date - end date    ( do we still need this cause the trigger to delete the movies it's kinda the same )
+movie start date - end date    ( do we still need this cause the trigger to delete the movies it's kinda the same ) || Yes we need this. It has nothing to do with the trigger. It is implemented anyways int he client
 
 every movie 3 times each day      done
 
@@ -8,9 +8,9 @@ adj recursive to decrement the number of noOfSeatss     DONE
 
 trigger for sql deleting movies         half-done
 
-thread pool?
+thread pool?  I have no idea how to do it - Laszlo
 
-semaphore for parallel adj seats 
+semaphore for parallel adj seats   pointless because of the method i think - Laszlo
 
 reservation + email address and regex !!!        half-done
 
