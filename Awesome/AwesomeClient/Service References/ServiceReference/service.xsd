@@ -91,6 +91,7 @@
         <xs:element minOccurs="0" name="reservationId" type="xs:int" />
         <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="taken" type="xs:boolean" />
+        <xs:element minOccurs="0" name="dateOfReserve" type="xs:dateTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

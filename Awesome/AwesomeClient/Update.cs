@@ -131,6 +131,7 @@ namespace AwesomeClient
                         movie_txt_title.Text = movies.First().Title;
                         movie_txt_roomId.Text = movies.First().RoomId.ToString();
                         movie_date_picker.Value = movies.First().DateAndTime;
+                        movie_txt_duration.Text = movies.First().Duration.ToString();
                     }
 
                 }
@@ -150,6 +151,7 @@ namespace AwesomeClient
                 else if (movies.ToList().Count > 1)
                 {
                     movie_combo_movies.Enabled = true;
+                    movie_btn_find.Text = "Display";
                 }
                 else
                 {
@@ -160,6 +162,7 @@ namespace AwesomeClient
                     movie_txt_title.Text = movies.First().Title;
                     movie_txt_roomId.Text = movies.First().RoomId.ToString();
                     movie_date_picker.Value = movies.First().DateAndTime;
+                    movie_txt_duration.Text = movies.First().Duration.ToString();
                 }
             }
             catch (NullReferenceException)
@@ -182,14 +185,62 @@ namespace AwesomeClient
             movie_txt_roomId.Enabled = true;
             movie_date_picker.Enabled = true;
             movie_txt_title.Enabled = true;
+            movie_txt_duration.Enabled = true;
+
+            movie_btn_find.Enabled = false;
+            movie_btn_save.Enabled = true;
+            movie_btn_edit.Enabled = false;
+            movie_btn_find.Enabled = false;
         }
 
         private void movie_save_btn_Click(object sender, EventArgs e)
         {
-            movie_txt_roomId.Enabled = false;
-            movie_date_picker.Enabled = false;
+            try
+            {
+                Movie movie = new Movie();
+                movie.Id = Convert.ToInt32(movie_txt_movieId.Text);
+                movie.Title = movie_txt_title.Text;
+                movie.DateAndTime = movie_date_picker.Value;
+                movie.Duration = TimeSpan.Parse(movie_txt_duration.Text);
+                movie.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
+
+                client.updateMovie(movie.Id, movie.Title, movie.DateAndTime, movie.Duration, movie.RoomId);
+
+                movie_txt_roomId.Enabled = false;
+                movie_date_picker.Enabled = false;
+                movie_btn_edit.Enabled = false;
+                movie_btn_save.Enabled = false;
+                movie_btn_find.Text = "Find Movie";
+                movie_btn_find.Enabled = true;
+
+                MessageBox.Show("Movie has been updates successfully!");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("An error has occured: " + ex.Message);
+            }
+        }
+
+        private void movie_btn_reset_Click(object sender, EventArgs e)
+        {
             movie_btn_edit.Enabled = false;
+            movie_btn_find.Enabled = true;
+            movie_btn_find.Text = "Find Movie";
             movie_btn_save.Enabled = false;
+            movie_txt_movieId.Text = "";
+            movie_txt_movieId.Enabled = true;
+            movie_txt_roomId.Text = "";
+            movie_txt_roomId.Enabled = false;
+            movie_txt_duration.Enabled = false;
+            movie_txt_duration.Text = "";
+            movie_txt_title.Text = "";
+            movie_txt_title.Enabled = true;
+            movie_date_picker.Value = DateTime.Now;
+            movie_date_picker.Enabled = false;
+
+            movie_combo_movies.DataSource = null;
+            //movie_combo_movies.SelectedIndex = null;
         }
         #endregion
         #region Reservation
@@ -215,24 +266,59 @@ namespace AwesomeClient
 
         private void reserv_show_btn_Click(object sender, EventArgs e)
         {
-            reserv_btn_edit.Enabled = true;
-            reserv_btn_save.Enabled = true;
-
             try
             {
-                var reserv = client.getReservation(reserv_txt_movieId.Text != "" ? Convert.ToInt32(reserv_txt_reservId.Text) : 0, reserv_txt_name.Text);
+                var reserv = client.getReservation(reserv_txt_reservId.Text != "" ? Convert.ToInt32(reserv_txt_reservId.Text) : 0, reserv_txt_name.Text);
 
-                if (reserv_combo_reservations != null)
+                if (reserv_combo_reservations.SelectedItem != null)
                 {
+
                     int indexStart = reserv_combo_reservations.SelectedItem.ToString().IndexOf("(");
                     int indexStop = reserv_combo_reservations.SelectedItem.ToString().IndexOf(")");
                     string stringId = reserv_combo_reservations.SelectedItem.ToString().Substring(indexStart + 1, indexStop - 1);
                     if (indexStart != -1 && indexStop != -1)
                     {
                         reserv = client.getReservation(Convert.ToInt32(stringId), "");
-                        reserv_txt_movieId.Text = reserv.First().Id.ToString();
+                        reserv_txt_name.Text = reserv.First().Name;
+                        reserv_txt_reservId.Text = reserv.First().Id.ToString();
+                        reserv_txt_seatCount.Text = reserv.First().SeatCount.ToString();
+                        reserv_dateTime_picker.Value = reserv.First().DateOfReserve;
+                        reserv_check_taken.Checked = reserv.First().Taken;
                     }
+
                 }
+
+                IList<string> dataSource = new List<string>();
+                dataSource.Add("Select One...");
+                foreach (var item in reserv)
+                    dataSource.Add("(" + item.Id + ")" + item.Name + " @Seats: " + item.SeatCount);
+
+                reserv_combo_reservations.DataSource = dataSource;
+                reserv_combo_reservations.SelectedIndex = reserv.ToList().Count == 1 ? 1 : 0;
+
+
+                if (reserv.ToList().Count == 0)
+                {
+                    MessageBox.Show("No reservation found with that id or name");
+                }
+                else if (reserv.ToList().Count > 1)
+                {
+                    reserv_combo_reservations.Enabled = true;
+                    reserv_btn_show.Text = "Display";
+                }
+                else
+                {
+                    reserv_combo_reservations.Enabled = false;
+                    reserv_btn_edit.Enabled = true;
+
+                    reserv_txt_name.Text = reserv.First().Name;
+                    reserv_txt_reservId.Text = reserv.First().Id.ToString();
+                    reserv_txt_seatCount.Text = reserv.First().SeatCount.ToString();
+                    reserv_dateTime_picker.Value = reserv.First().DateOfReserve;
+                    reserv_check_taken.Checked = reserv.First().Taken;
+
+                }
+
             }
             catch (NullReferenceException)
             {
@@ -250,19 +336,60 @@ namespace AwesomeClient
 
         private void reserv_edit_btn_Click(object sender, EventArgs e)
         {
-            Reservation reserv = new Reservation();
-            reserv_txt_seatCount.Enabled = true;
-            reserv_txt_movieId.Enabled = true;
+            reserv_txt_seatCount.Enabled = false;
             reserv_check_taken.Enabled = true;
+            reserv_combo_reservations.Enabled = true;
+            reserv_dateTime_picker.Enabled = true;
+            reserv_btn_save.Enabled = true;
+            reserv_btn_show.Enabled = false;
         }
 
         private void reserv_save_btn_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Reservation reserv = new Reservation();
+                reserv.Id = Convert.ToInt32(reserv_txt_reservId.Text);
+                reserv.Name = reserv_txt_name.Text;
+                reserv.Taken = reserv_check_taken.Checked;
+                reserv.DateOfReserve = reserv_dateTime_picker.Value;
+
+                client.updateReservation(reserv.Id, reserv.Name, reserv.Taken, reserv.DateOfReserve);
+
+                reserv_txt_seatCount.Enabled = false;
+                reserv_check_taken.Enabled = false;
+                reserv_dateTime_picker.Enabled = false;
+                reserv_combo_reservations.Enabled = false;
+                reserv_btn_edit.Enabled = false;
+                reserv_btn_save.Enabled = false;
+                reserv_btn_show.Enabled = true;
+                reserv_btn_show.Text = "Find";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error has occured: " + ex.Message);
+            }
+        }
+
+        private void reserv_btn_reset_Click(object sender, EventArgs e)
+        {
+            reserv_btn_edit.Enabled = false;
+            reserv_btn_show.Enabled = true;
+            reserv_btn_show.Text = "Find";
+            reserv_btn_save.Enabled = false;
             reserv_txt_seatCount.Enabled = false;
+            reserv_txt_seatCount.Text = "";
+            reserv_txt_reservId.Text = "";
+            reserv_txt_name.Text = "";
             reserv_check_taken.Enabled = false;
-            reserv_txt_movieId.Enabled = false;
+            reserv_check_taken.Checked = false;
+            reserv_combo_reservations.Enabled = false;
+            reserv_dateTime_picker.Enabled = false;
+            reserv_dateTime_picker.Value = DateTime.Now;
             reserv_btn_edit.Enabled = false;
             reserv_btn_save.Enabled = false;
+
+            reserv_combo_reservations.DataSource = null;
         }
         #endregion
         #region Discount
@@ -365,7 +492,7 @@ namespace AwesomeClient
             }
             catch (Exception ex)
             {
-                
+
                 throw ex;
             }
         }
@@ -386,24 +513,6 @@ namespace AwesomeClient
             ticket_btn_save.Enabled = false;
         }
         #endregion
-
-        private void movie_btn_reset_Click(object sender, EventArgs e)
-        {
-            movie_btn_edit.Enabled = false;
-            movie_btn_find.Enabled = true;
-            movie_btn_save.Enabled = false;
-            movie_txt_movieId.Text = "";
-            movie_txt_movieId.Enabled = true;
-            movie_txt_roomId.Text = "";
-            movie_txt_roomId.Enabled = false;
-            movie_txt_title.Text = "";
-            movie_txt_title.Enabled = true;
-            movie_date_picker.Value = DateTime.Now;
-            movie_date_picker.Enabled = false;
-
-            movie_combo_movies.DataSource = null;
-            //movie_combo_movies.SelectedIndex = null;
-        }
 
     }
 }

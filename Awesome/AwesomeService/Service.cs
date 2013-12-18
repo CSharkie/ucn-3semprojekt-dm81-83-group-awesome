@@ -17,7 +17,7 @@ namespace AwesomeService
         #region create
         public string createReservation(string name, bool taken, int seatCount, int movieId, IList<int> seatIds)
         {
-            return server.createReservation(name, taken,seatCount, movieId, seatIds);
+            return server.createReservation(name, taken, seatCount, movieId, seatIds);
         }
         public string createMovie(string title, DateTime dateAndTime, TimeSpan Duration, int roomId)
         {
@@ -41,10 +41,10 @@ namespace AwesomeService
         #endregion
 
         #region update
-        public string updateReservation(int reservationId, string name, bool taken)
+        public string updateReservation(int reservationId, string name, bool taken, DateTime dateOfReserve)
         {
 
-            return server.updateReservation(reservationId, name, taken);
+            return server.updateReservation(reservationId, name, taken, dateOfReserve);
         }
 
         public string updateMovie(int movieId, string title, DateTime dateAndTime, TimeSpan Duration, int roomId)

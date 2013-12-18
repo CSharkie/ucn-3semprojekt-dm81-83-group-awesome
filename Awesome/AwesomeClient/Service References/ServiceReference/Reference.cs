@@ -46,10 +46,10 @@ namespace AwesomeClient.ServiceReference {
         System.Threading.Tasks.Task<string> createDiscountAsync(decimal dPercent);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateReservation", ReplyAction="http://tempuri.org/IService/updateReservationResponse")]
-        string updateReservation(int reservationId, string name, bool taken);
+        string updateReservation(int reservationId, string name, bool taken, System.DateTime dateOfReserve);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateReservation", ReplyAction="http://tempuri.org/IService/updateReservationResponse")]
-        System.Threading.Tasks.Task<string> updateReservationAsync(int reservationId, string name, bool taken);
+        System.Threading.Tasks.Task<string> updateReservationAsync(int reservationId, string name, bool taken, System.DateTime dateOfReserve);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/updateMovie", ReplyAction="http://tempuri.org/IService/updateMovieResponse")]
         string updateMovie(int movieId, string title, System.DateTime dateAndTime, System.TimeSpan Duration, int roomId);
@@ -245,12 +245,12 @@ namespace AwesomeClient.ServiceReference {
             return base.Channel.createDiscountAsync(dPercent);
         }
         
-        public string updateReservation(int reservationId, string name, bool taken) {
-            return base.Channel.updateReservation(reservationId, name, taken);
+        public string updateReservation(int reservationId, string name, bool taken, System.DateTime dateOfReserve) {
+            return base.Channel.updateReservation(reservationId, name, taken, dateOfReserve);
         }
         
-        public System.Threading.Tasks.Task<string> updateReservationAsync(int reservationId, string name, bool taken) {
-            return base.Channel.updateReservationAsync(reservationId, name, taken);
+        public System.Threading.Tasks.Task<string> updateReservationAsync(int reservationId, string name, bool taken, System.DateTime dateOfReserve) {
+            return base.Channel.updateReservationAsync(reservationId, name, taken, dateOfReserve);
         }
         
         public string updateMovie(int movieId, string title, System.DateTime dateAndTime, System.TimeSpan Duration, int roomId) {

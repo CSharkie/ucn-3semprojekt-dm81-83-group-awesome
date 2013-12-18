@@ -182,7 +182,7 @@ namespace AwesomeServer
         #endregion
 
         #region update
-        public string updateReservation(int reservationId, string name, bool taken)
+        public string updateReservation(int reservationId, string name, bool taken, DateTime dateOfReserve)
         {
             using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             {
@@ -194,6 +194,8 @@ namespace AwesomeServer
                         obj.Name = name;
                     if (obj.Taken != taken)
                         obj.Taken = taken;
+                    if (obj.DateOfReserve != null)
+                        obj.DateOfReserve = dateOfReserve;
                     db.SubmitChanges(ConflictMode.FailOnFirstConflict);
                 }
                 catch (ChangeConflictException ex)
