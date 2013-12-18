@@ -43,6 +43,7 @@
             this.room_cols_lbl = new System.Windows.Forms.Label();
             this.room_roomId_lbl = new System.Windows.Forms.Label();
             this.movieTab = new System.Windows.Forms.TabPage();
+            this.movie_btn_reset = new System.Windows.Forms.Button();
             this.movie_btn_find = new System.Windows.Forms.Button();
             this.movie_combo_movies = new System.Windows.Forms.ComboBox();
             this.movie_lbl_dropdown = new System.Windows.Forms.Label();
@@ -62,11 +63,10 @@
             this.reserv_reservId_lbl = new System.Windows.Forms.Label();
             this.reserv_txt_reservId = new System.Windows.Forms.TextBox();
             this.reserv_seatCount_lbl = new System.Windows.Forms.Label();
-            this.reserv_movieId_lbl = new System.Windows.Forms.Label();
+            this.reserv_lbl_date = new System.Windows.Forms.Label();
             this.reserv_name_lbl = new System.Windows.Forms.Label();
             this.reserv_check_taken = new System.Windows.Forms.CheckBox();
             this.reserv_txt_seatCount = new System.Windows.Forms.TextBox();
-            this.reserv_txt_movieId = new System.Windows.Forms.TextBox();
             this.reserv_txt_name = new System.Windows.Forms.TextBox();
             this.reserv_btn_show = new System.Windows.Forms.Button();
             this.reserv_btn_save = new System.Windows.Forms.Button();
@@ -91,7 +91,10 @@
             this.ticket_txt_reservId = new System.Windows.Forms.TextBox();
             this.ticket_txt_price = new System.Windows.Forms.TextBox();
             this.ticket_txt_id = new System.Windows.Forms.TextBox();
-            this.movie_btn_reset = new System.Windows.Forms.Button();
+            this.movie_txt_duration = new System.Windows.Forms.TextBox();
+            this.movie_lbl_duration = new System.Windows.Forms.Label();
+            this.reserv_dateTime_picker = new System.Windows.Forms.DateTimePicker();
+            this.reserv_btn_reset = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.updateTabs.SuspendLayout();
             this.roomTab.SuspendLayout();
@@ -250,6 +253,8 @@
             // 
             // movieTab
             // 
+            this.movieTab.Controls.Add(this.movie_lbl_duration);
+            this.movieTab.Controls.Add(this.movie_txt_duration);
             this.movieTab.Controls.Add(this.movie_btn_reset);
             this.movieTab.Controls.Add(this.movie_btn_find);
             this.movieTab.Controls.Add(this.movie_combo_movies);
@@ -272,9 +277,19 @@
             this.movieTab.Text = "Movie";
             this.movieTab.UseVisualStyleBackColor = true;
             // 
+            // movie_btn_reset
+            // 
+            this.movie_btn_reset.Location = new System.Drawing.Point(225, 220);
+            this.movie_btn_reset.Name = "movie_btn_reset";
+            this.movie_btn_reset.Size = new System.Drawing.Size(100, 23);
+            this.movie_btn_reset.TabIndex = 32;
+            this.movie_btn_reset.Text = "Reset All";
+            this.movie_btn_reset.UseVisualStyleBackColor = true;
+            this.movie_btn_reset.Click += new System.EventHandler(this.movie_btn_reset_Click);
+            // 
             // movie_btn_find
             // 
-            this.movie_btn_find.Location = new System.Drawing.Point(225, 165);
+            this.movie_btn_find.Location = new System.Drawing.Point(225, 191);
             this.movie_btn_find.Name = "movie_btn_find";
             this.movie_btn_find.Size = new System.Drawing.Size(100, 23);
             this.movie_btn_find.TabIndex = 31;
@@ -284,6 +299,7 @@
             // 
             // movie_combo_movies
             // 
+            this.movie_combo_movies.Enabled = false;
             this.movie_combo_movies.FormattingEnabled = true;
             this.movie_combo_movies.Location = new System.Drawing.Point(120, 85);
             this.movie_combo_movies.Name = "movie_combo_movies";
@@ -302,7 +318,7 @@
             // movie_roomId_lbl
             // 
             this.movie_roomId_lbl.AutoSize = true;
-            this.movie_roomId_lbl.Location = new System.Drawing.Point(64, 142);
+            this.movie_roomId_lbl.Location = new System.Drawing.Point(64, 168);
             this.movie_roomId_lbl.Name = "movie_roomId_lbl";
             this.movie_roomId_lbl.Size = new System.Drawing.Size(50, 13);
             this.movie_roomId_lbl.TabIndex = 27;
@@ -338,7 +354,7 @@
             // movie_btn_save
             // 
             this.movie_btn_save.Enabled = false;
-            this.movie_btn_save.Location = new System.Drawing.Point(225, 252);
+            this.movie_btn_save.Location = new System.Drawing.Point(225, 278);
             this.movie_btn_save.Name = "movie_btn_save";
             this.movie_btn_save.Size = new System.Drawing.Size(100, 23);
             this.movie_btn_save.TabIndex = 23;
@@ -349,7 +365,7 @@
             // movie_btn_edit
             // 
             this.movie_btn_edit.Enabled = false;
-            this.movie_btn_edit.Location = new System.Drawing.Point(225, 223);
+            this.movie_btn_edit.Location = new System.Drawing.Point(225, 249);
             this.movie_btn_edit.Name = "movie_btn_edit";
             this.movie_btn_edit.Size = new System.Drawing.Size(100, 23);
             this.movie_btn_edit.TabIndex = 22;
@@ -371,7 +387,7 @@
             // movie_txt_roomId
             // 
             this.movie_txt_roomId.Enabled = false;
-            this.movie_txt_roomId.Location = new System.Drawing.Point(120, 139);
+            this.movie_txt_roomId.Location = new System.Drawing.Point(120, 165);
             this.movie_txt_roomId.Name = "movie_txt_roomId";
             this.movie_txt_roomId.Size = new System.Drawing.Size(313, 20);
             this.movie_txt_roomId.TabIndex = 2;
@@ -395,16 +411,17 @@
             // 
             // reservationTab
             // 
+            this.reservationTab.Controls.Add(this.reserv_btn_reset);
+            this.reservationTab.Controls.Add(this.reserv_dateTime_picker);
             this.reservationTab.Controls.Add(this.reserv_lbl_reservations);
             this.reservationTab.Controls.Add(this.reserv_combo_reservations);
             this.reservationTab.Controls.Add(this.reserv_reservId_lbl);
             this.reservationTab.Controls.Add(this.reserv_txt_reservId);
             this.reservationTab.Controls.Add(this.reserv_seatCount_lbl);
-            this.reservationTab.Controls.Add(this.reserv_movieId_lbl);
+            this.reservationTab.Controls.Add(this.reserv_lbl_date);
             this.reservationTab.Controls.Add(this.reserv_name_lbl);
             this.reservationTab.Controls.Add(this.reserv_check_taken);
             this.reservationTab.Controls.Add(this.reserv_txt_seatCount);
-            this.reservationTab.Controls.Add(this.reserv_txt_movieId);
             this.reservationTab.Controls.Add(this.reserv_txt_name);
             this.reservationTab.Controls.Add(this.reserv_btn_show);
             this.reservationTab.Controls.Add(this.reserv_btn_save);
@@ -428,10 +445,11 @@
             // 
             // reserv_combo_reservations
             // 
+            this.reserv_combo_reservations.Enabled = false;
             this.reserv_combo_reservations.FormattingEnabled = true;
             this.reserv_combo_reservations.Location = new System.Drawing.Point(163, 49);
             this.reserv_combo_reservations.Name = "reserv_combo_reservations";
-            this.reserv_combo_reservations.Size = new System.Drawing.Size(164, 21);
+            this.reserv_combo_reservations.Size = new System.Drawing.Size(256, 21);
             this.reserv_combo_reservations.TabIndex = 36;
             // 
             // reserv_reservId_lbl
@@ -459,14 +477,14 @@
             this.reserv_seatCount_lbl.TabIndex = 33;
             this.reserv_seatCount_lbl.Text = "Seat Count:";
             // 
-            // reserv_movieId_lbl
+            // reserv_lbl_date
             // 
-            this.reserv_movieId_lbl.AutoSize = true;
-            this.reserv_movieId_lbl.Location = new System.Drawing.Point(106, 104);
-            this.reserv_movieId_lbl.Name = "reserv_movieId_lbl";
-            this.reserv_movieId_lbl.Size = new System.Drawing.Size(51, 13);
-            this.reserv_movieId_lbl.TabIndex = 32;
-            this.reserv_movieId_lbl.Text = "Movie Id:";
+            this.reserv_lbl_date.AutoSize = true;
+            this.reserv_lbl_date.Location = new System.Drawing.Point(64, 104);
+            this.reserv_lbl_date.Name = "reserv_lbl_date";
+            this.reserv_lbl_date.Size = new System.Drawing.Size(93, 13);
+            this.reserv_lbl_date.TabIndex = 32;
+            this.reserv_lbl_date.Text = "Reservation Date:";
             // 
             // reserv_name_lbl
             // 
@@ -494,18 +512,9 @@
             this.reserv_txt_seatCount.Enabled = false;
             this.reserv_txt_seatCount.Location = new System.Drawing.Point(163, 127);
             this.reserv_txt_seatCount.Name = "reserv_txt_seatCount";
-            this.reserv_txt_seatCount.Size = new System.Drawing.Size(164, 20);
+            this.reserv_txt_seatCount.Size = new System.Drawing.Size(256, 20);
             this.reserv_txt_seatCount.TabIndex = 29;
             this.reserv_txt_seatCount.TextChanged += new System.EventHandler(this.reserv_seatCount_txt_TextChanged);
-            // 
-            // reserv_txt_movieId
-            // 
-            this.reserv_txt_movieId.Enabled = false;
-            this.reserv_txt_movieId.Location = new System.Drawing.Point(163, 101);
-            this.reserv_txt_movieId.Name = "reserv_txt_movieId";
-            this.reserv_txt_movieId.Size = new System.Drawing.Size(164, 20);
-            this.reserv_txt_movieId.TabIndex = 28;
-            this.reserv_txt_movieId.TextChanged += new System.EventHandler(this.reserv_movieId_txt_TextChanged);
             // 
             // reserv_txt_name
             // 
@@ -517,18 +526,18 @@
             // 
             // reserv_btn_show
             // 
-            this.reserv_btn_show.Location = new System.Drawing.Point(163, 153);
+            this.reserv_btn_show.Location = new System.Drawing.Point(252, 153);
             this.reserv_btn_show.Name = "reserv_btn_show";
             this.reserv_btn_show.Size = new System.Drawing.Size(100, 23);
             this.reserv_btn_show.TabIndex = 24;
-            this.reserv_btn_show.Text = "Display";
+            this.reserv_btn_show.Text = "Find";
             this.reserv_btn_show.UseVisualStyleBackColor = true;
             this.reserv_btn_show.Click += new System.EventHandler(this.reserv_show_btn_Click);
             // 
             // reserv_btn_save
             // 
             this.reserv_btn_save.Enabled = false;
-            this.reserv_btn_save.Location = new System.Drawing.Point(163, 211);
+            this.reserv_btn_save.Location = new System.Drawing.Point(252, 240);
             this.reserv_btn_save.Name = "reserv_btn_save";
             this.reserv_btn_save.Size = new System.Drawing.Size(100, 23);
             this.reserv_btn_save.TabIndex = 26;
@@ -539,7 +548,7 @@
             // reserv_btn_edit
             // 
             this.reserv_btn_edit.Enabled = false;
-            this.reserv_btn_edit.Location = new System.Drawing.Point(163, 182);
+            this.reserv_btn_edit.Location = new System.Drawing.Point(252, 211);
             this.reserv_btn_edit.Name = "reserv_btn_edit";
             this.reserv_btn_edit.Size = new System.Drawing.Size(100, 23);
             this.reserv_btn_edit.TabIndex = 25;
@@ -753,15 +762,42 @@
             this.ticket_txt_id.TabIndex = 0;
             this.ticket_txt_id.TextChanged += new System.EventHandler(this.ticket_id_txt_TextChanged);
             // 
-            // movie_btn_reset
+            // movie_txt_duration
             // 
-            this.movie_btn_reset.Location = new System.Drawing.Point(225, 194);
-            this.movie_btn_reset.Name = "movie_btn_reset";
-            this.movie_btn_reset.Size = new System.Drawing.Size(100, 23);
-            this.movie_btn_reset.TabIndex = 32;
-            this.movie_btn_reset.Text = "Reset All";
-            this.movie_btn_reset.UseVisualStyleBackColor = true;
-            this.movie_btn_reset.Click += new System.EventHandler(this.movie_btn_reset_Click);
+            this.movie_txt_duration.Enabled = false;
+            this.movie_txt_duration.Location = new System.Drawing.Point(120, 139);
+            this.movie_txt_duration.Name = "movie_txt_duration";
+            this.movie_txt_duration.Size = new System.Drawing.Size(313, 20);
+            this.movie_txt_duration.TabIndex = 33;
+            // 
+            // movie_lbl_duration
+            // 
+            this.movie_lbl_duration.AutoSize = true;
+            this.movie_lbl_duration.Location = new System.Drawing.Point(64, 142);
+            this.movie_lbl_duration.Name = "movie_lbl_duration";
+            this.movie_lbl_duration.Size = new System.Drawing.Size(50, 13);
+            this.movie_lbl_duration.TabIndex = 34;
+            this.movie_lbl_duration.Text = "Duration:";
+            // 
+            // reserv_dateTime_picker
+            // 
+            this.reserv_dateTime_picker.CustomFormat = "MM/dd/yyyy hh:mm tt";
+            this.reserv_dateTime_picker.Enabled = false;
+            this.reserv_dateTime_picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.reserv_dateTime_picker.Location = new System.Drawing.Point(163, 101);
+            this.reserv_dateTime_picker.Name = "reserv_dateTime_picker";
+            this.reserv_dateTime_picker.Size = new System.Drawing.Size(256, 20);
+            this.reserv_dateTime_picker.TabIndex = 38;
+            // 
+            // reserv_btn_reset
+            // 
+            this.reserv_btn_reset.Location = new System.Drawing.Point(252, 182);
+            this.reserv_btn_reset.Name = "reserv_btn_reset";
+            this.reserv_btn_reset.Size = new System.Drawing.Size(100, 23);
+            this.reserv_btn_reset.TabIndex = 39;
+            this.reserv_btn_reset.Text = "Reset All";
+            this.reserv_btn_reset.UseVisualStyleBackColor = true;
+            this.reserv_btn_reset.Click += new System.EventHandler(this.reserv_btn_reset_Click);
             // 
             // Update
             // 
@@ -818,11 +854,10 @@
         private System.Windows.Forms.TextBox movie_txt_title;
         private System.Windows.Forms.TextBox movie_txt_movieId;
         private System.Windows.Forms.Label reserv_seatCount_lbl;
-        private System.Windows.Forms.Label reserv_movieId_lbl;
+        private System.Windows.Forms.Label reserv_lbl_date;
         private System.Windows.Forms.Label reserv_name_lbl;
         private System.Windows.Forms.CheckBox reserv_check_taken;
         private System.Windows.Forms.TextBox reserv_txt_seatCount;
-        private System.Windows.Forms.TextBox reserv_txt_movieId;
         private System.Windows.Forms.TextBox reserv_txt_name;
         private System.Windows.Forms.Button reserv_btn_show;
         private System.Windows.Forms.Button reserv_btn_save;
@@ -853,5 +888,9 @@
         private System.Windows.Forms.Label reserv_lbl_reservations;
         private System.Windows.Forms.ComboBox reserv_combo_reservations;
         private System.Windows.Forms.Button movie_btn_reset;
+        private System.Windows.Forms.Label movie_lbl_duration;
+        private System.Windows.Forms.TextBox movie_txt_duration;
+        private System.Windows.Forms.DateTimePicker reserv_dateTime_picker;
+        private System.Windows.Forms.Button reserv_btn_reset;
     }
 }

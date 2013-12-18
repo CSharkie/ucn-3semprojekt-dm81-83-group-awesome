@@ -28,7 +28,7 @@ namespace AwesomeService
 
         #region update
         [OperationContract]
-        string updateReservation(int reservationId, string name, bool taken);
+        string updateReservation(int reservationId, string name, bool taken, DateTime dateOfReserve);
 
         [OperationContract]
         string updateMovie(int movieId, string title, DateTime dateAndTime, TimeSpan Duration, int roomId);

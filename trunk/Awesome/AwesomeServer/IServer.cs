@@ -18,7 +18,7 @@ namespace AwesomeServer
         #endregion
 
         #region update
-        string updateReservation(int reservationId, string name, bool taken);
+        string updateReservation(int reservationId, string name, bool taken, DateTime dateOfReserve);
         string updateMovie(int movieId, string title, DateTime dateAndTime, TimeSpan Duration, int roomId);
         string updateRoom(int roomId, int cols, int rows);
         string updateTicket(int ticketId, decimal standard, int reservationId, int discountId);
