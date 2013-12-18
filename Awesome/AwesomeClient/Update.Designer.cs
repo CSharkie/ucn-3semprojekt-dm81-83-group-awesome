@@ -50,7 +50,6 @@
             this.movie_date_lbl = new System.Windows.Forms.Label();
             this.movie_title_lbl = new System.Windows.Forms.Label();
             this.movie_movieId_lbl = new System.Windows.Forms.Label();
-            this.movie_btn_show = new System.Windows.Forms.Button();
             this.movie_btn_save = new System.Windows.Forms.Button();
             this.movie_btn_edit = new System.Windows.Forms.Button();
             this.movie_date_picker = new System.Windows.Forms.DateTimePicker();
@@ -92,6 +91,7 @@
             this.ticket_txt_reservId = new System.Windows.Forms.TextBox();
             this.ticket_txt_price = new System.Windows.Forms.TextBox();
             this.ticket_txt_id = new System.Windows.Forms.TextBox();
+            this.movie_btn_reset = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.updateTabs.SuspendLayout();
             this.roomTab.SuspendLayout();
@@ -250,6 +250,7 @@
             // 
             // movieTab
             // 
+            this.movieTab.Controls.Add(this.movie_btn_reset);
             this.movieTab.Controls.Add(this.movie_btn_find);
             this.movieTab.Controls.Add(this.movie_combo_movies);
             this.movieTab.Controls.Add(this.movie_lbl_dropdown);
@@ -257,7 +258,6 @@
             this.movieTab.Controls.Add(this.movie_date_lbl);
             this.movieTab.Controls.Add(this.movie_title_lbl);
             this.movieTab.Controls.Add(this.movie_movieId_lbl);
-            this.movieTab.Controls.Add(this.movie_btn_show);
             this.movieTab.Controls.Add(this.movie_btn_save);
             this.movieTab.Controls.Add(this.movie_btn_edit);
             this.movieTab.Controls.Add(this.movie_date_picker);
@@ -274,7 +274,7 @@
             // 
             // movie_btn_find
             // 
-            this.movie_btn_find.Location = new System.Drawing.Point(171, 165);
+            this.movie_btn_find.Location = new System.Drawing.Point(225, 165);
             this.movie_btn_find.Name = "movie_btn_find";
             this.movie_btn_find.Size = new System.Drawing.Size(100, 23);
             this.movie_btn_find.TabIndex = 31;
@@ -287,7 +287,7 @@
             this.movie_combo_movies.FormattingEnabled = true;
             this.movie_combo_movies.Location = new System.Drawing.Point(120, 85);
             this.movie_combo_movies.Name = "movie_combo_movies";
-            this.movie_combo_movies.Size = new System.Drawing.Size(200, 21);
+            this.movie_combo_movies.Size = new System.Drawing.Size(313, 21);
             this.movie_combo_movies.TabIndex = 30;
             // 
             // movie_lbl_dropdown
@@ -335,20 +335,10 @@
             this.movie_movieId_lbl.TabIndex = 24;
             this.movie_movieId_lbl.Text = "Movie Id:";
             // 
-            // movie_btn_show
-            // 
-            this.movie_btn_show.Location = new System.Drawing.Point(171, 194);
-            this.movie_btn_show.Name = "movie_btn_show";
-            this.movie_btn_show.Size = new System.Drawing.Size(100, 23);
-            this.movie_btn_show.TabIndex = 21;
-            this.movie_btn_show.Text = "Display";
-            this.movie_btn_show.UseVisualStyleBackColor = true;
-            this.movie_btn_show.Click += new System.EventHandler(this.movie_show_btn_Click);
-            // 
             // movie_btn_save
             // 
             this.movie_btn_save.Enabled = false;
-            this.movie_btn_save.Location = new System.Drawing.Point(171, 252);
+            this.movie_btn_save.Location = new System.Drawing.Point(225, 252);
             this.movie_btn_save.Name = "movie_btn_save";
             this.movie_btn_save.Size = new System.Drawing.Size(100, 23);
             this.movie_btn_save.TabIndex = 23;
@@ -359,7 +349,7 @@
             // movie_btn_edit
             // 
             this.movie_btn_edit.Enabled = false;
-            this.movie_btn_edit.Location = new System.Drawing.Point(171, 223);
+            this.movie_btn_edit.Location = new System.Drawing.Point(225, 223);
             this.movie_btn_edit.Name = "movie_btn_edit";
             this.movie_btn_edit.Size = new System.Drawing.Size(100, 23);
             this.movie_btn_edit.TabIndex = 22;
@@ -374,7 +364,7 @@
             this.movie_date_picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.movie_date_picker.Location = new System.Drawing.Point(120, 113);
             this.movie_date_picker.Name = "movie_date_picker";
-            this.movie_date_picker.Size = new System.Drawing.Size(200, 20);
+            this.movie_date_picker.Size = new System.Drawing.Size(313, 20);
             this.movie_date_picker.TabIndex = 3;
             this.movie_date_picker.ValueChanged += new System.EventHandler(this.movie_date_picker_ValueChanged);
             // 
@@ -383,7 +373,7 @@
             this.movie_txt_roomId.Enabled = false;
             this.movie_txt_roomId.Location = new System.Drawing.Point(120, 139);
             this.movie_txt_roomId.Name = "movie_txt_roomId";
-            this.movie_txt_roomId.Size = new System.Drawing.Size(200, 20);
+            this.movie_txt_roomId.Size = new System.Drawing.Size(313, 20);
             this.movie_txt_roomId.TabIndex = 2;
             this.movie_txt_roomId.TextChanged += new System.EventHandler(this.movie_roomId_txt_TextChanged);
             // 
@@ -391,7 +381,7 @@
             // 
             this.movie_txt_title.Location = new System.Drawing.Point(120, 59);
             this.movie_txt_title.Name = "movie_txt_title";
-            this.movie_txt_title.Size = new System.Drawing.Size(200, 20);
+            this.movie_txt_title.Size = new System.Drawing.Size(313, 20);
             this.movie_txt_title.TabIndex = 1;
             this.movie_txt_title.TextChanged += new System.EventHandler(this.movie_title_txt_TextChanged);
             // 
@@ -399,7 +389,7 @@
             // 
             this.movie_txt_movieId.Location = new System.Drawing.Point(120, 33);
             this.movie_txt_movieId.Name = "movie_txt_movieId";
-            this.movie_txt_movieId.Size = new System.Drawing.Size(200, 20);
+            this.movie_txt_movieId.Size = new System.Drawing.Size(313, 20);
             this.movie_txt_movieId.TabIndex = 0;
             this.movie_txt_movieId.TextChanged += new System.EventHandler(this.movie_movieId_txt_TextChanged);
             // 
@@ -763,6 +753,16 @@
             this.ticket_txt_id.TabIndex = 0;
             this.ticket_txt_id.TextChanged += new System.EventHandler(this.ticket_id_txt_TextChanged);
             // 
+            // movie_btn_reset
+            // 
+            this.movie_btn_reset.Location = new System.Drawing.Point(225, 194);
+            this.movie_btn_reset.Name = "movie_btn_reset";
+            this.movie_btn_reset.Size = new System.Drawing.Size(100, 23);
+            this.movie_btn_reset.TabIndex = 32;
+            this.movie_btn_reset.Text = "Reset All";
+            this.movie_btn_reset.UseVisualStyleBackColor = true;
+            this.movie_btn_reset.Click += new System.EventHandler(this.movie_btn_reset_Click);
+            // 
             // Update
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -811,7 +811,6 @@
         private System.Windows.Forms.Label movie_date_lbl;
         private System.Windows.Forms.Label movie_title_lbl;
         private System.Windows.Forms.Label movie_movieId_lbl;
-        private System.Windows.Forms.Button movie_btn_show;
         private System.Windows.Forms.Button movie_btn_save;
         private System.Windows.Forms.Button movie_btn_edit;
         private System.Windows.Forms.DateTimePicker movie_date_picker;
@@ -853,5 +852,6 @@
         private System.Windows.Forms.TextBox reserv_txt_reservId;
         private System.Windows.Forms.Label reserv_lbl_reservations;
         private System.Windows.Forms.ComboBox reserv_combo_reservations;
+        private System.Windows.Forms.Button movie_btn_reset;
     }
 }
