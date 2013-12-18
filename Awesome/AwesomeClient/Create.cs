@@ -80,7 +80,7 @@ namespace AwesomeClient
             //task.Start();
         }
 
-        int discountId = 0;
+        int discountId = 2;
         private void reserv_btn_create_Click(object sender, EventArgs e)
         {
             try
