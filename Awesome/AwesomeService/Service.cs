@@ -170,7 +170,10 @@ namespace AwesomeService
         {
             return server.emptyRoom(roomId);
         }
-
+        public bool login(string username, string password)
+        {
+            return server.login(username, password);
+        }
         #endregion
     }
 }

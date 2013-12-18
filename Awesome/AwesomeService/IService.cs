@@ -91,6 +91,8 @@ namespace AwesomeService
         bool emptyRoom(int roomId);
         [OperationContract]
         int lastReservation();
+        [OperationContract]
+        bool login(string username, string password);
         #endregion
     }
   
