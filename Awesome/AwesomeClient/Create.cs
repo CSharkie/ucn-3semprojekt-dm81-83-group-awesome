@@ -80,6 +80,7 @@ namespace AwesomeClient
             //task.Start();
         }
 
+        int discountId = 0;
         private void reserv_btn_create_Click(object sender, EventArgs e)
         {
             try
@@ -121,7 +122,7 @@ namespace AwesomeClient
                     foreach (int item in desiredSeats)
                     {
                         Seat seat = client.getSeat(item, 0, 0, 0, 0).First();
-                        client.createTicket(100, client.lastReservation(), 2, seat.Col, seat.Row);
+                        client.createTicket(100, client.lastReservation(), discountId, seat.Col, seat.Row);
                     }
                 }
                 else
@@ -477,6 +478,12 @@ namespace AwesomeClient
                     MessageBox.Show("No seats available for more than 1 person next to each other");
 
             }
+        }
+
+        private void reserv_txt_DId_TextChanged(object sender, EventArgs e)
+        {
+            if (reserv_txt_DId.Text != "")
+                discountId = Convert.ToInt32(reserv_txt_DId.Text);
         }
     }
 

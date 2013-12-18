@@ -54,6 +54,7 @@ namespace AwesomeClient
             this.movie_txt_roomId = new System.Windows.Forms.TextBox();
             this.movie_txt_title = new System.Windows.Forms.TextBox();
             this.create_reservationTab = new System.Windows.Forms.TabPage();
+            this.reserv_btn_prl = new System.Windows.Forms.Button();
             this.Validation = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.reserv_txt_SeatsNo = new System.Windows.Forms.TextBox();
@@ -76,7 +77,8 @@ namespace AwesomeClient
             this.discount_percent_lbl = new System.Windows.Forms.Label();
             this.discount_btn_create = new System.Windows.Forms.Button();
             this.discount_txt_dPercent = new System.Windows.Forms.TextBox();
-            this.reserv_btn_prl = new System.Windows.Forms.Button();
+            this.reserv_txt_DId = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.createTab.SuspendLayout();
             this.create_roomTab.SuspendLayout();
@@ -319,6 +321,8 @@ namespace AwesomeClient
             // 
             // create_reservationTab
             // 
+            this.create_reservationTab.Controls.Add(this.label5);
+            this.create_reservationTab.Controls.Add(this.reserv_txt_DId);
             this.create_reservationTab.Controls.Add(this.reserv_btn_prl);
             this.create_reservationTab.Controls.Add(this.Validation);
             this.create_reservationTab.Controls.Add(this.label4);
@@ -345,6 +349,16 @@ namespace AwesomeClient
             this.create_reservationTab.TabIndex = 2;
             this.create_reservationTab.Text = "Reservation";
             this.create_reservationTab.UseVisualStyleBackColor = true;
+            // 
+            // reserv_btn_prl
+            // 
+            this.reserv_btn_prl.Location = new System.Drawing.Point(379, 113);
+            this.reserv_btn_prl.Name = "reserv_btn_prl";
+            this.reserv_btn_prl.Size = new System.Drawing.Size(95, 23);
+            this.reserv_btn_prl.TabIndex = 23;
+            this.reserv_btn_prl.Text = "GetSeatsPrallel";
+            this.reserv_btn_prl.UseVisualStyleBackColor = true;
+            this.reserv_btn_prl.Click += new System.EventHandler(this.reserv_btn_prl_Click);
             // 
             // Validation
             // 
@@ -549,15 +563,22 @@ namespace AwesomeClient
             this.discount_txt_dPercent.Size = new System.Drawing.Size(100, 20);
             this.discount_txt_dPercent.TabIndex = 0;
             // 
-            // reserv_btn_prl
+            // reserv_txt_DId
             // 
-            this.reserv_btn_prl.Location = new System.Drawing.Point(379, 113);
-            this.reserv_btn_prl.Name = "reserv_btn_prl";
-            this.reserv_btn_prl.Size = new System.Drawing.Size(95, 23);
-            this.reserv_btn_prl.TabIndex = 23;
-            this.reserv_btn_prl.Text = "GetSeatsPrallel";
-            this.reserv_btn_prl.UseVisualStyleBackColor = true;
-            this.reserv_btn_prl.Click += new System.EventHandler(this.reserv_btn_prl_Click);
+            this.reserv_txt_DId.Location = new System.Drawing.Point(409, 12);
+            this.reserv_txt_DId.Name = "reserv_txt_DId";
+            this.reserv_txt_DId.Size = new System.Drawing.Size(101, 20);
+            this.reserv_txt_DId.TabIndex = 24;
+            this.reserv_txt_DId.TextChanged += new System.EventHandler(this.reserv_txt_DId_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(314, 15);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(61, 13);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "DiscountId:";
             // 
             // Create
             // 
@@ -633,6 +654,8 @@ namespace AwesomeClient
         private System.Windows.Forms.DateTimePicker movie_date_picker3;
         private System.Windows.Forms.DateTimePicker movie_date_picker2;
         private System.Windows.Forms.Button reserv_btn_prl;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox reserv_txt_DId;
 
     }
 }

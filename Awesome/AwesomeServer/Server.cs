@@ -741,6 +741,11 @@ namespace AwesomeServer
                     var room = db.Rooms.SingleOrDefault(r => r.Id == roomId);
                     if (room != null)
                     {
+                        IList<Movie> movies = getMovie(0, "", room.Id);
+                        foreach (Movie movie in movies)
+                        {
+                            removeMovie(movie.Id);
+                        }
                         db.Rooms.DeleteOnSubmit(room);
                         db.SubmitChanges();
                     }
