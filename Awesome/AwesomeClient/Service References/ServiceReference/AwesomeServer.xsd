@@ -121,8 +121,6 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Col" type="xs:int" />
       <xs:element minOccurs="0" name="Row" type="xs:int" />
-      <xs:element minOccurs="0" name="Usable" type="xs:boolean" />
-      <xs:element minOccurs="0" name="DateAndTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="RoomId" type="xs:int" />
       <xs:element minOccurs="0" name="MovieSeats" nillable="true" type="tns:ArrayOfMovieSeat">
         <xs:annotation>

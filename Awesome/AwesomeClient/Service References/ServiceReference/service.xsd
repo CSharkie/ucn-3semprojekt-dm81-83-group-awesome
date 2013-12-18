@@ -158,8 +158,6 @@
         <xs:element minOccurs="0" name="seatId" type="xs:int" />
         <xs:element minOccurs="0" name="col" type="xs:int" />
         <xs:element minOccurs="0" name="row" type="xs:int" />
-        <xs:element minOccurs="0" name="usable" type="xs:boolean" />
-        <xs:element minOccurs="0" name="dateAndTime" type="xs:dateTime" />
         <xs:element minOccurs="0" name="roomId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -386,6 +384,18 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="emptyRoomResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="lastReservation">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="lastReservationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="lastReservationResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -22,7 +22,7 @@ namespace AwesomeServer
         string updateMovie(int movieId, string title, DateTime dateAndTime, TimeSpan Duration, int roomId);
         string updateRoom(int roomId, int cols, int rows);
         string updateTicket(int ticketId, decimal standard, int reservationId, int discountId);
-        string updateSeat(int seatId, int col, int row, bool usable, DateTime dateAndTime, int roomId);
+        string updateSeat(int seatId, int col, int row, int roomId);
         string updateDiscount(int discountId, decimal dPercent);
         #endregion
 
@@ -55,6 +55,7 @@ namespace AwesomeServer
         //IList<Seat> getAdjSeatMultiThreadV2(int noOfSeats, int roomId);
         bool emptyRoom(int roomId);
         //string takeTickets(int reservationId);
+        int lastReservation();
         #endregion
         
     }

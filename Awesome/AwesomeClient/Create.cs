@@ -118,6 +118,11 @@ namespace AwesomeClient
                         movie.First().Id,
                         desiredSeats));
                     reserv_btn_reset_Click(null, null);
+                    foreach (int item in desiredSeats)
+                    {
+                        Seat seat = client.getSeat(item, 0, 0, 0, 0).First();
+                        client.createTicket(100, client.lastReservation(), 2, seat.Col, seat.Row);
+                    }
                 }
                 else
                 {
