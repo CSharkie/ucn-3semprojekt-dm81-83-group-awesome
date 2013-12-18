@@ -37,7 +37,7 @@ namespace AwesomeService
         [OperationContract]
         string updateTicket(int ticketId, decimal standard, int reservationId, int discountId);
         [OperationContract]
-        string updateSeat(int seatId, int col, int row, bool usable, DateTime dateAndTime, int roomId);
+        string updateSeat(int seatId, int col, int row, int roomId);
         [OperationContract]
         string updateDiscount(int discountId, decimal dPercent);
         #endregion
@@ -89,6 +89,8 @@ namespace AwesomeService
         //IList<string> adj2(int noOfSeats, int roomId);
         [OperationContract]
         bool emptyRoom(int roomId);
+        [OperationContract]
+        int lastReservation();
         #endregion
     }
   

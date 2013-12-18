@@ -121,7 +121,6 @@ namespace AwesomeServer
                             Seat seat = new Seat();
                             seat.Row = i;
                             seat.Col = j;
-                            seat.Usable = true;
                             seat.RoomId = room.Id;
                             room.Seats.Add(seat);
                         }
@@ -270,7 +269,6 @@ namespace AwesomeServer
                             Seat seat = new Seat();
                             seat.Row = i;
                             seat.Col = j;
-                            seat.Usable = true;
                             seat.RoomId = room.Id;
                             room.Seats.Add(seat);
                         }
@@ -323,7 +321,7 @@ namespace AwesomeServer
                 return message;
             }
         }
-        public string updateSeat(int seatId, int col, int row, bool usable, DateTime dateAndTime, int roomId)
+        public string updateSeat(int seatId, int col, int row, int roomId)
         {
             //using (DatabaseModelDataContext db = new DatabaseModelDataContext())
             //{
@@ -677,6 +675,9 @@ namespace AwesomeServer
                     if (reservation != null)
                     {
                         db.Reservations.DeleteOnSubmit(reservation);
+                        var tickets = db.Tickets.Where(t => t.ReservationId == reservation.Id);
+                        if (tickets != null)
+                            db.Tickets.DeleteAllOnSubmit(tickets);
                         db.SubmitChanges();
                     }
                     else
@@ -701,6 +702,18 @@ namespace AwesomeServer
                     if (movie != null)
                     {
                         var movieSeats = db.MovieSeats.Where(ms => ms.Movie.RoomId == movie.RoomId);
+                        foreach (MovieSeat ms in movieSeats)
+                        {
+                            var reservation = db.Reservations.SingleOrDefault(r => r.Id == ms.ReservationId);
+                            if (reservation != null)
+                            {
+                                db.Reservations.DeleteOnSubmit(reservation);
+                                var tickets = db.Tickets.Where(t => t.ReservationId == reservation.Id);
+                                if(tickets!=null)
+                                    db.Tickets.DeleteAllOnSubmit(tickets);
+                            }
+
+                        }
                         db.Movies.DeleteOnSubmit(movie);
                         db.SubmitChanges();
                     }
@@ -1166,6 +1179,14 @@ namespace AwesomeServer
         //        return message;
         //    }
         //}
+        public int lastReservation()
+        {
+            using (DatabaseModelDataContext db = new DatabaseModelDataContext())
+            {
+                int result = (from r in db.Reservations select r.Id).Max();
+                return result;
+            }
+        }
         #endregion
 
     }

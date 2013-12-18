@@ -62,9 +62,9 @@ namespace AwesomeService
             return server.updateTicket(ticketId, standard, reservationId, discountId);
         }
 
-        public string updateSeat(int seatId, int col, int row, bool usable, DateTime dateAndTime, int roomId)
+        public string updateSeat(int seatId, int col, int row, int roomId)
         {
-            return server.updateSeat(seatId, col, row, usable, dateAndTime, roomId);
+            return server.updateSeat(seatId, col, row, roomId);
         }
 
         public string updateDiscount(int discountId, decimal dPercent)
@@ -161,10 +161,16 @@ namespace AwesomeService
         //    return server.getAdjSeatSingleThreadV2(noOfSeats, roomId);
         //}
 
+        public int lastReservation()
+        {
+            return server.lastReservation();
+        }
+
         public bool emptyRoom(int roomId)
         {
             return server.emptyRoom(roomId);
         }
+
         #endregion
     }
 }

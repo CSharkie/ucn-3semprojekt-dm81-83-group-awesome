@@ -44,7 +44,7 @@ namespace AwesomeClient
             {
                 Movie movie = new Movie();
                 movie.Id = Convert.ToInt32(movie_txt_movieId.Text);
-                MessageBox.Show(client.removeRoom(movie.Id));
+                MessageBox.Show(client.removeMovie(movie.Id));
             }
             catch (Exception ex)
             {
@@ -60,7 +60,7 @@ namespace AwesomeClient
             {
                 Reservation reserv = new Reservation();
                 reserv.Id = Convert.ToInt32(reserv_txt_reservId.Text);
-                MessageBox.Show(client.removeRoom(reserv.Id));
+                MessageBox.Show(client.removeReservation(reserv.Id));
             }
             catch (Exception ex)
             {
@@ -76,7 +76,7 @@ namespace AwesomeClient
             {
                 Discount discount = new Discount();
                 discount.Id = Convert.ToInt32(discount_txt_discountId.Text);
-                MessageBox.Show(client.removeRoom(discount.Id));
+                MessageBox.Show(client.removeDiscount(discount.Id));
             }
             catch (Exception ex)
             {
@@ -92,7 +92,7 @@ namespace AwesomeClient
             {
                 Ticket ticket = new Ticket();
                 ticket.Id = Convert.ToInt32(ticket_txt_ticketId.Text);
-                MessageBox.Show(client.removeRoom(ticket.Id));
+                MessageBox.Show(client.removeTicket(ticket.Id));
             }
             catch (Exception ex)
             {

@@ -778,7 +778,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movie_MovieSeat", Storage="_MovieSeats", ThisKey="Id", OtherKey="MovieId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movy_MovieSeat", Storage="_MovieSeats", ThisKey="Id", OtherKey="MovieId")]
 		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6, EmitDefaultValue=false)]
 		public EntitySet<MovieSeat> MovieSeats
 		{
@@ -797,7 +797,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movie", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movy", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true)]
 		public Room Room
 		{
 			get
@@ -1028,7 +1028,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movie_MovieSeat", Storage="_Movie", ThisKey="MovieId", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movy_MovieSeat", Storage="_Movie", ThisKey="MovieId", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Movie Movie
 		{
 			get
@@ -1525,7 +1525,7 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movie", Storage="_Movies", ThisKey="Id", OtherKey="RoomId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Movy", Storage="_Movies", ThisKey="Id", OtherKey="RoomId")]
 		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4, EmitDefaultValue=false)]
 		public EntitySet<Movie> Movies
 		{
@@ -1649,10 +1649,6 @@ namespace AwesomeServer
 		
 		private int _Row;
 		
-		private bool _Usable;
-		
-		private System.Nullable<System.DateTime> _DateAndTime;
-		
 		private int _RoomId;
 		
 		private EntitySet<MovieSeat> _MovieSeats;
@@ -1671,10 +1667,6 @@ namespace AwesomeServer
     partial void OnColChanged();
     partial void OnRowChanging(int value);
     partial void OnRowChanged();
-    partial void OnUsableChanging(bool value);
-    partial void OnUsableChanged();
-    partial void OnDateAndTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnDateAndTimeChanged();
     partial void OnRoomIdChanging(int value);
     partial void OnRoomIdChanged();
     #endregion
@@ -1747,50 +1739,8 @@ namespace AwesomeServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usable", DbType="Bit NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-		public bool Usable
-		{
-			get
-			{
-				return this._Usable;
-			}
-			set
-			{
-				if ((this._Usable != value))
-				{
-					this.OnUsableChanging(value);
-					this.SendPropertyChanging();
-					this._Usable = value;
-					this.SendPropertyChanged("Usable");
-					this.OnUsableChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateAndTime", DbType="DateTime")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
-		public System.Nullable<System.DateTime> DateAndTime
-		{
-			get
-			{
-				return this._DateAndTime;
-			}
-			set
-			{
-				if ((this._DateAndTime != value))
-				{
-					this.OnDateAndTimeChanging(value);
-					this.SendPropertyChanging();
-					this._DateAndTime = value;
-					this.SendPropertyChanged("DateAndTime");
-					this.OnDateAndTimeChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomId", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public int RoomId
 		{
 			get
@@ -1815,7 +1765,7 @@ namespace AwesomeServer
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Seat_MovieSeat", Storage="_MovieSeats", ThisKey="Id", OtherKey="SeatId")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5, EmitDefaultValue=false)]
 		public EntitySet<MovieSeat> MovieSeats
 		{
 			get
