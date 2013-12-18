@@ -116,7 +116,7 @@ namespace AwesomeClient
         {
             try
             {
-                var movie = client.getMovie(movie_txt_movieId.Text != "" ? Convert.ToInt32(movie_txt_movieId.Text) : 0, movie_txt_title.Text, 0);
+                var movies = client.getMovie(movie_txt_movieId.Text != "" ? Convert.ToInt32(movie_txt_movieId.Text) : 0, movie_txt_title.Text, 0);
 
                 if (movie_combo_movies.SelectedItem != null)
                 {
@@ -126,28 +126,40 @@ namespace AwesomeClient
                     string stringId = movie_combo_movies.SelectedItem.ToString().Substring(indexStart + 1, indexStop - 1);
                     if (indexStart != -1 && indexStop != -1)
                     {
-                        movie = client.getMovie(Convert.ToInt32(stringId), "", 0);
-                        movie_txt_movieId.Text = movie.First().Id.ToString();
+                        movies = client.getMovie(Convert.ToInt32(stringId), "", 0);
+                        movie_txt_movieId.Text = movies.First().Id.ToString();
+                        movie_txt_title.Text = movies.First().Title;
+                        movie_txt_roomId.Text = movies.First().RoomId.ToString();
+                        movie_date_picker.Value = movies.First().DateAndTime;
                     }
 
                 }
                 IList<string> dataSource = new List<string>();
                 dataSource.Add("Select One...");
-                foreach (var item in movie)
+                foreach (var item in movies)
                     dataSource.Add("(" + item.Id + ")" + item.Title + " @ " + item.DateAndTime);
 
                 movie_combo_movies.DataSource = dataSource;
-                movie_combo_movies.SelectedIndex = movie.ToList().Count == 1 ? 1 : 0;
+                movie_combo_movies.SelectedIndex = movies.ToList().Count == 1 ? 1 : 0;
 
 
-                if (movie.ToList().Count == 0)
+                if (movies.ToList().Count == 0)
                 {
                     MessageBox.Show("No movie found with that id or title");
                 }
-                else if (movie.ToList().Count > 1)
+                else if (movies.ToList().Count > 1)
                 {
                     movie_combo_movies.Enabled = true;
-                    movie_btn_show.Enabled = true;
+                }
+                else
+                {
+                    movie_combo_movies.Enabled = false;
+                    movie_btn_edit.Enabled = true;
+
+                    movie_txt_movieId.Text = movies.First().Id.ToString();
+                    movie_txt_title.Text = movies.First().Title;
+                    movie_txt_roomId.Text = movies.First().RoomId.ToString();
+                    movie_date_picker.Value = movies.First().DateAndTime;
                 }
             }
             catch (NullReferenceException)
@@ -157,7 +169,6 @@ namespace AwesomeClient
             catch (ArgumentOutOfRangeException)
             {
                 MessageBox.Show("Please select the movie from the list!");
-                movie_btn_show.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -165,29 +176,6 @@ namespace AwesomeClient
             }
         }
 
-        private void movie_show_btn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Movie movie = new Movie();
-                IList<Movie> movies = new List<Movie>();
-                if (movie.Title.Contains(movie_txt_title.Text) || movie.Id.Equals(movie_txt_movieId.Text) || movie.RoomId.Equals(movie_txt_roomId.Text))
-                {
-                    movie.Title = movie_txt_title.Text;
-                    movie.Id = Convert.ToInt32(movie_txt_movieId.Text);
-                    movie.RoomId = Convert.ToInt32(movie_txt_roomId.Text);
-                    movies = client.getMovie(movie.Id, movie.Title, movie.RoomId);
-                    // TODO Need to get the displayed movie on select from Combo Box
-                }
-
-                movie_btn_edit.Enabled = true;
-                movie_btn_save.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error has occured: " + ex.Message);
-            }
-        }
 
         private void movie_edit_btn_Click(object sender, EventArgs e)
         {
@@ -398,6 +386,24 @@ namespace AwesomeClient
             ticket_btn_save.Enabled = false;
         }
         #endregion
+
+        private void movie_btn_reset_Click(object sender, EventArgs e)
+        {
+            movie_btn_edit.Enabled = false;
+            movie_btn_find.Enabled = true;
+            movie_btn_save.Enabled = false;
+            movie_txt_movieId.Text = "";
+            movie_txt_movieId.Enabled = true;
+            movie_txt_roomId.Text = "";
+            movie_txt_roomId.Enabled = false;
+            movie_txt_title.Text = "";
+            movie_txt_title.Enabled = true;
+            movie_date_picker.Value = DateTime.Now;
+            movie_date_picker.Enabled = false;
+
+            movie_combo_movies.DataSource = null;
+            //movie_combo_movies.SelectedIndex = null;
+        }
 
     }
 }
