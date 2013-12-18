@@ -679,6 +679,11 @@ namespace AwesomeServer
                         var tickets = db.Tickets.Where(t => t.ReservationId == reservation.Id);
                         if (tickets.Count() != 0)
                             db.Tickets.DeleteAllOnSubmit(tickets);
+                        var movieseats = db.MovieSeats.Where(ms => ms.ReservationId == reservation.Id);
+                        foreach (MovieSeat ms in movieseats)
+                        {
+                            ms.ReservationId = null;
+                        }
                         db.SubmitChanges();
                     }
                     else

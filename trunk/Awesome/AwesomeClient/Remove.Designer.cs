@@ -35,6 +35,10 @@
             this.room_lbl_roomId = new System.Windows.Forms.Label();
             this.room_btn_remove = new System.Windows.Forms.Button();
             this.movieTab = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.movie_combo_movie = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.movie_txt_title = new System.Windows.Forms.TextBox();
             this.movie_txt_movieId = new System.Windows.Forms.TextBox();
             this.movie_lbl_movieId = new System.Windows.Forms.Label();
             this.movie_btn_remove = new System.Windows.Forms.Button();
@@ -50,10 +54,7 @@
             this.ticket_txt_ticketId = new System.Windows.Forms.TextBox();
             this.ticket_lbl_ticketId = new System.Windows.Forms.Label();
             this.ticket_btn_remove = new System.Windows.Forms.Button();
-            this.movie_txt_title = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.movie_combo_movie = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.removeTab.SuspendLayout();
             this.roomTab.SuspendLayout();
@@ -127,6 +128,7 @@
             // 
             // movieTab
             // 
+            this.movieTab.Controls.Add(this.button1);
             this.movieTab.Controls.Add(this.label3);
             this.movieTab.Controls.Add(this.movie_combo_movie);
             this.movieTab.Controls.Add(this.label1);
@@ -141,6 +143,40 @@
             this.movieTab.TabIndex = 1;
             this.movieTab.Text = "Movie";
             this.movieTab.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(79, 110);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Select the movie:";
+            // 
+            // movie_combo_movie
+            // 
+            this.movie_combo_movie.Enabled = false;
+            this.movie_combo_movie.FormattingEnabled = true;
+            this.movie_combo_movie.Location = new System.Drawing.Point(171, 107);
+            this.movie_combo_movie.Name = "movie_combo_movie";
+            this.movie_combo_movie.Size = new System.Drawing.Size(200, 21);
+            this.movie_combo_movie.TabIndex = 17;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(138, 84);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Title:";
+            // 
+            // movie_txt_title
+            // 
+            this.movie_txt_title.Location = new System.Drawing.Point(171, 81);
+            this.movie_txt_title.Name = "movie_txt_title";
+            this.movie_txt_title.Size = new System.Drawing.Size(100, 20);
+            this.movie_txt_title.TabIndex = 6;
             // 
             // movie_txt_movieId
             // 
@@ -160,7 +196,7 @@
             // 
             // movie_btn_remove
             // 
-            this.movie_btn_remove.Location = new System.Drawing.Point(171, 134);
+            this.movie_btn_remove.Location = new System.Drawing.Point(268, 134);
             this.movie_btn_remove.Name = "movie_btn_remove";
             this.movie_btn_remove.Size = new System.Drawing.Size(75, 23);
             this.movie_btn_remove.TabIndex = 3;
@@ -285,39 +321,15 @@
             this.ticket_btn_remove.UseVisualStyleBackColor = true;
             this.ticket_btn_remove.Click += new System.EventHandler(this.ticket_btn_remove_Click);
             // 
-            // movie_txt_title
+            // button1
             // 
-            this.movie_txt_title.Location = new System.Drawing.Point(171, 81);
-            this.movie_txt_title.Name = "movie_txt_title";
-            this.movie_txt_title.Size = new System.Drawing.Size(100, 20);
-            this.movie_txt_title.TabIndex = 6;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(138, 84);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Title:";
-            // 
-            // movie_combo_movie
-            // 
-            this.movie_combo_movie.Enabled = false;
-            this.movie_combo_movie.FormattingEnabled = true;
-            this.movie_combo_movie.Location = new System.Drawing.Point(171, 107);
-            this.movie_combo_movie.Name = "movie_combo_movie";
-            this.movie_combo_movie.Size = new System.Drawing.Size(200, 21);
-            this.movie_combo_movie.TabIndex = 17;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(79, 110);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 13);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Select the movie:";
+            this.button1.Location = new System.Drawing.Point(171, 134);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "Find Movie";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Remove
             // 
@@ -371,5 +383,6 @@
         private System.Windows.Forms.TextBox movie_txt_title;
         private System.Windows.Forms.ComboBox movie_combo_movie;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
     }
 }

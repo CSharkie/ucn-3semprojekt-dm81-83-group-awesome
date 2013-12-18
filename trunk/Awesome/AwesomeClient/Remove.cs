@@ -42,31 +42,6 @@ namespace AwesomeClient
         {
             try
             {
-                var movie = client.getMovie(movie_txt_movieId.Text != "" ? Convert.ToInt32(movie_txt_movieId.Text) : 0, movie_txt_title.Text, 0);
-
-                if (movie_combo_movie.SelectedItem != null)
-                {
-
-                    int indexStart = movie_combo_movie.SelectedItem.ToString().IndexOf("(");
-                    int indexStop = movie_combo_movie.SelectedItem.ToString().IndexOf(")");
-                    string stringId = movie_combo_movie.SelectedItem.ToString().Substring(indexStart + 1, indexStop - 1);
-                    if (indexStart != -1 && indexStop != -1)
-                    {
-                        movie = client.getMovie(Convert.ToInt32(stringId), "", 0);
-                        movie_txt_movieId.Text = movie.First().Id.ToString();
-                    }
-
-                }
-
-                IList<string> dataSource = new List<string>();
-                dataSource.Add("Select One...");
-                foreach (var item in movie)
-                    dataSource.Add("(" + item.Id + ")" + item.Title + " @ " + item.DateAndTime);
-
-                movie_combo_movie.DataSource = dataSource;
-                movie_combo_movie.SelectedIndex = movie.ToList().Count == 1 ? 1 : 0;
-
-
                 Movie mov = new Movie();
                 mov.Id = Convert.ToInt32(movie_txt_movieId.Text);
                 MessageBox.Show(client.removeMovie(mov.Id));
@@ -126,6 +101,49 @@ namespace AwesomeClient
             }
         }
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var movies = client.getMovie(movie_txt_movieId.Text != "" ? Convert.ToInt32(movie_txt_movieId.Text) : 0, movie_txt_title.Text, 0);
+
+            if (movie_combo_movie.SelectedItem != null)
+            {
+
+                int indexStart = movie_combo_movie.SelectedItem.ToString().IndexOf("(");
+                int indexStop = movie_combo_movie.SelectedItem.ToString().IndexOf(")");
+                string stringId = movie_combo_movie.SelectedItem.ToString().Substring(indexStart + 1, indexStop - 1);
+                if (indexStart != -1 && indexStop != -1)
+                {
+                    movies = client.getMovie(Convert.ToInt32(stringId), "", 0);
+                    movie_txt_movieId.Text = movies.First().Id.ToString();
+                    movie_txt_title.Text = movies.First().Title;
+                }
+
+            }
+            IList<string> dataSource = new List<string>();
+            dataSource.Add("Select One...");
+            foreach (var item in movies)
+                dataSource.Add("(" + item.Id + ")" + item.Title + " @ " + item.DateAndTime);
+
+            movie_combo_movie.DataSource = dataSource;
+            movie_combo_movie.SelectedIndex = movies.ToList().Count == 1 ? 1 : 0;
+
+
+            if (movies.ToList().Count == 0)
+            {
+                MessageBox.Show("No movie found with that id or title");
+            }
+            else if (movies.ToList().Count > 1)
+            {
+                movie_combo_movie.Enabled = true;
+            }
+            else
+            {
+                movie_combo_movie.Enabled = false;
+                movie_txt_movieId.Text = movies.First().Id.ToString();
+                movie_txt_title.Text = movies.First().Title;
+            }
+        }
 
     }
 }
