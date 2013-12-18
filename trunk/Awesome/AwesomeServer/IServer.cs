@@ -56,6 +56,8 @@ namespace AwesomeServer
         bool emptyRoom(int roomId);
         //string takeTickets(int reservationId);
         int lastReservation();
+
+        bool login(string username, string password);
         #endregion
         
     }

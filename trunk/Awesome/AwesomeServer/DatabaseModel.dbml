@@ -28,8 +28,8 @@
       <Column Name="DateAndTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Duration" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Column Name="RoomId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Movy_MovieSeat" Member="MovieSeats" ThisKey="Id" OtherKey="MovieId" Type="MovieSeat" />
-      <Association Name="Room_Movy" Member="Room" ThisKey="RoomId" OtherKey="Id" Type="Room" IsForeignKey="true" />
+      <Association Name="Movie_MovieSeat" Member="MovieSeats" ThisKey="Id" OtherKey="MovieId" Type="MovieSeat" />
+      <Association Name="Room_Movie" Member="Room" ThisKey="RoomId" OtherKey="Id" Type="Room" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.MovieSeats" Member="MovieSeats">
@@ -38,7 +38,7 @@
       <Column Name="MovieId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SeatId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ReservationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Movy_MovieSeat" Member="Movie" ThisKey="MovieId" OtherKey="Id" Type="Movie" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Movie_MovieSeat" Member="Movie" ThisKey="MovieId" OtherKey="Id" Type="Movie" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Reservation_MovieSeat" Member="Reservation" ThisKey="ReservationId" OtherKey="Id" Type="Reservation" IsForeignKey="true" />
       <Association Name="Seat_MovieSeat" Member="Seat" ThisKey="SeatId" OtherKey="Id" Type="Seat" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
@@ -59,7 +59,7 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Cols" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Rows" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Room_Movy" Member="Movies" ThisKey="Id" OtherKey="RoomId" Type="Movie" />
+      <Association Name="Room_Movie" Member="Movies" ThisKey="Id" OtherKey="RoomId" Type="Movie" />
       <Association Name="Room_Seat" Member="Seats" ThisKey="Id" OtherKey="RoomId" Type="Seat" />
     </Type>
   </Table>
@@ -71,6 +71,14 @@
       <Column Name="RoomId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Seat_MovieSeat" Member="MovieSeats" ThisKey="Id" OtherKey="SeatId" Type="MovieSeat" />
       <Association Name="Room_Seat" Member="Room" ThisKey="RoomId" OtherKey="Id" Type="Room" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Salt" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>
