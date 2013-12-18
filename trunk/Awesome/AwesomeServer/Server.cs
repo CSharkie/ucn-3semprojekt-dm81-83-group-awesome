@@ -674,9 +674,10 @@ namespace AwesomeServer
 
                     if (reservation != null)
                     {
+
                         db.Reservations.DeleteOnSubmit(reservation);
                         var tickets = db.Tickets.Where(t => t.ReservationId == reservation.Id);
-                        if (tickets != null)
+                        if (tickets.Count() != 0)
                             db.Tickets.DeleteAllOnSubmit(tickets);
                         db.SubmitChanges();
                     }

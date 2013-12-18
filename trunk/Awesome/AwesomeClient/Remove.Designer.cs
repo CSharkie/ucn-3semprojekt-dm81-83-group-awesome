@@ -31,25 +31,29 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.removeTab = new System.Windows.Forms.TabControl();
             this.roomTab = new System.Windows.Forms.TabPage();
-            this.movieTab = new System.Windows.Forms.TabPage();
-            this.reservationTab = new System.Windows.Forms.TabPage();
-            this.discountTab = new System.Windows.Forms.TabPage();
-            this.ticketTab = new System.Windows.Forms.TabPage();
-            this.room_btn_remove = new System.Windows.Forms.Button();
-            this.room_lbl_roomId = new System.Windows.Forms.Label();
             this.room_txt_roomId = new System.Windows.Forms.TextBox();
+            this.room_lbl_roomId = new System.Windows.Forms.Label();
+            this.room_btn_remove = new System.Windows.Forms.Button();
+            this.movieTab = new System.Windows.Forms.TabPage();
             this.movie_txt_movieId = new System.Windows.Forms.TextBox();
             this.movie_lbl_movieId = new System.Windows.Forms.Label();
             this.movie_btn_remove = new System.Windows.Forms.Button();
+            this.reservationTab = new System.Windows.Forms.TabPage();
             this.reserv_txt_reservId = new System.Windows.Forms.TextBox();
             this.reserv_lbl_reservId = new System.Windows.Forms.Label();
             this.reserv_btn_remove = new System.Windows.Forms.Button();
+            this.discountTab = new System.Windows.Forms.TabPage();
             this.discount_txt_discountId = new System.Windows.Forms.TextBox();
             this.discount_lbl_dicountId = new System.Windows.Forms.Label();
             this.discount_btn_remove = new System.Windows.Forms.Button();
+            this.ticketTab = new System.Windows.Forms.TabPage();
             this.ticket_txt_ticketId = new System.Windows.Forms.TextBox();
             this.ticket_lbl_ticketId = new System.Windows.Forms.Label();
             this.ticket_btn_remove = new System.Windows.Forms.Button();
+            this.movie_txt_title = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.movie_combo_movie = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.removeTab.SuspendLayout();
             this.roomTab.SuspendLayout();
@@ -95,57 +99,21 @@
             this.roomTab.Text = "Room";
             this.roomTab.UseVisualStyleBackColor = true;
             // 
-            // movieTab
+            // room_txt_roomId
             // 
-            this.movieTab.Controls.Add(this.movie_txt_movieId);
-            this.movieTab.Controls.Add(this.movie_lbl_movieId);
-            this.movieTab.Controls.Add(this.movie_btn_remove);
-            this.movieTab.Location = new System.Drawing.Point(4, 22);
-            this.movieTab.Name = "movieTab";
-            this.movieTab.Padding = new System.Windows.Forms.Padding(3);
-            this.movieTab.Size = new System.Drawing.Size(642, 434);
-            this.movieTab.TabIndex = 1;
-            this.movieTab.Text = "Movie";
-            this.movieTab.UseVisualStyleBackColor = true;
+            this.room_txt_roomId.Location = new System.Drawing.Point(163, 69);
+            this.room_txt_roomId.Name = "room_txt_roomId";
+            this.room_txt_roomId.Size = new System.Drawing.Size(100, 20);
+            this.room_txt_roomId.TabIndex = 2;
             // 
-            // reservationTab
+            // room_lbl_roomId
             // 
-            this.reservationTab.Controls.Add(this.reserv_txt_reservId);
-            this.reservationTab.Controls.Add(this.reserv_lbl_reservId);
-            this.reservationTab.Controls.Add(this.reserv_btn_remove);
-            this.reservationTab.Location = new System.Drawing.Point(4, 22);
-            this.reservationTab.Name = "reservationTab";
-            this.reservationTab.Padding = new System.Windows.Forms.Padding(3);
-            this.reservationTab.Size = new System.Drawing.Size(642, 434);
-            this.reservationTab.TabIndex = 2;
-            this.reservationTab.Text = "Reservation";
-            this.reservationTab.UseVisualStyleBackColor = true;
-            // 
-            // discountTab
-            // 
-            this.discountTab.Controls.Add(this.discount_txt_discountId);
-            this.discountTab.Controls.Add(this.discount_lbl_dicountId);
-            this.discountTab.Controls.Add(this.discount_btn_remove);
-            this.discountTab.Location = new System.Drawing.Point(4, 22);
-            this.discountTab.Name = "discountTab";
-            this.discountTab.Padding = new System.Windows.Forms.Padding(3);
-            this.discountTab.Size = new System.Drawing.Size(642, 434);
-            this.discountTab.TabIndex = 3;
-            this.discountTab.Text = "Discount";
-            this.discountTab.UseVisualStyleBackColor = true;
-            // 
-            // ticketTab
-            // 
-            this.ticketTab.Controls.Add(this.ticket_txt_ticketId);
-            this.ticketTab.Controls.Add(this.ticket_lbl_ticketId);
-            this.ticketTab.Controls.Add(this.ticket_btn_remove);
-            this.ticketTab.Location = new System.Drawing.Point(4, 22);
-            this.ticketTab.Name = "ticketTab";
-            this.ticketTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ticketTab.Size = new System.Drawing.Size(642, 434);
-            this.ticketTab.TabIndex = 4;
-            this.ticketTab.Text = "Ticket";
-            this.ticketTab.UseVisualStyleBackColor = true;
+            this.room_lbl_roomId.AutoSize = true;
+            this.room_lbl_roomId.Location = new System.Drawing.Point(112, 72);
+            this.room_lbl_roomId.Name = "room_lbl_roomId";
+            this.room_lbl_roomId.Size = new System.Drawing.Size(47, 13);
+            this.room_lbl_roomId.TabIndex = 1;
+            this.room_lbl_roomId.Text = "RoomId:";
             // 
             // room_btn_remove
             // 
@@ -157,21 +125,22 @@
             this.room_btn_remove.UseVisualStyleBackColor = true;
             this.room_btn_remove.Click += new System.EventHandler(this.room_btn_remove_Click);
             // 
-            // room_lbl_roomId
+            // movieTab
             // 
-            this.room_lbl_roomId.AutoSize = true;
-            this.room_lbl_roomId.Location = new System.Drawing.Point(112, 72);
-            this.room_lbl_roomId.Name = "room_lbl_roomId";
-            this.room_lbl_roomId.Size = new System.Drawing.Size(47, 13);
-            this.room_lbl_roomId.TabIndex = 1;
-            this.room_lbl_roomId.Text = "RoomId:";
-            // 
-            // room_txt_roomId
-            // 
-            this.room_txt_roomId.Location = new System.Drawing.Point(163, 69);
-            this.room_txt_roomId.Name = "room_txt_roomId";
-            this.room_txt_roomId.Size = new System.Drawing.Size(100, 20);
-            this.room_txt_roomId.TabIndex = 2;
+            this.movieTab.Controls.Add(this.label3);
+            this.movieTab.Controls.Add(this.movie_combo_movie);
+            this.movieTab.Controls.Add(this.label1);
+            this.movieTab.Controls.Add(this.movie_txt_title);
+            this.movieTab.Controls.Add(this.movie_txt_movieId);
+            this.movieTab.Controls.Add(this.movie_lbl_movieId);
+            this.movieTab.Controls.Add(this.movie_btn_remove);
+            this.movieTab.Location = new System.Drawing.Point(4, 22);
+            this.movieTab.Name = "movieTab";
+            this.movieTab.Padding = new System.Windows.Forms.Padding(3);
+            this.movieTab.Size = new System.Drawing.Size(642, 434);
+            this.movieTab.TabIndex = 1;
+            this.movieTab.Text = "Movie";
+            this.movieTab.UseVisualStyleBackColor = true;
             // 
             // movie_txt_movieId
             // 
@@ -191,13 +160,26 @@
             // 
             // movie_btn_remove
             // 
-            this.movie_btn_remove.Location = new System.Drawing.Point(171, 81);
+            this.movie_btn_remove.Location = new System.Drawing.Point(171, 134);
             this.movie_btn_remove.Name = "movie_btn_remove";
             this.movie_btn_remove.Size = new System.Drawing.Size(75, 23);
             this.movie_btn_remove.TabIndex = 3;
             this.movie_btn_remove.Text = "Remove";
             this.movie_btn_remove.UseVisualStyleBackColor = true;
             this.movie_btn_remove.Click += new System.EventHandler(this.movie_btn_remove_Click);
+            // 
+            // reservationTab
+            // 
+            this.reservationTab.Controls.Add(this.reserv_txt_reservId);
+            this.reservationTab.Controls.Add(this.reserv_lbl_reservId);
+            this.reservationTab.Controls.Add(this.reserv_btn_remove);
+            this.reservationTab.Location = new System.Drawing.Point(4, 22);
+            this.reservationTab.Name = "reservationTab";
+            this.reservationTab.Padding = new System.Windows.Forms.Padding(3);
+            this.reservationTab.Size = new System.Drawing.Size(642, 434);
+            this.reservationTab.TabIndex = 2;
+            this.reservationTab.Text = "Reservation";
+            this.reservationTab.UseVisualStyleBackColor = true;
             // 
             // reserv_txt_reservId
             // 
@@ -225,6 +207,19 @@
             this.reserv_btn_remove.UseVisualStyleBackColor = true;
             this.reserv_btn_remove.Click += new System.EventHandler(this.reserv_btn_remove_Click);
             // 
+            // discountTab
+            // 
+            this.discountTab.Controls.Add(this.discount_txt_discountId);
+            this.discountTab.Controls.Add(this.discount_lbl_dicountId);
+            this.discountTab.Controls.Add(this.discount_btn_remove);
+            this.discountTab.Location = new System.Drawing.Point(4, 22);
+            this.discountTab.Name = "discountTab";
+            this.discountTab.Padding = new System.Windows.Forms.Padding(3);
+            this.discountTab.Size = new System.Drawing.Size(642, 434);
+            this.discountTab.TabIndex = 3;
+            this.discountTab.Text = "Discount";
+            this.discountTab.UseVisualStyleBackColor = true;
+            // 
             // discount_txt_discountId
             // 
             this.discount_txt_discountId.Location = new System.Drawing.Point(198, 65);
@@ -251,6 +246,19 @@
             this.discount_btn_remove.UseVisualStyleBackColor = true;
             this.discount_btn_remove.Click += new System.EventHandler(this.discount_btn_remove_Click);
             // 
+            // ticketTab
+            // 
+            this.ticketTab.Controls.Add(this.ticket_txt_ticketId);
+            this.ticketTab.Controls.Add(this.ticket_lbl_ticketId);
+            this.ticketTab.Controls.Add(this.ticket_btn_remove);
+            this.ticketTab.Location = new System.Drawing.Point(4, 22);
+            this.ticketTab.Name = "ticketTab";
+            this.ticketTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ticketTab.Size = new System.Drawing.Size(642, 434);
+            this.ticketTab.TabIndex = 4;
+            this.ticketTab.Text = "Ticket";
+            this.ticketTab.UseVisualStyleBackColor = true;
+            // 
             // ticket_txt_ticketId
             // 
             this.ticket_txt_ticketId.Location = new System.Drawing.Point(226, 83);
@@ -276,6 +284,40 @@
             this.ticket_btn_remove.Text = "Remove";
             this.ticket_btn_remove.UseVisualStyleBackColor = true;
             this.ticket_btn_remove.Click += new System.EventHandler(this.ticket_btn_remove_Click);
+            // 
+            // movie_txt_title
+            // 
+            this.movie_txt_title.Location = new System.Drawing.Point(171, 81);
+            this.movie_txt_title.Name = "movie_txt_title";
+            this.movie_txt_title.Size = new System.Drawing.Size(100, 20);
+            this.movie_txt_title.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(138, 84);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Title:";
+            // 
+            // movie_combo_movie
+            // 
+            this.movie_combo_movie.Enabled = false;
+            this.movie_combo_movie.FormattingEnabled = true;
+            this.movie_combo_movie.Location = new System.Drawing.Point(171, 107);
+            this.movie_combo_movie.Name = "movie_combo_movie";
+            this.movie_combo_movie.Size = new System.Drawing.Size(200, 21);
+            this.movie_combo_movie.TabIndex = 17;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(79, 110);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Select the movie:";
             // 
             // Remove
             // 
@@ -325,5 +367,9 @@
         private System.Windows.Forms.TextBox ticket_txt_ticketId;
         private System.Windows.Forms.Label ticket_lbl_ticketId;
         private System.Windows.Forms.Button ticket_btn_remove;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox movie_txt_title;
+        private System.Windows.Forms.ComboBox movie_combo_movie;
+        private System.Windows.Forms.Label label3;
     }
 }

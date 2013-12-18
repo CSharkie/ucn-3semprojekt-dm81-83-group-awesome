@@ -54,6 +54,8 @@ namespace AwesomeClient
             this.movie_txt_roomId = new System.Windows.Forms.TextBox();
             this.movie_txt_title = new System.Windows.Forms.TextBox();
             this.create_reservationTab = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.reserv_txt_DId = new System.Windows.Forms.TextBox();
             this.reserv_btn_prl = new System.Windows.Forms.Button();
             this.Validation = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -77,8 +79,6 @@ namespace AwesomeClient
             this.discount_percent_lbl = new System.Windows.Forms.Label();
             this.discount_btn_create = new System.Windows.Forms.Button();
             this.discount_txt_dPercent = new System.Windows.Forms.TextBox();
-            this.reserv_txt_DId = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.createTab.SuspendLayout();
             this.create_roomTab.SuspendLayout();
@@ -350,6 +350,24 @@ namespace AwesomeClient
             this.create_reservationTab.Text = "Reservation";
             this.create_reservationTab.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(314, 15);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(61, 13);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "DiscountId:";
+            // 
+            // reserv_txt_DId
+            // 
+            this.reserv_txt_DId.Location = new System.Drawing.Point(409, 12);
+            this.reserv_txt_DId.Name = "reserv_txt_DId";
+            this.reserv_txt_DId.Size = new System.Drawing.Size(101, 20);
+            this.reserv_txt_DId.TabIndex = 24;
+            this.reserv_txt_DId.Text = "2";
+            this.reserv_txt_DId.TextChanged += new System.EventHandler(this.reserv_txt_DId_TextChanged);
+            // 
             // reserv_btn_prl
             // 
             this.reserv_btn_prl.Location = new System.Drawing.Point(379, 113);
@@ -562,23 +580,6 @@ namespace AwesomeClient
             this.discount_txt_dPercent.Name = "discount_txt_dPercent";
             this.discount_txt_dPercent.Size = new System.Drawing.Size(100, 20);
             this.discount_txt_dPercent.TabIndex = 0;
-            // 
-            // reserv_txt_DId
-            // 
-            this.reserv_txt_DId.Location = new System.Drawing.Point(409, 12);
-            this.reserv_txt_DId.Name = "reserv_txt_DId";
-            this.reserv_txt_DId.Size = new System.Drawing.Size(101, 20);
-            this.reserv_txt_DId.TabIndex = 24;
-            this.reserv_txt_DId.TextChanged += new System.EventHandler(this.reserv_txt_DId_TextChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(314, 15);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 13);
-            this.label5.TabIndex = 25;
-            this.label5.Text = "DiscountId:";
             // 
             // Create
             // 
